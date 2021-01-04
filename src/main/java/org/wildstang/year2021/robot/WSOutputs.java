@@ -36,34 +36,13 @@ public enum WSOutputs implements Outputs {
     // ********************************
     // Solenoids
     // ********************************
-    // TODO IDs
-    // WEDGE_SOLENOID("Wedge solenoid", WSOutputType.SOLENOID_SINGLE, new WsSolenoidConfig(0, 0, true), false),//1,2&3
-    //WEDGE_SOLENOID("Wedge Solenoid", WSOutputType.REMOTE_DIGITAL, new WsRemoteDigitalOutputConfig("fake", false), false),
-    // TODO IDs
 
-   
-
-    // HOPPER_SOLENOID("Hopper Solenoid", WSOutputType.SOLENOID_SINGLE, new WsSolenoidConfig(0,6,false), false),//1,0&1
-    //HOPPER_SOLENOID("Hopper Solenoid", WSOutputType.REMOTE_DIGITAL, new WsRemoteDigitalOutputConfig("fake", false), false),
-    // INTAKE_SOLENOID("Intake Solenoid", WSOutputType.SOLENOID_DOUBLE, new WsDoubleSolenoidConfig(0, 5,4,WsDoubleSolenoidState.FORWARD), false),//1,4&5
-    //INTAKE_SOLENOID("Intake Solenoid", WSOutputType.REMOTE_DIGITAL, new WsRemoteDigitalOutputConfig("fake", false), false),
-    // TODO IDs
-    // HATCH_OUT_SOLENOID("Hatch Out Solenoid", WSOutputType.SOLENOID_SINGLE, new WsSolenoidConfig(0,2,false),false),//0,1&2
-    //HATCH_OUT_SOLENOID("Hatch Out Solenoid", WSOutputType.REMOTE_DIGITAL, new WsRemoteDigitalOutputConfig("fake", false),false),
-    // HATCH_LOCK_SOLENOID("Hatch Lock Solenoid", WSOutputType.SOLENOID_SINGLE, new WsSolenoidConfig(0,3,true),false),//0,0
-    //HATCH_LOCK_SOLENOID("Hatch Lock Solenoid", WSOutputType.REMOTE_DIGITAL, new WsRemoteDigitalOutputConfig("fake", false),false),
     
     // ********************************
     // Relays
     // ********************************
     // RELAY_0("Relay 0", WSOutputType.RELAY, new WsRelayConfig(0,
     // WsRelayState.RELAY_OFF), false), // Relay 0, Both Off
-    // RELAY_1("Relay 1", WSOutputType.RELAY, new WsRelayConfig(1,
-    // WsRelayState.RELAY_OFF), false), // Relay 1, Both Off
-    // RELAY_2("Relay 2", WSOutputType.RELAY, new WsRelayConfig(2,
-    // WsRelayState.RELAY_OFF), false), // Relay 2, Both Off
-    // RELAY_3("Relay 3", WSOutputType.RELAY, new WsRelayConfig(3,
-    // WsRelayState.RELAY_OFF), false), // Relay 3, Both Off
 
     // ********************************
     // Others ...

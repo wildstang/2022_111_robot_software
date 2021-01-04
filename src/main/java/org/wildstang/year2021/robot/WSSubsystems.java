@@ -1,7 +1,5 @@
 package org.wildstang.year2021.robot;
 
-import org.wildstang.year2021.subsystems.drive.Drive;
-import org.wildstang.year2021.subsystems.launching.Limelight;
 import org.wildstang.year2021.subsystems.TestSubsystem;
 import org.wildstang.framework.core.Subsystems;
 
@@ -11,9 +9,7 @@ import org.wildstang.framework.core.Subsystems;
  * initialize all subsystems.
  **/
 public enum WSSubsystems implements Subsystems {
-    DRIVEBASE("Drive Base", Drive.class),
-    LIMELIGHT("Limelight", Limelight.class);
-    // LED("LED", LED.class);
+    TEST("Test Subsystem", TestSubsystem.class);
     
 
     private String name;

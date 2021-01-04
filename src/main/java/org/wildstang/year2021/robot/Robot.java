@@ -11,8 +11,6 @@ import org.wildstang.framework.io.inputs.RemoteAnalogInput;
 import org.wildstang.framework.timer.WsTimer;
 import org.wildstang.hardware.crio.RoboRIOInputFactory;
 import org.wildstang.hardware.crio.RoboRIOOutputFactory;
-import org.wildstang.year2021.subsystems.drive.Drive;
-import org.wildstang.year2021.subsystems.launching.Limelight;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -58,24 +56,12 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledInit() {
         System.out.println("Engaging disabled mode.");
-        Drive driveBase = ((Drive) Core.getSubsystemManager().getSubsystem(WSSubsystems.DRIVEBASE.getName()));
-        //FalconDrive falconDrive = ((FalconDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.FALCONDRIVE.getName()));
-        driveBase.setBrakeMode(false);
-        driveBase.purgePaths();
-        Limelight limelightSubsystem = (Limelight) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT.getName());
-        limelightSubsystem.disableLEDs();
-        limelightSubsystem.switchToDriverCameraMode();
+        
     }
 
     @Override
     public void autonomousInit() {
         Core.getSubsystemManager().resetState();
-
-        Drive driveBase = ((Drive) Core.getSubsystemManager()
-                .getSubsystem(WSSubsystems.DRIVEBASE.getName()));
-        driveBase.purgePaths();
-
-        SmartDashboard.putBoolean("Checkpoint 707 yay", true);
 
         core.setAutoManager(AutoManager.getInstance());
         AutoManager.getInstance().startCurrentProgram();
@@ -86,11 +72,6 @@ public class Robot extends TimedRobot {
         System.out.println("Engaging teleoperation mode.");
         Core.getSubsystemManager().resetState();
 
-        Drive driveBase = ((Drive) Core.getSubsystemManager()
-                .getSubsystem(WSSubsystems.DRIVEBASE.getName()));
-        driveBase.purgePaths();
-        driveBase.setOpenLoopDrive();
-        driveBase.setBrakeMode(false);
     }
 
     @Override
@@ -115,14 +96,6 @@ public class Robot extends TimedRobot {
         //Drive drive = (Drive) Core.getSubsystemManager().getSubsystem(WSSubsystems.DRIVEBASE.getName());
         //drive.setFullBrakeMode();
         resetRobotState();
-
-        Drive driveBase = ((Drive) Core.getSubsystemManager()
-                .getSubsystem(WSSubsystems.DRIVEBASE.getName()));
-        driveBase.purgePaths();
-
-        Limelight limelightSubsystem = (Limelight) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT.getName());
-        limelightSubsystem.disableLEDs();
-        limelightSubsystem.switchToDriverCameraMode();
 
     }
     
