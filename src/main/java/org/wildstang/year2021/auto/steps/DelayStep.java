@@ -4,9 +4,17 @@ import org.wildstang.framework.auto.steps.AutoStep;
 import org.wildstang.framework.timer.WsTimer;
 
 
-//this example is for Drive, you can also modify it to use ballpath, climbwedge, hatch, lift, strafeaxis
-
-public class DelayStep extends AutoStep{
+/**
+ * This is an example Autonomous Step.
+ * Autonomous steps define a single repeatable operation we want to perform in autonomous programs.
+ * These programs are started by calling "initialize", then "update" is repeatedly called, until "setFinished(true)" is called.
+ * The "toString" function defines a name for the step.
+ *
+ * In this example an AutoStep is created for an amount of time in seconds called "delay".
+ * When the step is initialized a timer is started.
+ * When the step is updated, the time is checked. If the time excedes the delay, the step if set to finished.
+ */
+public class DelayStep extends AutoStep {
 
     WsTimer timer = new WsTimer();
     double delay;
@@ -15,18 +23,21 @@ public class DelayStep extends AutoStep{
         this.delay = delay;
     }
 
-    public void update() {
-        if (timer.get() > delay) {
-            setFinished(true);
-        }
-    }
-    public String toString(){
-        //put a reasonable name for this step inside the string
-        return "DelayStep";
-    }
-    public void initialize(){
+    public void initialize() {
+        // start the timer
         timer.start();
     }
 
+    public void update() {
+        // check if the timer has exceded the desired delay
+        if (timer.get() >= delay) {
+            setFinished(true);
+        }
+    }
+
+    public String toString() {
+        // give it a name
+        return "DelayStep";
+    }
 
 }

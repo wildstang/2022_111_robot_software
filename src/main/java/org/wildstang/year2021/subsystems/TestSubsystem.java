@@ -17,7 +17,7 @@ import org.wildstang.framework.subsystems.Subsystem;
  * Class:       TestSubsystem.java
  * Inputs:      1 joystick
  * Outputs:     1 talon
- * Description: This is a testing subsystem that controls a motor with a joystick
+ * Description: This is a testing subsystem that controls a single motor with a joystick.
  */
 public class TestSubsystem implements Subsystem {
 
@@ -32,11 +32,11 @@ public class TestSubsystem implements Subsystem {
 
     // initializes the subsystem
     public void init() {
-        // register buttons with arbitrary button names, since this is a test
+        // register button and attach input listener with WS Input
         joystick = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_JOYSTICK_Y.getName());
         joystick.addInputListener(this);
 
-        // register solenoids with arbitrary output names, since this is a test
+        // create motor controller object with CAN Constant
         motor = new TalonSRX(CANConstants.EXAMPLE_CONTROLLER);
 
         resetState();
@@ -44,7 +44,7 @@ public class TestSubsystem implements Subsystem {
 
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
-        motor.set(ControlMode.PercentOutput , speed);
+        motor.set(ControlMode.PercentOutput, speed);
     }
 
     // respond to input updates
@@ -65,6 +65,6 @@ public class TestSubsystem implements Subsystem {
 
     // returns the unique name of the example
     public String getName() {
-        return "TestSubsystem";
+        return "Test Subsystem";
     }
 }

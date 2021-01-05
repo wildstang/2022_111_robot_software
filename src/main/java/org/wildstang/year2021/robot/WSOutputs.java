@@ -15,6 +15,12 @@ import org.wildstang.hardware.crio.outputs.config.WsDigitalOutputConfig;
 
 import edu.wpi.first.wpilibj.I2C;
 
+/**
+ * Output mappings are stored here.
+ * Below each PWM, Digital Output, Solenoid, and Relay is enumerated with their appropriated IDs.
+ * The enumeration includes a name, output type, output object, and tracking boolean.
+ * Note, our motors are currently all controlled via the CAN bus, so they do not appear in this enum.
+ */
 public enum WSOutputs implements Outputs {
     // ********************************
     // PWM Outputs
@@ -30,8 +36,7 @@ public enum WSOutputs implements Outputs {
     // ********************************
     // DIO Outputs
     // ********************************
-    // DIO_O_0("Test Digital Output 0", WSOutputType.DIGITAL_OUTPUT, new
-    // WsDigitalOutputConfig(0, true), false), // Channel 0, Initially Low
+    DIO_O_0("Test Digital Output 0", WSOutputType.DIGITAL_OUTPUT, new WsDigitalOutputConfig(0, true), false), // Channel 0, Initially Low
 
     // ********************************
     // Solenoids
@@ -41,8 +46,6 @@ public enum WSOutputs implements Outputs {
     // ********************************
     // Relays
     // ********************************
-    // RELAY_0("Relay 0", WSOutputType.RELAY, new WsRelayConfig(0,
-    // WsRelayState.RELAY_OFF), false), // Relay 0, Both Off
 
     // ********************************
     // Others ...
