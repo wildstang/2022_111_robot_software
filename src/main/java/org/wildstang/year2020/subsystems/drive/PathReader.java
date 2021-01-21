@@ -1,13 +1,15 @@
 package org.wildstang.year2020.subsystems.drive;
 
-import com.ctre.phoenix.motion.TrajectoryPoint;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ctre.phoenix.motion.TrajectoryPoint;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 
 public class PathReader {
 
