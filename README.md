@@ -1,6 +1,7 @@
 # WildStang Robot Framework
 
 This is the core framework for WildStang's FRC robot software development.
+Example robot code can be found in [examples](examples).
 
 ## Robot Framework Initialization
 
@@ -29,9 +30,10 @@ In order to create a new code base for a new robot follow these steps:
 - Phoenix Tuner (CAN)
   - [Download](https://github.com/CrossTheRoadElec/Phoenix-Releases/releases/latest/)
 
-### Building and deploying to the robot
+## Building and deploying to the robot
 
-To build/deploy/debug the robot code either right click on `build.gradle` and choose the desired option or open the command pallete and search and select `WPILib: [FUNCTION] robot code`. Robot code may also be deployed by pressing `Shift + F5`.
+To build/deploy/debug the robot code either right click on `build.gradle` and choose the desired option or open the command pallete and search and select `WPILib: [FUNCTION] robot code`.
+Robot code may also be deployed by pressing `Shift + F5`.
 
 To open the command palette use:
 - F1
