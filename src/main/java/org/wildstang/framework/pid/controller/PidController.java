@@ -3,7 +3,8 @@ package org.wildstang.framework.pid.controller;
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.pid.input.IPidInput;
 import org.wildstang.framework.pid.output.IPidOutput;
-import org.wildstang.framework.timer.WsTimer;
+
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
@@ -34,7 +35,7 @@ public class PidController implements IPidController {
     private double minOnTargetTime; // Minimum number of cycles in epsilon range
     // to be done
     private boolean allowStaticEpsilon;
-    private WsTimer stabilizationTimer;
+    private Timer stabilizationTimer;
     private IPidInput pidSource;
     private IPidOutput pidOutput;
     private String controllerName;
@@ -76,7 +77,7 @@ public class PidController implements IPidController {
         currentState = PidStateType.PID_INITIALIZE_STATE;
         minOnTargetTime = 0.2;
         allowStaticEpsilon = false;
-        stabilizationTimer = new WsTimer();
+        stabilizationTimer = new Timer();
         pidSource = source;
         pidOutput = output;
         controllerName = pidControllerName;

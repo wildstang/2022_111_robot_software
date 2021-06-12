@@ -8,7 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.auto.steps.AutoStep;
-import org.wildstang.framework.timer.WsTimer;
+
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
@@ -23,11 +24,11 @@ public class AutoStepDelay
     private static Logger s_log = Logger.getLogger(AutoStepDelay.class.getName());
 
     protected final double delay;
-    protected WsTimer timer;
+    protected Timer timer;
 
     public AutoStepDelay(int msDelay) {
         this.delay = msDelay / 1000.0;
-        this.timer = new WsTimer();
+        this.timer = new Timer();
         if (msDelay < 0) {
             s_log.logp(Level.FINE, this.getClass().getName(), "AutonomousStepDelay",
                     "Delay must be greater than 0");
