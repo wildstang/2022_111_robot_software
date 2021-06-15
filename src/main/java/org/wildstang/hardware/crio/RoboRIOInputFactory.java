@@ -14,7 +14,6 @@ import org.wildstang.hardware.crio.inputs.WSInputType;
 import org.wildstang.hardware.crio.inputs.WsAbsoluteEncoder;
 import org.wildstang.hardware.crio.inputs.WsAnalogGyro;
 import org.wildstang.hardware.crio.inputs.WsAnalogInput;
-// import org.wildstang.hardware.crio.inputs.WsCompassInput;
 import org.wildstang.hardware.crio.inputs.WsDPadButton;
 import org.wildstang.hardware.crio.inputs.WsDigitalInput;
 import org.wildstang.hardware.crio.inputs.WsHallEffectInput;
@@ -31,16 +30,23 @@ import org.wildstang.hardware.crio.inputs.config.WsI2CInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsJSButtonInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsJSJoystickInputConfig;
 
+/**
+ * Builds inputs from WsInputs enumerations.
+ */
 public class RoboRIOInputFactory implements InputFactory {
 
     private static Logger s_log = Logger.getLogger(RoboRIOInputFactory.class.getName());
     private static final String s_className = "RoboRIOInputFactory";
     private boolean s_initialised = false;
 
-    public RoboRIOInputFactory() {
+    /**
+     * Empty constructor override WPILib InputFactory constructor.
+     */
+    public RoboRIOInputFactory() {}
 
-    }
-
+    /**
+     * Prepares logger.
+     */
     @Override
     public void init() {
         if (s_log.isLoggable(Level.FINER)) {
@@ -56,6 +62,11 @@ public class RoboRIOInputFactory implements InputFactory {
         }
     }
 
+    /**
+     * Creates an Input from an enumeration of WsInputs.
+     * @param An enumeration of WsInputs.
+     * @return A constructed Input.
+     */
     @Override
     public Input createInput(Inputs p_input) {
         if (s_log.isLoggable(Level.FINER)) {
@@ -122,11 +133,6 @@ public class RoboRIOInputFactory implements InputFactory {
                     ((WsI2CInputConfig) p_input.getConfig()).getPort(),
                     ((WsI2CInputConfig) p_input.getConfig()).getAddress());
         break;
-        // case COMPASS:
-        //     in = new WsCompassInput(p_input.getName(),
-        //             ((WsI2CInputConfig) p_input.getConfig()).getPort(),
-        //             ((WsI2CInputConfig) p_input.getConfig()).getAddress());
-        // break;
         case ANALOG_GYRO:
             in = new WsAnalogGyro(p_input.getName(),
                     ((WsAnalogGyroConfig) p_input.getConfig()).getChannel(),
@@ -137,7 +143,6 @@ public class RoboRIOInputFactory implements InputFactory {
         break;
         case NULL:
         default:
-        // in = new NullAnalogInput(p_name);
         break;
         }
 

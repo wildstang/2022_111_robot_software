@@ -28,21 +28,23 @@ import org.wildstang.hardware.crio.outputs.config.WsSolenoidConfig;
 import org.wildstang.hardware.crio.outputs.config.WsTalonConfig;
 import org.wildstang.hardware.crio.outputs.config.WsVictorConfig;
 
-/*
- * TODO: This factory seems unnecessary; it contains no configuration data.
- * We can probably get rid of it.
+/**
+ * Builds outputs from WsOutputs enumerations.
  */
 public class RoboRIOOutputFactory implements OutputFactory {
 
     private static Logger s_log = Logger.getLogger(RoboRIOOutputFactory.class.getName());
     private static final String s_className = "RoboRIOOutputFactory";
-
     private boolean s_initialised = false;
 
-    public RoboRIOOutputFactory() {
+    /**
+     * Empty constructor override WPILib InputFactory constructor.
+     */
+    public RoboRIOOutputFactory() {}
 
-    }
-
+    /**
+     * Prepares logger.
+     */
     @Override
     public void init() {
         if (s_log.isLoggable(Level.FINER)) {
@@ -58,6 +60,11 @@ public class RoboRIOOutputFactory implements OutputFactory {
         }
     }
 
+    /**
+     * Creates an Output from an enumeration of WsOutputs.
+     * @param An enumeration of WsOutputs.
+     * @return A constructed Output.
+     */
     @Override
     public Output createOutput(Outputs p_output) {
         if (s_log.isLoggable(Level.FINER)) {
@@ -78,9 +85,6 @@ public class RoboRIOOutputFactory implements OutputFactory {
                     ((WsDigitalOutputConfig) p_output.getConfig()).getDefault());
         break;
         case SERVO:
-            // out = new WsServo(p_output.getName(), ((WsAnalogOutputConfig)
-            // p_output.getConfig()).getChannel(), ((WsAnalogOutputConfig)
-            // p_output.getConfig()).getDefault());
             out = new WsServo(p_output.getName(),
                     ((WsServoConfig) p_output.getConfig()).getChannel(),
                     ((WsServoConfig) p_output.getConfig()).getDefault());
@@ -126,7 +130,6 @@ public class RoboRIOOutputFactory implements OutputFactory {
         break;
         case NULL:
         default:
-            // out = new NullDigitalOutput(p_name);
         }
 
         if (s_log.isLoggable(Level.FINER)) {
