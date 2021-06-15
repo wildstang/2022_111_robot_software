@@ -2,6 +2,9 @@ package org.wildstang.framework.subsystems;
 
 import org.wildstang.framework.io.InputListener;
 
+/**
+ * Interface describing a subsystem class.
+ */
 public interface Subsystem extends InputListener {
 
     /**
