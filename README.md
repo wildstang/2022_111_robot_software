@@ -2,6 +2,15 @@
 
 This is the core framework for WildStang's FRC robot software development.
 Example robot code can be found in [examples](examples).
+Prior to 2022 the latest version of the robot framework could be found in the latest 20XX_robot_software repo.
+This repository is the primary working space for the framework, all future robot software repos should fork it.
+
+This repo contains 2 components to the "framework".
+First, it contains the actual robot framework which acts as the control layer of the robot software.
+It connects all the pieces together, but does not interact with any hardware on either side.
+Second, there is the hardware component, it implements others' API to connect the hardware to the framework.
+The framework for this reason should not import any external libraries for specific robot functions, such as WPILib.
+The framework may import libraries for utility purposes, in this case WPILib's Timer is okay.
 
 ## Robot Framework Initialization
 
@@ -40,3 +49,7 @@ To open the command palette use:
 - Ctrl + Shift + P
 - Cmd + Shift + P
 - Select the WPILib Command Palette 'W' button in the top right
+
+## Generate Docs
+
+`./gradlew javadoc`

@@ -18,6 +18,9 @@ deploy {
             // You can use getTeamOrDefault(team) instead of getTeamNumber if you
             // want to store a team number in this file.
             team = frc.getTeamNumber()
+
+            // uncomment below to deploy to a custom IP address
+            //addAddress("192.168.16.98")
         }
     }
     artifacts {
@@ -35,6 +38,11 @@ deploy {
             directory = '/home/lvuser/deploy'
         }
     }
+}
+
+// build docs in /docs folder
+javadoc {
+    destinationDir = file("docs")
 }
 
 // Set this to true to enable desktop support.
