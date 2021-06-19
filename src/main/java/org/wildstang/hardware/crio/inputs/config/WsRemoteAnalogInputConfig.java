@@ -1,4 +1,6 @@
-package org.wildstang.framework.hardware;
+package org.wildstang.hardware.crio.inputs.config;
+
+import org.wildstang.framework.hardware.InputConfig;
 
 public class WsRemoteAnalogInputConfig implements InputConfig {
     private String m_networktbl = "remoteIO";

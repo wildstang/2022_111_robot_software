@@ -1,9 +1,6 @@
 package org.wildstang.framework.core;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,14 +13,6 @@ import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.io.InputManager;
 import org.wildstang.framework.io.outputs.Output;
 import org.wildstang.framework.io.OutputManager;
-import org.wildstang.framework.io.inputs.AnalogInput;
-import org.wildstang.framework.io.inputs.DigitalInput;
-import org.wildstang.framework.io.inputs.RemoteAnalogInput;
-import org.wildstang.framework.io.inputs.RemoteDigitalInput;
-import org.wildstang.framework.io.outputs.AnalogOutput;
-import org.wildstang.framework.io.outputs.DigitalOutput;
-import org.wildstang.framework.io.outputs.RemoteAnalogOutput;
-import org.wildstang.framework.io.outputs.RemoteDigitalOutput;
 import org.wildstang.framework.logger.StateTracker;
 import org.wildstang.framework.subsystems.Subsystem;
 import org.wildstang.framework.subsystems.SubsystemManager;
@@ -184,62 +173,6 @@ public class Core {
 
         if (s_log.isLoggable(Level.FINER)) {
             s_log.exiting(s_className, "createSubsystems");
-        }
-    }
-
-    public void mapInputsToRemoteOutputs() {
-        // Get all the Inputs
-        HashMap<String, Input> inputMap = s_inputManager.getHashMap();
-
-        // For each input that is not a remote input, create a remote output
-        Iterator<HashMap.Entry<String, Input>> iter = inputMap.entrySet().iterator();
-
-        if (iter != null) {
-            while (iter.hasNext()) {
-                Map.Entry<String, Input> entry = iter.next();
-
-                String name = entry.getKey();
-                Input input = entry.getValue();
-
-                Output out = null;
-                if (!(input instanceof RemoteAnalogInput)
-                        && !(input instanceof RemoteDigitalInput)) {
-                    if (input instanceof AnalogInput) {
-                        out = new RemoteAnalogOutput(name, "remoteIO", 0);
-                    } else if (input instanceof DigitalInput) {
-                        out = new RemoteDigitalOutput(name, "remoteIO", false);
-                    }
-                    s_outputManager.addOutput(out);
-                }
-            }
-        }
-    }
-
-    public void mapOutputsToRemoteInputs() {
-        // Get all the Outputs
-        HashMap<String, Output> outputMap = s_outputManager.getHashMap();
-
-        // For each input that is not a remote input, create a remote output
-        Iterator<HashMap.Entry<String, Output>> iter = outputMap.entrySet().iterator();
-
-        if (iter != null) {
-            while (iter.hasNext()) {
-                Map.Entry<String, Output> entry = iter.next();
-
-                String name = entry.getKey();
-                Output output = entry.getValue();
-
-                Input in = null;
-                if (!(output instanceof RemoteAnalogOutput)
-                        && !(output instanceof RemoteDigitalOutput)) {
-                    if (output instanceof AnalogOutput) {
-                        in = new RemoteAnalogInput(name, "remoteIO");
-                    } else if (output instanceof DigitalOutput) {
-                        in = new RemoteDigitalInput(name, "remoteIO");
-                    }
-                    s_inputManager.addInput(in);
-                }
-            }
         }
     }
 

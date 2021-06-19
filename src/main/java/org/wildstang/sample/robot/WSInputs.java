@@ -1,21 +1,12 @@
 package org.wildstang.sample.robot;
 
 import org.wildstang.framework.core.Inputs;
-import org.wildstang.framework.io.inputs.RemoteDigitalInput;
 import org.wildstang.framework.hardware.InputConfig;
-import org.wildstang.framework.hardware.WsRemoteAnalogInputConfig;
 import org.wildstang.framework.io.inputs.InputType;
 import org.wildstang.hardware.JoystickConstants;
 import org.wildstang.hardware.crio.inputs.WSInputType;
-import org.wildstang.hardware.crio.inputs.config.WsAnalogGyroConfig;
-import org.wildstang.hardware.crio.inputs.config.WsDigitalInputConfig;
-import org.wildstang.hardware.crio.inputs.config.WsI2CInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsJSButtonInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsJSJoystickInputConfig;
-import org.wildstang.hardware.crio.inputs.config.WsMotionProfileConfig;
-
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Input mappings are stored here.

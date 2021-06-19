@@ -4,11 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.core.Inputs;
-import org.wildstang.framework.hardware.WsRemoteAnalogInputConfig;
-import org.wildstang.framework.hardware.WsRemoteDigitalInputConfig;
 import org.wildstang.framework.io.inputs.Input;
-import org.wildstang.framework.io.inputs.RemoteAnalogInput;
-import org.wildstang.framework.io.inputs.RemoteDigitalInput;
 import org.wildstang.hardware.crio.inputs.WSInputType;
 import org.wildstang.hardware.crio.inputs.WsAbsoluteEncoder;
 import org.wildstang.hardware.crio.inputs.WsAnalogGyro;
@@ -21,6 +17,8 @@ import org.wildstang.hardware.crio.inputs.WsJoystickAxis;
 import org.wildstang.hardware.crio.inputs.WsJoystickButton;
 import org.wildstang.hardware.crio.inputs.WsLIDAR;
 import org.wildstang.hardware.crio.inputs.WsMotionProfileControl;
+import org.wildstang.hardware.crio.inputs.WsRemoteAnalogInput;
+import org.wildstang.hardware.crio.inputs.WsRemoteDigitalInput;
 import org.wildstang.hardware.crio.inputs.config.WsAbsoluteEncoderConfig;
 import org.wildstang.hardware.crio.inputs.config.WsAnalogGyroConfig;
 import org.wildstang.hardware.crio.inputs.config.WsAnalogInputConfig;
@@ -28,6 +26,8 @@ import org.wildstang.hardware.crio.inputs.config.WsDigitalInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsI2CInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsJSButtonInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsJSJoystickInputConfig;
+import org.wildstang.hardware.crio.inputs.config.WsRemoteAnalogInputConfig;
+import org.wildstang.hardware.crio.inputs.config.WsRemoteDigitalInputConfig;
 
 /**
  * Builds inputs from WsInputs enumerations.
@@ -118,11 +118,11 @@ public class RoboRIOInputFactory {
                     ((WsJSButtonInputConfig) p_input.getConfig()).getButton());
         break;
         case REMOTE_DIGITAL:
-            in = new RemoteDigitalInput(p_input.getName(),
+            in = new WsRemoteDigitalInput(p_input.getName(),
                     ((WsRemoteDigitalInputConfig) p_input.getConfig()).getTableName());
         break;
         case REMOTE_ANALOG:
-            in = new RemoteAnalogInput(p_input.getName(),
+            in = new WsRemoteAnalogInput(p_input.getName(),
                     ((WsRemoteAnalogInputConfig) p_input.getConfig()).getTableName());
         break;
         case I2C:

@@ -1,4 +1,6 @@
-package org.wildstang.framework.io.outputs;
+package org.wildstang.hardware.crio.outputs;
+
+import org.wildstang.framework.io.outputs.AnalogOutput;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -6,14 +8,14 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 /**
  *
  */
-public class RemoteDigitalOutput extends DigitalOutput {
+public class WsRemoteAnalogOutput extends AnalogOutput {
 
     NetworkTable remoteIOTable;
 
-    public RemoteDigitalOutput(String name, String p_networkTbl, boolean p_default) {
+    public WsRemoteAnalogOutput(String name, String p_networkTbl, double p_default) {
         super(name, p_default);
-        System.out.println("Getting Network Table: " + p_networkTbl);
         remoteIOTable = NetworkTableInstance.getDefault().getTable(p_networkTbl);
+        System.out.println("Got Table");
     }
 
     public void notifyConfigChange() {
@@ -23,7 +25,7 @@ public class RemoteDigitalOutput extends DigitalOutput {
 
     @Override
     protected void sendDataToOutput() {
-        remoteIOTable.getEntry(getName()).forceSetBoolean(getValue());
+        remoteIOTable.getEntry(getName()).forceSetDouble(getValue());
     }
 
 }

@@ -1,10 +1,12 @@
-package org.wildstang.framework.hardware;
+package org.wildstang.hardware.crio.outputs.config;
 
-public class WsRemoteDigitalOutputConfig implements OutputConfig {
+import org.wildstang.framework.hardware.OutputConfig;
+
+public class WsRemoteAnalogOutputConfig implements OutputConfig {
     private String m_networktbl = "RemoteIO";
-    private boolean m_default;
+    private double m_default;
 
-    public WsRemoteDigitalOutputConfig(String networktbl, boolean p_default) {
+    public WsRemoteAnalogOutputConfig(String networktbl, double p_default) {
         m_networktbl = networktbl;
         m_default = p_default;
     }
@@ -13,7 +15,7 @@ public class WsRemoteDigitalOutputConfig implements OutputConfig {
         return m_networktbl;
     }
 
-    public boolean getDefault() {
+    public double getDefault() {
         return m_default;
     }
 

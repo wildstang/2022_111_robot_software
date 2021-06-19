@@ -1,13 +1,15 @@
-package org.wildstang.framework.io.inputs;
+package org.wildstang.hardware.crio.inputs;
+
+import org.wildstang.framework.io.inputs.DigitalInput;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class RemoteDigitalInput extends DigitalInput {
+public class WsRemoteDigitalInput extends DigitalInput {
 
     NetworkTable remoteIOTable;
 
-    public RemoteDigitalInput(String p_name, String p_networkTbl) {
+    public WsRemoteDigitalInput(String p_name, String p_networkTbl) {
         super(p_name);
         remoteIOTable = NetworkTableInstance.getDefault().getTable(p_networkTbl);
 

@@ -1,4 +1,6 @@
-package org.wildstang.framework.io.inputs;
+package org.wildstang.hardware.crio.inputs;
+
+import org.wildstang.framework.io.inputs.AnalogInput;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -6,11 +8,11 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 /**
  *
  */
-public class RemoteAnalogInput extends AnalogInput {
+public class WsRemoteAnalogInput extends AnalogInput {
 
     NetworkTable remoteIOTable;
 
-    public RemoteAnalogInput(String p_name, String p_networkTbl) {
+    public WsRemoteAnalogInput(String p_name, String p_networkTbl) {
         super(p_name);
         remoteIOTable = NetworkTableInstance.getDefault().getTable(p_networkTbl);
     }

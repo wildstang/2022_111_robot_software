@@ -4,16 +4,6 @@ package org.wildstang.sample.robot;
 import org.wildstang.framework.core.Outputs;
 import org.wildstang.framework.hardware.OutputConfig;
 import org.wildstang.framework.io.outputs.OutputType;
-import org.wildstang.hardware.crio.outputs.WSOutputType;
-import org.wildstang.hardware.crio.outputs.config.WsI2COutputConfig;
-import org.wildstang.hardware.crio.outputs.config.WsSolenoidConfig;
-import org.wildstang.hardware.crio.outputs.config.WsDoubleSolenoidConfig;
-import org.wildstang.hardware.crio.outputs.WsDoubleSolenoidState;
-import org.wildstang.hardware.crio.outputs.config.WsVictorConfig;
-import org.wildstang.framework.hardware.WsRemoteDigitalOutputConfig;
-import org.wildstang.hardware.crio.outputs.config.WsDigitalOutputConfig;
-
-import edu.wpi.first.wpilibj.I2C;
 
 /**
  * Output mappings are stored here.

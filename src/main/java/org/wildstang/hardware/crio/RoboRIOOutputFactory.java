@@ -4,11 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.core.Outputs;
-import org.wildstang.framework.hardware.WsRemoteAnalogOutputConfig;
-import org.wildstang.framework.hardware.WsRemoteDigitalOutputConfig;
 import org.wildstang.framework.io.outputs.Output;
-import org.wildstang.framework.io.outputs.RemoteAnalogOutput;
-import org.wildstang.framework.io.outputs.RemoteDigitalOutput;
 import org.wildstang.hardware.crio.outputs.WSOutputType;
 import org.wildstang.hardware.crio.outputs.WsDigitalOutput;
 import org.wildstang.hardware.crio.outputs.WsDoubleSolenoid;
@@ -18,6 +14,8 @@ import org.wildstang.hardware.crio.outputs.WsServo;
 import org.wildstang.hardware.crio.outputs.WsSolenoid;
 import org.wildstang.hardware.crio.outputs.WsTalon;
 import org.wildstang.hardware.crio.outputs.WsVictor;
+import org.wildstang.hardware.crio.outputs.WsRemoteAnalogOutput;
+import org.wildstang.hardware.crio.outputs.WsRemoteDigitalOutput;
 import org.wildstang.hardware.crio.outputs.config.WsDigitalOutputConfig;
 import org.wildstang.hardware.crio.outputs.config.WsDoubleSolenoidConfig;
 import org.wildstang.hardware.crio.outputs.config.WsI2COutputConfig;
@@ -26,6 +24,8 @@ import org.wildstang.hardware.crio.outputs.config.WsServoConfig;
 import org.wildstang.hardware.crio.outputs.config.WsSolenoidConfig;
 import org.wildstang.hardware.crio.outputs.config.WsTalonConfig;
 import org.wildstang.hardware.crio.outputs.config.WsVictorConfig;
+import org.wildstang.hardware.crio.outputs.config.WsRemoteAnalogOutputConfig;
+import org.wildstang.hardware.crio.outputs.config.WsRemoteDigitalOutputConfig;
 
 /**
  * Builds outputs from WsOutputs enumerations.
@@ -116,12 +116,12 @@ public class RoboRIOOutputFactory {
                     ((WsI2COutputConfig) p_output.getConfig()).getAddress());
         break;
         case REMOTE_DIGITAL:
-            out = new RemoteDigitalOutput(p_output.getName(),
+            out = new WsRemoteDigitalOutput(p_output.getName(),
                     ((WsRemoteDigitalOutputConfig) p_output.getConfig()).getTableName(),
                     ((WsRemoteDigitalOutputConfig) p_output.getConfig()).getDefault());
         break;
         case REMOTE_ANALOG:
-            out = new RemoteAnalogOutput(p_output.getName(),
+            out = new WsRemoteAnalogOutput(p_output.getName(),
                     ((WsRemoteAnalogOutputConfig) p_output.getConfig()).getTableName(),
                     ((WsRemoteAnalogOutputConfig) p_output.getConfig()).getDefault());
         break;
