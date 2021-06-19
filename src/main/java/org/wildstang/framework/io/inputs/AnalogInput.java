@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class AnalogInput extends AbstractInput {
+public abstract class AnalogInput extends Input {
 
     private static Logger s_log = Logger.getLogger(AnalogInput.class.getName());
     private static final String s_className = "AnalogInput";

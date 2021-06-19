@@ -7,24 +7,24 @@ import java.util.logging.Logger;
 
 import org.wildstang.framework.CoreUtils;
 import org.wildstang.framework.core.Inputs;
+import org.wildstang.framework.io.inputs.Input;
 
 /**
- * This class in the manager for all inputs.
+ * Contains and updates all Inputs.
  *
  * @author Steve
- *
  */
-public class InputManager implements IInputManager {
+public class InputManager {
+
     private static Logger s_log = Logger.getLogger(InputManager.class.getName());
     private static final String s_className = "InputManager";
 
     private HashMap<String, Input> m_inputs = new HashMap<>();
     private boolean s_initialised = false;
 
-    public InputManager() {
-    }
-
-    @Override
+    /**
+     * Initializes logger.
+     */
     public void init() {
         s_log.entering(s_className, "init");
 
@@ -35,7 +35,9 @@ public class InputManager implements IInputManager {
         s_log.exiting(s_className, "init");
     }
 
-    @Override
+    /**
+     * Updates all managed inputs.
+     */
     public void update() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "update");
@@ -62,7 +64,10 @@ public class InputManager implements IInputManager {
         }
     }
 
-    @Override
+    /**
+     * Adds an Input to the manager.
+     * @param p_input Input object to add.
+     */
     public void addInput(Input p_input) {
         CoreUtils.checkNotNull(p_input, "p_input is null");
 
@@ -74,7 +79,10 @@ public class InputManager implements IInputManager {
         }
     }
 
-    @Override
+    /**
+     * Removes an Input to the manager.
+     * @param p_input Input object to remove.
+     */
     public void removeInput(Input p_input) {
         CoreUtils.checkNotNull(p_input, "p_input is null");
 
@@ -85,7 +93,11 @@ public class InputManager implements IInputManager {
         m_inputs.remove(p_input.getName());
     }
 
-    @Override
+    /**
+     * Returns a named Input from the manager.
+     * @param p_name Name of the Input to fetch.
+     * @return Input belonging to the manager.
+     */
     public Input getInput(String p_name) {
         CoreUtils.checkNotNull(p_name, "p_name is null");
         Input result = null;
@@ -98,28 +110,44 @@ public class InputManager implements IInputManager {
         return result;
     }
 
-    @Override
+    /**
+     * Returns an Input with a matching name from the manager.
+     * @param p_name Input to fetch from the manager.
+     * @return Input belonging to the manager.
+     */
     public Input getInput(Inputs p_input) {
         return getInput(p_input.getName());
     }
 
-    @Override
+    /**
+     * Determines if the manager has an Input with a given name.
+     * @param p_name Name of an Input to search for.
+     * @return True if an Input exists with p_name.
+     */
     public boolean contains(String p_name) {
         CoreUtils.checkNotNull(p_name, "p_name is null");
         return m_inputs.containsKey(p_name);
     }
 
-    @Override
+    /**
+     * Returns the total size of all managed inputs.
+     * @return Size of all managed inputs.
+     */
     public int size() {
         return m_inputs.size();
     }
 
-    @Override
+    /**
+     * Removes all Inputs from the manager.
+     */
     public void removeAll() {
         m_inputs.clear();
     }
 
-    @Override
+    /**
+     * Produces a HashMap of all managed Inputs.
+     * @return HashMap of all managed Inputs mapped to their names.
+     */
     public HashMap<String, Input> getHashMap() {
         return new HashMap<>(m_inputs);
     }

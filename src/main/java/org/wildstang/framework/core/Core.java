@@ -12,11 +12,9 @@ import org.wildstang.framework.auto.AutoManager;
 import org.wildstang.framework.config.ConfigManager;
 import org.wildstang.framework.hardware.InputFactory;
 import org.wildstang.framework.hardware.OutputFactory;
-import org.wildstang.framework.io.IInputManager;
-import org.wildstang.framework.io.IOutputManager;
-import org.wildstang.framework.io.Input;
+import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.io.InputManager;
-import org.wildstang.framework.io.Output;
+import org.wildstang.framework.io.outputs.Output;
 import org.wildstang.framework.io.OutputManager;
 import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.io.inputs.DigitalInput;
@@ -38,8 +36,8 @@ public class Core {
     private static Logger s_log = Logger.getLogger(Core.class.getName());
     private static final String s_className = "Core";
 
-    private static IInputManager s_inputManager;
-    private static IOutputManager s_outputManager;
+    private static InputManager s_inputManager;
+    private static OutputManager s_outputManager;
     private static SubsystemManager s_subsystemManager;
     private static ConfigManager s_configManager;
     private static StateTracker s_stateTracker;
@@ -232,8 +230,8 @@ public class Core {
                 Output output = entry.getValue();
 
                 Input in = null;
-                if (!(output instanceof RemoteAnalogInput)
-                        && !(output instanceof RemoteDigitalInput)) {
+                if (!(output instanceof RemoteAnalogOutput)
+                        && !(output instanceof RemoteDigitalOutput)) {
                     if (output instanceof AnalogOutput) {
                         in = new RemoteAnalogInput(name, "remoteIO");
                     } else if (output instanceof DigitalOutput) {
@@ -245,11 +243,11 @@ public class Core {
         }
     }
 
-    public static IInputManager getInputManager() {
+    public static InputManager getInputManager() {
         return s_inputManager;
     }
 
-    public static IOutputManager getOutputManager() {
+    public static OutputManager getOutputManager() {
         return s_outputManager;
     }
 

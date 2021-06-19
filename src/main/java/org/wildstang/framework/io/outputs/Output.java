@@ -4,25 +4,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.CoreUtils;
-import org.wildstang.framework.io.Output;
 import org.wildstang.framework.logger.StateTracker;
 
-public abstract class AbstractOutput implements Output {
+public abstract class Output {
 
-    private static Logger s_log = Logger.getLogger(AbstractOutput.class.getName());
+    private static Logger s_log = Logger.getLogger(Output.class.getName());
     private static final String s_className = "AbstractOutput";
 
     private String m_name = "Undefined";
     private StateTracker m_stateTracker;
     private boolean m_enabled = true;
 
-    public AbstractOutput(String p_name) {
+    public Output(String p_name) {
         CoreUtils.checkNotNull(p_name, "p_name is null");
 
         m_name = p_name;
     }
 
-    @Override
     public void update() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "update");
@@ -46,7 +44,6 @@ public abstract class AbstractOutput implements Output {
         }
     }
 
-    @Override
     public String getName() {
         return m_name;
     }
@@ -57,17 +54,9 @@ public abstract class AbstractOutput implements Output {
 
     @Override
     public int hashCode() {
-        // TODO
         return getName().hashCode();
     }
 
-    @Override
-    public boolean equals(Object p_obj) {
-        // TODO
-        return super.equals(p_obj);
-    }
-
-    @Override
     public void setStateTracker(StateTracker p_tracker) {
         m_stateTracker = p_tracker;
     }
@@ -76,17 +65,14 @@ public abstract class AbstractOutput implements Output {
         return m_stateTracker;
     }
 
-    @Override
     public void enable() {
         m_enabled = true;
     }
 
-    @Override
     public void disable() {
         m_enabled = false;
     }
 
-    @Override
     public boolean isEnabled() {
         return m_enabled;
     }

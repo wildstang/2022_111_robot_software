@@ -4,10 +4,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.core.Outputs;
-import org.wildstang.framework.hardware.OutputFactory;
 import org.wildstang.framework.hardware.WsRemoteAnalogOutputConfig;
 import org.wildstang.framework.hardware.WsRemoteDigitalOutputConfig;
-import org.wildstang.framework.io.Output;
+import org.wildstang.framework.io.outputs.Output;
 import org.wildstang.framework.io.outputs.RemoteAnalogOutput;
 import org.wildstang.framework.io.outputs.RemoteDigitalOutput;
 import org.wildstang.hardware.crio.outputs.WSOutputType;
@@ -31,7 +30,7 @@ import org.wildstang.hardware.crio.outputs.config.WsVictorConfig;
 /**
  * Builds outputs from WsOutputs enumerations.
  */
-public class RoboRIOOutputFactory implements OutputFactory {
+public class RoboRIOOutputFactory {
 
     private static Logger s_log = Logger.getLogger(RoboRIOOutputFactory.class.getName());
     private static final String s_className = "RoboRIOOutputFactory";
@@ -45,7 +44,6 @@ public class RoboRIOOutputFactory implements OutputFactory {
     /**
      * Prepares logger.
      */
-    @Override
     public void init() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "init");
@@ -65,7 +63,6 @@ public class RoboRIOOutputFactory implements OutputFactory {
      * @param An enumeration of WsOutputs.
      * @return A constructed Output.
      */
-    @Override
     public Output createOutput(Outputs p_output) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "createDigitalInput");

@@ -3,7 +3,7 @@ package org.wildstang.framework.io.inputs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class ImageInput extends AbstractInput {
+public abstract class ImageInput extends Input {
 
     private static Logger s_log = Logger.getLogger(ImageInput.class.getName());
     private static final String s_className = "ImageInput";

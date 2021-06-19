@@ -3,7 +3,7 @@ package org.wildstang.framework.io.outputs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class I2COutput extends AbstractOutput {
+public abstract class I2COutput extends Output {
     private static Logger s_log = Logger.getLogger(I2COutput.class.getName());
     private static final String s_className = "I2COutput";
 

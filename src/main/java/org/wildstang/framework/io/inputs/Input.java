@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.CoreUtils;
-import org.wildstang.framework.io.Input;
 import org.wildstang.framework.io.InputListener;
 import org.wildstang.framework.logger.StateTracker;
 
@@ -19,9 +18,9 @@ import org.wildstang.framework.logger.StateTracker;
  * @author Steve
  *
  */
-public abstract class AbstractInput implements Input {
+public abstract class Input {
 
-    private static Logger s_log = Logger.getLogger(AbstractInput.class.getName());
+    private static Logger s_log = Logger.getLogger(Input.class.getName());
     private static final String s_className = "AbstractInput";
 
     private ArrayList<InputListener> m_listeners = new ArrayList<>(5);
@@ -31,13 +30,12 @@ public abstract class AbstractInput implements Input {
 
     private StateTracker m_stateTracker;
 
-    public AbstractInput(String p_name) {
+    public Input(String p_name) {
         CoreUtils.checkNotNull(p_name, "p_name is null");
 
         m_name = p_name;
     }
 
-    @Override
     public void addInputListener(InputListener p_listener) {
         CoreUtils.checkNotNull(p_listener, "p_listener is null");
 
@@ -55,7 +53,6 @@ public abstract class AbstractInput implements Input {
         }
     }
 
-    @Override
     public void removeInputListener(InputListener p_listener) {
         CoreUtils.checkNotNull(p_listener, "p_listener is null");
 
@@ -74,7 +71,6 @@ public abstract class AbstractInput implements Input {
         }
     }
 
-    @Override
     public List<InputListener> getInputListeners() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "getInputListeners");
@@ -118,7 +114,6 @@ public abstract class AbstractInput implements Input {
         }
     }
 
-    @Override
     public void update() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "update");
@@ -150,7 +145,6 @@ public abstract class AbstractInput implements Input {
         }
     }
 
-    @Override
     public String getName() {
         return m_name;
     }
@@ -167,12 +161,10 @@ public abstract class AbstractInput implements Input {
 
     protected abstract void readDataFromInput();
 
-    @Override
     public void removeAllListeners() {
         m_listeners.clear();
     }
 
-    @Override
     public void setStateTracker(StateTracker p_tracker) {
         m_stateTracker = p_tracker;
     }
@@ -181,17 +173,14 @@ public abstract class AbstractInput implements Input {
         return m_stateTracker;
     }
 
-    @Override
     public void enable() {
         m_enabled = true;
     }
 
-    @Override
     public void disable() {
         m_enabled = false;
     }
 
-    @Override
     public boolean isEnabled() {
         return m_enabled;
     }

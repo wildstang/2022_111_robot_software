@@ -3,7 +3,7 @@ package org.wildstang.framework.io.outputs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class DiscreteOutput extends AbstractOutput {
+public abstract class DiscreteOutput extends Output {
 
     private static Logger s_log = Logger.getLogger(DiscreteOutput.class.getName());
     private static final String s_className = "DiscreteOutput";

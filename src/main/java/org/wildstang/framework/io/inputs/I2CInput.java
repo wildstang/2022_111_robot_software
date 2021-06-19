@@ -3,7 +3,7 @@ package org.wildstang.framework.io.inputs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class I2CInput extends AbstractInput {
+public abstract class I2CInput extends Input {
     private static Logger s_log = Logger.getLogger(I2CInput.class.getName());
     private static final String s_className = "I2CInput";
 

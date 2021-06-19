@@ -3,7 +3,7 @@ package org.wildstang.framework.io.inputs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class DiscreteInput extends AbstractInput {
+public abstract class DiscreteInput extends Input {
 
     private static Logger s_log = Logger.getLogger(DiscreteInput.class.getName());
     private static final String s_className = "DiscreteInput";

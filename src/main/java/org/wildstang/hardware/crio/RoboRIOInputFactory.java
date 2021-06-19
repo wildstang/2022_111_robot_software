@@ -4,10 +4,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.core.Inputs;
-import org.wildstang.framework.hardware.InputFactory;
 import org.wildstang.framework.hardware.WsRemoteAnalogInputConfig;
 import org.wildstang.framework.hardware.WsRemoteDigitalInputConfig;
-import org.wildstang.framework.io.Input;
+import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.io.inputs.RemoteAnalogInput;
 import org.wildstang.framework.io.inputs.RemoteDigitalInput;
 import org.wildstang.hardware.crio.inputs.WSInputType;
@@ -33,7 +32,7 @@ import org.wildstang.hardware.crio.inputs.config.WsJSJoystickInputConfig;
 /**
  * Builds inputs from WsInputs enumerations.
  */
-public class RoboRIOInputFactory implements InputFactory {
+public class RoboRIOInputFactory {
 
     private static Logger s_log = Logger.getLogger(RoboRIOInputFactory.class.getName());
     private static final String s_className = "RoboRIOInputFactory";
@@ -47,7 +46,6 @@ public class RoboRIOInputFactory implements InputFactory {
     /**
      * Prepares logger.
      */
-    @Override
     public void init() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "init");
@@ -67,7 +65,6 @@ public class RoboRIOInputFactory implements InputFactory {
      * @param An enumeration of WsInputs.
      * @return A constructed Input.
      */
-    @Override
     public Input createInput(Inputs p_input) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "createAnalogInput");
