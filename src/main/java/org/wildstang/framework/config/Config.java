@@ -12,7 +12,6 @@ import org.wildstang.framework.CoreUtils;
  * This class represents the config parameters. It is a map of key/value pairs.
  *
  * @author Steve
- *
  */
 public class Config {
     private static Logger s_log = Logger.getLogger(Config.class.getName());
@@ -20,9 +19,10 @@ public class Config {
 
     private HashMap<String, Object> m_configMap = new HashMap<>();
 
-    public Config() {
-    }
-
+    /**
+     * Load in a config from file.
+     * @param p_reader BufferedReader on a config file.
+     */
     protected void load(BufferedReader p_reader) {
         CoreUtils.checkNotNull(p_reader, "p_reader is null");
 
@@ -38,7 +38,6 @@ public class Config {
                 currentLine = stripComments(currentLine.trim());
 
                 if (currentLine.length() > 0) {
-                    // TODO: Error checking
                     // Split token on = to get name/value
                     keyValue = getKeyValuePair(currentLine);
 
@@ -56,7 +55,6 @@ public class Config {
                 }
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -66,17 +64,11 @@ public class Config {
      * of the line that comes before that character, which will be an empty string
      * if the line starts with a '#'. If a null string is passed in, a
      * NullPointerException is thrown. The String is trimmed before being returned
-     * to remove any whitespace on either end
-     *
-     * @param p_line
-     *            a String representing a line of text
-     *
+     * to remove any whitespace on either end.
+     * @param p_line a String representing a line of text
      * @return the String, minus any present # character, and any characters that
-     *         follow it, if any. May return an empty String, but will never return
-     *         null
-     *
-     * @throws NullPointerException
-     *             if the input String is null
+     *         follow it, if any. May return an empty String, but will never return null.
+     * @throws NullPointerException True if the input String is null.
      */
     protected String stripComments(String p_line) {
         if (s_log.isLoggable(Level.FINER)) {
@@ -87,7 +79,8 @@ public class Config {
 
         String result;
 
-        // TODO: split line into parts and add error checking
+        // TODO: add error checking
+        // split line into parts
         result = p_line.split("#")[0].trim();
 
         if (s_log.isLoggable(Level.FINER)) {
@@ -100,13 +93,9 @@ public class Config {
     /**
      * Splits the input String on an equals (=) character, and returns the two parts
      * as an array of two Strings.
-     *
-     * @param p_line
-     *
-     * @return
-     *
-     * @throws NullPointerException
-     *             if the String passed in is null
+     * @param p_line String containing an '='.
+     * @return Array of p_line split by '='.
+     * @throws NullPointerException True if the String passed in is null.
      */
     protected String[] getKeyValuePair(String p_line) {
         String[] result;
@@ -127,10 +116,9 @@ public class Config {
     /**
      * Parses the value from a String. It attempts to parse it into a primitive
      * type, returns as its wrapper class. The order it attempts is: double, int,
-     * boolean, String
-     *
-     * @param p_valueStr
-     * @return
+     * boolean, String.
+     * @param p_valueStr String containing a value.
+     * @return Value as type object.
      */
     protected Object parseValue(String p_valueStr) {
         CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
@@ -181,6 +169,11 @@ public class Config {
         return result;
     }
 
+    /**
+     * Converts a String containing a double to a Double.
+     * @param p_valueStr String representation of a double.
+     * @return Parsed Double or null if not a double.
+     */
     protected Double parseDouble(String p_valueStr) {
         CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
 
@@ -204,6 +197,11 @@ public class Config {
         return d;
     }
 
+    /**
+     * Converts a String containing a int to a Int.
+     * @param p_valueStr String representation of a int.
+     * @return Parsed Int or null if not a int.
+     */
     protected Integer parseInt(String p_valueStr) {
         CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
 
@@ -225,6 +223,11 @@ public class Config {
         return i;
     }
 
+    /**
+     * Converts a String containing a boolean to a Boolean.
+     * @param p_valueStr String representation of a boolean.
+     * @return Parsed Boolean or null if not a boolean.
+     */
     protected Boolean parseBoolean(String p_valueStr) {
         CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
 
@@ -248,6 +251,11 @@ public class Config {
         return b;
     }
 
+    /**
+     * Gets the value corresponding to a key in the config.
+     * @param p_key Key to find corresponding value to.
+     * @return Value corresponding to key.
+     */
     public Object getValue(String p_key) {
         CoreUtils.checkNotNull(p_key, "p_key is null");
 
@@ -262,6 +270,12 @@ public class Config {
         return result;
     }
 
+    /**
+     * Gets the value corresponding to a key in the config, with default.
+     * @param p_key Key to find corresponding value to.
+     * @param p_default Default value if p_key doesn't exist.
+     * @return Value corresponding to key, or default value.
+     */
     public Object getValue(String p_key, Object p_default) {
         CoreUtils.checkNotNull(p_key, "p_key is null");
 
@@ -286,6 +300,12 @@ public class Config {
         return value;
     }
 
+    /**
+     * Gets the double corresponding to a key in the config, with default.
+     * @param p_key Key to find corresponding double to.
+     * @param p_default Default double if p_key doesn't exist.
+     * @return double corresponding to key, or default double.
+     */
     public double getDouble(String p_key, double p_default) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "getDouble");
@@ -300,6 +320,12 @@ public class Config {
         return (Double) value;
     }
 
+    /**
+     * Gets the int corresponding to a key in the config, with default.
+     * @param p_key Key to find corresponding int to.
+     * @param p_default Default int if p_key doesn't exist.
+     * @return int corresponding to key, or default int.
+     */
     public int getInt(String p_key, int p_default) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "getInt");
@@ -314,6 +340,12 @@ public class Config {
         return (Integer) value;
     }
 
+    /**
+     * Gets the boolean corresponding to a key in the config, with default.
+     * @param p_key Key to find corresponding boolean to.
+     * @param p_default Default boolean if p_key doesn't exist.
+     * @return boolean corresponding to key, or default boolean.
+     */
     public boolean getBoolean(String p_key, boolean p_default) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "getBoolean");
@@ -328,6 +360,12 @@ public class Config {
         return (Boolean) value;
     }
 
+    /**
+     * Gets the String corresponding to a key in the config, with default.
+     * @param p_key Key to find corresponding String to.
+     * @param p_default Default String if p_key doesn't exist.
+     * @return String corresponding to key, or default String.
+     */
     public String getString(String p_key, String p_default) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "getString");
@@ -341,6 +379,10 @@ public class Config {
         return (String) value;
     }
 
+    /**
+     * Returns the size of the total config map.
+     * @return Size of config map.
+     */
     public int size() {
         return m_configMap.size();
     }

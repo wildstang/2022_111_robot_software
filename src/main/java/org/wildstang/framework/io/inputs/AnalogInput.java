@@ -73,8 +73,7 @@ public abstract class AnalogInput extends Input {
     /**
      * This method reads the raw value from the underlying hardware. This should be
      * implemented by each individual input subclass.
-     *
-     * @return
+     * @return Raw value read by input.
      */
     protected abstract double readRawValue();
 
