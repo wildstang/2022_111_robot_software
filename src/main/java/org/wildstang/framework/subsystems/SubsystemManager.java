@@ -121,7 +121,7 @@ public class SubsystemManager {
 
     /**
      * Gets a given subsystem by name from the manager.
-     * @param p_subsystem Name of subsystem to get.
+     * @param p_name Name of subsystem to get.
      * @return The registered system requested.
      */
     public Subsystem getSubsystem(String p_name) {
@@ -140,7 +140,7 @@ public class SubsystemManager {
 
     /**
      * Gets a given subsystem from the manager.
-     * @param p_subsystem Subsystem to get.
+     * @param desiredSubsystem Subsystem to get.
      * @return The registered system requested.
      */
     public Subsystem getSubsystem(Subsystems desiredSubsystem) {

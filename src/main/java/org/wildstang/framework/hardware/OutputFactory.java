@@ -21,7 +21,7 @@ public interface OutputFactory {
 
     /**
      * Creates an Output from an enumeration of WsOutputs.
-     * @param An enumeration of WsOutputs.
+     * @param p_output An enumeration of WsOutputs.
      * @return A constructed Output.
      */
     public Output createOutput(Outputs p_output);

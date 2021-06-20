@@ -112,7 +112,7 @@ public class InputManager {
 
     /**
      * Returns an Input with a matching name from the manager.
-     * @param p_name Input to fetch from the manager.
+     * @param p_input Input to fetch from the manager.
      * @return Input belonging to the manager.
      */
     public Input getInput(Inputs p_input) {

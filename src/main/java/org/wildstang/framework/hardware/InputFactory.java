@@ -21,7 +21,7 @@ public interface InputFactory {
 
     /**
      * Creates an Input from an enumeration of WsInputs.
-     * @param An enumeration of WsInputs.
+     * @param p_input An enumeration of WsInputs.
      * @return A constructed Input.
      */
     public Input createInput(Inputs p_input);
