@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var data = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -138,7 +138,10 @@ extends java.lang.Object</pre>
  This class is responsible for reading the configuration from the file into
  the Config object, and providing access to the Config object.
 
- This class is a singleton.</div>
+ This class is a singleton.
+ 
+ Note: This class previously handled ConfigListeners but they were removed
+ because they were only implemented once and weren't actually used.</div>
 </li>
 </ul>
 </div>
@@ -181,42 +184,25 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addConfigListener(org.wildstang.framework.config.ConfigListener)">addConfigListener</a></span>&#8203;(<a href="ConfigListener.html" title="interface in org.wildstang.framework.config">ConfigListener</a>&nbsp;p_listener)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="Config.html" title="class in org.wildstang.framework.config">Config</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getConfig()">getConfig</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="ConfigListener.html" title="interface in org.wildstang.framework.config">ConfigListener</a>&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getConfigListeners()">getConfigListeners</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#init()">init</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#loadConfig(java.io.BufferedReader)">loadConfig</a></span>&#8203;(java.io.BufferedReader&nbsp;p_reader)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#notifyListeners()">notifyListeners</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Notifies all listeners that the config has changed and they should reload any
- values.</div>
+<div class="block">Returns the manager's Config.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeConfigListener(org.wildstang.framework.config.ConfigListener)">removeConfigListener</a></span>&#8203;(<a href="ConfigListener.html" title="interface in org.wildstang.framework.config">ConfigListener</a>&nbsp;p_listener)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#init()">init</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Create a new Config, belonging to the manager.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#loadConfig(java.io.BufferedReader)">loadConfig</a></span>&#8203;(java.io.BufferedReader&nbsp;p_reader)</code></th>
+<td class="colLast">
+<div class="block">Loads in a Config from file, using a BufferedReader.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -268,6 +254,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>init</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;init()</pre>
+<div class="block">Create a new Config, belonging to the manager.</div>
 </li>
 </ul>
 <a id="getConfig()">
@@ -277,53 +264,25 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getConfig</h4>
 <pre class="methodSignature">public&nbsp;<a href="Config.html" title="class in org.wildstang.framework.config">Config</a>&nbsp;getConfig()</pre>
+<div class="block">Returns the manager's Config.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The manager's Config if initialized, otherwise null.</dd>
+</dl>
 </li>
 </ul>
 <a id="loadConfig(java.io.BufferedReader)">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>loadConfig</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;loadConfig&#8203;(java.io.BufferedReader&nbsp;p_reader)</pre>
-</li>
-</ul>
-<a id="addConfigListener(org.wildstang.framework.config.ConfigListener)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>addConfigListener</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;addConfigListener&#8203;(<a href="ConfigListener.html" title="interface in org.wildstang.framework.config">ConfigListener</a>&nbsp;p_listener)</pre>
-</li>
-</ul>
-<a id="removeConfigListener(org.wildstang.framework.config.ConfigListener)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>removeConfigListener</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;removeConfigListener&#8203;(<a href="ConfigListener.html" title="interface in org.wildstang.framework.config">ConfigListener</a>&nbsp;p_listener)</pre>
-</li>
-</ul>
-<a id="getConfigListeners()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getConfigListeners</h4>
-<pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="ConfigListener.html" title="interface in org.wildstang.framework.config">ConfigListener</a>&gt;&nbsp;getConfigListeners()</pre>
-</li>
-</ul>
-<a id="notifyListeners()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>notifyListeners</h4>
-<pre class="methodSignature">protected&nbsp;void&nbsp;notifyListeners()</pre>
-<div class="block">Notifies all listeners that the config has changed and they should reload any
- values.</div>
+<div class="block">Loads in a Config from file, using a BufferedReader.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_reader</code> - BufferedReader opened on a file.</dd>
+</dl>
 </li>
 </ul>
 </li>
