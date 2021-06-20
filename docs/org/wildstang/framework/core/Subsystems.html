@@ -127,6 +127,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">Subsystems</span></pre>
+<div class="block">Used in implementations to enumerate Subsystems.
+ We would like to have a super class for this structure, however,
+ Java does not support enums extending classes.</div>
 </li>
 </ul>
 </div>
@@ -150,12 +153,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getName()">getName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the name mapped to the subsystem.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.Class&lt;?&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSubsystemClass()">getSubsystemClass</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns subsystem's class.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -181,6 +188,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getName</h4>
 <pre class="methodSignature">java.lang.String&nbsp;getName()</pre>
+<div class="block">Returns the name mapped to the subsystem.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Name mapped to the subsystem.</dd>
+</dl>
 </li>
 </ul>
 <a id="getSubsystemClass()">
@@ -190,6 +202,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getSubsystemClass</h4>
 <pre class="methodSignature">java.lang.Class&lt;?&gt;&nbsp;getSubsystemClass()</pre>
+<div class="block">Returns subsystem's class.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Subsystem's class.</dd>
+</dl>
 </li>
 </ul>
 </li>

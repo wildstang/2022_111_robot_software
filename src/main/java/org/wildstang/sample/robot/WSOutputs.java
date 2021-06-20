@@ -12,6 +12,7 @@ import org.wildstang.framework.io.outputs.OutputType;
  * Note, our motors are currently all controlled via the CAN bus, so they do not appear in this enum.
  */
 public enum WSOutputs implements Outputs {
+
     // ********************************
     // PWM Outputs
     // ********************************
@@ -43,6 +44,11 @@ public enum WSOutputs implements Outputs {
 
     ; // end of enum
 
+    /**
+     * Do not modify below code, provides template for enumerations.
+     * We would like to have a super class for this structure, however,
+     * Java does not support enums extending classes.
+     */
 
     private String m_name;
     private OutputType m_type;
@@ -51,6 +57,13 @@ public enum WSOutputs implements Outputs {
 
     private static boolean isLogging = true;
 
+    /**
+     * Initialize a new Output.
+     * @param p_name Name, must match that in class to prevent errors.
+     * @param p_type Type of Output to use.
+     * @param p_config Corresponding configuration for OutputType.
+     * @param p_trackingState If the Output is tracking.
+     */
     WSOutputs(String p_name, OutputType p_type, OutputConfig p_config, boolean p_trackingState) {
         m_name = p_name;
         m_type = p_type;
@@ -58,24 +71,43 @@ public enum WSOutputs implements Outputs {
         m_trackingState = p_trackingState;
     }
 
-    @Override
+    /**
+     * Returns the name mapped to the Output.
+     * @return Name mapped to the Output.
+     */
     public String getName() {
         return m_name;
     }
 
-    @Override
+    /**
+     * Returns the type of Output for the enumeration.
+     * @return OutputType of enumeration.
+     */
     public OutputType getType() {
         return m_type;
     }
 
+    /**
+     * Returns the config of Output for the enumeration.
+     * @return OutputConfig of enumeration.
+     */
     public OutputConfig getConfig() {
         return m_config;
     }
 
+    /**
+     * Returns true if the Logger should track the Output's state.
+     * @return True if of tracking state.
+     */
     public boolean isTrackingState() {
         return m_trackingState;
     }
 
+
+    /**
+     * Returns true if the Outputs are set to log.
+     * @return True if set to log.
+     */
     public static boolean getLogging() {
         return isLogging;
     }

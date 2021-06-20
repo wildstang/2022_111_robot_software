@@ -127,6 +127,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">Outputs</span></pre>
+<div class="block">Used in implementations to enumerate Outputs.
+ We would like to have a super class for this structure, however,
+ Java does not support enums extending classes.</div>
 </li>
 </ul>
 </div>
@@ -150,22 +153,30 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../hardware/OutputConfig.html" title="interface in org.wildstang.framework.hardware">OutputConfig</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getConfig()">getConfig</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the config of Output for the enumeration.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getName()">getName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the name mapped to the Output.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../io/outputs/OutputType.html" title="interface in org.wildstang.framework.io.outputs">OutputType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getType()">getType</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the type of Output for the enumeration.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTrackingState()">isTrackingState</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the Logger should track the Output's state.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -191,6 +202,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getName</h4>
 <pre class="methodSignature">java.lang.String&nbsp;getName()</pre>
+<div class="block">Returns the name mapped to the Output.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Name mapped to the Output.</dd>
+</dl>
 </li>
 </ul>
 <a id="getType()">
@@ -200,6 +216,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getType</h4>
 <pre class="methodSignature"><a href="../io/outputs/OutputType.html" title="interface in org.wildstang.framework.io.outputs">OutputType</a>&nbsp;getType()</pre>
+<div class="block">Returns the type of Output for the enumeration.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>OutputType of enumeration.</dd>
+</dl>
 </li>
 </ul>
 <a id="getConfig()">
@@ -209,6 +230,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getConfig</h4>
 <pre class="methodSignature"><a href="../hardware/OutputConfig.html" title="interface in org.wildstang.framework.hardware">OutputConfig</a>&nbsp;getConfig()</pre>
+<div class="block">Returns the config of Output for the enumeration.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>OutputConfig of enumeration.</dd>
+</dl>
 </li>
 </ul>
 <a id="isTrackingState()">
@@ -218,6 +244,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>isTrackingState</h4>
 <pre class="methodSignature">boolean&nbsp;isTrackingState()</pre>
+<div class="block">Returns true if the Logger should track the Output's state.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>True if of tracking state.</dd>
+</dl>
 </li>
 </ul>
 </li>

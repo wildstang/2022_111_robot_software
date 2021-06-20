@@ -175,6 +175,11 @@ public enum WSInputs implements Inputs {
             
     ; // end of enum
     
+    /**
+     * Do not modify below code, provides template for enumerations.
+     * We would like to have a super class for this structure, however,
+     * Java does not support enums extending classes.
+     */
 
     private final String m_name;
     private final InputType m_type;
@@ -192,24 +197,42 @@ public enum WSInputs implements Inputs {
         m_trackingState = p_trackingState;
     }
 
-    @Override
+    /**
+     * Returns the name mapped to the Input.
+     * @return Name mapped to the Input.
+     */
     public String getName() {
         return m_name;
     }
 
-    @Override
+    /**
+     * Returns the type of Input for the enumeration.
+     * @return InputType of enumeration.
+     */
     public InputType getType() {
         return m_type;
     }
 
+    /**
+     * Returns the config of Input for the enumeration.
+     * @return InputConfig of enumeration.
+     */
     public InputConfig getConfig() {
         return m_config;
     }
 
+    /**
+     * Returns true if the Logger should track the Input's state.
+     * @return True if of tracking state.
+     */
     public boolean isTrackingState() {
         return m_trackingState;
     }
 
+    /**
+     * Returns true if the Inputs are set to log.
+     * @return True if set to log.
+     */
     public static boolean getLogging() {
         return isLogging;
     }
