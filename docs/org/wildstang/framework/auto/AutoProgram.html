@@ -131,11 +131,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="AutoMovement.html" title="class in org.wildstang.framework.auto">AutoMovement</a></code>, <code><a href="program/Sleeper.html" title="class in org.wildstang.framework.auto.program">Sleeper</a></code></dd>
+<dd><code><a href="program/Sleeper.html" title="class in org.wildstang.framework.auto.program">Sleeper</a></code></dd>
 </dl>
 <hr>
 <pre>public abstract class <span class="typeNameLabel">AutoProgram</span>
 extends java.lang.Object</pre>
+<div class="block">Represents a collection of AutoSteps used for a single Autonomous period.</div>
 </li>
 </ul>
 </div>
@@ -172,7 +173,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected java.util.List&lt;<a href="steps/AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&gt;</code></td>
+<td class="colFirst"><code>protected java.util.List&lt;<a href="AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#programSteps">programSteps</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -217,53 +218,73 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addStep(org.wildstang.framework.auto.steps.AutoStep)">addStep</a></span>&#8203;(<a href="steps/AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;newStep)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addStep(org.wildstang.framework.auto.AutoStep)">addStep</a></span>&#8203;(<a href="AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&nbsp;newStep)</code></th>
+<td class="colLast">
+<div class="block">Adds a new AutoStep to the AutoProgram.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cleanup()">cleanup</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Remove all steps from the AutoProgram</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>protected abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#defineSteps()">defineSteps</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Use this method to set the steps for this program.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="steps/AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></td>
+<td class="colFirst"><code><a href="AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentStep()">getCurrentStep</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the current running AutoStep within the AutoProgram.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="steps/AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></td>
+<td class="colFirst"><code><a href="AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNextStep()">getNextStep</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the next AutoStep to run or null if at the last step.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initialize()">initialize</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Collects the defined steps and starts the auto program.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isFinished()">isFinished</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the AutoProgram is complete.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#loadStopPosition()">loadStopPosition</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds an AutoStepStopAutonomous after a given AutoStep index from config.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>abstract java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the name of the AutoProgram.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Update the current running step and move on if necessary.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -295,7 +316,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>programSteps</h4>
-<pre>protected final&nbsp;java.util.List&lt;<a href="steps/AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&gt; programSteps</pre>
+<pre>protected final&nbsp;java.util.List&lt;<a href="AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&gt; programSteps</pre>
 </li>
 </ul>
 <a id="currentStep">
@@ -361,6 +382,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>defineSteps</h4>
 <pre class="methodSignature">protected abstract&nbsp;void&nbsp;defineSteps()</pre>
+<div class="block">Use this method to set the steps for this program.
+ Programs execute the steps in the array programSteps serially.
+ Remember to clear everything before all of your steps are finished,
+ because once they are, it immediately drops into Sleeper.</div>
 </li>
 </ul>
 <a id="initialize()">
@@ -370,6 +395,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>initialize</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;initialize()</pre>
+<div class="block">Collects the defined steps and starts the auto program.</div>
 </li>
 </ul>
 <a id="cleanup()">
@@ -379,6 +405,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>cleanup</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;cleanup()</pre>
+<div class="block">Remove all steps from the AutoProgram</div>
 </li>
 </ul>
 <a id="update()">
@@ -388,6 +415,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>update</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;update()</pre>
+<div class="block">Update the current running step and move on if necessary.</div>
 </li>
 </ul>
 <a id="getCurrentStep()">
@@ -396,7 +424,12 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getCurrentStep</h4>
-<pre class="methodSignature">public&nbsp;<a href="steps/AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;getCurrentStep()</pre>
+<pre class="methodSignature">public&nbsp;<a href="AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&nbsp;getCurrentStep()</pre>
+<div class="block">Returns the current running AutoStep within the AutoProgram.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Current running AutoStep.</dd>
+</dl>
 </li>
 </ul>
 <a id="getNextStep()">
@@ -405,7 +438,12 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getNextStep</h4>
-<pre class="methodSignature">public&nbsp;<a href="steps/AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;getNextStep()</pre>
+<pre class="methodSignature">public&nbsp;<a href="AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&nbsp;getNextStep()</pre>
+<div class="block">Returns the next AutoStep to run or null if at the last step.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Next AutoStep or null if no more steps.</dd>
+</dl>
 </li>
 </ul>
 <a id="loadStopPosition()">
@@ -415,6 +453,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>loadStopPosition</h4>
 <pre class="methodSignature">protected&nbsp;void&nbsp;loadStopPosition()</pre>
+<div class="block">Adds an AutoStepStopAutonomous after a given AutoStep index from config.
+ This allows insertion of a force stop of autonomous into a program via config.</div>
 </li>
 </ul>
 <a id="isFinished()">
@@ -424,15 +464,25 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isFinished</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isFinished()</pre>
+<div class="block">Returns true if the AutoProgram is complete.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>True if the AutoProgram is complete.</dd>
+</dl>
 </li>
 </ul>
-<a id="addStep(org.wildstang.framework.auto.steps.AutoStep)">
+<a id="addStep(org.wildstang.framework.auto.AutoStep)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>addStep</h4>
-<pre class="methodSignature">protected&nbsp;void&nbsp;addStep&#8203;(<a href="steps/AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;newStep)</pre>
+<pre class="methodSignature">protected&nbsp;void&nbsp;addStep&#8203;(<a href="AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&nbsp;newStep)</pre>
+<div class="block">Adds a new AutoStep to the AutoProgram.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>newStep</code> - New AutoStep to add.</dd>
+</dl>
 </li>
 </ul>
 <a id="toString()">
@@ -442,9 +492,12 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>toString</h4>
 <pre class="methodSignature">public abstract&nbsp;java.lang.String&nbsp;toString()</pre>
+<div class="block">Returns the name of the AutoProgram.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Name of the AutoProgram.</dd>
 </dl>
 </li>
 </ul>

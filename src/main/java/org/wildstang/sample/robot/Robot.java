@@ -21,11 +21,9 @@ public class Robot extends TimedRobot {
     Core core;
     private boolean AutoFirstRun = true;
 
-    /** Nothing to do in the Robot constructor; real setup happens in robotInit. */
-    public Robot() {
-        super();
-    }
-
+    /**
+     * Runs on initialization, creates and configure framework Core.
+     */
     @Override
     public void robotInit() {
         System.out.println("Initializing robot.");
@@ -39,11 +37,17 @@ public class Robot extends TimedRobot {
         //AutoManager.getInstance().addProgram(new ExampleAutoProgram());
     }
 
+    /**
+     * Runs when robot is disabled.
+     */
     @Override
     public void disabledInit() {
         System.out.println("Engaging disabled mode.");
     }
 
+    /**
+     * Runs when autonomous is enabled.
+     */
     @Override
     public void autonomousInit() {
         Core.getSubsystemManager().resetState();
@@ -52,17 +56,26 @@ public class Robot extends TimedRobot {
         AutoManager.getInstance().startCurrentProgram();
     }
 
+    /**
+     * Runs when teleoperated is enabled.
+     */
     @Override
     public void teleopInit() {
         System.out.println("Engaging teleoperation mode.");
         Core.getSubsystemManager().resetState();
     }
 
+    /**
+     * Runs when test is enabled.
+     */
     @Override
     public void testInit() {
         System.out.println("Engaging test mode.");
     }
 
+    /**
+     * Runs repeatedly, regardless of mode and state.
+     */
     @Override
     public void robotPeriodic() {
         core.executeUpdate();
@@ -72,15 +85,24 @@ public class Robot extends TimedRobot {
         Core.getStateTracker().getStateList();
     }
 
+    /**
+     * Runs repeatedly while robot is disabled.
+     */
     @Override
     public void disabledPeriodic() {
         resetRobotState();
     }
     
+    /**
+     * Utility functions to reset if auto has run when disabled.
+     */
     private void resetRobotState() {
         AutoFirstRun = true;
     }
 
+    /**
+     * Runs repeatedly while autonomous is enabled.
+     */
     @Override
     public void autonomousPeriodic() {
         core.executeUpdate();
@@ -90,6 +112,9 @@ public class Robot extends TimedRobot {
         }
     }
 
+    /**
+     * Runs repeatedly while teleoperated is enabled.
+     */
     @Override
     public void teleopPeriodic() {
         try {
@@ -107,6 +132,9 @@ public class Robot extends TimedRobot {
         }
     }
 
+    /**
+     * Runs repeatedly while test is enabled.
+     */
     @Override
     public void testPeriodic() {
     }

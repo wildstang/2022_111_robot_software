@@ -3,12 +3,13 @@ package org.wildstang.framework.auto.steps;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.wildstang.framework.auto.AutoStep;
+
 /**
- *
+ * Serial groups execute all contained steps sequentially.
  * @author coder65535
  */
 public class AutoSerialStepGroup extends AutoStep {
-    // Serial groups execute all contained steps sequentially
 
     final List<AutoStep> steps = new ArrayList<>();
     int currentStep = 0;
@@ -16,14 +17,24 @@ public class AutoSerialStepGroup extends AutoStep {
     String name = "";
     private boolean finishedPreviousStep;
 
+    /**
+     * Allow empty constructors since groups contain steps anyway.
+     */
     public AutoSerialStepGroup() {
-        name = "";
+        this("");
     }
 
+    /**
+     * Constructor takes a name since there may be multiple groups.
+     * @param name Name for the step group.
+     */
     public AutoSerialStepGroup(String name) {
         this.name = name;
     }
 
+    /**
+     * Initializes each step in the group.
+     */
     @Override
     public void initialize() {
         finishedPreviousStep = false;
@@ -35,6 +46,10 @@ public class AutoSerialStepGroup extends AutoStep {
         initialized = true;
     }
 
+    /**
+     * Updates the current step in the group until it is finished.
+     * Then moves on to the next step. Group is finished when last step is finished.
+     */
     @Override
     public void update() {
         if (isFinished()) {
@@ -59,30 +74,42 @@ public class AutoSerialStepGroup extends AutoStep {
         }
     }
 
+    /**
+     * Add a step to the group if it is not initialized.
+     * @param step Step to add to the group.
+     */
     public void addStep(AutoStep step) {
         if (!initialized) {
             steps.add(step);
         }
     }
 
+    /**
+     * Group name is used in conjuction with "Serial step group: "
+     * @return Name of the group.
+     */
     @Override
     public String toString() {
         return "Serial step group: " + name;
     }
 
+    /**
+     * Gets the current executing AutoStep.
+     * @return The current AutoStep.
+     */
     public AutoStep getCurrentStep() {
         return steps.get(currentStep);
     }
 
+    /**
+     * Gets the next AutoStep to execute.
+     * @return The next AutoStep to execute of null if none left.
+     */
     public AutoStep getNextStep() {
         if (currentStep + 1 < steps.size()) {
             return steps.get(currentStep + 1);
         } else {
             return null;
         }
-    }
-
-    public void finishGroup() {
-        setFinished(true);
     }
 }

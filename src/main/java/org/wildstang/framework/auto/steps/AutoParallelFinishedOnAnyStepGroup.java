@@ -1,38 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.wildstang.framework.auto.steps;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.wildstang.framework.auto.AutoStep;
 
 /**
- *
+ * AutoParallelStepGroup where on completion of any child steps the whole group finishes.
  * @author Joey
  */
-public class AutoParallelFinishedOnAnyStepGroup extends AutoStep {
+public class AutoParallelFinishedOnAnyStepGroup extends AutoParallelStepGroup {
 
-    private String name;
-    private boolean initialized = false;
-    private final List<AutoStep> steps = new ArrayList<>();
-
-    public AutoParallelFinishedOnAnyStepGroup() {
-        name = "";
-    }
-
-    public AutoParallelFinishedOnAnyStepGroup(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public void initialize() {
-        initialized = true;
-        for (AutoStep step : steps) {
-            step.initialize();
-        }
-    }
-
+    /**
+     * Updates every step in the group, until one is finished, then finishes.
+     */
     @Override
     public void update() {
         for (AutoStep step : steps) {
@@ -47,12 +25,10 @@ public class AutoParallelFinishedOnAnyStepGroup extends AutoStep {
         }
     }
 
-    public void addStep(AutoStep step) {
-        if (!initialized) {
-            steps.add(step);
-        }
-    }
-
+    /**
+     * Returns the name of the AutoStep, used to uniquely identify the step.
+     * @return Name of the AutoStep.
+     */
     @Override
     public String toString() {
         return "Parallel finished on any step group: " + name;

@@ -11,22 +11,27 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Manages all autonomous and AutoPrograms for the framework.
+ * Note: This manager previously tracked an AutoStartPosition Enum
+ * which was used to compare the current position to where the robot
+ * started autonomous. Due to a lack of use this was removed.
  * @author Nathan
  */
 public class AutoManager {
+
     private static AutoManager instance = null;
     private static Logger s_log = Logger.getLogger(AutoManager.class.getName());
 
     private List<AutoProgram> programs = new ArrayList<>();
     private AutoProgram runningProgram;
     private boolean programFinished, programRunning;
-    private AutoStartPositionEnum currentPosition;
     private SendableChooser<AutoProgram> chooser;
     private SendableChooser<Boolean> lockinChooser;
 
+    /**
+     * Loads in AutoPrograms and adds selectors to the SmartDashboard.
+     */
     private AutoManager() {
-        currentPosition = AutoStartPositionEnum.UNKNOWN;
         chooser = new SendableChooser<>();
         lockinChooser = new SendableChooser<>();
         lockinChooser.setDefaultOption("Unlocked", false);
@@ -40,6 +45,9 @@ public class AutoManager {
         clear();
     }
 
+    /**
+     * Updates the running AutoProgram and detects if it is finished.
+     */
     public void update() {
         if (programFinished) {
             runningProgram.cleanup();
@@ -52,13 +60,15 @@ public class AutoManager {
         }
     }
 
+    /**
+     * Starts the currently selected program from SmartDashboard if locked in.
+     */
     public void startCurrentProgram() {
         if (lockinChooser.getSelected()) {
             runningProgram = chooser.getSelected();
         } else {
             runningProgram = programs.get(0);
         }
-        // runningProgram = programs.get(1);
         
         SmartDashboard.putBoolean("Checkpoint 606 yay", true);
         
@@ -67,11 +77,17 @@ public class AutoManager {
         SmartDashboard.putString("Running Autonomous Program", runningProgram.toString());
     }
 
+    /**
+     * Starts the default program, Sleeper, which does nothing and never ends.
+     */
     public void startSleeper() {
         runningProgram = programs.get(0);
         runningProgram.initialize();
     }
 
+    /**
+     * Resets the current program and all states.
+     */
     public void clear() {
         programFinished = false;
         programRunning = false;
@@ -80,33 +96,38 @@ public class AutoManager {
         }
         runningProgram = programs.get(0);
         SmartDashboard.putString("Running Autonomous Program", "No Program Running");
-        SmartDashboard.putString("Current Start Position", currentPosition.toString());
     }
 
+    /**
+     * Returns the current running AutoProgram, if one is running.
+     * @return The current running program, or null.
+     */
     public AutoProgram getRunningProgram() {
-        if (programRunning) {
+        if (runningProgram != null && !programFinished) {
             return runningProgram;
         } else {
             return null;
         }
     }
 
-    public String getRunningProgramName() {
-        return runningProgram.toString();
-    }
-
-    /*
-     * public String getSelectedProgramName() { return
-     * programs.get(currentProgram).toString(); }
-     *
-     * public String getLockedProgramName() { return
-     * programs.get(lockedProgram).toString(); }
+    /**
+     * Returns the name of the current running AutoProgram, if one is running.
+     * @return The name of the running program, or an empty String.
      */
-
-    public AutoStartPositionEnum getStartPosition() {
-        return currentPosition;
+    public String getRunningProgramName() {
+        AutoProgram p = getRunningProgram();
+        if (p != null) {
+            return p.toString();
+        }
+        else {
+            return "";
+        }
     }
 
+    /**
+     * Gets the instance of AutoManager or creates a new one.
+     * @return The instance of AutoManager.
+     */
     public static AutoManager getInstance() {
         if (AutoManager.instance == null) {
             AutoManager.instance = new AutoManager();
@@ -114,22 +135,20 @@ public class AutoManager {
         return AutoManager.instance;
     }
 
-    /*
-     * public void setProgram(int index) { if (index >= programs.size() || index <
-     * 0) { index = 0; } currentProgram = index; lockedProgram = currentProgram; }
+    /**
+     * Defines the default set of AutoPrograms.
+     * The first should always be Sleeper, which does nothing and never finishes.
+     * Do not change that.
      */
-
-    public void setPosition(int index) {
-        currentPosition = AutoStartPositionEnum.getEnumFromValue(index);
-    }
-
     private void definePrograms() {
-        addProgram(new Sleeper()); // Always leave Sleeper as
-        // 0. Other parts of the
-        // code assume 0 is Sleeper.
+        addProgram(new Sleeper());
 
     }
 
+    /**
+     * Adds a new program to AutoManager and SmartDashboard chooser.
+     * @param program New AutoProgram to add.
+     */
     public void addProgram(AutoProgram program) {
         programs.add(program);
         chooser.addOption(program.toString(), program);

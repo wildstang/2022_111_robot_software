@@ -176,22 +176,42 @@ public class Core {
         }
     }
 
+    /**
+     * Returns the framework's InputManager.
+     * @return InputManager belonging to the framework.
+     */
     public static InputManager getInputManager() {
         return s_inputManager;
     }
 
+    /**
+     * Returns the framework's OutputManager.
+     * @return OutputManager belonging to the framework.
+     */
     public static OutputManager getOutputManager() {
         return s_outputManager;
     }
 
+    /**
+     * Returns the framework's SubsystemManager.
+     * @return SubsystemManager belonging to the framework.
+     */
     public static SubsystemManager getSubsystemManager() {
         return s_subsystemManager;
     }
 
+    /**
+     * Returns the framework's ConfigManager.
+     * @return ConfigManager belonging to the framework.
+     */
     public static ConfigManager getConfigManager() {
         return s_configManager;
     }
 
+    /**
+     * Returns the framework's StateTracker.
+     * @return StateTracker belonging to the framework.
+     */
     public static StateTracker getStateTracker() {
         return s_stateTracker;
     }

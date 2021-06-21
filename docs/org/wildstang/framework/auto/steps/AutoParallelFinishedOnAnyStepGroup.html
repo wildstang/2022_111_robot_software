@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10};
+var data = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -122,10 +122,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">org.wildstang.framework.auto.steps.AutoStep</a></li>
+<li><a href="../AutoStep.html" title="class in org.wildstang.framework.auto">org.wildstang.framework.auto.AutoStep</a></li>
+<li>
+<ul class="inheritance">
+<li><a href="AutoParallelStepGroup.html" title="class in org.wildstang.framework.auto.steps">org.wildstang.framework.auto.steps.AutoParallelStepGroup</a></li>
 <li>
 <ul class="inheritance">
 <li>org.wildstang.framework.auto.steps.AutoParallelFinishedOnAnyStepGroup</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -136,7 +141,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <hr>
 <pre>public class <span class="typeNameLabel">AutoParallelFinishedOnAnyStepGroup</span>
-extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></pre>
+extends <a href="AutoParallelStepGroup.html" title="class in org.wildstang.framework.auto.steps">AutoParallelStepGroup</a></pre>
+<div class="block">AutoParallelStepGroup where on completion of any child steps the whole group finishes.</div>
 </li>
 </ul>
 </div>
@@ -160,10 +166,6 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">AutoParallelFinishedOnAnyStepGroup</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String)">AutoParallelFinishedOnAnyStepGroup</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
 </table>
 </li>
 </ul>
@@ -183,32 +185,33 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addStep(org.wildstang.framework.auto.steps.AutoStep)">addStep</a></span>&#8203;(<a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;step)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the name of the AutoStep, used to uniquely identify the step.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initialize()">initialize</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Updates every step in the group, until one is finished, then finishes.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a id="methods.inherited.from.class.org.wildstang.framework.auto.steps.AutoStep">
+<li class="blockList"><a id="methods.inherited.from.class.org.wildstang.framework.auto.steps.AutoParallelStepGroup">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;org.wildstang.framework.auto.steps.<a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></h3>
-<code><a href="AutoStep.html#isFinished()">isFinished</a>, <a href="AutoStep.html#setFinished(boolean)">setFinished</a></code></li>
+<h3>Methods inherited from class&nbsp;org.wildstang.framework.auto.steps.<a href="AutoParallelStepGroup.html" title="class in org.wildstang.framework.auto.steps">AutoParallelStepGroup</a></h3>
+<code><a href="AutoParallelStepGroup.html#addStep(org.wildstang.framework.auto.AutoStep)">addStep</a>, <a href="AutoParallelStepGroup.html#initialize()">initialize</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a id="methods.inherited.from.class.org.wildstang.framework.auto.AutoStep">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.wildstang.framework.auto.<a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></h3>
+<code><a href="../AutoStep.html#isFinished()">isFinished</a>, <a href="../AutoStep.html#setFinished()">setFinished</a>, <a href="../AutoStep.html#setFinished(boolean)">setFinished</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -236,19 +239,10 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <a id="&lt;init&gt;()">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
-<h4>AutoParallelFinishedOnAnyStepGroup</h4>
-<pre>public&nbsp;AutoParallelFinishedOnAnyStepGroup()</pre>
-</li>
-</ul>
-<a id="&lt;init&gt;(java.lang.String)">
-<!--   -->
-</a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>AutoParallelFinishedOnAnyStepGroup</h4>
-<pre>public&nbsp;AutoParallelFinishedOnAnyStepGroup&#8203;(java.lang.String&nbsp;name)</pre>
+<pre>public&nbsp;AutoParallelFinishedOnAnyStepGroup()</pre>
 </li>
 </ul>
 </li>
@@ -261,19 +255,6 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="initialize()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>initialize</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;initialize()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="AutoStep.html#initialize()">initialize</a></code>&nbsp;in class&nbsp;<code><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></dd>
-</dl>
-</li>
-</ul>
 <a id="update()">
 <!--   -->
 </a>
@@ -281,19 +262,11 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <li class="blockList">
 <h4>update</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;update()</pre>
+<div class="block">Updates every step in the group, until one is finished, then finishes.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="AutoStep.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="AutoParallelStepGroup.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="AutoParallelStepGroup.html" title="class in org.wildstang.framework.auto.steps">AutoParallelStepGroup</a></code></dd>
 </dl>
-</li>
-</ul>
-<a id="addStep(org.wildstang.framework.auto.steps.AutoStep)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>addStep</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;addStep&#8203;(<a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;step)</pre>
 </li>
 </ul>
 <a id="toString()">
@@ -303,9 +276,12 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <li class="blockList">
 <h4>toString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
+<div class="block">Returns the name of the AutoStep, used to uniquely identify the step.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="AutoStep.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="AutoParallelStepGroup.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="AutoParallelStepGroup.html" title="class in org.wildstang.framework.auto.steps">AutoParallelStepGroup</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Name of the AutoStep.</dd>
 </dl>
 </li>
 </ul>

@@ -137,6 +137,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">Sleeper</span>
 extends <a href="../AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></pre>
+<div class="block">A default AutoProgram that does nothing an never completes.
+ This is used in AutoManager as a final program (program 0) which
+ does nothing but keeps a program running when all programs complete.</div>
 </li>
 </ul>
 </div>
@@ -198,12 +201,16 @@ extends <a href="../AutoProgram.html" title="class in org.wildstang.framework.au
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#defineSteps()">defineSteps</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Defines an AutoProgram's steps, executed in order added.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the AutoProgram's name.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -211,7 +218,7 @@ extends <a href="../AutoProgram.html" title="class in org.wildstang.framework.au
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.wildstang.framework.auto.<a href="../AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></h3>
-<code><a href="../AutoProgram.html#addStep(org.wildstang.framework.auto.steps.AutoStep)">addStep</a>, <a href="../AutoProgram.html#cleanup()">cleanup</a>, <a href="../AutoProgram.html#getCurrentStep()">getCurrentStep</a>, <a href="../AutoProgram.html#getNextStep()">getNextStep</a>, <a href="../AutoProgram.html#initialize()">initialize</a>, <a href="../AutoProgram.html#isFinished()">isFinished</a>, <a href="../AutoProgram.html#loadStopPosition()">loadStopPosition</a>, <a href="../AutoProgram.html#update()">update</a></code></li>
+<code><a href="../AutoProgram.html#addStep(org.wildstang.framework.auto.AutoStep)">addStep</a>, <a href="../AutoProgram.html#cleanup()">cleanup</a>, <a href="../AutoProgram.html#getCurrentStep()">getCurrentStep</a>, <a href="../AutoProgram.html#getNextStep()">getNextStep</a>, <a href="../AutoProgram.html#initialize()">initialize</a>, <a href="../AutoProgram.html#isFinished()">isFinished</a>, <a href="../AutoProgram.html#loadStopPosition()">loadStopPosition</a>, <a href="../AutoProgram.html#update()">update</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -262,6 +269,9 @@ extends <a href="../AutoProgram.html" title="class in org.wildstang.framework.au
 <li class="blockList">
 <h4>defineSteps</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;defineSteps()</pre>
+<div class="block">Defines an AutoProgram's steps, executed in order added.
+ Sleeper uses only a single step: AutoStepStopAutonomous, which
+ does nothing and never finishes.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../AutoProgram.html#defineSteps()">defineSteps</a></code>&nbsp;in class&nbsp;<code><a href="../AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></code></dd>
@@ -275,9 +285,12 @@ extends <a href="../AutoProgram.html" title="class in org.wildstang.framework.au
 <li class="blockList">
 <h4>toString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
+<div class="block">Returns the AutoProgram's name.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../AutoProgram.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="../AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The name of the AutoProgram.</dd>
 </dl>
 </li>
 </ul>

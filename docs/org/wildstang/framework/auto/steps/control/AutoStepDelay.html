@@ -122,7 +122,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li><a href="../AutoStep.html" title="class in org.wildstang.framework.auto.steps">org.wildstang.framework.auto.steps.AutoStep</a></li>
+<li><a href="../../AutoStep.html" title="class in org.wildstang.framework.auto">org.wildstang.framework.auto.AutoStep</a></li>
 <li>
 <ul class="inheritance">
 <li>org.wildstang.framework.auto.steps.control.AutoStepDelay</li>
@@ -136,7 +136,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <hr>
 <pre>public class <span class="typeNameLabel">AutoStepDelay</span>
-extends <a href="../AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></pre>
+extends <a href="../../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></pre>
+<div class="block">This step delays testing for the specified number of cycles. Note: If
+ used in a parallel step group, it insures that the group waits for at
+ least the specified number of cycles, instead.</div>
 </li>
 </ul>
 </div>
@@ -186,7 +189,9 @@ extends <a href="../AutoStep.html" title="class in org.wildstang.framework.auto.
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int)">AutoStepDelay</a></span>&#8203;(int&nbsp;msDelay)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructing creates a new timer for msDelay ms.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -209,25 +214,31 @@ extends <a href="../AutoStep.html" title="class in org.wildstang.framework.auto.
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initialize()">initialize</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Starts the timer on initialization.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the name of the AutoStep, "Delay for X ms".</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Once timer has passed the AutoStep finishes.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a id="methods.inherited.from.class.org.wildstang.framework.auto.steps.AutoStep">
+<li class="blockList"><a id="methods.inherited.from.class.org.wildstang.framework.auto.AutoStep">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;org.wildstang.framework.auto.steps.<a href="../AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></h3>
-<code><a href="../AutoStep.html#isFinished()">isFinished</a>, <a href="../AutoStep.html#setFinished(boolean)">setFinished</a></code></li>
+<h3>Methods inherited from class&nbsp;org.wildstang.framework.auto.<a href="../../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></h3>
+<code><a href="../../AutoStep.html#isFinished()">isFinished</a>, <a href="../../AutoStep.html#setFinished()">setFinished</a>, <a href="../../AutoStep.html#setFinished(boolean)">setFinished</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -287,6 +298,11 @@ extends <a href="../AutoStep.html" title="class in org.wildstang.framework.auto.
 <li class="blockList">
 <h4>AutoStepDelay</h4>
 <pre>public&nbsp;AutoStepDelay&#8203;(int&nbsp;msDelay)</pre>
+<div class="block">Constructing creates a new timer for msDelay ms.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>msDelay</code> - Number of milliseconds to wait before finishing.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -306,9 +322,10 @@ extends <a href="../AutoStep.html" title="class in org.wildstang.framework.auto.
 <li class="blockList">
 <h4>initialize</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;initialize()</pre>
+<div class="block">Starts the timer on initialization.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../AutoStep.html#initialize()">initialize</a></code>&nbsp;in class&nbsp;<code><a href="../AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></dd>
+<dd><code><a href="../../AutoStep.html#initialize()">initialize</a></code>&nbsp;in class&nbsp;<code><a href="../../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -319,9 +336,10 @@ extends <a href="../AutoStep.html" title="class in org.wildstang.framework.auto.
 <li class="blockList">
 <h4>update</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;update()</pre>
+<div class="block">Once timer has passed the AutoStep finishes.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../AutoStep.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="../AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></dd>
+<dd><code><a href="../../AutoStep.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="../../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -332,9 +350,12 @@ extends <a href="../AutoStep.html" title="class in org.wildstang.framework.auto.
 <li class="blockList">
 <h4>toString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
+<div class="block">Returns the name of the AutoStep, "Delay for X ms".</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../AutoStep.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="../AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></dd>
+<dd><code><a href="../../AutoStep.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="../../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Name of the AutoStep.</dd>
 </dl>
 </li>
 </ul>

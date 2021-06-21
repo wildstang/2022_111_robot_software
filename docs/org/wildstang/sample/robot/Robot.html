@@ -208,9 +208,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Robot</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Nothing to do in the Robot constructor; real setup happens in robotInit.</div>
-</td>
+<td class="colLast">&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -233,52 +231,72 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#autonomousInit()">autonomousInit</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs when autonomous is enabled.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#autonomousPeriodic()">autonomousPeriodic</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs repeatedly while autonomous is enabled.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#disabledInit()">disabledInit</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs when robot is disabled.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#disabledPeriodic()">disabledPeriodic</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs repeatedly while robot is disabled.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#robotInit()">robotInit</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs on initialization, creates and configure framework Core.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#robotPeriodic()">robotPeriodic</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs repeatedly, regardless of mode and state.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#teleopInit()">teleopInit</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs when teleoperated is enabled.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#teleopPeriodic()">teleopPeriodic</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs repeatedly while teleoperated is enabled.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#testInit()">testInit</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs when test is enabled.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#testPeriodic()">testPeriodic</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs repeatedly while test is enabled.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -332,7 +350,6 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>Robot</h4>
 <pre>public&nbsp;Robot()</pre>
-<div class="block">Nothing to do in the Robot constructor; real setup happens in robotInit.</div>
 </li>
 </ul>
 </li>
@@ -352,6 +369,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>robotInit</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;robotInit()</pre>
+<div class="block">Runs on initialization, creates and configure framework Core.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>robotInit</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>
@@ -365,6 +383,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>disabledInit</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;disabledInit()</pre>
+<div class="block">Runs when robot is disabled.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>disabledInit</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>
@@ -378,6 +397,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>autonomousInit</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;autonomousInit()</pre>
+<div class="block">Runs when autonomous is enabled.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>autonomousInit</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>
@@ -391,6 +411,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>teleopInit</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;teleopInit()</pre>
+<div class="block">Runs when teleoperated is enabled.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>teleopInit</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>
@@ -404,6 +425,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>testInit</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;testInit()</pre>
+<div class="block">Runs when test is enabled.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>testInit</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>
@@ -417,6 +439,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>robotPeriodic</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;robotPeriodic()</pre>
+<div class="block">Runs repeatedly, regardless of mode and state.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>robotPeriodic</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>
@@ -430,6 +453,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>disabledPeriodic</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;disabledPeriodic()</pre>
+<div class="block">Runs repeatedly while robot is disabled.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>disabledPeriodic</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>
@@ -443,6 +467,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>autonomousPeriodic</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;autonomousPeriodic()</pre>
+<div class="block">Runs repeatedly while autonomous is enabled.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>autonomousPeriodic</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>
@@ -456,6 +481,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>teleopPeriodic</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;teleopPeriodic()</pre>
+<div class="block">Runs repeatedly while teleoperated is enabled.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>teleopPeriodic</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>
@@ -469,6 +495,7 @@ extends edu.wpi.first.wpilibj.TimedRobot</pre>
 <li class="blockList">
 <h4>testPeriodic</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;testPeriodic()</pre>
+<div class="block">Runs repeatedly while test is enabled.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>testPeriodic</code>&nbsp;in class&nbsp;<code>edu.wpi.first.wpilibj.IterativeRobotBase</code></dd>

@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -122,7 +122,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">org.wildstang.framework.auto.steps.AutoStep</a></li>
+<li><a href="../AutoStep.html" title="class in org.wildstang.framework.auto">org.wildstang.framework.auto.AutoStep</a></li>
 <li>
 <ul class="inheritance">
 <li>org.wildstang.framework.auto.steps.AutoSerialStepGroup</li>
@@ -136,7 +136,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <hr>
 <pre>public class <span class="typeNameLabel">AutoSerialStepGroup</span>
-extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></pre>
+extends <a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></pre>
+<div class="block">Serial groups execute all contained steps sequentially.</div>
 </li>
 </ul>
 </div>
@@ -158,11 +159,15 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">AutoSerialStepGroup</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Allow empty constructors since groups contain steps anyway.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String)">AutoSerialStepGroup</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor takes a name since there may be multiple groups.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -184,46 +189,53 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addStep(org.wildstang.framework.auto.steps.AutoStep)">addStep</a></span>&#8203;(<a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;step)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addStep(org.wildstang.framework.auto.AutoStep)">addStep</a></span>&#8203;(<a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&nbsp;step)</code></th>
+<td class="colLast">
+<div class="block">Add a step to the group if it is not initialized.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#finishGroup()">finishGroup</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code><a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentStep()">getCurrentStep</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Gets the current executing AutoStep.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentStep()">getCurrentStep</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code><a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNextStep()">getNextStep</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Gets the next AutoStep to execute.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNextStep()">getNextStep</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initialize()">initialize</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Initializes each step in the group.</div>
+</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Group name is used in conjuction with "Serial step group: "</div>
+</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Updates the current step in the group until it is finished.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a id="methods.inherited.from.class.org.wildstang.framework.auto.steps.AutoStep">
+<li class="blockList"><a id="methods.inherited.from.class.org.wildstang.framework.auto.AutoStep">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;org.wildstang.framework.auto.steps.<a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></h3>
-<code><a href="AutoStep.html#isFinished()">isFinished</a>, <a href="AutoStep.html#setFinished(boolean)">setFinished</a></code></li>
+<h3>Methods inherited from class&nbsp;org.wildstang.framework.auto.<a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></h3>
+<code><a href="../AutoStep.html#isFinished()">isFinished</a>, <a href="../AutoStep.html#setFinished()">setFinished</a>, <a href="../AutoStep.html#setFinished(boolean)">setFinished</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -255,6 +267,7 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <li class="blockList">
 <h4>AutoSerialStepGroup</h4>
 <pre>public&nbsp;AutoSerialStepGroup()</pre>
+<div class="block">Allow empty constructors since groups contain steps anyway.</div>
 </li>
 </ul>
 <a id="&lt;init&gt;(java.lang.String)">
@@ -264,6 +277,11 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <li class="blockList">
 <h4>AutoSerialStepGroup</h4>
 <pre>public&nbsp;AutoSerialStepGroup&#8203;(java.lang.String&nbsp;name)</pre>
+<div class="block">Constructor takes a name since there may be multiple groups.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>name</code> - Name for the step group.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -283,9 +301,10 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <li class="blockList">
 <h4>initialize</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;initialize()</pre>
+<div class="block">Initializes each step in the group.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="AutoStep.html#initialize()">initialize</a></code>&nbsp;in class&nbsp;<code><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></dd>
+<dd><code><a href="../AutoStep.html#initialize()">initialize</a></code>&nbsp;in class&nbsp;<code><a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -296,19 +315,26 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <li class="blockList">
 <h4>update</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;update()</pre>
+<div class="block">Updates the current step in the group until it is finished.
+ Then moves on to the next step. Group is finished when last step is finished.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="AutoStep.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></dd>
+<dd><code><a href="../AutoStep.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></dd>
 </dl>
 </li>
 </ul>
-<a id="addStep(org.wildstang.framework.auto.steps.AutoStep)">
+<a id="addStep(org.wildstang.framework.auto.AutoStep)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>addStep</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;addStep&#8203;(<a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;step)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;addStep&#8203;(<a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&nbsp;step)</pre>
+<div class="block">Add a step to the group if it is not initialized.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>step</code> - Step to add to the group.</dd>
+</dl>
 </li>
 </ul>
 <a id="toString()">
@@ -318,9 +344,12 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <li class="blockList">
 <h4>toString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
+<div class="block">Group name is used in conjuction with "Serial step group: "</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="AutoStep.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a></code></dd>
+<dd><code><a href="../AutoStep.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Name of the group.</dd>
 </dl>
 </li>
 </ul>
@@ -330,25 +359,26 @@ extends <a href="AutoStep.html" title="class in org.wildstang.framework.auto.ste
 <ul class="blockList">
 <li class="blockList">
 <h4>getCurrentStep</h4>
-<pre class="methodSignature">public&nbsp;<a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;getCurrentStep()</pre>
+<pre class="methodSignature">public&nbsp;<a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&nbsp;getCurrentStep()</pre>
+<div class="block">Gets the current executing AutoStep.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The current AutoStep.</dd>
+</dl>
 </li>
 </ul>
 <a id="getNextStep()">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getNextStep</h4>
-<pre class="methodSignature">public&nbsp;<a href="AutoStep.html" title="class in org.wildstang.framework.auto.steps">AutoStep</a>&nbsp;getNextStep()</pre>
-</li>
-</ul>
-<a id="finishGroup()">
-<!--   -->
-</a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>finishGroup</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;finishGroup()</pre>
+<h4>getNextStep</h4>
+<pre class="methodSignature">public&nbsp;<a href="../AutoStep.html" title="class in org.wildstang.framework.auto">AutoStep</a>&nbsp;getNextStep()</pre>
+<div class="block">Gets the next AutoStep to execute.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The next AutoStep to execute of null if none left.</dd>
+</dl>
 </li>
 </ul>
 </li>

@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.wildstang.framework.auto.steps.AutoStep;
 import org.wildstang.framework.auto.steps.control.AutoStepStopAutonomous;
 import org.wildstang.framework.core.Core;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Represents a collection of AutoSteps used for a single Autonomous period.
  * @author Nathan
  */
 public abstract class AutoProgram {
@@ -23,13 +22,17 @@ public abstract class AutoProgram {
     protected int currentStep;
     protected boolean finishedPreviousStep, finished;
 
-    protected abstract void defineSteps(); // Use this method to set the steps
-    // for this program. Programs
-    // execute the steps in the array
-    // programSteps serially.
-    // Remember to clear everything before all of your steps are finished,
-    // because once they are, it immediately drops into Sleeper.
+    /**
+     * Use this method to set the steps for this program.
+     * Programs execute the steps in the array programSteps serially.
+     * Remember to clear everything before all of your steps are finished,
+     * because once they are, it immediately drops into Sleeper.
+     */
+    protected abstract void defineSteps();
 
+    /**
+     * Collects the defined steps and starts the auto program.
+     */
     public void initialize() {
         defineSteps();
         loadStopPosition();
@@ -40,10 +43,16 @@ public abstract class AutoProgram {
         s_log.logp(Level.FINE, "Auton", "Step Starting", programSteps.get(0).toString());
     }
 
+    /**
+     * Remove all steps from the AutoProgram
+     */
     public void cleanup() {
         programSteps.clear();
     }
 
+    /**
+     * Update the current running step and move on if necessary.
+     */
     public void update() {
         if (finished) {
             return;
@@ -69,10 +78,18 @@ public abstract class AutoProgram {
         }
     }
 
+    /**
+     * Returns the current running AutoStep within the AutoProgram.
+     * @return Current running AutoStep.
+     */
     public AutoStep getCurrentStep() {
         return programSteps.get(currentStep);
     }
 
+    /**
+     * Returns the next AutoStep to run or null if at the last step.
+     * @return Next AutoStep or null if no more steps.
+     */
     public AutoStep getNextStep() {
         if (currentStep + 1 < programSteps.size()) {
             return programSteps.get(currentStep + 1);
@@ -81,6 +98,10 @@ public abstract class AutoProgram {
         }
     }
 
+    /**
+     * Adds an AutoStepStopAutonomous after a given AutoStep index from config.
+     * This allows insertion of a force stop of autonomous into a program via config.
+     */
     protected void loadStopPosition() {
         int forceStopAtStep = Core.getConfigManager().getConfig()
                 .getInt(this.getClass().getName() + ".ForceStopAtStep", 0);
@@ -98,14 +119,26 @@ public abstract class AutoProgram {
         }
     }
 
+    /**
+     * Returns true if the AutoProgram is complete.
+     * @return True if the AutoProgram is complete.
+     */
     public boolean isFinished() {
         return finished;
     }
 
+    /**
+     * Adds a new AutoStep to the AutoProgram.
+     * @param newStep New AutoStep to add.
+     */
     protected void addStep(AutoStep newStep) {
         programSteps.add(newStep);
     }
 
+    /**
+     * Returns the name of the AutoProgram.
+     * @return Name of the AutoProgram.
+     */
     @Override
     public abstract String toString();
 }
