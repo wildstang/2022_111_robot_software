@@ -55,11 +55,10 @@ dependencies {
     nativeZip wpi.deps.wpilibJni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.wpilibJni(wpi.platforms.desktop)
 
-
     implementation wpi.deps.vendor.java()
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
-    compile files('thirdparty/commons-csv-1.6/commons-csv-1.6.jar')
+    compile 'org.apache.commons:commons-csv:1.8'
 
     testImplementation 'junit:junit:4.12'
 
