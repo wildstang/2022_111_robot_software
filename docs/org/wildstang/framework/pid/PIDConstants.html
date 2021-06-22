@@ -126,7 +126,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">PIDConstants</span>
 extends java.lang.Object</pre>
-<div class="block">A tuple of F, P, I, D constants</div>
+<div class="block">Represents the 4 PID constants: F, P, I, and D.
+ Feed-forward-proportional-integral-derivative controller
+ https://en.wikipedia.org/wiki/PID_controller#Feed-forward</div>
 </li>
 </ul>
 </div>
@@ -189,7 +191,9 @@ extends java.lang.Object</pre>
             double&nbsp;p,
             double&nbsp;i,
             double&nbsp;d)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Create a new PID constant set.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -281,6 +285,14 @@ extends java.lang.Object</pre>
                     double&nbsp;p,
                     double&nbsp;i,
                     double&nbsp;d)</pre>
+<div class="block">Create a new PID constant set.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>f</code> - Feed-forward - Major proportion of the output.</dd>
+<dd><code>p</code> - Proportional - Proportional to the current value of the error.</dd>
+<dd><code>i</code> - Integral - Accounts for past values of the error.</dd>
+<dd><code>d</code> - Derivative - Best estimate of the future trend of the error.</dd>
+</dl>
 </li>
 </ul>
 </li>

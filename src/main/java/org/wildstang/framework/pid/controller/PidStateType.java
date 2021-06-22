@@ -1,7 +1,7 @@
 package org.wildstang.framework.pid.controller;
 
 /**
- *
+ * Represents PID states
  * @author Nathan
  */
 public enum PidStateType {
@@ -15,10 +15,18 @@ public enum PidStateType {
 
     private String title;
 
+    /**
+     * Constructs with human readable name.
+     * @param name Human readable name for state.
+     */
     private PidStateType(String name) {
         this.title = name;
     }
 
+    /**
+     * Returns the name of the state.
+     * @return Name of the state.
+     */
     @Override
     public String toString() {
         return title;

@@ -134,13 +134,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
-<dl>
-<dt>All Implemented Interfaces:</dt>
-<dd><code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
-</dl>
 <hr>
 <pre>public class <span class="typeNameLabel">SpeedPidController</span>
 extends <a href="PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></pre>
+<div class="block">Represents a PID controller for motor speed control.</div>
 </li>
 </ul>
 </div>
@@ -164,7 +161,9 @@ extends <a href="PidController.html" title="class in org.wildstang.framework.pid
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.wildstang.framework.pid.input.IPidInput,org.wildstang.framework.pid.output.IPidOutput,java.lang.String)">SpeedPidController</a></span>&#8203;(<a href="../input/IPidInput.html" title="interface in org.wildstang.framework.pid.input">IPidInput</a>&nbsp;source,
                   <a href="../output/IPidOutput.html" title="interface in org.wildstang.framework.pid.output">IPidOutput</a>&nbsp;output,
                   java.lang.String&nbsp;pidControllerName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Passes all parameters on to PidController().</div>
+</td>
 </tr>
 </table>
 </li>
@@ -187,7 +186,9 @@ extends <a href="PidController.html" title="class in org.wildstang.framework.pid
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>protected double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#calcDerivativeTerm()">calcDerivativeTerm</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Calculates the derivative term D based off errors.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -229,6 +230,13 @@ extends <a href="PidController.html" title="class in org.wildstang.framework.pid
 <pre>public&nbsp;SpeedPidController&#8203;(<a href="../input/IPidInput.html" title="interface in org.wildstang.framework.pid.input">IPidInput</a>&nbsp;source,
                           <a href="../output/IPidOutput.html" title="interface in org.wildstang.framework.pid.output">IPidOutput</a>&nbsp;output,
                           java.lang.String&nbsp;pidControllerName)</pre>
+<div class="block">Passes all parameters on to PidController().</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>source</code> - IPidInput for PID control.</dd>
+<dd><code>output</code> - IPidOutput for PID control.</dd>
+<dd><code>pidControllerName</code> - Name of the controller.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -248,9 +256,13 @@ extends <a href="PidController.html" title="class in org.wildstang.framework.pid
 <li class="blockList">
 <h4>calcDerivativeTerm</h4>
 <pre class="methodSignature">protected&nbsp;double&nbsp;calcDerivativeTerm()</pre>
+<div class="block">Calculates the derivative term D based off errors.
+ Assumes target velocity == 0.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="PidController.html#calcDerivativeTerm()">calcDerivativeTerm</a></code>&nbsp;in class&nbsp;<code><a href="PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Estimated derivative term D.</dd>
 </dl>
 </li>
 </ul>

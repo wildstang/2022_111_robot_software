@@ -7,10 +7,10 @@ import org.wildstang.framework.pid.output.IPidOutput;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- *
+ * Controller for PID motor control.
  * @author Nathan
  */
-public class PidController implements IPidController {
+public class PidController {
 
     private double p; // P coefficient
     private double i; // I coefficient
@@ -56,6 +56,12 @@ public class PidController implements IPidController {
     private double maxInput_config;
     private double minInput_config;
 
+    /**
+     * Constructs and initialized controller values.
+     * @param source IPidInput for PID control.
+     * @param output IPidOutput for PID control.
+     * @param pidControllerName Name of the controller.
+     */
     public PidController(IPidInput source, IPidOutput output, String pidControllerName) {
         p = 1.0;
         i = 0.0;
@@ -113,54 +119,87 @@ public class PidController implements IPidController {
         this.setErrorIncrementPercentage(errorIncrement);
     }
 
-    @Override
+    /**
+     * Returns the P term.
+     * @return The P (proportional) term.
+     */
     public double getP() {
         return p;
     }
 
-    @Override
+    /**
+     * Returns the I term.
+     * @return The I (integral) term.
+     */
     public double getI() {
         return i;
     }
 
-    @Override
+    /**
+     * Returns the D term.
+     * @return The D (derivative) term.
+     */
     public double getD() {
         return d;
     }
 
-    @Override
+    /**
+     * Returns epsilon.
+     * @return Epsilon, the allowable error in completion.
+     */
     public double getEpsilon() {
         return errorEpsilon;
     }
 
-    @Override
+    /**
+     * Returns static epsilon.
+     * @return Static epsilon, the allowable error in steady-state.
+     */
     public double getStaticEpsilon() {
         return staticEpsilon;
     }
 
-    @Override
+    /**
+     * Set the 3 PID constants.
+     * @param p Proportional - Proportional to the current value of the error.
+     * @param i Integral - Accounts for past values of the error.
+     * @param d Derivative - Best estimate of the future trend of the error.
+     */
     public void setConstants(double p, double i, double d) {
         this.p = p;
         this.i = i;
         this.d = d;
     }
 
-    @Override
+    /**
+     * Sets static epsilon.
+     * @param epsilon Static epsilon, the allowable error in steady-state.
+     */
     public void setStaticEpsilon(double epsilon) {
         this.staticEpsilon = epsilon;
     }
 
-    @Override
+    /**
+     * Sets epsilon.
+     * @param epsilon Epsilon, the allowable error in completion.
+     */
     public void setErrorEpsilon(double epsilon) {
         this.errorEpsilon = epsilon;
     }
 
-    @Override
+    /**
+     * Sets error increment percentage.
+     * @param inc Error increment percentage, the max error increment per call.
+     */
     public void setErrorIncrementPercentage(double inc) {
         errorIncrement = ((maxOutput - minOutput) * (inc / 100.0f));
     }
 
-    @Override
+    /**
+     * Sets the min and max output.
+     * @param min Minimum output, floor on PID output.
+     * @param max Maximum output, ceiling on PID output.
+     */
     public void setMinMaxOutput(double min, double max) {
         if (min < max) {
             minOutput = min;
@@ -168,7 +207,11 @@ public class PidController implements IPidController {
         }
     }
 
-    @Override
+    /**
+     * Sets the min and max input.
+     * @param min Minimum input, floor on PID input.
+     * @param max Maximum input, ceiling on PID input.
+     */
     public void setMinMaxInput(double min, double max) {
         if (min < max) {
             minInput = min;
@@ -176,118 +219,146 @@ public class PidController implements IPidController {
         }
     }
 
-    @Override
+    /**
+     * Sets the max integral.
+     * @param max Max integral.
+     */
     public void setMaxIntegral(double max) {
         maxIntegral = Math.abs(max);
     }
 
-    @Override
+    /**
+     * Sets the integral error threshold.
+     * @param thresh Intergral error threshold.
+     */
     public void setIntegralErrorThresh(double thresh) {
         integralErrorThresh = Math.abs(thresh);
     }
 
-    @Override
+    /**
+     * Returns the integral error threshold.
+     * @return Intergral error threshold.
+     */
     public double getIntegralErrorThresh() {
         return integralErrorThresh;
     }
 
-    @Override
+    /**
+     * Sets the min stabilization time.
+     * @param time New min stabilization time.
+     */
     public void setMinStabilizationTime(double time) {
         minOnTargetTime = time;
     }
 
-    @Override
+    /**
+     * Sets the set point.
+     * @param set_point The new set point.
+     */
     public void setSetPoint(double set_point) {
         this.setPoint = set_point;
     }
 
-    @Override
+    /**
+     * Returns the set point value.
+     * @return The current set point value.
+     */
     public double getSetPoint() {
         return setPoint;
     }
 
-    @Override
+    /**
+     * Sets the differentiator band limit.
+     * @param band_limit The new differentiator band limit.
+     */
     public void setDifferentiatorBandLimit(double band_limit) {
         differentiatorBandLimit = band_limit;
     }
 
-    @Override
+    /**
+     * Returns the differentiator band limit.
+     * @return The current differentiator band limit.
+     */
     public double getDifferentiatorBandLimit() {
         return differentiatorBandLimit;
     }
 
-    @Override
+    /**
+     * Resets the error sum to 0.
+     */
     public void resetErrorSum() {
         errorSum = 0.0;
     }
 
+    /**
+     * Returns the current output value.
+     * @return The current output.
+     */
     public double getCurrentOutput() {
         return output;
     }
 
+    /**
+     * Set output to enabled or disabled.
+     * @param outputEnabled True if set to enabled.
+     */
     public void setOutputEnabled(boolean outputEnabled) {
         this.outputEnabled = outputEnabled;
     }
 
-    @Override
+    /**
+     * Calculate PID.
+     */
     public void calcPid() {
         PidStateType new_state = currentState;
 
         // Read the value of the process variable under control and limit it
         double current_pv = pidSource.pidRead();
         current_pv = this.limitInput(current_pv);
-        // System.out.println(this.controllerName + " pid source value: " +
-        // current_pv);
 
         // Calculate the current error term
         currentError = setPoint - current_pv;
         System.out.println(this.controllerName + " error: " + currentError);
-        // System.out.println(this.controllerName + " errorSum: " + errorSum);
 
-        //
         // Adjust our metrics depending on where the process variable is as
         // compared
         // to the set point.
-        //
         if (currentState == PidStateType.PID_DISABLED_STATE) {
-            // System.out.println(this.controllerName + " is DISABLED");
             // PID controller is disabled, nothing to do here...
-
             // reset everything now.
             this.reset();
             return;
-        } else if (currentState == PidStateType.PID_INITIALIZE_STATE) {
-            // System.out.println(this.controllerName + " is INITIALIZE");
+        }
+        else if (currentState == PidStateType.PID_INITIALIZE_STATE) {
             // Don't look at the D-term when we're just starting up
             previousError = currentError;
 
-            //
             // Find the next state
-            //
             if (currentError <= -errorEpsilon) {
                 //
                 // Error is negative and outside the epsilon band.
                 // Negative errors mean we are above our setpoint
                 //
                 new_state = PidStateType.PID_ABOVE_TARGET_STATE;
-            } else if (currentError >= errorEpsilon) {
+            }
+            else if (currentError >= errorEpsilon) {
                 //
                 // Positive Errors mean we are below our setpoint
                 //
                 new_state = PidStateType.PID_BELOW_TARGET_STATE;
-            } else if ((currentError >= (-1 * errorEpsilon)) && (currentError <= errorEpsilon)) {
+            }
+            else if ((currentError >= (-1 * errorEpsilon)) && (currentError <= errorEpsilon)) {
                 new_state = PidStateType.PID_ON_TARGET_STATE;
                 stabilizationTimer.reset();
                 stabilizationTimer.start();
-            } else {
+            }
+            else {
                 // You had better hope this does not happen
             }
 
-        } else if (currentState == PidStateType.PID_BELOW_TARGET_STATE) {
-            // System.out.println(this.controllerName + " is BELOW_TARGET");
-            //
+        }
+        else if (currentState == PidStateType.PID_BELOW_TARGET_STATE) {
             // In this case, we were above and we switched to below
-            //
             if (errorSum < 0) {
                 // If we are fighting away from the point, reset the error.
                 errorSum = 0;
@@ -297,7 +368,8 @@ public class PidController implements IPidController {
                 // If the error is smaller than the max increment amount, add
                 // it.
                 errorSum += currentError;
-            } else {
+            }
+            else {
                 // Otherwise, add the maximum increment per cycle.
                 errorSum += errorIncrement;
             }
@@ -317,13 +389,14 @@ public class PidController implements IPidController {
 
                 // Reset the error sum
                 errorSum = 0.0;
-            } else {
+            }
+            else {
                 // Stay here.
                 new_state = PidStateType.PID_BELOW_TARGET_STATE;
             }
 
-        } else if (currentState == PidStateType.PID_ON_TARGET_STATE) {
-            // System.out.println(this.controllerName + " is ON TARGET");
+        }
+        else if (currentState == PidStateType.PID_ON_TARGET_STATE) {
             errorSum = 0.0;
             allowStaticEpsilon = true;
 
@@ -333,19 +406,23 @@ public class PidController implements IPidController {
                 new_state = PidStateType.PID_BELOW_TARGET_STATE;
                 stabilizationTimer.stop();
                 stabilizationTimer.reset();
-            } else if (currentError <= -errorEpsilon) {
+            }
+            else if (currentError <= -errorEpsilon) {
                 new_state = PidStateType.PID_ABOVE_TARGET_STATE;
                 stabilizationTimer.stop();
                 stabilizationTimer.reset();
-            } else if (true == (stabilizationTimer.get() > minOnTargetTime)) {
+            }
+            else if (true == (stabilizationTimer.get() > minOnTargetTime)) {
                 new_state = PidStateType.PID_STABILIZED_STATE;
                 stabilizationTimer.stop();
                 stabilizationTimer.reset();
-            } else {
+            }
+            else {
                 // Stay right here, we are on target, but not long enough yet...
                 new_state = PidStateType.PID_ON_TARGET_STATE;
             }
-        } else if (currentState == PidStateType.PID_STABILIZED_STATE) {
+        }
+        else if (currentState == PidStateType.PID_STABILIZED_STATE) {
             // System.out.println(this.controllerName + " is STABILIZED");
             errorSum = 0.0;
             allowStaticEpsilon = true;
@@ -354,26 +431,25 @@ public class PidController implements IPidController {
             // Error is positive and outside the epsilon band.
             if (currentError >= errorEpsilon) {
                 new_state = PidStateType.PID_BELOW_TARGET_STATE;
-            } else if (currentError <= -errorEpsilon) {
+            }
+            else if (currentError <= -errorEpsilon) {
                 new_state = PidStateType.PID_ABOVE_TARGET_STATE;
-            } else {
+            }
+            else {
                 new_state = PidStateType.PID_STABILIZED_STATE;
             }
 
         } else if (currentState == PidStateType.PID_ABOVE_TARGET_STATE) {
-            // System.out.println(this.controllerName + " is ABOVE TARGET");
-            //
             // In this case, we were below and we just switched to above
-            //
             if (errorSum > 0) {
                 // If we are fighting away from the point, reset the error.
                 errorSum = 0;
             }
             if (currentError > -errorIncrement) {
-                // If the error is smaller than the max increment amount, add
-                // it.
+                // If the error is smaller than the max increment amount, add it.
                 errorSum += currentError;
-            } else {
+            }
+            else {
                 // Otherwise, subtract the maximum increment per cycle.
                 errorSum += -errorIncrement;
             }
@@ -389,21 +465,22 @@ public class PidController implements IPidController {
                 new_state = PidStateType.PID_ON_TARGET_STATE;
                 stabilizationTimer.reset();
                 stabilizationTimer.start();
-            } // Error is positive and outside the epsilon band.
+            }
+            // Error is positive and outside the epsilon band.
             else if (currentError >= errorEpsilon) {
                 new_state = PidStateType.PID_BELOW_TARGET_STATE;
                 // Reset the error sum
 
                 errorSum = 0.0;
-            } else {
+            }
+            else {
                 new_state = PidStateType.PID_ABOVE_TARGET_STATE;
             }
 
-        } else {
+        }
+        else {
             // Invalid state
-
             new_state = PidStateType.PID_DISABLED_STATE;
-
         }
 
         currentState = new_state;
@@ -411,13 +488,6 @@ public class PidController implements IPidController {
         // Finally, calculate the PID output
         double output = this.calcProportionalTerm() + this.calcIntegralTerm()
                 + this.calcDerivativeTerm();
-        // System.out.println(this.controllerName + " p-term,: " +
-        // this.calcProportionalTerm());
-        // System.out.println(this.controllerName + " i-term: " +
-        // this.calcIntegralTerm());
-        // System.out.println(this.controllerName + " d-term: " +
-        // this.calcDerivativeTerm());
-        // System.out.println(this.controllerName + " output: " + output);
 
         // Handle Static Epsilon
         if ((allowStaticEpsilon == true) && Math.abs(currentError) < staticEpsilon) {
@@ -427,11 +497,6 @@ public class PidController implements IPidController {
 
         // Clip the output to the allowable region
         output = this.limitOutput(output);
-
-        // Update smart dashboard
-        // SmartDashboard.putNumber(this.getName() + " PID output", output);
-        // SmartDashboard.putNumber(this.getName() + " PID error", currentError);
-        // SmartDashboard.putNumber(this.getName() + " PID input", current_pv);
 
         // Write the pid output, if it's enabled
         if (outputEnabled) {
@@ -443,38 +508,53 @@ public class PidController implements IPidController {
         previousError = currentError;
     }
 
-    @Override
+    /**
+     * Returns true if the controller is in the target or stabilized state.
+     * @return True if the controller is target or stabilized.
+     */
     public boolean isOnTarget() {
         boolean on_target = ((PidStateType.PID_ON_TARGET_STATE == currentState)
                 || (PidStateType.PID_STABILIZED_STATE == currentState));
         return on_target;
     }
 
-    @Override
+    /**
+     * Returns true if the controller is in the stabilized state.
+     * @return True if the controller is stabilized.
+     */
     public boolean isStabilized() {
         boolean stabilized = (PidStateType.PID_STABILIZED_STATE == currentState);
         return stabilized;
     }
 
-    @Override
+    /**
+     * Returns true if the controller is in the enabled state.
+     * @return True if the controller is enabled.
+     */
     public boolean isEnabled() {
         return (PidStateType.PID_DISABLED_STATE != currentState);
     }
 
-    @Override
+    /**
+     * Puts the controller in the enabled state only if in the disabled state.
+     */
     public void enable() {
         if (currentState == PidStateType.PID_DISABLED_STATE) {
             currentState = PidStateType.PID_INITIALIZE_STATE;
         }
     }
 
-    @Override
+    /**
+     * Resets and put the controller in the disabled state.
+     */
     public void disable() {
         this.reset();
         currentState = PidStateType.PID_DISABLED_STATE;
     }
 
-    @Override
+    /**
+     * Resets all error values in controller.
+     */
     public void reset() {
         errorSum = 0.0;
         currentError = 0.0;
@@ -482,20 +562,35 @@ public class PidController implements IPidController {
         allowStaticEpsilon = true;
     }
 
-    @Override
+    /**
+     * Returns the current error value.
+     * @return The current error value.
+     */
     public double getError() {
         return currentError;
     }
 
+    /**
+     * Returns the previous error value.
+     * @return The previous error value.
+     */
     public double getPreviousError() {
         return previousError;
     }
 
+    /**
+     * Calculates the proportional term P based off current error.
+     * @return Estimated proportional term P.
+     */
     private double calcProportionalTerm() {
         double p_term = p * currentError;
         return p_term;
     }
 
+    /**
+     * Calculates the integral term I based off current error.
+     * @return Estimated integral term I.
+     */
     private double calcIntegralTerm() {
         // Prevent Integral Wind Up.
         if (integralErrorThresh != -1) {
@@ -515,6 +610,10 @@ public class PidController implements IPidController {
         return i_term;
     }
 
+    /**
+     * Calculates the derivative term D based off errors.
+     * @return Estimated derivative term D.
+     */
     protected double calcDerivativeTerm() {
         double d_term = d * (currentError - previousError);
 
@@ -525,6 +624,13 @@ public class PidController implements IPidController {
         return d_term;
     }
 
+    /**
+     * Limit an output value by the max and min value.
+     * Effectively if too low the output is the min
+     * and if too high the output is the max.
+     * @param output Output value to limit.
+     * @return Limited output value.
+     */
     private double limitOutput(double output) {
         double clipped_output = 0.0;
         if (output > maxOutput) {
@@ -539,6 +645,13 @@ public class PidController implements IPidController {
         return clipped_output;
     }
 
+    /**
+     * Limit an input value by the max and min value.
+     * Effectively if too low the output is the min
+     * and if too high the output is the max.
+     * @param input Input value to limit.
+     * @return Limited input value.
+     */
     private double limitInput(double input) {
         double clipped_input = 0.0;
         if (input > maxInput) {
@@ -553,11 +666,18 @@ public class PidController implements IPidController {
         return clipped_input;
     }
 
-    @Override
+    /**
+     * Returns the current state of the controller
+     * @return Current state.
+     */
     public PidStateType getState() {
         return this.currentState;
     }
 
+    /**
+     * Notifys the controller of a config change.
+     * Controller then set values to config values.
+     */
     public void notifyConfigChange() {
         p = p_config;
         i = i_config;
@@ -572,13 +692,20 @@ public class PidController implements IPidController {
         minOutput = minOutput_config;
         maxInput = maxInput_config;
         minInput = minInput_config;
-        // System.out.println("PidController " + p);
     }
 
+    /**
+     * Returns the name of the controller.
+     * @return Controller name.
+     */
     public String getName() {
         return controllerName;
     }
 
+    /**
+     * Returns the name in combination with the PID state.
+     * @return Name and PID state.
+     */
     @Override
     public String toString() {
         return getName() + " " + getState();

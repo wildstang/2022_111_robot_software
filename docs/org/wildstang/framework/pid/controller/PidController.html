@@ -130,17 +130,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <dl>
-<dt>All Implemented Interfaces:</dt>
-<dd><code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
-</dl>
-<dl>
 <dt>Direct Known Subclasses:</dt>
 <dd><code><a href="SpeedPidController.html" title="class in org.wildstang.framework.pid.controller">SpeedPidController</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">PidController</span>
-extends java.lang.Object
-implements <a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></pre>
+extends java.lang.Object</pre>
+<div class="block">Controller for PID motor control.</div>
 </li>
 </ul>
 </div>
@@ -164,7 +160,9 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.wildstang.framework.pid.input.IPidInput,org.wildstang.framework.pid.output.IPidOutput,java.lang.String)">PidController</a></span>&#8203;(<a href="../input/IPidInput.html" title="interface in org.wildstang.framework.pid.input">IPidInput</a>&nbsp;source,
              <a href="../output/IPidOutput.html" title="interface in org.wildstang.framework.pid.output">IPidOutput</a>&nbsp;output,
              java.lang.String&nbsp;pidControllerName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs and initialized controller values.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -187,186 +185,258 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>protected double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#calcDerivativeTerm()">calcDerivativeTerm</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Calculates the derivative term D based off errors.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#calcPid()">calcPid</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Calculate PID.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#disable()">disable</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Resets and put the controller in the disabled state.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enable()">enable</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Puts the controller in the enabled state only if in the disabled state.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentOutput()">getCurrentOutput</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the current output value.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getD()">getD</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the D term.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDifferentiatorBandLimit()">getDifferentiatorBandLimit</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the differentiator band limit.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getEpsilon()">getEpsilon</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns epsilon.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getError()">getError</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the current error value.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getI()">getI</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the I term.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getIntegralErrorThresh()">getIntegralErrorThresh</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the integral error threshold.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getName()">getName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the name of the controller.</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getP()">getP</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the P term.</div>
+</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPreviousError()">getPreviousError</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the previous error value.</div>
+</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSetPoint()">getSetPoint</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the set point value.</div>
+</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="PidStateType.html" title="enum in org.wildstang.framework.pid.controller">PidStateType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getState()">getState</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the current state of the controller</div>
+</td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStaticEpsilon()">getStaticEpsilon</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns static epsilon.</div>
+</td>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isEnabled()">isEnabled</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the controller is in the enabled state.</div>
+</td>
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isOnTarget()">isOnTarget</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the controller is in the target or stabilized state.</div>
+</td>
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isStabilized()">isStabilized</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the controller is in the stabilized state.</div>
+</td>
 </tr>
 <tr id="i20" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#notifyConfigChange()">notifyConfigChange</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Notifys the controller of a config change.</div>
+</td>
 </tr>
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#reset()">reset</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Resets all error values in controller.</div>
+</td>
 </tr>
 <tr id="i22" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetErrorSum()">resetErrorSum</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Resets the error sum to 0.</div>
+</td>
 </tr>
 <tr id="i23" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setConstants(double,double,double)">setConstants</a></span>&#8203;(double&nbsp;p,
             double&nbsp;i,
             double&nbsp;d)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Set the 3 PID constants.</div>
+</td>
 </tr>
 <tr id="i24" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDifferentiatorBandLimit(double)">setDifferentiatorBandLimit</a></span>&#8203;(double&nbsp;band_limit)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the differentiator band limit.</div>
+</td>
 </tr>
 <tr id="i25" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setErrorEpsilon(double)">setErrorEpsilon</a></span>&#8203;(double&nbsp;epsilon)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets epsilon.</div>
+</td>
 </tr>
 <tr id="i26" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setErrorIncrementPercentage(double)">setErrorIncrementPercentage</a></span>&#8203;(double&nbsp;inc)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets error increment percentage.</div>
+</td>
 </tr>
 <tr id="i27" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setIntegralErrorThresh(double)">setIntegralErrorThresh</a></span>&#8203;(double&nbsp;thresh)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the integral error threshold.</div>
+</td>
 </tr>
 <tr id="i28" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMaxIntegral(double)">setMaxIntegral</a></span>&#8203;(double&nbsp;max)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the max integral.</div>
+</td>
 </tr>
 <tr id="i29" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMinMaxInput(double,double)">setMinMaxInput</a></span>&#8203;(double&nbsp;min,
               double&nbsp;max)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the min and max input.</div>
+</td>
 </tr>
 <tr id="i30" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMinMaxOutput(double,double)">setMinMaxOutput</a></span>&#8203;(double&nbsp;min,
                double&nbsp;max)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the min and max output.</div>
+</td>
 </tr>
 <tr id="i31" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMinStabilizationTime(double)">setMinStabilizationTime</a></span>&#8203;(double&nbsp;time)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the min stabilization time.</div>
+</td>
 </tr>
 <tr id="i32" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setOutputEnabled(boolean)">setOutputEnabled</a></span>&#8203;(boolean&nbsp;outputEnabled)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Set output to enabled or disabled.</div>
+</td>
 </tr>
 <tr id="i33" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSetPoint(double)">setSetPoint</a></span>&#8203;(double&nbsp;set_point)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the set point.</div>
+</td>
 </tr>
 <tr id="i34" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setStaticEpsilon(double)">setStaticEpsilon</a></span>&#8203;(double&nbsp;epsilon)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets static epsilon.</div>
+</td>
 </tr>
 <tr id="i35" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the name in combination with the PID state.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -401,6 +471,13 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <pre>public&nbsp;PidController&#8203;(<a href="../input/IPidInput.html" title="interface in org.wildstang.framework.pid.input">IPidInput</a>&nbsp;source,
                      <a href="../output/IPidOutput.html" title="interface in org.wildstang.framework.pid.output">IPidOutput</a>&nbsp;output,
                      java.lang.String&nbsp;pidControllerName)</pre>
+<div class="block">Constructs and initialized controller values.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>source</code> - IPidInput for PID control.</dd>
+<dd><code>output</code> - IPidOutput for PID control.</dd>
+<dd><code>pidControllerName</code> - Name of the controller.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -420,9 +497,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getP</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getP()</pre>
+<div class="block">Returns the P term.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getP()">getP</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The P (proportional) term.</dd>
 </dl>
 </li>
 </ul>
@@ -433,9 +511,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getI</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getI()</pre>
+<div class="block">Returns the I term.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getI()">getI</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The I (integral) term.</dd>
 </dl>
 </li>
 </ul>
@@ -446,9 +525,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getD</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getD()</pre>
+<div class="block">Returns the D term.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getD()">getD</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The D (derivative) term.</dd>
 </dl>
 </li>
 </ul>
@@ -459,9 +539,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getEpsilon</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getEpsilon()</pre>
+<div class="block">Returns epsilon.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getEpsilon()">getEpsilon</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Epsilon, the allowable error in completion.</dd>
 </dl>
 </li>
 </ul>
@@ -472,9 +553,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getStaticEpsilon</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getStaticEpsilon()</pre>
+<div class="block">Returns static epsilon.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getStaticEpsilon()">getStaticEpsilon</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Static epsilon, the allowable error in steady-state.</dd>
 </dl>
 </li>
 </ul>
@@ -487,9 +569,12 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <pre class="methodSignature">public&nbsp;void&nbsp;setConstants&#8203;(double&nbsp;p,
                          double&nbsp;i,
                          double&nbsp;d)</pre>
+<div class="block">Set the 3 PID constants.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setConstants(double,double,double)">setConstants</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p</code> - Proportional - Proportional to the current value of the error.</dd>
+<dd><code>i</code> - Integral - Accounts for past values of the error.</dd>
+<dd><code>d</code> - Derivative - Best estimate of the future trend of the error.</dd>
 </dl>
 </li>
 </ul>
@@ -500,9 +585,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>setStaticEpsilon</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setStaticEpsilon&#8203;(double&nbsp;epsilon)</pre>
+<div class="block">Sets static epsilon.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setStaticEpsilon(double)">setStaticEpsilon</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>epsilon</code> - Static epsilon, the allowable error in steady-state.</dd>
 </dl>
 </li>
 </ul>
@@ -513,9 +599,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>setErrorEpsilon</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setErrorEpsilon&#8203;(double&nbsp;epsilon)</pre>
+<div class="block">Sets epsilon.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setErrorEpsilon(double)">setErrorEpsilon</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>epsilon</code> - Epsilon, the allowable error in completion.</dd>
 </dl>
 </li>
 </ul>
@@ -526,9 +613,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>setErrorIncrementPercentage</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setErrorIncrementPercentage&#8203;(double&nbsp;inc)</pre>
+<div class="block">Sets error increment percentage.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setErrorIncrementPercentage(double)">setErrorIncrementPercentage</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>inc</code> - Error increment percentage, the max error increment per call.</dd>
 </dl>
 </li>
 </ul>
@@ -540,9 +628,11 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <h4>setMinMaxOutput</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setMinMaxOutput&#8203;(double&nbsp;min,
                             double&nbsp;max)</pre>
+<div class="block">Sets the min and max output.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setMinMaxOutput(double,double)">setMinMaxOutput</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>min</code> - Minimum output, floor on PID output.</dd>
+<dd><code>max</code> - Maximum output, ceiling on PID output.</dd>
 </dl>
 </li>
 </ul>
@@ -554,9 +644,11 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <h4>setMinMaxInput</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setMinMaxInput&#8203;(double&nbsp;min,
                            double&nbsp;max)</pre>
+<div class="block">Sets the min and max input.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setMinMaxInput(double,double)">setMinMaxInput</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>min</code> - Minimum input, floor on PID input.</dd>
+<dd><code>max</code> - Maximum input, ceiling on PID input.</dd>
 </dl>
 </li>
 </ul>
@@ -567,9 +659,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>setMaxIntegral</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setMaxIntegral&#8203;(double&nbsp;max)</pre>
+<div class="block">Sets the max integral.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setMaxIntegral(double)">setMaxIntegral</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>max</code> - Max integral.</dd>
 </dl>
 </li>
 </ul>
@@ -580,9 +673,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>setIntegralErrorThresh</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setIntegralErrorThresh&#8203;(double&nbsp;thresh)</pre>
+<div class="block">Sets the integral error threshold.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setIntegralErrorThresh(double)">setIntegralErrorThresh</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>thresh</code> - Intergral error threshold.</dd>
 </dl>
 </li>
 </ul>
@@ -593,9 +687,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getIntegralErrorThresh</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getIntegralErrorThresh()</pre>
+<div class="block">Returns the integral error threshold.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getIntegralErrorThresh()">getIntegralErrorThresh</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Intergral error threshold.</dd>
 </dl>
 </li>
 </ul>
@@ -606,9 +701,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>setMinStabilizationTime</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setMinStabilizationTime&#8203;(double&nbsp;time)</pre>
+<div class="block">Sets the min stabilization time.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setMinStabilizationTime(double)">setMinStabilizationTime</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>time</code> - New min stabilization time.</dd>
 </dl>
 </li>
 </ul>
@@ -619,9 +715,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>setSetPoint</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setSetPoint&#8203;(double&nbsp;set_point)</pre>
+<div class="block">Sets the set point.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setSetPoint(double)">setSetPoint</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>set_point</code> - The new set point.</dd>
 </dl>
 </li>
 </ul>
@@ -632,9 +729,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getSetPoint</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getSetPoint()</pre>
+<div class="block">Returns the set point value.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getSetPoint()">getSetPoint</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The current set point value.</dd>
 </dl>
 </li>
 </ul>
@@ -645,9 +743,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>setDifferentiatorBandLimit</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setDifferentiatorBandLimit&#8203;(double&nbsp;band_limit)</pre>
+<div class="block">Sets the differentiator band limit.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#setDifferentiatorBandLimit(double)">setDifferentiatorBandLimit</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>band_limit</code> - The new differentiator band limit.</dd>
 </dl>
 </li>
 </ul>
@@ -658,9 +757,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getDifferentiatorBandLimit</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getDifferentiatorBandLimit()</pre>
+<div class="block">Returns the differentiator band limit.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getDifferentiatorBandLimit()">getDifferentiatorBandLimit</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The current differentiator band limit.</dd>
 </dl>
 </li>
 </ul>
@@ -671,10 +771,7 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>resetErrorSum</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;resetErrorSum()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#resetErrorSum()">resetErrorSum</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
-</dl>
+<div class="block">Resets the error sum to 0.</div>
 </li>
 </ul>
 <a id="getCurrentOutput()">
@@ -684,6 +781,11 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getCurrentOutput</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getCurrentOutput()</pre>
+<div class="block">Returns the current output value.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The current output.</dd>
+</dl>
 </li>
 </ul>
 <a id="setOutputEnabled(boolean)">
@@ -693,6 +795,11 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>setOutputEnabled</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setOutputEnabled&#8203;(boolean&nbsp;outputEnabled)</pre>
+<div class="block">Set output to enabled or disabled.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>outputEnabled</code> - True if set to enabled.</dd>
+</dl>
 </li>
 </ul>
 <a id="calcPid()">
@@ -702,10 +809,7 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>calcPid</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;calcPid()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#calcPid()">calcPid</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
-</dl>
+<div class="block">Calculate PID.</div>
 </li>
 </ul>
 <a id="isOnTarget()">
@@ -715,9 +819,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>isOnTarget</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isOnTarget()</pre>
+<div class="block">Returns true if the controller is in the target or stabilized state.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#isOnTarget()">isOnTarget</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>True if the controller is target or stabilized.</dd>
 </dl>
 </li>
 </ul>
@@ -728,9 +833,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>isStabilized</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isStabilized()</pre>
+<div class="block">Returns true if the controller is in the stabilized state.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#isStabilized()">isStabilized</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>True if the controller is stabilized.</dd>
 </dl>
 </li>
 </ul>
@@ -741,9 +847,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>isEnabled</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isEnabled()</pre>
+<div class="block">Returns true if the controller is in the enabled state.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#isEnabled()">isEnabled</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>True if the controller is enabled.</dd>
 </dl>
 </li>
 </ul>
@@ -754,10 +861,7 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>enable</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;enable()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#enable()">enable</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
-</dl>
+<div class="block">Puts the controller in the enabled state only if in the disabled state.</div>
 </li>
 </ul>
 <a id="disable()">
@@ -767,10 +871,7 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>disable</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;disable()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#disable()">disable</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
-</dl>
+<div class="block">Resets and put the controller in the disabled state.</div>
 </li>
 </ul>
 <a id="reset()">
@@ -780,10 +881,7 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>reset</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;reset()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#reset()">reset</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
-</dl>
+<div class="block">Resets all error values in controller.</div>
 </li>
 </ul>
 <a id="getError()">
@@ -793,9 +891,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getError</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getError()</pre>
+<div class="block">Returns the current error value.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getError()">getError</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The current error value.</dd>
 </dl>
 </li>
 </ul>
@@ -806,6 +905,11 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getPreviousError</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getPreviousError()</pre>
+<div class="block">Returns the previous error value.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The previous error value.</dd>
+</dl>
 </li>
 </ul>
 <a id="calcDerivativeTerm()">
@@ -815,6 +919,11 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>calcDerivativeTerm</h4>
 <pre class="methodSignature">protected&nbsp;double&nbsp;calcDerivativeTerm()</pre>
+<div class="block">Calculates the derivative term D based off errors.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Estimated derivative term D.</dd>
+</dl>
 </li>
 </ul>
 <a id="getState()">
@@ -824,9 +933,10 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getState</h4>
 <pre class="methodSignature">public&nbsp;<a href="PidStateType.html" title="enum in org.wildstang.framework.pid.controller">PidStateType</a>&nbsp;getState()</pre>
+<div class="block">Returns the current state of the controller</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="IPidController.html#getState()">getState</a></code>&nbsp;in interface&nbsp;<code><a href="IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Current state.</dd>
 </dl>
 </li>
 </ul>
@@ -837,6 +947,8 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>notifyConfigChange</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;notifyConfigChange()</pre>
+<div class="block">Notifys the controller of a config change.
+ Controller then set values to config values.</div>
 </li>
 </ul>
 <a id="getName()">
@@ -846,6 +958,11 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>getName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getName()</pre>
+<div class="block">Returns the name of the controller.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Controller name.</dd>
+</dl>
 </li>
 </ul>
 <a id="toString()">
@@ -855,9 +972,12 @@ implements <a href="IPidController.html" title="interface in org.wildstang.frame
 <li class="blockList">
 <h4>toString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
+<div class="block">Returns the name in combination with the PID state.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Name and PID state.</dd>
 </dl>
 </li>
 </ul>
