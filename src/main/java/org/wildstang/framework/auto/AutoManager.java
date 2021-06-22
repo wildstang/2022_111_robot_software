@@ -24,7 +24,7 @@ public class AutoManager {
 
     private List<AutoProgram> programs = new ArrayList<>();
     private AutoProgram runningProgram;
-    private boolean programFinished, programRunning;
+    private boolean programFinished;
     private SendableChooser<AutoProgram> chooser;
     private SendableChooser<Boolean> lockinChooser;
 
@@ -90,7 +90,6 @@ public class AutoManager {
      */
     public void clear() {
         programFinished = false;
-        programRunning = false;
         if (runningProgram != null) {
             runningProgram.cleanup();
         }

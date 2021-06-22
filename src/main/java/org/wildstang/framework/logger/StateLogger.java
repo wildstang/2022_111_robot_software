@@ -7,7 +7,11 @@ import java.util.List;
 
 import org.wildstang.framework.CoreUtils;
 
+/**
+ * Manages logging in a Thread. Includes logging control and JSON formatting.
+ */
 public class StateLogger implements Runnable {
+
     private static final long s_defaultWriteInterval = 200;
 
     private Writer m_output;
@@ -18,73 +22,102 @@ public class StateLogger implements Runnable {
     private StateTracker m_tracker;
     private long m_writeInterval = s_defaultWriteInterval;
 
+    /**
+     * StateLogger requires a StateTracker where it pulls logging info from.
+     * @param p_tracker StateTracker to log from.
+     */
     public StateLogger(StateTracker p_tracker) {
         m_tracker = p_tracker;
     }
 
+    /**
+     * Sets the Writer used for logging.
+     * @param p_output New writer to log to.
+     */
     public void setWriter(Writer p_output) {
         m_output = p_output;
     }
 
+    /**
+     * Returns the Writer used for logging.
+     * @return Writer used for logging.
+     */
     public Writer getOutput() {
         return m_output;
     }
 
+    /**
+     * Returns true if the logger is running.
+     * @return True if the logger is running
+     */
     public boolean isRunning() {
         return m_running;
     }
 
+    /**
+     * Resume logging.
+     */
     public void start() {
         m_running = true;
     }
 
+    /**
+     * Pause logging.
+     */
     public void stop() {
         m_running = false;
     }
 
+    /**
+     * Thread that handles all logging. Pauses while m_running is false.
+     */
     @Override
     public void run() {
-        // Open the JSON
         try {
-            writeStart(m_output);
+            // create log
+            writeStart();
 
+            // continuously write until told to stop
             while (m_running) {
                 try {
                     Thread.sleep(m_writeInterval);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
+                // write if tracking state
                 if (m_tracker.isTrackingState()) {
                     if (!m_infoWritten) {
-                        // These calls should not go back to the state manager - need to pass the
-                        // list
-                        // in somehow
-                        writeInfo(m_output, m_tracker.getIoSet());
+                        writeInfo(m_tracker.getIoSet());
                         m_infoWritten = true;
                     } else {
-                        writeState(m_output, m_tracker.getStateList());
+                        writeState(m_tracker.getStateList());
                     }
                 }
             }
 
-            // Close the JSON
-            // Write any remaining state information
-            writeState(m_output, m_tracker.getStateList());
-            writeEnd(m_output);
-            m_output.flush();
+            // write any remaining state information, complete log, and flush
+            writeState(m_tracker.getStateList());
+            writeEnd();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
+    /**
+     * Set the interval to write to log in milliseconds.
+     * @param p_interval Inverval between logging in milliseconds.
+     */
     public void setWriteInterval(long p_interval) {
         m_writeInterval = p_interval;
     }
 
-    protected void writeInfo(Writer p_output, IOSet p_set) throws IOException {
+    /**
+     * Write an IOSet to log.
+     * @param p_set IOSet to write to log.
+     * @throws IOException If write fails.
+     */
+    protected void writeInfo(IOSet p_set) throws IOException {
         // The set should not be null - this would indicate a code error
         CoreUtils.checkNotNull(p_set, "p_set is null");
         // The Writer may be null - it is not fatal. Errors causing a null Writer
@@ -103,12 +136,17 @@ public class StateLogger implements Runnable {
         }
         builder.append("\n],\n");
 
-        if (p_output != null) {
-            p_output.write(builder.toString());
+        if (m_output != null) {
+            m_output.write(builder.toString());
         }
     }
 
-    protected void writeState(Writer p_output, List<StateGroup> p_stateList) throws IOException {
+    /**
+     * Write a StateGroup List to log.
+     * @param p_set States to write to log.
+     * @throws IOException If write fails.
+     */
+    protected void writeState(List<StateGroup> p_stateList) throws IOException {
         // The list should never be null - this would indicate a code error
         CoreUtils.checkNotNull(p_stateList, "p_stateList is null");
         // The Writer could be null - this is not fatal. Errors that would
@@ -143,13 +181,17 @@ public class StateLogger implements Runnable {
         // If the writer is null, don't write it
         // This is non-fatal. If we miss a few values, it doesn't matter
         // Don't log that it is null - it gets called too frequently
-        if (p_output != null) {
-            p_output.write(builder.toString());
+        if (m_output != null) {
+            m_output.write(builder.toString());
         }
 
     }
 
-    protected void writeStart(Writer p_output) throws IOException {
+    /**
+     * Create beginning of JSON and write to log.
+     * @throws IOException If write fails.
+     */
+    protected void writeStart() throws IOException {
 
         StringBuilder builder = new StringBuilder();
 
@@ -157,12 +199,16 @@ public class StateLogger implements Runnable {
 
         // It's not critical that this is not written out
         // Don't log that it is null - it gets called too frequently
-        if (p_output != null) {
-            p_output.write(builder.toString());
+        if (m_output != null) {
+            m_output.write(builder.toString());
         }
     }
 
-    protected void writeEnd(Writer p_output) throws IOException {
+    /**
+     * Create end of JSON, write to log, and flush.
+     * @throws IOException If write fails.
+     */
+    protected void writeEnd() throws IOException {
 
         StringBuilder builder = new StringBuilder();
 
@@ -170,11 +216,17 @@ public class StateLogger implements Runnable {
 
         // It's not critical that this is not written out
         // Don't log that it is null - it gets called too frequently
-        if (p_output != null) {
-            p_output.write(builder.toString());
+        if (m_output != null) {
+            m_output.write(builder.toString());
         }
+        m_output.flush();
     }
 
+    /**
+     * Format a single StateGroup to JSON before logging.
+     * @param p_group StateGroup to format.
+     * @return Formatted StateGroup as JSON String.
+     */
     protected String formatState(StateGroup p_group) {
         StringBuilder builder = new StringBuilder();
 
@@ -208,6 +260,11 @@ public class StateLogger implements Runnable {
         return builder.toString();
     }
 
+    /**
+     * Format a single IOInfo to JSON before logging.
+     * @param p_group IOInfo to format.
+     * @return Formatted IOInfo as JSON String.
+     */
     protected String formatIOInfo(IOInfo p_info) {
         StringBuilder builder = new StringBuilder();
 

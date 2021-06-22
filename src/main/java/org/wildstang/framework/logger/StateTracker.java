@@ -5,7 +5,16 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Used to track the various logs created before being written to log file.
+ * There is one StateTracker that the framework's Core owns.
+ * Additional StateTrackers may be made an given to new StateLoggers,
+ * but the intended use case is one StateLogger belonging to the year's Robot.'
+ * StateTrackers track both descriptions of available IO as IOInfo grouped in IOSets,
+ * as well as, StateInfo logs grouped in StateGroups.
+ */
 public class StateTracker {
+
     private static Logger s_log = Logger.getLogger(StateTracker.class.getName());
     private static final String s_className = "StateTracker";
 
@@ -19,9 +28,9 @@ public class StateTracker {
 
     private Object m_stateListLock = new Object();
 
-    public StateTracker() {
-    }
-
+    /**
+     * Sets the tracker as initialised.
+     */
     public void init() {
         s_log.entering(s_className, "init");
 
@@ -32,6 +41,10 @@ public class StateTracker {
         s_log.exiting(s_className, "init");
     }
 
+    /**
+     * If tracking state, creates a new StateGroup at the given timestamp.
+     * @param p_timestamp Timestamp to create StateGroup at.
+     */
     public void beginCycle(Date p_timestamp) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "beginCycle");
@@ -65,6 +78,12 @@ public class StateTracker {
         }
     }
 
+    /**
+     * Creates a new StateInfo and adds it to the current StateGroup if it exists.
+     * @param p_name Name of entry.
+     * @param p_parent Name of entry's parent.
+     * @param p_value Value of entry.
+     */
     public void addState(String p_name, String p_parent, Object p_value) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "addState");
@@ -98,6 +117,9 @@ public class StateTracker {
         }
     }
 
+    /**
+     * Adds the current StateGroup to the StateTracker's set, then clears it.
+     */
     public void endCycle() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "endCycle");
@@ -135,6 +157,13 @@ public class StateTracker {
         }
     }
 
+    /**
+     * Creates a new IOInfo and adds it to the current IOSet if it exists.
+     * @param p_name Specific name of state.
+     * @param p_type Type of IO, normally subsystem.
+     * @param p_direction IO direction (Input/Output).
+     * @param p_port IO port or null if not applicable.
+     */
     public void addIOInfo(String p_name, String p_type, String p_direction, Object p_port) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "addIOInfo");
@@ -147,14 +176,26 @@ public class StateTracker {
         }
     }
 
+    /**
+     * Returns the current StateGroup, it may be null.
+     * @return The current StateGroup.
+     */
     protected StateGroup getCurrentState() {
         return m_currentState;
     }
 
+    /**
+     * Returns the current IOSet, it may be null.
+     * @return The current IOSet.
+     */
     public IOSet getIoSet() {
         return m_ioSet;
     }
 
+    /**
+     * Returns the current set of StateGroups.
+     * @return Current set of StateGroups.
+     */
     public ArrayList<StateGroup> getStateList() {
         ArrayList<StateGroup> prevList;
 
@@ -169,23 +210,35 @@ public class StateTracker {
         return prevList;
     }
 
+    /**
+     * Resumes state tracking.
+     */
     public void startTrackingState() {
         m_trackingState = true;
     }
 
+    /**
+     * Pauses state tracking.
+     */
     public void stopTrackingState() {
         m_trackingState = false;
     }
 
+    /**
+     * Returns true if tracking state.
+     * @return True if tracking state.
+     */
     public boolean isTrackingState() {
         return m_trackingState;
     }
 
+    /**
+     * Clears out all stored info and resumes state tracking.
+     */
     public void reset() {
         m_ioSet = new IOSet();
         m_stateList.clear();
         m_currentState = null;
         startTrackingState();
-
     }
 }
