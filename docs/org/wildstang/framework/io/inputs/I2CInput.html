@@ -141,6 +141,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public abstract class <span class="typeNameLabel">I2CInput</span>
 extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></pre>
+<div class="block">First abstraction of Input representing I2C Inputs.
+ Currently there are no implementations of this type.</div>
 </li>
 </ul>
 </div>
@@ -162,7 +164,9 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String)">I2CInput</a></span>&#8203;(java.lang.String&nbsp;p_name)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor simply passes on name.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -185,29 +189,37 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>byte[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValue()">getValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the latest stored value from the Input.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#logCurrentStateInternal()">logCurrentStateInternal</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Doesn't log anything right now.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readDataFromInput()">readDataFromInput</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Processes raw value read from Input's hardware.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>protected abstract byte[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readRawValue()">readRawValue</a></span>()</code></th>
 <td class="colLast">
-<div class="block">This method reads the raw value from the underlying hardware.</div>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setValue(byte%5B%5D)">setValue</a></span>&#8203;(byte[]&nbsp;p_newValue)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Takes a new value stores it and notifys listeners.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -247,6 +259,11 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>I2CInput</h4>
 <pre>public&nbsp;I2CInput&#8203;(java.lang.String&nbsp;p_name)</pre>
+<div class="block">Constructor simply passes on name.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_name</code> - Name of the Input.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -266,6 +283,7 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>readDataFromInput</h4>
 <pre class="methodSignature">protected&nbsp;void&nbsp;readDataFromInput()</pre>
+<div class="block">Processes raw value read from Input's hardware.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Input.html#readDataFromInput()">readDataFromInput</a></code>&nbsp;in class&nbsp;<code><a href="Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></code></dd>
@@ -279,6 +297,12 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>setValue</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setValue&#8203;(byte[]&nbsp;p_newValue)</pre>
+<div class="block">Takes a new value stores it and notifys listeners.
+ This is a public version of setNewValue() for manual value updating.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_newValue</code> - New value read for the Input.</dd>
+</dl>
 </li>
 </ul>
 <a id="readRawValue()">
@@ -288,11 +312,10 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>readRawValue</h4>
 <pre class="methodSignature">protected abstract&nbsp;byte[]&nbsp;readRawValue()</pre>
-<div class="block">This method reads the raw value from the underlying hardware. This should be
- implemented by each individual input subclass.</div>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Raw value read by input.</dd>
+<dd>The latest value read from hardware.</dd>
 </dl>
 </li>
 </ul>
@@ -303,6 +326,11 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>getValue</h4>
 <pre class="methodSignature">public&nbsp;byte[]&nbsp;getValue()</pre>
+<div class="block">Returns the latest stored value from the Input.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Latest value store in the Input.</dd>
+</dl>
 </li>
 </ul>
 <a id="logCurrentStateInternal()">
@@ -312,6 +340,7 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>logCurrentStateInternal</h4>
 <pre class="methodSignature">protected&nbsp;void&nbsp;logCurrentStateInternal()</pre>
+<div class="block">Doesn't log anything right now.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Input.html#logCurrentStateInternal()">logCurrentStateInternal</a></code>&nbsp;in class&nbsp;<code><a href="Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></code></dd>

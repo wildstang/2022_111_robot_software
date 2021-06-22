@@ -1,4 +1,6 @@
 package org.wildstang.framework.io.outputs;
 
-public interface OutputType {
-}
+/**
+ * Framework representation of WsOutputType.
+ */
+public interface OutputType {}

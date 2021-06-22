@@ -1,5 +1,6 @@
 package org.wildstang.framework.io.inputs;
 
-public interface InputType {
-
-}
+/**
+ * Framework representation of WsInputType.
+ */
+public interface InputType {}

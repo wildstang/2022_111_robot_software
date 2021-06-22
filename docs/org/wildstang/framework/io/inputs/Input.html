@@ -136,8 +136,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public abstract class <span class="typeNameLabel">Input</span>
 extends java.lang.Object</pre>
-<div class="block">This is an abstract implementation of the Input interface. This class
- implements the Input listener mechanism.</div>
+<div class="block">Core input functions, primarily handling InputListeners.
+ Note: Input's update() handles InputListener triggering,
+ latency could be increase if abstracted versions call
+ readDataFromInput() then notifyListners().</div>
 </li>
 </ul>
 </div>
@@ -159,7 +161,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String)">Input</a></span>&#8203;(java.lang.String&nbsp;p_name)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor sets the name of the Input.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -182,87 +186,122 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addInputListener(org.wildstang.framework.io.InputListener)">addInputListener</a></span>&#8203;(<a href="../InputListener.html" title="interface in org.wildstang.framework.io">InputListener</a>&nbsp;p_listener)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Attaches an InputListener to the Input.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#disable()">disable</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Disables the Input, does nothing at the Input level.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enable()">enable</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Enables the Input, does nothing at the Input level.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../InputListener.html" title="interface in org.wildstang.framework.io">InputListener</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInputListeners()">getInputListeners</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns a copy of the Array of all attached InputListeners.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getName()">getName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the name of the Input.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStateTracker()">getStateTracker</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the StateTracker associated with the Input.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>protected boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasValueChanged()">hasValueChanged</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the value of the Input has changed.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isEnabled()">isEnabled</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the Input is enabled, does nothing at this level.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#logCurrentState()">logCurrentState</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Logs the current state of the Input.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>protected abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#logCurrentStateInternal()">logCurrentStateInternal</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Abstract function to log the hardware Input's state to the StateTracker.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#notifyListeners()">notifyListeners</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Determines if the value has changed,
+ then notifys all attached listeners that a state change has occured.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>protected abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readDataFromInput()">readDataFromInput</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Abstract function to read the hardware Input and store its value.</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAllListeners()">removeAllListeners</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Detaches all InputListeners associated with the Input.</div>
+</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeInputListener(org.wildstang.framework.io.InputListener)">removeInputListener</a></span>&#8203;(<a href="../InputListener.html" title="interface in org.wildstang.framework.io">InputListener</a>&nbsp;p_listener)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Detaches a given InputListener from the Input.</div>
+</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setStateTracker(org.wildstang.framework.logger.StateTracker)">setStateTracker</a></span>&#8203;(<a href="../../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a>&nbsp;p_tracker)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Associates a StateTracker with the Input.</div>
+</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setValueChanged(boolean)">setValueChanged</a></span>&#8203;(boolean&nbsp;p_changed)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Mark that the value of the Input has changed.</div>
+</td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Reads the data from the hardware Input and notifys listeners appropriately.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -295,6 +334,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>Input</h4>
 <pre>public&nbsp;Input&#8203;(java.lang.String&nbsp;p_name)</pre>
+<div class="block">Constructor sets the name of the Input.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_name</code> - New name of the Input.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -314,6 +358,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>addInputListener</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;addInputListener&#8203;(<a href="../InputListener.html" title="interface in org.wildstang.framework.io">InputListener</a>&nbsp;p_listener)</pre>
+<div class="block">Attaches an InputListener to the Input.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_listener</code> - New InputListener to attach.</dd>
+</dl>
 </li>
 </ul>
 <a id="removeInputListener(org.wildstang.framework.io.InputListener)">
@@ -323,6 +372,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>removeInputListener</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;removeInputListener&#8203;(<a href="../InputListener.html" title="interface in org.wildstang.framework.io">InputListener</a>&nbsp;p_listener)</pre>
+<div class="block">Detaches a given InputListener from the Input.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_listener</code> - InputListner to detach.</dd>
+</dl>
 </li>
 </ul>
 <a id="getInputListeners()">
@@ -332,6 +386,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInputListeners</h4>
 <pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="../InputListener.html" title="interface in org.wildstang.framework.io">InputListener</a>&gt;&nbsp;getInputListeners()</pre>
+<div class="block">Returns a copy of the Array of all attached InputListeners.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Copy of the Array of InputListeners.</dd>
+</dl>
 </li>
 </ul>
 <a id="notifyListeners()">
@@ -341,6 +400,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>notifyListeners</h4>
 <pre class="methodSignature">protected&nbsp;void&nbsp;notifyListeners()</pre>
+<div class="block">Determines if the value has changed,
+ then notifys all attached listeners that a state change has occured.</div>
 </li>
 </ul>
 <a id="update()">
@@ -350,6 +411,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>update</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;update()</pre>
+<div class="block">Reads the data from the hardware Input and notifys listeners appropriately.</div>
 </li>
 </ul>
 <a id="logCurrentState()">
@@ -359,6 +421,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>logCurrentState</h4>
 <pre class="methodSignature">protected&nbsp;void&nbsp;logCurrentState()</pre>
+<div class="block">Logs the current state of the Input.</div>
 </li>
 </ul>
 <a id="getName()">
@@ -368,6 +431,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getName()</pre>
+<div class="block">Returns the name of the Input.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Name of the Input.</dd>
+</dl>
 </li>
 </ul>
 <a id="setValueChanged(boolean)">
@@ -377,6 +445,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setValueChanged</h4>
 <pre class="methodSignature">protected&nbsp;void&nbsp;setValueChanged&#8203;(boolean&nbsp;p_changed)</pre>
+<div class="block">Mark that the value of the Input has changed.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_changed</code> - New state of the valueChanged.</dd>
+</dl>
 </li>
 </ul>
 <a id="hasValueChanged()">
@@ -386,6 +459,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>hasValueChanged</h4>
 <pre class="methodSignature">protected&nbsp;boolean&nbsp;hasValueChanged()</pre>
+<div class="block">Returns true if the value of the Input has changed.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>True if the value of the Input has changed.</dd>
+</dl>
 </li>
 </ul>
 <a id="logCurrentStateInternal()">
@@ -395,6 +473,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>logCurrentStateInternal</h4>
 <pre class="methodSignature">protected abstract&nbsp;void&nbsp;logCurrentStateInternal()</pre>
+<div class="block">Abstract function to log the hardware Input's state to the StateTracker.</div>
 </li>
 </ul>
 <a id="readDataFromInput()">
@@ -404,6 +483,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>readDataFromInput</h4>
 <pre class="methodSignature">protected abstract&nbsp;void&nbsp;readDataFromInput()</pre>
+<div class="block">Abstract function to read the hardware Input and store its value.</div>
 </li>
 </ul>
 <a id="removeAllListeners()">
@@ -413,6 +493,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>removeAllListeners</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;removeAllListeners()</pre>
+<div class="block">Detaches all InputListeners associated with the Input.</div>
 </li>
 </ul>
 <a id="setStateTracker(org.wildstang.framework.logger.StateTracker)">
@@ -422,6 +503,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setStateTracker</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setStateTracker&#8203;(<a href="../../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a>&nbsp;p_tracker)</pre>
+<div class="block">Associates a StateTracker with the Input.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_tracker</code> - New StateTracker to associate with Input.</dd>
+</dl>
 </li>
 </ul>
 <a id="getStateTracker()">
@@ -431,6 +517,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getStateTracker</h4>
 <pre class="methodSignature">public&nbsp;<a href="../../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a>&nbsp;getStateTracker()</pre>
+<div class="block">Returns the StateTracker associated with the Input.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Input's StateTracker.</dd>
+</dl>
 </li>
 </ul>
 <a id="enable()">
@@ -440,6 +531,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>enable</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;enable()</pre>
+<div class="block">Enables the Input, does nothing at the Input level.</div>
 </li>
 </ul>
 <a id="disable()">
@@ -449,6 +541,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>disable</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;disable()</pre>
+<div class="block">Disables the Input, does nothing at the Input level.</div>
 </li>
 </ul>
 <a id="isEnabled()">
@@ -458,6 +551,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isEnabled</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isEnabled()</pre>
+<div class="block">Returns true if the Input is enabled, does nothing at this level.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>True if the Input is enabled.</dd>
+</dl>
 </li>
 </ul>
 </li>

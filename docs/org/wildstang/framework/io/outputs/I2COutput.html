@@ -141,6 +141,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public abstract class <span class="typeNameLabel">I2COutput</span>
 extends <a href="Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></pre>
+<div class="block">First abstraction of Output representing I2C Outputs.
+ Currently there are no implementations of this type.</div>
 </li>
 </ul>
 </div>
@@ -162,7 +164,9 @@ extends <a href="Output.html" title="class in org.wildstang.framework.io.outputs
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String)">I2COutput</a></span>&#8203;(java.lang.String&nbsp;p_name)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor simply passes on name.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -185,17 +189,23 @@ extends <a href="Output.html" title="class in org.wildstang.framework.io.outputs
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>byte[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValue()">getValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the latest commanded value for the Output.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#logCurrentState()">logCurrentState</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Doesn't log anything right now.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setValue(byte%5B%5D)">setValue</a></span>&#8203;(byte[]&nbsp;p_value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the output value, doesn't command the hardware.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -235,6 +245,11 @@ extends <a href="Output.html" title="class in org.wildstang.framework.io.outputs
 <li class="blockList">
 <h4>I2COutput</h4>
 <pre>public&nbsp;I2COutput&#8203;(java.lang.String&nbsp;p_name)</pre>
+<div class="block">Constructor simply passes on name.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_name</code> - Name of the Output.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -254,6 +269,11 @@ extends <a href="Output.html" title="class in org.wildstang.framework.io.outputs
 <li class="blockList">
 <h4>getValue</h4>
 <pre class="methodSignature">public&nbsp;byte[]&nbsp;getValue()</pre>
+<div class="block">Returns the latest commanded value for the Output.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Latest value stored in the Output.</dd>
+</dl>
 </li>
 </ul>
 <a id="setValue(byte[])">
@@ -263,6 +283,11 @@ extends <a href="Output.html" title="class in org.wildstang.framework.io.outputs
 <li class="blockList">
 <h4>setValue</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setValue&#8203;(byte[]&nbsp;p_value)</pre>
+<div class="block">Sets the output value, doesn't command the hardware.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_value</code> - New value for the Output.</dd>
+</dl>
 </li>
 </ul>
 <a id="logCurrentState()">
@@ -272,6 +297,7 @@ extends <a href="Output.html" title="class in org.wildstang.framework.io.outputs
 <li class="blockList">
 <h4>logCurrentState</h4>
 <pre class="methodSignature">protected&nbsp;void&nbsp;logCurrentState()</pre>
+<div class="block">Doesn't log anything right now.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Output.html#logCurrentState()">logCurrentState</a></code>&nbsp;in class&nbsp;<code><a href="Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></code></dd>

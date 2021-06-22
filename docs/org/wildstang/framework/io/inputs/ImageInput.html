@@ -137,6 +137,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public abstract class <span class="typeNameLabel">ImageInput</span>
 extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></pre>
+<div class="block">First abstraction of Input representing "image" Inputs for vision purposes.
+ There are currently no implementations of this type.</div>
 </li>
 </ul>
 </div>
@@ -158,7 +160,9 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String)">ImageInput</a></span>&#8203;(java.lang.String&nbsp;p_name)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor simply passes on name.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -181,27 +185,37 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.Object</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValue()">getValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the latest stored value from the Input.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#logCurrentStateInternal()">logCurrentStateInternal</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Logs the Input's state to the StateTracker.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readDataFromInput()">readDataFromInput</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Processes raw value read from Input's hardware.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>protected abstract java.lang.Object</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readRawValue()">readRawValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCurrentValue(java.lang.Object)">setCurrentValue</a></span>&#8203;(java.lang.Object&nbsp;p_value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Stores a given Object as the current value.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -241,6 +255,11 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>ImageInput</h4>
 <pre>public&nbsp;ImageInput&#8203;(java.lang.String&nbsp;p_name)</pre>
+<div class="block">Constructor simply passes on name.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_name</code> - Name of the Input.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -260,6 +279,7 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>readDataFromInput</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;readDataFromInput()</pre>
+<div class="block">Processes raw value read from Input's hardware.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Input.html#readDataFromInput()">readDataFromInput</a></code>&nbsp;in class&nbsp;<code><a href="Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></code></dd>
@@ -273,6 +293,11 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>setCurrentValue</h4>
 <pre class="methodSignature">protected&nbsp;void&nbsp;setCurrentValue&#8203;(java.lang.Object&nbsp;p_value)</pre>
+<div class="block">Stores a given Object as the current value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_value</code> - New Object to store.</dd>
+</dl>
 </li>
 </ul>
 <a id="readRawValue()">
@@ -282,6 +307,11 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>readRawValue</h4>
 <pre class="methodSignature">protected abstract&nbsp;java.lang.Object&nbsp;readRawValue()</pre>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The latest value read from hardware.</dd>
+</dl>
 </li>
 </ul>
 <a id="getValue()">
@@ -291,6 +321,11 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>getValue</h4>
 <pre class="methodSignature">public&nbsp;java.lang.Object&nbsp;getValue()</pre>
+<div class="block">Returns the latest stored value from the Input.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Latest value store in the Input.</dd>
+</dl>
 </li>
 </ul>
 <a id="logCurrentStateInternal()">
@@ -300,6 +335,8 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <li class="blockList">
 <h4>logCurrentStateInternal</h4>
 <pre class="methodSignature">protected&nbsp;void&nbsp;logCurrentStateInternal()</pre>
+<div class="block">Logs the Input's state to the StateTracker.
+ Currently logs nothing as images are too complex for complete logs.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Input.html#logCurrentStateInternal()">logCurrentStateInternal</a></code>&nbsp;in class&nbsp;<code><a href="Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></code></dd>

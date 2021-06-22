@@ -103,7 +103,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Adds an Input to the manager.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#addInputListener(org.wildstang.framework.io.InputListener)">addInputListener(InputListener)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Attaches an InputListener to the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOSet.html#addIOInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.Object)">addIOInfo(String, String, String, Object)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a></dt>
 <dd>
 <div class="block">Creates a new IOInfo and adds it to the set.</div>
@@ -147,17 +149,31 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/WSInputType.html#ANALOG_GYRO">ANALOG_GYRO</a></span> - org.wildstang.hardware.crio.inputs.<a href="org/wildstang/hardware/crio/inputs/WSInputType.html" title="enum in org.wildstang.hardware.crio.inputs">WSInputType</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/wildstang/framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs"><span class="typeNameLink">AnalogInput</span></a> - Class in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">First abstraction of Input representing "analog" Inputs
+ such as joysticks and gyros.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/AnalogInput.html#%3Cinit%3E(java.lang.String)">AnalogInput(String)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs">AnalogInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor simply passes on name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/AnalogInput.html#%3Cinit%3E(java.lang.String,double)">AnalogInput(String, double)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs">AnalogInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor with default value.</div>
+</dd>
 <dt><a href="org/wildstang/framework/io/outputs/AnalogOutput.html" title="class in org.wildstang.framework.io.outputs"><span class="typeNameLink">AnalogOutput</span></a> - Class in <a href="org/wildstang/framework/io/outputs/package-summary.html">org.wildstang.framework.io.outputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">First abstraction of Output representing "analog" Outputs
+ such as servos and motors.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/AnalogOutput.html#%3Cinit%3E(java.lang.String)">AnalogOutput(String)</a></span> - Constructor for class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/AnalogOutput.html" title="class in org.wildstang.framework.io.outputs">AnalogOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor simply passes on name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/AnalogOutput.html#%3Cinit%3E(java.lang.String,double)">AnalogOutput(String, double)</a></span> - Constructor for class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/AnalogOutput.html" title="class in org.wildstang.framework.io.outputs">AnalogOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor with default value.</div>
+</dd>
 <dt><a href="org/wildstang/framework/auto/AutoManager.html" title="class in org.wildstang.framework.auto"><span class="typeNameLink">AutoManager</span></a> - Class in <a href="org/wildstang/framework/auto/package-summary.html">org.wildstang.framework.auto</a></dt>
 <dd>
 <div class="block">Manages all autonomous and AutoPrograms for the framework.</div>
@@ -366,23 +382,43 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/outputs/WSOutputType.html#DIGITAL_OUTPUT">DIGITAL_OUTPUT</a></span> - org.wildstang.hardware.crio.outputs.<a href="org/wildstang/hardware/crio/outputs/WSOutputType.html" title="enum in org.wildstang.hardware.crio.outputs">WSOutputType</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs"><span class="typeNameLink">DigitalInput</span></a> - Class in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">First abstraction of Input representing "digital" Inputs
+ such as buttons and limit switches.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DigitalInput.html#%3Cinit%3E(java.lang.String)">DigitalInput(String)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs">DigitalInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor simply passes on name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DigitalInput.html#%3Cinit%3E(java.lang.String,boolean)">DigitalInput(String, boolean)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs">DigitalInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor with default value.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DigitalInput.html#%3Cinit%3E(java.lang.String,boolean,int)">DigitalInput(String, boolean, int)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs">DigitalInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor with default value.</div>
+</dd>
 <dt><a href="org/wildstang/framework/io/outputs/DigitalOutput.html" title="class in org.wildstang.framework.io.outputs"><span class="typeNameLink">DigitalOutput</span></a> - Class in <a href="org/wildstang/framework/io/outputs/package-summary.html">org.wildstang.framework.io.outputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">First abstraction of Output representing "analog" Outputs
+ such as solenoids and LEDs.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DigitalOutput.html#%3Cinit%3E(java.lang.String)">DigitalOutput(String)</a></span> - Constructor for class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DigitalOutput.html" title="class in org.wildstang.framework.io.outputs">DigitalOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor simply passes on name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DigitalOutput.html#%3Cinit%3E(java.lang.String,boolean)">DigitalOutput(String, boolean)</a></span> - Constructor for class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DigitalOutput.html" title="class in org.wildstang.framework.io.outputs">DigitalOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor with default value.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#disable()">disable()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Disables the Input, does nothing at the Input level.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#disable()">disable()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Disables the Output, does nothing at the Input level.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/IPidController.html#disable()">disable()</a></span> - Method in interface org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#disable()">disable()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
@@ -396,17 +432,31 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Runs repeatedly while robot is disabled.</div>
 </dd>
 <dt><a href="org/wildstang/framework/io/inputs/DiscreteInput.html" title="class in org.wildstang.framework.io.inputs"><span class="typeNameLink">DiscreteInput</span></a> - Class in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">First abstraction of Input representing "discrete" Inputs
+ such as hall effect and LIDAR sensors.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DiscreteInput.html#%3Cinit%3E(java.lang.String)">DiscreteInput(String)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DiscreteInput.html" title="class in org.wildstang.framework.io.inputs">DiscreteInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor simply passes on name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DiscreteInput.html#%3Cinit%3E(java.lang.String,int)">DiscreteInput(String, int)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DiscreteInput.html" title="class in org.wildstang.framework.io.inputs">DiscreteInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor with default value.</div>
+</dd>
 <dt><a href="org/wildstang/framework/io/outputs/DiscreteOutput.html" title="class in org.wildstang.framework.io.outputs"><span class="typeNameLink">DiscreteOutput</span></a> - Class in <a href="org/wildstang/framework/io/outputs/package-summary.html">org.wildstang.framework.io.outputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">First abstraction of Output representing "analog" Outputs
+ such as relays and double solenoids.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DiscreteOutput.html#%3Cinit%3E(java.lang.String)">DiscreteOutput(String)</a></span> - Constructor for class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DiscreteOutput.html" title="class in org.wildstang.framework.io.outputs">DiscreteOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor simply passes on name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DiscreteOutput.html#%3Cinit%3E(java.lang.String,int)">DiscreteOutput(String, int)</a></span> - Constructor for class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DiscreteOutput.html" title="class in org.wildstang.framework.io.outputs">DiscreteOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor with default value.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/JoystickConstants.html#DPAD_X">DPAD_X</a></span> - Static variable in class org.wildstang.hardware.<a href="org/wildstang/hardware/JoystickConstants.html" title="class in org.wildstang.hardware">JoystickConstants</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/JoystickConstants.html#DPAD_X_LEFT">DPAD_X_LEFT</a></span> - Static variable in class org.wildstang.hardware.<a href="org/wildstang/hardware/JoystickConstants.html" title="class in org.wildstang.hardware">JoystickConstants</a></dt>
@@ -466,9 +516,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h2 class="title">E</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#enable()">enable()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Enables the Input, does nothing at the Input level.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#enable()">enable()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Enables the Output, does nothing at the Input level.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/IPidController.html#enable()">enable()</a></span> - Method in interface org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#enable()">enable()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
@@ -664,7 +718,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns an Input with a matching name from the manager.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#getInputListeners()">getInputListeners()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a copy of the Array of all attached InputListeners.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/core/Core.html#getInputManager()">getInputManager()</a></span> - Static method in class org.wildstang.framework.core.<a href="org/wildstang/framework/core/Core.html" title="class in org.wildstang.framework.core">Core</a></dt>
 <dd>
 <div class="block">Returns the framework's InputManager.</div>
@@ -717,9 +773,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns the name mapped to the subsystem.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#getName()">getName()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the name of the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#getName()">getName()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the name of the Output.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOInfo.html#getName()">getName()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOInfo.html" title="class in org.wildstang.framework.logger">IOInfo</a></dt>
 <dd>
 <div class="block">Returns the name of the state.</div>
@@ -825,9 +885,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns the framework's StateTracker.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#getStateTracker()">getStateTracker()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the StateTracker associated with the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#getStateTracker()">getStateTracker()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the StateTracker associated with the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/IPidController.html#getStaticEpsilon()">getStaticEpsilon()</a></span> - Method in interface org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getStaticEpsilon()">getStaticEpsilon()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
@@ -893,23 +957,41 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns the type of Output for the enumeration.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/AnalogInput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs">AnalogInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the latest stored value from the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DigitalInput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs">DigitalInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the latest stored value from the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DiscreteInput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DiscreteInput.html" title="class in org.wildstang.framework.io.inputs">DiscreteInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the latest stored value from the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/I2CInput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/I2CInput.html" title="class in org.wildstang.framework.io.inputs">I2CInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the latest stored value from the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/ImageInput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/ImageInput.html" title="class in org.wildstang.framework.io.inputs">ImageInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the latest stored value from the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/AnalogOutput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/AnalogOutput.html" title="class in org.wildstang.framework.io.outputs">AnalogOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the latest commanded value for the Output.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DigitalOutput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DigitalOutput.html" title="class in org.wildstang.framework.io.outputs">DigitalOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the latest commanded value for the Output.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DiscreteOutput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DiscreteOutput.html" title="class in org.wildstang.framework.io.outputs">DiscreteOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the latest commanded value for the Output.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/I2COutput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/I2COutput.html" title="class in org.wildstang.framework.io.outputs">I2COutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the latest commanded value for the Output.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateInfo.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateInfo.html" title="class in org.wildstang.framework.logger">StateInfo</a></dt>
 <dd>
 <div class="block">Returns the value logged for the entry.</div>
@@ -931,9 +1013,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/WSInputType.html#HALL_EFFECT">HALL_EFFECT</a></span> - org.wildstang.hardware.crio.inputs.<a href="org/wildstang/hardware/crio/inputs/WSInputType.html" title="enum in org.wildstang.hardware.crio.inputs">WSInputType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#hashCode()">hashCode()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Produces a hashcode based off the Output's name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#hasValueChanged()">hasValueChanged()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns true if the value of the Input has changed.</div>
+</dd>
 </dl>
 <a id="I:I">
 <!--   -->
@@ -947,17 +1033,29 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/outputs/WSOutputType.html#I2C">I2C</a></span> - org.wildstang.hardware.crio.outputs.<a href="org/wildstang/hardware/crio/outputs/WSOutputType.html" title="enum in org.wildstang.hardware.crio.outputs">WSOutputType</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/wildstang/framework/io/inputs/I2CInput.html" title="class in org.wildstang.framework.io.inputs"><span class="typeNameLink">I2CInput</span></a> - Class in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">First abstraction of Input representing I2C Inputs.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/I2CInput.html#%3Cinit%3E(java.lang.String)">I2CInput(String)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/I2CInput.html" title="class in org.wildstang.framework.io.inputs">I2CInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor simply passes on name.</div>
+</dd>
 <dt><a href="org/wildstang/framework/io/outputs/I2COutput.html" title="class in org.wildstang.framework.io.outputs"><span class="typeNameLink">I2COutput</span></a> - Class in <a href="org/wildstang/framework/io/outputs/package-summary.html">org.wildstang.framework.io.outputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">First abstraction of Output representing I2C Outputs.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/I2COutput.html#%3Cinit%3E(java.lang.String)">I2COutput(String)</a></span> - Constructor for class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/I2COutput.html" title="class in org.wildstang.framework.io.outputs">I2COutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor simply passes on name.</div>
+</dd>
 <dt><a href="org/wildstang/framework/io/inputs/ImageInput.html" title="class in org.wildstang.framework.io.inputs"><span class="typeNameLink">ImageInput</span></a> - Class in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">First abstraction of Input representing "image" Inputs for vision purposes.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/ImageInput.html#%3Cinit%3E(java.lang.String)">ImageInput(String)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/ImageInput.html" title="class in org.wildstang.framework.io.inputs">ImageInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor simply passes on name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/config/ConfigManager.html#init()">init()</a></span> - Method in class org.wildstang.framework.config.<a href="org/wildstang/framework/config/ConfigManager.html" title="class in org.wildstang.framework.config">ConfigManager</a></dt>
 <dd>
 <div class="block">Create a new Config, belonging to the manager.</div>
@@ -1024,10 +1122,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs"><span class="typeNameLink">Input</span></a> - Class in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
 <dd>
-<div class="block">This is an abstract implementation of the Input interface.</div>
+<div class="block">Core input functions, primarily handling InputListeners.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#%3Cinit%3E(java.lang.String)">Input(String)</a></span> - Constructor for class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor sets the name of the Input.</div>
+</dd>
 <dt><a href="org/wildstang/framework/hardware/InputConfig.html" title="interface in org.wildstang.framework.hardware"><span class="typeNameLink">InputConfig</span></a> - Interface in <a href="org/wildstang/framework/hardware/package-summary.html">org.wildstang.framework.hardware</a></dt>
 <dd>
 <div class="block">This interface could be deprecated as it provides no functionality
@@ -1052,7 +1152,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Used in implementations to enumerate Inputs.</div>
 </dd>
 <dt><a href="org/wildstang/framework/io/inputs/InputType.html" title="interface in org.wildstang.framework.io.inputs"><span class="typeNameLink">InputType</span></a> - Interface in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Framework representation of WsInputType.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/InputListener.html#inputUpdate(org.wildstang.framework.io.inputs.Input)">inputUpdate(Input)</a></span> - Method in interface org.wildstang.framework.io.<a href="org/wildstang/framework/io/InputListener.html" title="interface in org.wildstang.framework.io">InputListener</a></dt>
 <dd>
 <div class="block">Notifies the listener that an input event has occurred.</div>
@@ -1080,9 +1182,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><a href="org/wildstang/framework/pid/output/IPidOutput.html" title="interface in org.wildstang.framework.pid.output"><span class="typeNameLink">IPidOutput</span></a> - Interface in <a href="org/wildstang/framework/pid/output/package-summary.html">org.wildstang.framework.pid.output</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#isEnabled()">isEnabled()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns true if the Input is enabled, does nothing at this level.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#isEnabled()">isEnabled()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns true if the Output is enabled, does nothing at this level.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/IPidController.html#isEnabled()">isEnabled()</a></span> - Method in interface org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#isEnabled()">isEnabled()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
@@ -1178,29 +1284,53 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Adds an AutoStepStopAutonomous after a given AutoStep index from config.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#logCurrentState()">logCurrentState()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Logs the current state of the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/AnalogOutput.html#logCurrentState()">logCurrentState()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/AnalogOutput.html" title="class in org.wildstang.framework.io.outputs">AnalogOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Logs the Output's state to the StateTracker.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DigitalOutput.html#logCurrentState()">logCurrentState()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DigitalOutput.html" title="class in org.wildstang.framework.io.outputs">DigitalOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Logs the Output's state to the StateTracker.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DiscreteOutput.html#logCurrentState()">logCurrentState()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DiscreteOutput.html" title="class in org.wildstang.framework.io.outputs">DiscreteOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Logs the Output's state to the StateTracker.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/I2COutput.html#logCurrentState()">logCurrentState()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/I2COutput.html" title="class in org.wildstang.framework.io.outputs">I2COutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Doesn't log anything right now.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#logCurrentState()">logCurrentState()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Abstract function to log the Output's state to the StateTracker.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/AnalogInput.html#logCurrentStateInternal()">logCurrentStateInternal()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs">AnalogInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Logs the Input's state to the StateTracker.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DigitalInput.html#logCurrentStateInternal()">logCurrentStateInternal()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs">DigitalInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Logs the Input's state to the StateTracker.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DiscreteInput.html#logCurrentStateInternal()">logCurrentStateInternal()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DiscreteInput.html" title="class in org.wildstang.framework.io.inputs">DiscreteInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Logs the Input's state to the StateTracker.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/I2CInput.html#logCurrentStateInternal()">logCurrentStateInternal()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/I2CInput.html" title="class in org.wildstang.framework.io.inputs">I2CInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Doesn't log anything right now.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/ImageInput.html#logCurrentStateInternal()">logCurrentStateInternal()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/ImageInput.html" title="class in org.wildstang.framework.io.inputs">ImageInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Logs the Input's state to the StateTracker.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#logCurrentStateInternal()">logCurrentStateInternal()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Abstract function to log the hardware Input's state to the StateTracker.</div>
+</dd>
 </dl>
 <a id="I:M">
 <!--   -->
@@ -1280,7 +1410,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/outputs/WsVictor.html#notifyConfigChange()">notifyConfigChange()</a></span> - Method in class org.wildstang.hardware.crio.outputs.<a href="org/wildstang/hardware/crio/outputs/WsVictor.html" title="class in org.wildstang.hardware.crio.outputs">WsVictor</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#notifyListeners()">notifyListeners()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Determines if the value has changed,
+ then notifys all attached listeners that a state change has occured.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/WSInputType.html#NULL">NULL</a></span> - org.wildstang.hardware.crio.inputs.<a href="org/wildstang/hardware/crio/inputs/WSInputType.html" title="enum in org.wildstang.hardware.crio.inputs">WSInputType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/outputs/WSOutputType.html#NULL">NULL</a></span> - org.wildstang.hardware.crio.outputs.<a href="org/wildstang/hardware/crio/outputs/WSOutputType.html" title="enum in org.wildstang.hardware.crio.outputs">WSOutputType</a></dt>
@@ -1344,9 +1477,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><a href="org/wildstang/sample/robot/package-summary.html">org.wildstang.sample.robot</a> - package org.wildstang.sample.robot</dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs"><span class="typeNameLink">Output</span></a> - Class in <a href="org/wildstang/framework/io/outputs/package-summary.html">org.wildstang.framework.io.outputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Core output functions.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#%3Cinit%3E(java.lang.String)">Output(String)</a></span> - Constructor for class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor sets the name of the Output.</div>
+</dd>
 <dt><a href="org/wildstang/framework/hardware/OutputConfig.html" title="interface in org.wildstang.framework.hardware"><span class="typeNameLink">OutputConfig</span></a> - Interface in <a href="org/wildstang/framework/hardware/package-summary.html">org.wildstang.framework.hardware</a></dt>
 <dd>
 <div class="block">This interface could be deprecated as it provides no functionality
@@ -1367,7 +1504,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Used in implementations to enumerate Outputs.</div>
 </dd>
 <dt><a href="org/wildstang/framework/io/outputs/OutputType.html" title="interface in org.wildstang.framework.io.outputs"><span class="typeNameLink">OutputType</span></a> - Interface in <a href="org/wildstang/framework/io/outputs/package-summary.html">org.wildstang.framework.io.outputs</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Framework representation of WsOutputType.</div>
+</dd>
 </dl>
 <a id="I:P">
 <!--   -->
@@ -1433,33 +1572,51 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h2 class="title">R</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/AnalogInput.html#readDataFromInput()">readDataFromInput()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs">AnalogInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Processes raw value read from Input's hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DigitalInput.html#readDataFromInput()">readDataFromInput()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs">DigitalInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Processes raw value read from Input's hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DiscreteInput.html#readDataFromInput()">readDataFromInput()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DiscreteInput.html" title="class in org.wildstang.framework.io.inputs">DiscreteInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Processes raw value read from Input's hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/I2CInput.html#readDataFromInput()">readDataFromInput()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/I2CInput.html" title="class in org.wildstang.framework.io.inputs">I2CInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Processes raw value read from Input's hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/ImageInput.html#readDataFromInput()">readDataFromInput()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/ImageInput.html" title="class in org.wildstang.framework.io.inputs">ImageInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Processes raw value read from Input's hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#readDataFromInput()">readDataFromInput()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Abstract function to read the hardware Input and store its value.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/WsMotionProfileControl.html#readDataFromInput()">readDataFromInput()</a></span> - Method in class org.wildstang.hardware.crio.inputs.<a href="org/wildstang/hardware/crio/inputs/WsMotionProfileControl.html" title="class in org.wildstang.hardware.crio.inputs">WsMotionProfileControl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/AnalogInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs">AnalogInput</a></dt>
 <dd>
-<div class="block">This method reads the raw value from the underlying hardware.</div>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DigitalInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs">DigitalInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DiscreteInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DiscreteInput.html" title="class in org.wildstang.framework.io.inputs">DiscreteInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/I2CInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/I2CInput.html" title="class in org.wildstang.framework.io.inputs">I2CInput</a></dt>
 <dd>
-<div class="block">This method reads the raw value from the underlying hardware.</div>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/ImageInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/ImageInput.html" title="class in org.wildstang.framework.io.inputs">ImageInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/driverstation/WsDSAnalogInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.crio.inputs.driverstation.<a href="org/wildstang/hardware/crio/inputs/driverstation/WsDSAnalogInput.html" title="class in org.wildstang.hardware.crio.inputs.driverstation">WsDSAnalogInput</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/driverstation/WsDSDigitalInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.crio.inputs.driverstation.<a href="org/wildstang/hardware/crio/inputs/driverstation/WsDSDigitalInput.html" title="class in org.wildstang.hardware.crio.inputs.driverstation">WsDSDigitalInput</a></dt>
@@ -1523,13 +1680,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Deregisters all subsystems from the manager.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#removeAllListeners()">removeAllListeners()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Detaches all InputListeners associated with the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/InputManager.html#removeInput(org.wildstang.framework.io.inputs.Input)">removeInput(Input)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/InputManager.html" title="class in org.wildstang.framework.io">InputManager</a></dt>
 <dd>
 <div class="block">Removes an Input to the manager.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#removeInputListener(org.wildstang.framework.io.InputListener)">removeInputListener(InputListener)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Detaches a given InputListener from the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/OutputManager.html#removeOutput(org.wildstang.framework.io.outputs.Output)">removeOutput(Output)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/OutputManager.html" title="class in org.wildstang.framework.io">OutputManager</a></dt>
 <dd>
 <div class="block">Removes an Output to the manager.</div>
@@ -1621,7 +1782,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Tests all subsystems registered with the manager.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#sendDataToOutput()">sendDataToOutput()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Abstract function to write the current value to hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/outputs/WsDigitalOutput.html#sendDataToOutput()">sendDataToOutput()</a></span> - Method in class org.wildstang.hardware.crio.outputs.<a href="org/wildstang/hardware/crio/outputs/WsDigitalOutput.html" title="class in org.wildstang.hardware.crio.outputs">WsDigitalOutput</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/outputs/WsDoubleSolenoid.html#sendDataToOutput()">sendDataToOutput()</a></span> - Method in class org.wildstang.hardware.crio.outputs.<a href="org/wildstang/hardware/crio/outputs/WsDoubleSolenoid.html" title="class in org.wildstang.hardware.crio.outputs">WsDoubleSolenoid</a></dt>
@@ -1651,7 +1814,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#setConstants(double,double,double)">setConstants(double, double, double)</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/ImageInput.html#setCurrentValue(java.lang.Object)">setCurrentValue(Object)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/ImageInput.html" title="class in org.wildstang.framework.io.inputs">ImageInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Stores a given Object as the current value.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/IPidController.html#setDifferentiatorBandLimit(double)">setDifferentiatorBandLimit(double)</a></span> - Method in interface org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#setDifferentiatorBandLimit(double)">setDifferentiatorBandLimit(double)</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
@@ -1703,31 +1868,53 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#setSetPoint(double)">setSetPoint(double)</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#setStateTracker(org.wildstang.framework.logger.StateTracker)">setStateTracker(StateTracker)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Associates a StateTracker with the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#setStateTracker(org.wildstang.framework.logger.StateTracker)">setStateTracker(StateTracker)</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Associates a StateTracker with the Input.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/IPidController.html#setStaticEpsilon(double)">setStaticEpsilon(double)</a></span> - Method in interface org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#setStaticEpsilon(double)">setStaticEpsilon(double)</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DigitalInput.html#setValue(boolean)">setValue(boolean)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs">DigitalInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes a new value stores it and notifys listeners.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DigitalOutput.html#setValue(boolean)">setValue(boolean)</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DigitalOutput.html" title="class in org.wildstang.framework.io.outputs">DigitalOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the output value, doesn't command the hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/I2CInput.html#setValue(byte%5B%5D)">setValue(byte[])</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/I2CInput.html" title="class in org.wildstang.framework.io.inputs">I2CInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes a new value stores it and notifys listeners.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/I2COutput.html#setValue(byte%5B%5D)">setValue(byte[])</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/I2COutput.html" title="class in org.wildstang.framework.io.outputs">I2COutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the output value, doesn't command the hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/AnalogInput.html#setValue(double)">setValue(double)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs">AnalogInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes a new value stores it and notifys listeners.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/AnalogOutput.html#setValue(double)">setValue(double)</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/AnalogOutput.html" title="class in org.wildstang.framework.io.outputs">AnalogOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the output value, doesn't command the hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/DiscreteInput.html#setValue(int)">setValue(int)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/DiscreteInput.html" title="class in org.wildstang.framework.io.inputs">DiscreteInput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes a new value stores it and notifys listeners.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/DiscreteOutput.html#setValue(int)">setValue(int)</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/DiscreteOutput.html" title="class in org.wildstang.framework.io.outputs">DiscreteOutput</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the output value, doesn't command the hardware.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#setValueChanged(boolean)">setValueChanged(boolean)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Mark that the value of the Input has changed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#setWriteInterval(long)">setWriteInterval(long)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
 <dd>
 <div class="block">Set the interval to write to log in milliseconds.</div>
@@ -1999,13 +2186,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Updates all managed inputs.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#update()">update()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Reads the data from the hardware Input and notifys listeners appropriately.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/OutputManager.html#update()">update()</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/OutputManager.html" title="class in org.wildstang.framework.io">OutputManager</a></dt>
 <dd>
 <div class="block">Updates all managed outputs.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#update()">update()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Logs the current state to the StateTracker, if one exists.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/subsystems/Subsystem.html#update()">update()</a></span> - Method in interface org.wildstang.framework.subsystems.<a href="org/wildstang/framework/subsystems/Subsystem.html" title="interface in org.wildstang.framework.subsystems">Subsystem</a></dt>
 <dd>
 <div class="block">Called to cause the subsystem to update its state and set new values on

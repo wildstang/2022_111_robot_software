@@ -190,6 +190,13 @@ public enum WSInputs implements Inputs {
 
     private static boolean isLogging = true;
 
+    /**
+     * Initialize a new Input.
+     * @param p_name Name, must match that in class to prevent errors.
+     * @param p_type Type of Input to use.
+     * @param p_config Corresponding configuration for InputType.
+     * @param p_trackingState If the Input is tracking.
+     */
     WSInputs(String p_name, InputType p_type, InputConfig p_config, boolean p_trackingState) {
         m_name = p_name;
         m_type = p_type;

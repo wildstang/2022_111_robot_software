@@ -9,14 +9,12 @@ import org.wildstang.framework.CoreUtils;
 import org.wildstang.framework.io.InputListener;
 import org.wildstang.framework.logger.StateTracker;
 
-//import com.sun.jndi.cosnaming.CNNameParser;
-
 /**
- * This is an abstract implementation of the Input interface. This class
- * implements the Input listener mechanism.
- *
+ * Core input functions, primarily handling InputListeners.
+ * Note: Input's update() handles InputListener triggering,
+ * latency could be increase if abstracted versions call
+ * readDataFromInput() then notifyListners().
  * @author Steve
- *
  */
 public abstract class Input {
 
@@ -30,12 +28,20 @@ public abstract class Input {
 
     private StateTracker m_stateTracker;
 
+    /**
+     * Constructor sets the name of the Input.
+     * @param p_name New name of the Input.
+     */
     public Input(String p_name) {
         CoreUtils.checkNotNull(p_name, "p_name is null");
 
         m_name = p_name;
     }
 
+    /**
+     * Attaches an InputListener to the Input.
+     * @param p_listener New InputListener to attach.
+     */
     public void addInputListener(InputListener p_listener) {
         CoreUtils.checkNotNull(p_listener, "p_listener is null");
 
@@ -53,6 +59,10 @@ public abstract class Input {
         }
     }
 
+    /**
+     * Detaches a given InputListener from the Input.
+     * @param p_listener InputListner to detach.
+     */
     public void removeInputListener(InputListener p_listener) {
         CoreUtils.checkNotNull(p_listener, "p_listener is null");
 
@@ -71,6 +81,10 @@ public abstract class Input {
         }
     }
 
+    /**
+     * Returns a copy of the Array of all attached InputListeners.
+     * @return Copy of the Array of InputListeners.
+     */
     public List<InputListener> getInputListeners() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "getInputListeners");
@@ -86,6 +100,10 @@ public abstract class Input {
         return copy;
     }
 
+    /**
+     * Determines if the value has changed,
+     * then notifys all attached listeners that a state change has occured.
+     */
     protected void notifyListeners() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "notifyListeners");
@@ -114,6 +132,9 @@ public abstract class Input {
         }
     }
 
+    /**
+     * Reads the data from the hardware Input and notifys listeners appropriately.
+     */
     public void update() {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "update");
@@ -135,6 +156,9 @@ public abstract class Input {
         }
     }
 
+    /**
+     * Logs the current state of the Input.
+     */
     protected void logCurrentState() {
         // Log any state information
         if (m_stateTracker != null) {
@@ -145,42 +169,83 @@ public abstract class Input {
         }
     }
 
+    /**
+     * Returns the name of the Input.
+     * @return Name of the Input.
+     */
     public String getName() {
         return m_name;
     }
 
+    /**
+     * Mark that the value of the Input has changed.
+     * @param p_changed New state of the valueChanged.
+     */
     protected void setValueChanged(boolean p_changed) {
         m_valueChanged = p_changed;
     }
 
+    /**
+     * Returns true if the value of the Input has changed.
+     * @return True if the value of the Input has changed.
+     */
     protected boolean hasValueChanged() {
         return m_valueChanged;
     }
 
+    /**
+     * Abstract function to log the hardware Input's state to the StateTracker.
+     */
     protected abstract void logCurrentStateInternal();
 
+    /**
+     * Abstract function to read the hardware Input and store its value.
+     */
     protected abstract void readDataFromInput();
 
+    /**
+     * Detaches all InputListeners associated with the Input.
+     */
     public void removeAllListeners() {
         m_listeners.clear();
     }
 
+    /**
+     * Associates a StateTracker with the Input.
+     * @param p_tracker New StateTracker to associate with Input.
+     */
     public void setStateTracker(StateTracker p_tracker) {
         m_stateTracker = p_tracker;
     }
 
+    /**
+     * Returns the StateTracker associated with the Input.
+     * @return Input's StateTracker.
+     */
     public StateTracker getStateTracker() {
         return m_stateTracker;
     }
 
+    // TODO: Actually do something with m_enabled?
+
+    /**
+     * Enables the Input, does nothing at the Input level.
+     */
     public void enable() {
         m_enabled = true;
     }
 
+    /**
+     * Disables the Input, does nothing at the Input level.
+     */
     public void disable() {
         m_enabled = false;
     }
 
+    /**
+     * Returns true if the Input is enabled, does nothing at this level.
+     * @return True if the Input is enabled.
+     */
     public boolean isEnabled() {
         return m_enabled;
     }

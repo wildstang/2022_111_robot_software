@@ -188,7 +188,7 @@ extends <a href="../../../../framework/io/inputs/AnalogInput.html" title="class 
 <td class="colFirst"><code>protected double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readRawValue()">readRawValue</a></span>()</code></th>
 <td class="colLast">
-<div class="block">This method reads the raw value from the underlying hardware.</div>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
 </td>
 </tr>
 </table>
@@ -257,13 +257,12 @@ extends <a href="../../../../framework/io/inputs/AnalogInput.html" title="class 
 <h4>readRawValue</h4>
 <pre class="methodSignature">protected&nbsp;double&nbsp;readRawValue()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../framework/io/inputs/AnalogInput.html#readRawValue()">AnalogInput</a></code></span></div>
-<div class="block">This method reads the raw value from the underlying hardware. This should be
- implemented by each individual input subclass.</div>
+<div class="block">Abstract function to request and return the raw value from hardware.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../framework/io/inputs/AnalogInput.html#readRawValue()">readRawValue</a></code>&nbsp;in class&nbsp;<code><a href="../../../../framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs">AnalogInput</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Raw value read by input.</dd>
+<dd>The latest value read from hardware.</dd>
 </dl>
 </li>
 </ul>

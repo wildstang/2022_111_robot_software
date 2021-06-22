@@ -3,6 +3,10 @@ package org.wildstang.framework.io.inputs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * First abstraction of Input representing "digital" Inputs
+ * such as buttons and limit switches. 
+ */
 public abstract class DigitalInput extends Input {
 
     private static Logger s_log = Logger.getLogger(DigitalInput.class.getName());
@@ -14,21 +18,40 @@ public abstract class DigitalInput extends Input {
     private boolean m_lastValue;
     private int DEBOUNCE_CYCLES;
 
+    /**
+     * Constructor simply passes on name.
+     * @param p_name Name of the Input.
+     */
     public DigitalInput(String p_name) {
         super(p_name);
     }
 
+    /**
+     * Constructor with default value.
+     * @param p_name Name of the Input.
+     * @param p_debounced True if the Input should be "debounced". Used to clean up button presses.
+     * @param p_debounceCycles Set the number of cycles value must be constant before determining no longer bouncing.
+     */
     public DigitalInput(String p_name, boolean p_debounced, int p_debounceCycles) {
         super(p_name);
         m_debounced = p_debounced;
         DEBOUNCE_CYCLES = p_debounceCycles;
     }
 
+    /**
+     * Constructor with default value.
+     * @param p_name Name of the Input.
+     * @param p_default Default value of the Input.
+     */
     public DigitalInput(String p_name, boolean p_default) {
         super(p_name);
         m_currentValue = p_default;
     }
 
+    /**
+     * Processes raw value read from Input's hardware.
+     * Also counts bounces for debouncing.
+     */
     @Override
     public void readDataFromInput() {
         if (s_log.isLoggable(Level.FINER)) {
@@ -60,6 +83,11 @@ public abstract class DigitalInput extends Input {
         }
     }
 
+    /**
+     * Takes a new value stores it and notifys listeners.
+     * This is a public version of setNewValue() for manual value updating.
+     * @param p_newValue New binary value read for the Input.
+     */
     public void setValue(boolean p_newValue) {
         if (s_log.isLoggable(Level.FINER)) {
             s_log.entering(s_className, "setValue");
@@ -76,6 +104,10 @@ public abstract class DigitalInput extends Input {
         }
     }
 
+    /**
+     * Takes an ingested value, store it, and marks the value changed flag if it has.
+     * @param p_newValue New binary value to store.
+     */
     private void setNewValue(boolean p_newValue) {
         // Only update if the value has changed
         if (s_log.isLoggable(Level.FINEST)) {
@@ -90,12 +122,23 @@ public abstract class DigitalInput extends Input {
         }
     }
 
+    /**
+     * Abstract function to request and return the raw value from hardware.
+     * @return The latest binary value read from hardware.
+     */
     protected abstract boolean readRawValue();
 
+    /**
+     * Returns the latest stored value from the Input.
+     * @return Latest binary value store in the Input.
+     */
     public boolean getValue() {
         return m_currentValue;
     }
 
+    /**
+     * Logs the Input's state to the StateTracker.
+     */
     @Override
     protected void logCurrentStateInternal() {
         if (s_log.isLoggable(Level.FINER)) {
