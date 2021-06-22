@@ -143,7 +143,7 @@ public class StateLogger implements Runnable {
 
     /**
      * Write a StateGroup List to log.
-     * @param p_set States to write to log.
+     * @param p_stateList States to write to log.
      * @throws IOException If write fails.
      */
     protected void writeState(List<StateGroup> p_stateList) throws IOException {
@@ -262,7 +262,7 @@ public class StateLogger implements Runnable {
 
     /**
      * Format a single IOInfo to JSON before logging.
-     * @param p_group IOInfo to format.
+     * @param p_info IOInfo to format.
      * @return Formatted IOInfo as JSON String.
      */
     protected String formatIOInfo(IOInfo p_info) {

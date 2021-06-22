@@ -8,7 +8,7 @@ This repository is the primary working space for the framework, all future robot
 This repo contains 2 components to the "framework".
 First, it contains the actual robot framework which acts as the control layer of the robot software.
 It connects all the pieces together, but does not interact with any hardware on either side.
-Second, there is the hardware component, it implements others' API to connect the hardware to the framework.
+Second, there is the hardware component, it implements others' APIs to connect the hardware to the framework.
 The framework for this reason should not import any external libraries for specific robot functions, such as WPILib.
 The framework may import libraries for utility purposes, in this case WPILib's Timer is okay.
 
