@@ -105,9 +105,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#addInputListener(org.wildstang.framework.io.InputListener)">addInputListener(InputListener)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOSet.html#addIOInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.Object)">addIOInfo(String, String, String, Object)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new IOInfo and adds it to the set.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#addIOInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.Object)">addIOInfo(String, String, String, Object)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new IOInfo and adds it to the current IOSet if it exists.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/OutputManager.html#addOutput(org.wildstang.framework.io.outputs.Output)">addOutput(Output)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/OutputManager.html" title="class in org.wildstang.framework.io">OutputManager</a></dt>
 <dd>
 <div class="block">Adds an Output to the manager.</div>
@@ -117,9 +121,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Adds a new program to AutoManager and SmartDashboard chooser.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateGroup.html#addState(java.lang.String,java.lang.String,java.lang.Object)">addState(String, String, Object)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Adds a new entry to the StateGroup.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#addState(java.lang.String,java.lang.String,java.lang.Object)">addState(String, String, Object)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new StateInfo and adds it to the current StateGroup if it exists.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoProgram.html#addStep(org.wildstang.framework.auto.AutoStep)">addStep(AutoStep)</a></span> - Method in class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></dt>
 <dd>
 <div class="block">Adds a new AutoStep to the AutoProgram.</div>
@@ -227,7 +235,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h2 class="title">B</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#beginCycle(java.util.Date)">beginCycle(Date)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">If tracking state, creates a new StateGroup at the given timestamp.</div>
+</dd>
 </dl>
 <a id="I:C">
 <!--   -->
@@ -464,7 +474,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#enable()">enable()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#endCycle()">endCycle()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Adds the current StateGroup to the StateTracker's set, then clears it.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/CANConstants.html#EXAMPLE_MOTOR_CONTROLLER">EXAMPLE_MOTOR_CONTROLLER</a></span> - Static variable in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/CANConstants.html" title="class in org.wildstang.sample.robot">CANConstants</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/CANConstants.html#EXAMPLE_PAIRED_CONTROLLERS">EXAMPLE_PAIRED_CONTROLLERS</a></span> - Static variable in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/CANConstants.html" title="class in org.wildstang.sample.robot">CANConstants</a></dt>
@@ -486,9 +498,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoProgram.html#finishedPreviousStep">finishedPreviousStep</a></span> - Variable in class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#formatIOInfo(org.wildstang.framework.logger.IOInfo)">formatIOInfo(IOInfo)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Format a single IOInfo to JSON before logging.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#formatState(org.wildstang.framework.logger.StateGroup)">formatState(StateGroup)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Format a single StateGroup to JSON before logging.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/outputs/WsDoubleSolenoidState.html#FORWARD">FORWARD</a></span> - org.wildstang.hardware.crio.outputs.<a href="org/wildstang/hardware/crio/outputs/WsDoubleSolenoidState.html" title="enum in org.wildstang.hardware.crio.outputs">WsDoubleSolenoidState</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -566,7 +582,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getCurrentOutput()">getCurrentOutput()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#getCurrentState()">getCurrentState()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the current StateGroup, it may be null.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoProgram.html#getCurrentStep()">getCurrentStep()</a></span> - Method in class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></dt>
 <dd>
 <div class="block">Returns the current running AutoStep within the AutoProgram.</div>
@@ -604,7 +622,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getDifferentiatorBandLimit()">getDifferentiatorBandLimit()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOInfo.html#getDirection()">getDirection()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOInfo.html" title="class in org.wildstang.framework.logger">IOInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the IO direction (input/output).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/LidarSensor.html#getDistance()">getDistance()</a></span> - Method in class org.wildstang.hardware.crio.inputs.<a href="org/wildstang/hardware/crio/inputs/LidarSensor.html" title="class in org.wildstang.hardware.crio.inputs">LidarSensor</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/config/Config.html#getDouble(java.lang.String,double)">getDouble(String, double)</a></span> - Method in class org.wildstang.framework.config.<a href="org/wildstang/framework/config/Config.html" title="class in org.wildstang.framework.config">Config</a></dt>
@@ -632,7 +652,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getI()">getI()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOSet.html#getInfoList()">getInfoList()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the List of IOInfo.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/InputManager.html#getInput(java.lang.String)">getInput(String)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/InputManager.html" title="class in org.wildstang.framework.io">InputManager</a></dt>
 <dd>
 <div class="block">Returns a named Input from the manager.</div>
@@ -660,7 +682,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getIntegralErrorThresh()">getIntegralErrorThresh()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#getIoSet()">getIoSet()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the current IOSet, it may be null.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/config/Config.html#getKeyValuePair(java.lang.String)">getKeyValuePair(String)</a></span> - Method in class org.wildstang.framework.config.<a href="org/wildstang/framework/config/Config.html" title="class in org.wildstang.framework.config">Config</a></dt>
 <dd>
 <div class="block">Splits the input String on an equals (=) character, and returns the two parts
@@ -697,9 +721,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/Output.html#getName()">getName()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOInfo.html#getName()">getName()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOInfo.html" title="class in org.wildstang.framework.logger">IOInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the name of the state.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateInfo.html#getName()">getName()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateInfo.html" title="class in org.wildstang.framework.logger">StateInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the name of StateInfo entry.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getName()">getName()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/subsystems/Subsystem.html#getName()">getName()</a></span> - Method in interface org.wildstang.framework.subsystems.<a href="org/wildstang/framework/subsystems/Subsystem.html" title="interface in org.wildstang.framework.subsystems">Subsystem</a></dt>
@@ -727,7 +755,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Gets the next AutoStep to execute.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#getOutput()">getOutput()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the Writer used for logging.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/OutputManager.html#getOutput(java.lang.String)">getOutput(String)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/OutputManager.html" title="class in org.wildstang.framework.io">OutputManager</a></dt>
 <dd>
 <div class="block">Returns a named Output from the manager.</div>
@@ -741,9 +771,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getP()">getP()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateInfo.html#getParent()">getParent()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateInfo.html" title="class in org.wildstang.framework.logger">StateInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the name of the entry's parent.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOInfo.html#getPort()">getPort()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOInfo.html" title="class in org.wildstang.framework.logger">IOInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the port for the state's IO.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/config/WsI2CInputConfig.html#getPort()">getPort()</a></span> - Method in class org.wildstang.hardware.crio.inputs.config.<a href="org/wildstang/hardware/crio/inputs/config/WsI2CInputConfig.html" title="class in org.wildstang.hardware.crio.inputs.config">WsI2CInputConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/config/WsJSButtonInputConfig.html#getPort()">getPort()</a></span> - Method in class org.wildstang.hardware.crio.inputs.config.<a href="org/wildstang/hardware/crio/inputs/config/WsJSButtonInputConfig.html" title="class in org.wildstang.hardware.crio.inputs.config">WsJSButtonInputConfig</a></dt>
@@ -779,9 +813,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getState()">getState()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateGroup.html#getStateList()">getStateList()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the group's list of StateInfos.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#getStateList()">getStateList()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the current set of StateGroups.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/core/Core.html#getStateTracker()">getStateTracker()</a></span> - Static method in class org.wildstang.framework.core.<a href="org/wildstang/framework/core/Core.html" title="class in org.wildstang.framework.core">Core</a></dt>
 <dd>
 <div class="block">Returns the framework's StateTracker.</div>
@@ -831,7 +869,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/outputs/config/WsRemoteDigitalOutputConfig.html#getTableName()">getTableName()</a></span> - Method in class org.wildstang.hardware.crio.outputs.config.<a href="org/wildstang/hardware/crio/outputs/config/WsRemoteDigitalOutputConfig.html" title="class in org.wildstang.hardware.crio.outputs.config">WsRemoteDigitalOutputConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateGroup.html#getTimestamp()">getTimestamp()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the timestamp associated with the StateGroup.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/core/Inputs.html#getType()">getType()</a></span> - Method in interface org.wildstang.framework.core.<a href="org/wildstang/framework/core/Inputs.html" title="interface in org.wildstang.framework.core">Inputs</a></dt>
 <dd>
 <div class="block">Returns the type of Input for the enumeration.</div>
@@ -841,7 +881,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns the type of Output for the enumeration.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOInfo.html#getType()">getType()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOInfo.html" title="class in org.wildstang.framework.logger">IOInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the type of IO for the state.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSInputs.html#getType()">getType()</a></span> - Method in enum org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></dt>
 <dd>
 <div class="block">Returns the type of Input for the enumeration.</div>
@@ -869,7 +911,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/outputs/I2COutput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.outputs.<a href="org/wildstang/framework/io/outputs/I2COutput.html" title="class in org.wildstang.framework.io.outputs">I2COutput</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateInfo.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateInfo.html" title="class in org.wildstang.framework.logger">StateInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the value logged for the entry.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/config/Config.html#getValue(java.lang.String)">getValue(String)</a></span> - Method in class org.wildstang.framework.config.<a href="org/wildstang/framework/config/Config.html" title="class in org.wildstang.framework.config">Config</a></dt>
 <dd>
 <div class="block">Gets the value corresponding to a key in the config.</div>
@@ -935,7 +979,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Initializes logger.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#init()">init()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the tracker as initialised.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/subsystems/Subsystem.html#init()">init()</a></span> - Method in interface org.wildstang.framework.subsystems.<a href="org/wildstang/framework/subsystems/Subsystem.html" title="interface in org.wildstang.framework.subsystems">Subsystem</a></dt>
 <dd>
 <div class="block">Initialise the subsystem.</div>
@@ -1012,11 +1058,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Notifies the listener that an input event has occurred.</div>
 </dd>
 <dt><a href="org/wildstang/framework/logger/IOInfo.html" title="class in org.wildstang.framework.logger"><span class="typeNameLink">IOInfo</span></a> - Class in <a href="org/wildstang/framework/logger/package-summary.html">org.wildstang.framework.logger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Stores a description of an available input/output that may be logged with StateInfo.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOInfo.html#%3Cinit%3E(java.lang.String,java.lang.String,java.lang.String,java.lang.Object)">IOInfo(String, String, String, Object)</a></span> - Constructor for class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOInfo.html" title="class in org.wildstang.framework.logger">IOInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs an IOInfo entry for describing an IO state.</div>
+</dd>
 <dt><a href="org/wildstang/framework/logger/IOSet.html" title="class in org.wildstang.framework.logger"><span class="typeNameLink">IOSet</span></a> - Class in <a href="org/wildstang/framework/logger/package-summary.html">org.wildstang.framework.logger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A collection of IOInfo descriptions as a dictionary of sorts for inputs or outputs belonging to a subsystem or group.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/IOSet.html#%3Cinit%3E()">IOSet()</a></span> - Constructor for class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/wildstang/framework/pid/controller/IPidController.html" title="interface in org.wildstang.framework.pid.controller"><span class="typeNameLink">IPidController</span></a> - Interface in <a href="org/wildstang/framework/pid/controller/package-summary.html">org.wildstang.framework.pid.controller</a></dt>
@@ -1048,7 +1100,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#isOnTarget()">isOnTarget()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#isRunning()">isRunning()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns true if the logger is running.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/IPidController.html#isStabilized()">isStabilized()</a></span> - Method in interface org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#isStabilized()">isStabilized()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
@@ -1062,7 +1116,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns true if the Logger should track the Output's state.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#isTrackingState()">isTrackingState()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns true if tracking state.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSInputs.html#isTrackingState()">isTrackingState()</a></span> - Method in enum org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></dt>
 <dd>
 <div class="block">Returns true if the Logger should track the Input's state.</div>
@@ -1483,7 +1539,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Deregisters a given subsystem from the manager.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#reset()">reset()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Clears out all stored info and resumes state tracking.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/IPidController.html#reset()">reset()</a></span> - Method in interface org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/IPidController.html" title="interface in org.wildstang.framework.pid.controller">IPidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#reset()">reset()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
@@ -1545,7 +1603,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Runs repeatedly, regardless of mode and state.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#run()">run()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Thread that handles all logging.</div>
+</dd>
 </dl>
 <a id="I:S">
 <!--   -->
@@ -1669,9 +1729,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#setValueChanged(boolean)">setValueChanged(boolean)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#setWriteInterval(long)">setWriteInterval(long)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Set the interval to write to log in milliseconds.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#setWriter(java.io.Writer)">setWriter(Writer)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the Writer used for logging.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/config/Config.html#size()">size()</a></span> - Method in class org.wildstang.framework.config.<a href="org/wildstang/framework/config/Config.html" title="class in org.wildstang.framework.config">Config</a></dt>
 <dd>
 <div class="block">Returns the size of the total config map.</div>
@@ -1703,7 +1767,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/SpeedPidController.html#%3Cinit%3E(org.wildstang.framework.pid.input.IPidInput,org.wildstang.framework.pid.output.IPidOutput,java.lang.String)">SpeedPidController(IPidInput, IPidOutput, String)</a></span> - Constructor for class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/SpeedPidController.html" title="class in org.wildstang.framework.pid.controller">SpeedPidController</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#start()">start()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Resume logging.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/LidarSensor.html#start()">start()</a></span> - Method in class org.wildstang.hardware.crio.inputs.<a href="org/wildstang/hardware/crio/inputs/LidarSensor.html" title="class in org.wildstang.hardware.crio.inputs">LidarSensor</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/LidarSensor.html#start(int)">start(int)</a></span> - Method in class org.wildstang.hardware.crio.inputs.<a href="org/wildstang/hardware/crio/inputs/LidarSensor.html" title="class in org.wildstang.hardware.crio.inputs">LidarSensor</a></dt>
@@ -1719,29 +1785,49 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Starts the default program, Sleeper, which does nothing and never ends.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#startTrackingState()">startTrackingState()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Resumes state tracking.</div>
+</dd>
 <dt><a href="org/wildstang/framework/logger/StateGroup.html" title="class in org.wildstang.framework.logger"><span class="typeNameLink">StateGroup</span></a> - Class in <a href="org/wildstang/framework/logger/package-summary.html">org.wildstang.framework.logger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Tracks a group of StateInfo which occured at the same moment.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateGroup.html#%3Cinit%3E(java.util.Date)">StateGroup(Date)</a></span> - Constructor for class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Construct a StateGroup at a given timestamp.</div>
+</dd>
 <dt><a href="org/wildstang/framework/logger/StateInfo.html" title="class in org.wildstang.framework.logger"><span class="typeNameLink">StateInfo</span></a> - Class in <a href="org/wildstang/framework/logger/package-summary.html">org.wildstang.framework.logger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Tracks a single key, value pair for logging a robot state.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateInfo.html#%3Cinit%3E(java.lang.String,java.lang.String,java.lang.Object)">StateInfo(String, String, Object)</a></span> - Constructor for class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateInfo.html" title="class in org.wildstang.framework.logger">StateInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Construct a new StateInfo log.</div>
+</dd>
 <dt><a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger"><span class="typeNameLink">StateLogger</span></a> - Class in <a href="org/wildstang/framework/logger/package-summary.html">org.wildstang.framework.logger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Manages logging in a Thread.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#%3Cinit%3E(org.wildstang.framework.logger.StateTracker)">StateLogger(StateTracker)</a></span> - Constructor for class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">StateLogger requires a StateTracker where it pulls logging info from.</div>
+</dd>
 <dt><a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger"><span class="typeNameLink">StateTracker</span></a> - Class in <a href="org/wildstang/framework/logger/package-summary.html">org.wildstang.framework.logger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Used to track the various logs created before being written to log file.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#%3Cinit%3E()">StateTracker()</a></span> - Constructor for class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#stop()">stop()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Pause logging.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/LidarSensor.html#stop()">stop()</a></span> - Method in class org.wildstang.hardware.crio.inputs.<a href="org/wildstang/hardware/crio/inputs/LidarSensor.html" title="class in org.wildstang.hardware.crio.inputs">LidarSensor</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#stopTrackingState()">stopTrackingState()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Pauses state tracking.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/config/Config.html#stripComments(java.lang.String)">stripComments(String)</a></span> - Method in class org.wildstang.framework.config.<a href="org/wildstang/framework/config/Config.html" title="class in org.wildstang.framework.config">Config</a></dt>
 <dd>
 <div class="block">Removes any part of a line following a hash character - '#'.</div>
@@ -2017,14 +2103,22 @@ the order they are declared.</div>
 </a>
 <h2 class="title">W</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#writeEnd(java.io.Writer)">writeEnd(Writer)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#writeInfo(java.io.Writer,org.wildstang.framework.logger.IOSet)">writeInfo(Writer, IOSet)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#writeStart(java.io.Writer)">writeStart(Writer)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#writeState(java.io.Writer,java.util.List)">writeState(Writer, List&lt;StateGroup&gt;)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
-<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#writeEnd()">writeEnd()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
+<dd>
+<div class="block">Create end of JSON, write to log, and flush.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#writeInfo(org.wildstang.framework.logger.IOSet)">writeInfo(IOSet)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
+<dd>
+<div class="block">Write an IOSet to log.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#writeStart()">writeStart()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
+<dd>
+<div class="block">Create beginning of JSON and write to log.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#writeState(java.util.List)">writeState(List&lt;StateGroup&gt;)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
+<dd>
+<div class="block">Write a StateGroup List to log.</div>
+</dd>
 <dt><a href="org/wildstang/hardware/crio/inputs/WsAbsoluteEncoder.html" title="class in org.wildstang.hardware.crio.inputs"><span class="typeNameLink">WsAbsoluteEncoder</span></a> - Class in <a href="org/wildstang/hardware/crio/inputs/package-summary.html">org.wildstang.hardware.crio.inputs</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/crio/inputs/WsAbsoluteEncoder.html#%3Cinit%3E(java.lang.String,int,int)">WsAbsoluteEncoder(String, int, int)</a></span> - Constructor for class org.wildstang.hardware.crio.inputs.<a href="org/wildstang/hardware/crio/inputs/WsAbsoluteEncoder.html" title="class in org.wildstang.hardware.crio.inputs">WsAbsoluteEncoder</a></dt>

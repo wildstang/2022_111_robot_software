@@ -132,6 +132,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">StateGroup</span>
 extends java.lang.Object</pre>
+<div class="block">Tracks a group of StateInfo which occured at the same moment.
+ This is intended for logging many different states at once.</div>
 </li>
 </ul>
 </div>
@@ -153,7 +155,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.util.Date)">StateGroup</a></span>&#8203;(java.util.Date&nbsp;p_timestamp)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Construct a StateGroup at a given timestamp.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -178,17 +182,23 @@ extends java.lang.Object</pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addState(java.lang.String,java.lang.String,java.lang.Object)">addState</a></span>&#8203;(java.lang.String&nbsp;p_name,
         java.lang.String&nbsp;p_parent,
         java.lang.Object&nbsp;p_value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds a new entry to the StateGroup.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.HashMap&lt;java.lang.String,&#8203;<a href="StateInfo.html" title="class in org.wildstang.framework.logger">StateInfo</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStateList()">getStateList</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the group's list of StateInfos.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.Date</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTimestamp()">getTimestamp</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the timestamp associated with the StateGroup.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -221,6 +231,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>StateGroup</h4>
 <pre>public&nbsp;StateGroup&#8203;(java.util.Date&nbsp;p_timestamp)</pre>
+<div class="block">Construct a StateGroup at a given timestamp.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_timestamp</code> - Timestamp of log.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -242,6 +257,13 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;void&nbsp;addState&#8203;(java.lang.String&nbsp;p_name,
                      java.lang.String&nbsp;p_parent,
                      java.lang.Object&nbsp;p_value)</pre>
+<div class="block">Adds a new entry to the StateGroup.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_name</code> - Name of entry.</dd>
+<dd><code>p_parent</code> - Name of entry's parent.</dd>
+<dd><code>p_value</code> - Value to log.</dd>
+</dl>
 </li>
 </ul>
 <a id="getTimestamp()">
@@ -251,6 +273,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getTimestamp</h4>
 <pre class="methodSignature">public&nbsp;java.util.Date&nbsp;getTimestamp()</pre>
+<div class="block">Returns the timestamp associated with the StateGroup.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Timestamp associated with StateInfos.</dd>
+</dl>
 </li>
 </ul>
 <a id="getStateList()">
@@ -260,6 +287,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getStateList</h4>
 <pre class="methodSignature">public&nbsp;java.util.HashMap&lt;java.lang.String,&#8203;<a href="StateInfo.html" title="class in org.wildstang.framework.logger">StateInfo</a>&gt;&nbsp;getStateList()</pre>
+<div class="block">Returns the group's list of StateInfos.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Map of StateInfos and names.</dd>
+</dl>
 </li>
 </ul>
 </li>

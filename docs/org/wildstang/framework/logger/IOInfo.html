@@ -132,6 +132,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">IOInfo</span>
 extends java.lang.Object</pre>
+<div class="block">Stores a description of an available input/output that may be logged with StateInfo.</div>
 </li>
 </ul>
 </div>
@@ -156,7 +157,9 @@ extends java.lang.Object</pre>
       java.lang.String&nbsp;p_type,
       java.lang.String&nbsp;p_direction,
       java.lang.Object&nbsp;p_port)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs an IOInfo entry for describing an IO state.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -179,22 +182,30 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDirection()">getDirection</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the IO direction (input/output).</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getName()">getName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the name of the state.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.Object</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPort()">getPort</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the port for the state's IO.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getType()">getType</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the type of IO for the state.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -230,6 +241,14 @@ extends java.lang.Object</pre>
               java.lang.String&nbsp;p_type,
               java.lang.String&nbsp;p_direction,
               java.lang.Object&nbsp;p_port)</pre>
+<div class="block">Constructs an IOInfo entry for describing an IO state.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_name</code> - Specific name of state.</dd>
+<dd><code>p_type</code> - Type of IO, normally subsystem.</dd>
+<dd><code>p_direction</code> - IO direction (Input/Output).</dd>
+<dd><code>p_port</code> - IO port or null if not applicable.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -249,6 +268,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getName()</pre>
+<div class="block">Returns the name of the state.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Name of the state.</dd>
+</dl>
 </li>
 </ul>
 <a id="getType()">
@@ -258,6 +282,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getType</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getType()</pre>
+<div class="block">Returns the type of IO for the state.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Type of IO.</dd>
+</dl>
 </li>
 </ul>
 <a id="getPort()">
@@ -267,6 +296,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getPort</h4>
 <pre class="methodSignature">public&nbsp;java.lang.Object&nbsp;getPort()</pre>
+<div class="block">Returns the port for the state's IO.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Port of IO.</dd>
+</dl>
 </li>
 </ul>
 <a id="getDirection()">
@@ -276,6 +310,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getDirection</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getDirection()</pre>
+<div class="block">Returns the IO direction (input/output).</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Direction of IO.</dd>
+</dl>
 </li>
 </ul>
 </li>

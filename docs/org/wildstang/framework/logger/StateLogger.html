@@ -137,6 +137,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">StateLogger</span>
 extends java.lang.Object
 implements java.lang.Runnable</pre>
+<div class="block">Manages logging in a Thread. Includes logging control and JSON formatting.</div>
 </li>
 </ul>
 </div>
@@ -158,7 +159,9 @@ implements java.lang.Runnable</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.wildstang.framework.logger.StateTracker)">StateLogger</a></span>&#8203;(<a href="StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a>&nbsp;p_tracker)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">StateLogger requires a StateTracker where it pulls logging info from.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -181,69 +184,93 @@ implements java.lang.Runnable</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#formatIOInfo(org.wildstang.framework.logger.IOInfo)">formatIOInfo</a></span>&#8203;(<a href="IOInfo.html" title="class in org.wildstang.framework.logger">IOInfo</a>&nbsp;p_info)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Format a single IOInfo to JSON before logging.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#formatState(org.wildstang.framework.logger.StateGroup)">formatState</a></span>&#8203;(<a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a>&nbsp;p_group)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Format a single StateGroup to JSON before logging.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.io.Writer</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOutput()">getOutput</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the Writer used for logging.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isRunning()">isRunning</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the logger is running.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#run()">run</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Thread that handles all logging.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setWriteInterval(long)">setWriteInterval</a></span>&#8203;(long&nbsp;p_interval)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Set the interval to write to log in milliseconds.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setWriter(java.io.Writer)">setWriter</a></span>&#8203;(java.io.Writer&nbsp;p_output)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the Writer used for logging.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#start()">start</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Resume logging.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stop()">stop</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Pause logging.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#writeEnd(java.io.Writer)">writeEnd</a></span>&#8203;(java.io.Writer&nbsp;p_output)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#writeEnd()">writeEnd</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Create end of JSON, write to log, and flush.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#writeInfo(java.io.Writer,org.wildstang.framework.logger.IOSet)">writeInfo</a></span>&#8203;(java.io.Writer&nbsp;p_output,
-         <a href="IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a>&nbsp;p_set)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#writeInfo(org.wildstang.framework.logger.IOSet)">writeInfo</a></span>&#8203;(<a href="IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a>&nbsp;p_set)</code></th>
+<td class="colLast">
+<div class="block">Write an IOSet to log.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#writeStart(java.io.Writer)">writeStart</a></span>&#8203;(java.io.Writer&nbsp;p_output)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#writeStart()">writeStart</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Create beginning of JSON and write to log.</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#writeState(java.io.Writer,java.util.List)">writeState</a></span>&#8203;(java.io.Writer&nbsp;p_output,
-          java.util.List&lt;<a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a>&gt;&nbsp;p_stateList)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#writeState(java.util.List)">writeState</a></span>&#8203;(java.util.List&lt;<a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a>&gt;&nbsp;p_stateList)</code></th>
+<td class="colLast">
+<div class="block">Write a StateGroup List to log.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -276,6 +303,11 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>StateLogger</h4>
 <pre>public&nbsp;StateLogger&#8203;(<a href="StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a>&nbsp;p_tracker)</pre>
+<div class="block">StateLogger requires a StateTracker where it pulls logging info from.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_tracker</code> - StateTracker to log from.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -295,6 +327,11 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>setWriter</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setWriter&#8203;(java.io.Writer&nbsp;p_output)</pre>
+<div class="block">Sets the Writer used for logging.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_output</code> - New writer to log to.</dd>
+</dl>
 </li>
 </ul>
 <a id="getOutput()">
@@ -304,6 +341,11 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>getOutput</h4>
 <pre class="methodSignature">public&nbsp;java.io.Writer&nbsp;getOutput()</pre>
+<div class="block">Returns the Writer used for logging.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Writer used for logging.</dd>
+</dl>
 </li>
 </ul>
 <a id="isRunning()">
@@ -313,6 +355,11 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>isRunning</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isRunning()</pre>
+<div class="block">Returns true if the logger is running.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>True if the logger is running</dd>
+</dl>
 </li>
 </ul>
 <a id="start()">
@@ -322,6 +369,7 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>start</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;start()</pre>
+<div class="block">Resume logging.</div>
 </li>
 </ul>
 <a id="stop()">
@@ -331,6 +379,7 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>stop</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;stop()</pre>
+<div class="block">Pause logging.</div>
 </li>
 </ul>
 <a id="run()">
@@ -340,6 +389,7 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>run</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;run()</pre>
+<div class="block">Thread that handles all logging. Pauses while m_running is false.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>run</code>&nbsp;in interface&nbsp;<code>java.lang.Runnable</code></dd>
@@ -353,63 +403,74 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>setWriteInterval</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setWriteInterval&#8203;(long&nbsp;p_interval)</pre>
+<div class="block">Set the interval to write to log in milliseconds.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_interval</code> - Inverval between logging in milliseconds.</dd>
+</dl>
 </li>
 </ul>
-<a id="writeInfo(java.io.Writer,org.wildstang.framework.logger.IOSet)">
+<a id="writeInfo(org.wildstang.framework.logger.IOSet)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>writeInfo</h4>
-<pre class="methodSignature">protected&nbsp;void&nbsp;writeInfo&#8203;(java.io.Writer&nbsp;p_output,
-                         <a href="IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a>&nbsp;p_set)
+<pre class="methodSignature">protected&nbsp;void&nbsp;writeInfo&#8203;(<a href="IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a>&nbsp;p_set)
                   throws java.io.IOException</pre>
+<div class="block">Write an IOSet to log.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_set</code> - IOSet to write to log.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
+<dd><code>java.io.IOException</code> - If write fails.</dd>
 </dl>
 </li>
 </ul>
-<a id="writeState(java.io.Writer,java.util.List)">
+<a id="writeState(java.util.List)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>writeState</h4>
-<pre class="methodSignature">protected&nbsp;void&nbsp;writeState&#8203;(java.io.Writer&nbsp;p_output,
-                          java.util.List&lt;<a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a>&gt;&nbsp;p_stateList)
+<pre class="methodSignature">protected&nbsp;void&nbsp;writeState&#8203;(java.util.List&lt;<a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a>&gt;&nbsp;p_stateList)
                    throws java.io.IOException</pre>
+<div class="block">Write a StateGroup List to log.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_set</code> - States to write to log.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
+<dd><code>java.io.IOException</code> - If write fails.</dd>
 </dl>
 </li>
 </ul>
-<a id="writeStart(java.io.Writer)">
+<a id="writeStart()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>writeStart</h4>
-<pre class="methodSignature">protected&nbsp;void&nbsp;writeStart&#8203;(java.io.Writer&nbsp;p_output)
+<pre class="methodSignature">protected&nbsp;void&nbsp;writeStart()
                    throws java.io.IOException</pre>
+<div class="block">Create beginning of JSON and write to log.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
+<dd><code>java.io.IOException</code> - If write fails.</dd>
 </dl>
 </li>
 </ul>
-<a id="writeEnd(java.io.Writer)">
+<a id="writeEnd()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>writeEnd</h4>
-<pre class="methodSignature">protected&nbsp;void&nbsp;writeEnd&#8203;(java.io.Writer&nbsp;p_output)
+<pre class="methodSignature">protected&nbsp;void&nbsp;writeEnd()
                  throws java.io.IOException</pre>
+<div class="block">Create end of JSON, write to log, and flush.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
+<dd><code>java.io.IOException</code> - If write fails.</dd>
 </dl>
 </li>
 </ul>
@@ -420,6 +481,13 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>formatState</h4>
 <pre class="methodSignature">protected&nbsp;java.lang.String&nbsp;formatState&#8203;(<a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a>&nbsp;p_group)</pre>
+<div class="block">Format a single StateGroup to JSON before logging.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_group</code> - StateGroup to format.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Formatted StateGroup as JSON String.</dd>
+</dl>
 </li>
 </ul>
 <a id="formatIOInfo(org.wildstang.framework.logger.IOInfo)">
@@ -429,6 +497,13 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>formatIOInfo</h4>
 <pre class="methodSignature">protected&nbsp;java.lang.String&nbsp;formatIOInfo&#8203;(<a href="IOInfo.html" title="class in org.wildstang.framework.logger">IOInfo</a>&nbsp;p_info)</pre>
+<div class="block">Format a single IOInfo to JSON before logging.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_group</code> - IOInfo to format.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Formatted IOInfo as JSON String.</dd>
+</dl>
 </li>
 </ul>
 </li>

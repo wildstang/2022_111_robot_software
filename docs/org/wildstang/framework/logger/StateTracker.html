@@ -132,6 +132,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">StateTracker</span>
 extends java.lang.Object</pre>
+<div class="block">Used to track the various logs created before being written to log file.
+ There is one StateTracker that the framework's Core owns.
+ Additional StateTrackers may be made an given to new StateLoggers,
+ but the intended use case is one StateLogger belonging to the year's Robot.'
+ StateTrackers track both descriptions of available IO as IOInfo grouped in IOSets,
+ as well as, StateInfo logs grouped in StateGroups.</div>
 </li>
 </ul>
 </div>
@@ -179,64 +185,88 @@ extends java.lang.Object</pre>
          java.lang.String&nbsp;p_type,
          java.lang.String&nbsp;p_direction,
          java.lang.Object&nbsp;p_port)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Creates a new IOInfo and adds it to the current IOSet if it exists.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addState(java.lang.String,java.lang.String,java.lang.Object)">addState</a></span>&#8203;(java.lang.String&nbsp;p_name,
         java.lang.String&nbsp;p_parent,
         java.lang.Object&nbsp;p_value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Creates a new StateInfo and adds it to the current StateGroup if it exists.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#beginCycle(java.util.Date)">beginCycle</a></span>&#8203;(java.util.Date&nbsp;p_timestamp)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">If tracking state, creates a new StateGroup at the given timestamp.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#endCycle()">endCycle</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds the current StateGroup to the StateTracker's set, then clears it.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>protected <a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentState()">getCurrentState</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the current StateGroup, it may be null.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getIoSet()">getIoSet</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the current IOSet, it may be null.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>java.util.ArrayList&lt;<a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStateList()">getStateList</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the current set of StateGroups.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#init()">init</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the tracker as initialised.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTrackingState()">isTrackingState</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if tracking state.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#reset()">reset</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Clears out all stored info and resumes state tracking.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startTrackingState()">startTrackingState</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Resumes state tracking.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopTrackingState()">stopTrackingState</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Pauses state tracking.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -288,6 +318,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>init</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;init()</pre>
+<div class="block">Sets the tracker as initialised.</div>
 </li>
 </ul>
 <a id="beginCycle(java.util.Date)">
@@ -297,6 +328,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>beginCycle</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;beginCycle&#8203;(java.util.Date&nbsp;p_timestamp)</pre>
+<div class="block">If tracking state, creates a new StateGroup at the given timestamp.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_timestamp</code> - Timestamp to create StateGroup at.</dd>
+</dl>
 </li>
 </ul>
 <a id="addState(java.lang.String,java.lang.String,java.lang.Object)">
@@ -308,6 +344,13 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;void&nbsp;addState&#8203;(java.lang.String&nbsp;p_name,
                      java.lang.String&nbsp;p_parent,
                      java.lang.Object&nbsp;p_value)</pre>
+<div class="block">Creates a new StateInfo and adds it to the current StateGroup if it exists.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_name</code> - Name of entry.</dd>
+<dd><code>p_parent</code> - Name of entry's parent.</dd>
+<dd><code>p_value</code> - Value of entry.</dd>
+</dl>
 </li>
 </ul>
 <a id="endCycle()">
@@ -317,6 +360,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>endCycle</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;endCycle()</pre>
+<div class="block">Adds the current StateGroup to the StateTracker's set, then clears it.</div>
 </li>
 </ul>
 <a id="addIOInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.Object)">
@@ -329,6 +373,14 @@ extends java.lang.Object</pre>
                       java.lang.String&nbsp;p_type,
                       java.lang.String&nbsp;p_direction,
                       java.lang.Object&nbsp;p_port)</pre>
+<div class="block">Creates a new IOInfo and adds it to the current IOSet if it exists.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_name</code> - Specific name of state.</dd>
+<dd><code>p_type</code> - Type of IO, normally subsystem.</dd>
+<dd><code>p_direction</code> - IO direction (Input/Output).</dd>
+<dd><code>p_port</code> - IO port or null if not applicable.</dd>
+</dl>
 </li>
 </ul>
 <a id="getCurrentState()">
@@ -338,6 +390,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getCurrentState</h4>
 <pre class="methodSignature">protected&nbsp;<a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a>&nbsp;getCurrentState()</pre>
+<div class="block">Returns the current StateGroup, it may be null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The current StateGroup.</dd>
+</dl>
 </li>
 </ul>
 <a id="getIoSet()">
@@ -347,6 +404,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getIoSet</h4>
 <pre class="methodSignature">public&nbsp;<a href="IOSet.html" title="class in org.wildstang.framework.logger">IOSet</a>&nbsp;getIoSet()</pre>
+<div class="block">Returns the current IOSet, it may be null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The current IOSet.</dd>
+</dl>
 </li>
 </ul>
 <a id="getStateList()">
@@ -356,6 +418,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getStateList</h4>
 <pre class="methodSignature">public&nbsp;java.util.ArrayList&lt;<a href="StateGroup.html" title="class in org.wildstang.framework.logger">StateGroup</a>&gt;&nbsp;getStateList()</pre>
+<div class="block">Returns the current set of StateGroups.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Current set of StateGroups.</dd>
+</dl>
 </li>
 </ul>
 <a id="startTrackingState()">
@@ -365,6 +432,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>startTrackingState</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;startTrackingState()</pre>
+<div class="block">Resumes state tracking.</div>
 </li>
 </ul>
 <a id="stopTrackingState()">
@@ -374,6 +442,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>stopTrackingState</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;stopTrackingState()</pre>
+<div class="block">Pauses state tracking.</div>
 </li>
 </ul>
 <a id="isTrackingState()">
@@ -383,6 +452,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isTrackingState</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isTrackingState()</pre>
+<div class="block">Returns true if tracking state.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>True if tracking state.</dd>
+</dl>
 </li>
 </ul>
 <a id="reset()">
@@ -392,6 +466,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>reset</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;reset()</pre>
+<div class="block">Clears out all stored info and resumes state tracking.</div>
 </li>
 </ul>
 </li>
