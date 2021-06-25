@@ -3,8 +3,8 @@ package org.wildstang.sample.robot;
 import org.wildstang.framework.auto.AutoManager;
 
 import org.wildstang.framework.core.Core;
-import org.wildstang.hardware.crio.RoboRIOInputFactory;
-import org.wildstang.hardware.crio.RoboRIOOutputFactory;
+import org.wildstang.hardware.roborio.RoboRIOInputFactory;
+import org.wildstang.hardware.roborio.RoboRIOOutputFactory;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

@@ -4,9 +4,9 @@ import org.wildstang.framework.core.Inputs;
 import org.wildstang.framework.hardware.InputConfig;
 import org.wildstang.framework.io.inputs.InputType;
 import org.wildstang.hardware.JoystickConstants;
-import org.wildstang.hardware.crio.inputs.WSInputType;
-import org.wildstang.hardware.crio.inputs.config.WsJSButtonInputConfig;
-import org.wildstang.hardware.crio.inputs.config.WsJSJoystickInputConfig;
+import org.wildstang.hardware.roborio.inputs.WSInputType;
+import org.wildstang.hardware.roborio.inputs.config.WsJSButtonInputConfig;
+import org.wildstang.hardware.roborio.inputs.config.WsJSJoystickInputConfig;
 
 /**
  * Input mappings are stored here.
