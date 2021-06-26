@@ -423,7 +423,6 @@ public class PidController {
             }
         }
         else if (currentState == PidStateType.PID_STABILIZED_STATE) {
-            // System.out.println(this.controllerName + " is STABILIZED");
             errorSum = 0.0;
             allowStaticEpsilon = true;
 

@@ -235,6 +235,10 @@ public class Core {
         return obj;
     }
 
+    /**
+     * Sets the autonomous mode manager for the framework.
+     * @param p_autoManager New auto manager.
+     */
     public void setAutoManager(AutoManager p_autoManager) {
         m_autoManager = p_autoManager;
     }
