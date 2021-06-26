@@ -103,8 +103,7 @@ public class Core {
             // Add the output to the output manager
             if (output_enum.isTrackingState()) {
                 output.setStateTracker(s_stateTracker);
-                s_stateTracker.addIOInfo(output_enum.getName(), output_enum.getType().toString(), "Output",
-                                         output_enum.getConfig());
+                s_stateTracker.addIOInfo(output_enum.getName(), output_enum.getConfig().getClass().getSimpleName(), "Output", output_enum.getConfig());
             }
             s_outputManager.addOutput(output);
         }
@@ -136,8 +135,7 @@ public class Core {
             // Add the input to the input manager
             if (input_enum.isTrackingState()) {
                 input.setStateTracker(s_stateTracker);
-                s_stateTracker.addIOInfo(input_enum.getName(), input_enum.getType().toString(), "Input",
-                                         input_enum.getConfig());
+                s_stateTracker.addIOInfo(input_enum.getName(), input_enum.getConfig().getClass().getSimpleName(), "Input", input_enum.getConfig());
             }
             s_inputManager.addInput(input);
         }

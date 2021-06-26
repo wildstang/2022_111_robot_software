@@ -4,8 +4,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.core.Inputs;
+import org.wildstang.framework.hardware.InputConfig;
 import org.wildstang.framework.io.inputs.Input;
-import org.wildstang.hardware.roborio.inputs.WSInputType;
 import org.wildstang.hardware.roborio.inputs.WsAbsoluteEncoder;
 import org.wildstang.hardware.roborio.inputs.WsAnalogGyro;
 import org.wildstang.hardware.roborio.inputs.WsAnalogInput;
@@ -22,10 +22,14 @@ import org.wildstang.hardware.roborio.inputs.WsRemoteDigitalInput;
 import org.wildstang.hardware.roborio.inputs.config.WsAbsoluteEncoderConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsAnalogGyroConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsAnalogInputConfig;
+import org.wildstang.hardware.roborio.inputs.config.WsDPadButtonInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsDigitalInputConfig;
+import org.wildstang.hardware.roborio.inputs.config.WsHallEffectInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsI2CInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsJSButtonInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsJSJoystickInputConfig;
+import org.wildstang.hardware.roborio.inputs.config.WsLidarInputConfig;
+import org.wildstang.hardware.roborio.inputs.config.WsMotionProfileConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsRemoteAnalogInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsRemoteDigitalInputConfig;
 
@@ -71,76 +75,63 @@ public class RoboRIOInputFactory {
         }
 
         Input in = null;
+        InputConfig config = p_input.getConfig();
 
         if (s_log.isLoggable(Level.FINE)) {
-            s_log.fine("Creating analog input: Name = " + p_input.getName() + ", type = "
-                    + p_input.getType());
+            s_log.fine("Creating analog input: Name = " + p_input.getName());
         }
 
-        switch ((WSInputType) p_input.getType()) {
-        case POT:
-            in = new WsAnalogInput(p_input.getName(),
-                    ((WsAnalogInputConfig) p_input.getConfig()).getChannel());
-        break;
-        case SWITCH:
-            in = new WsDigitalInput(p_input.getName(),
-                    ((WsDigitalInputConfig) p_input.getConfig()).getChannel(),
-                    ((WsDigitalInputConfig) p_input.getConfig()).getPullup());
-        break;
-        case ABSOLUTE_ENCODER:
-            in = new WsAbsoluteEncoder(p_input.getName(),
-                    ((WsAbsoluteEncoderConfig) p_input.getConfig()).getChannel(),
-                    ((WsAbsoluteEncoderConfig) p_input.getConfig()).getMaxVoltage());
-        break;
-        case HALL_EFFECT:
-            in = new WsHallEffectInput(p_input.getName(),
-                    ((WsI2CInputConfig) p_input.getConfig()).getPort(),
-                    ((WsI2CInputConfig) p_input.getConfig()).getAddress());
-        break;
-        case LIDAR:
+        if (config instanceof WsAbsoluteEncoderConfig) {
+            WsAbsoluteEncoderConfig c = (WsAbsoluteEncoderConfig) config;
+            in = new WsAbsoluteEncoder(p_input.getName(), c.getChannel(), c.getMaxVoltage());
+        }
+        else if (config instanceof WsHallEffectInputConfig) {
+            WsHallEffectInputConfig c = (WsHallEffectInputConfig) config;
+            in = new WsHallEffectInput(p_input.getName(), c.getPort(), c.getAddress());
+        }
+        else if (config instanceof WsLidarInputConfig) {
             // Port is the address, module is the port - such as I2C.kMXP
-            in = new WsLidarSensor(p_input.getName(), ((WsI2CInputConfig) p_input.getConfig()).getPort(),
-                    ((WsI2CInputConfig) p_input.getConfig()).getAddress());
-        break;
-        case JS_BUTTON:
-            in = new WsJoystickButton(p_input.getName(),
-                    ((WsJSButtonInputConfig) p_input.getConfig()).getPort(),
-                    ((WsJSButtonInputConfig) p_input.getConfig()).getButton());
-        break;
-        case JS_JOYSTICK:
-            in = new WsJoystickAxis(p_input.getName(),
-                    ((WsJSJoystickInputConfig) p_input.getConfig()).getPort(),
-                    ((WsJSJoystickInputConfig) p_input.getConfig()).getAxis());
-        break;
-        case JS_DPAD_BUTTON:
-            in = new WsDPadButton(p_input.getName(),
-                    ((WsJSButtonInputConfig) p_input.getConfig()).getPort(),
-                    ((WsJSButtonInputConfig) p_input.getConfig()).getButton());
-        break;
-        case REMOTE_DIGITAL:
-            in = new WsRemoteDigitalInput(p_input.getName(),
-                    ((WsRemoteDigitalInputConfig) p_input.getConfig()).getTableName());
-        break;
-        case REMOTE_ANALOG:
-            in = new WsRemoteAnalogInput(p_input.getName(),
-                    ((WsRemoteAnalogInputConfig) p_input.getConfig()).getTableName());
-        break;
-        case I2C:
-            in = new WsI2CInput(p_input.getName(),
-                    ((WsI2CInputConfig) p_input.getConfig()).getPort(),
-                    ((WsI2CInputConfig) p_input.getConfig()).getAddress());
-        break;
-        case ANALOG_GYRO:
-            in = new WsAnalogGyro(p_input.getName(),
-                    ((WsAnalogGyroConfig) p_input.getConfig()).getChannel(),
-                    ((WsAnalogGyroConfig) p_input.getConfig()).getCompensate());
-        break;
-        case MOTION_PROFILE_CONTROL:
+            WsLidarInputConfig c = (WsLidarInputConfig) config;
+            in = new WsLidarSensor(p_input.getName(), c.getPort(), c.getAddress());
+        }
+        else if (config instanceof WsDPadButtonInputConfig) {
+            WsDPadButtonInputConfig c = (WsDPadButtonInputConfig) config;
+            in = new WsDPadButton(p_input.getName(), c.getPort(), c.getButton());
+        }
+        else if (config instanceof WsJSButtonInputConfig) {
+            WsJSButtonInputConfig c = (WsJSButtonInputConfig) config;
+            in = new WsJoystickButton(p_input.getName(), c.getPort(), c.getButton());
+        }
+        else if (config instanceof WsJSJoystickInputConfig) {
+            WsJSJoystickInputConfig c = (WsJSJoystickInputConfig) config;
+            in = new WsJoystickAxis(p_input.getName(), c.getPort(), c.getAxis());
+        }
+        else if (config instanceof WsRemoteDigitalInputConfig) {
+            WsRemoteDigitalInputConfig c = (WsRemoteDigitalInputConfig) config;
+            in = new WsRemoteDigitalInput(p_input.getName(), c.getTableName());
+        }
+        else if (config instanceof WsRemoteAnalogInputConfig) {
+            WsRemoteAnalogInputConfig c = (WsRemoteAnalogInputConfig) config;
+            in = new WsRemoteAnalogInput(p_input.getName(), c.getTableName());
+        }
+        else if (config instanceof WsI2CInputConfig) {
+            WsI2CInputConfig c = (WsI2CInputConfig) config;
+            in = new WsI2CInput(p_input.getName(), c.getPort(), c.getAddress());
+        }
+        else if (config instanceof WsAnalogGyroConfig) {
+            WsAnalogGyroConfig c = (WsAnalogGyroConfig) config;
+            in = new WsAnalogGyro(p_input.getName(), c.getChannel(), c.getCompensate());
+        }
+        else if (config instanceof WsMotionProfileConfig) {
             in = new WsMotionProfileControl(p_input.getName());
-        break;
-        case NULL:
-        default:
-        break;
+        }
+        else if (config instanceof WsAnalogInputConfig) {
+            WsAnalogInputConfig c = (WsAnalogInputConfig) config;
+            in = new WsAnalogInput(p_input.getName(), c.getChannel());
+        }
+        else if (config instanceof WsDigitalInputConfig) {
+            WsDigitalInputConfig c = (WsDigitalInputConfig) config;
+            in = new WsDigitalInput(p_input.getName(), c.getChannel(), c.getPullup());
         }
 
         if (s_log.isLoggable(Level.FINER)) {

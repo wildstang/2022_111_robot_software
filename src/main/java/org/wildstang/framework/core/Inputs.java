@@ -1,7 +1,6 @@
 package org.wildstang.framework.core;
 
 import org.wildstang.framework.hardware.InputConfig;
-import org.wildstang.framework.io.inputs.InputType;
 
 /**
  * Used in implementations to enumerate Inputs.
@@ -17,12 +16,6 @@ public interface Inputs {
     public String getName();
 
     /**
-     * Returns the type of Input for the enumeration.
-     * @return InputType of enumeration.
-     */
-    public InputType getType();
-
-    /**
      * Returns the config of Input for the enumeration.
      * @return InputConfig of enumeration.
      */
@@ -30,7 +23,7 @@ public interface Inputs {
 
     /**
      * Returns true if the Logger should track the Input's state.
-     * @return True if of tracking state.
+     * @return True if the StateTracker should track this Input.
      */
     public boolean isTrackingState();
 }

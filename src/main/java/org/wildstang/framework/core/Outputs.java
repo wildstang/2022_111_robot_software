@@ -1,7 +1,6 @@
 package org.wildstang.framework.core;
 
 import org.wildstang.framework.hardware.OutputConfig;
-import org.wildstang.framework.io.outputs.OutputType;
 
 /**
  * Used in implementations to enumerate Outputs.
@@ -17,12 +16,6 @@ public interface Outputs {
     public String getName();
 
     /**
-     * Returns the type of Output for the enumeration.
-     * @return OutputType of enumeration.
-     */
-    public OutputType getType();
-
-    /**
      * Returns the config of Output for the enumeration.
      * @return OutputConfig of enumeration.
      */
@@ -30,7 +23,7 @@ public interface Outputs {
 
     /**
      * Returns true if the Logger should track the Output's state.
-     * @return True if of tracking state.
+     * @return True if the StateTracker should track this Output.
      */
     public boolean isTrackingState();
 }

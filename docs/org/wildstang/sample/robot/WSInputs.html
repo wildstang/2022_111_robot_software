@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9};
+var data = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":9,"i5":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -366,27 +366,20 @@ implements <a href="../../framework/core/Inputs.html" title="interface in org.wi
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../framework/io/inputs/InputType.html" title="interface in org.wildstang.framework.io.inputs">InputType</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getType()">getType</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Returns the type of Input for the enumeration.</div>
-</td>
-</tr>
-<tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTrackingState()">isTrackingState</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns true if the Logger should track the Input's state.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#valueOf(java.lang.String)">valueOf</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#values()">values</a></span>()</code></th>
 <td class="colLast">
@@ -551,24 +544,6 @@ the order they are declared.</div>
 <pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> DRIVER_RIGHT_SHOULDER</pre>
 </li>
 </ul>
-<a id="DRIVER_LEFT_TRIGGER">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>DRIVER_LEFT_TRIGGER</h4>
-<pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> DRIVER_LEFT_TRIGGER</pre>
-</li>
-</ul>
-<a id="DRIVER_RIGHT_TRIGGER">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>DRIVER_RIGHT_TRIGGER</h4>
-<pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> DRIVER_RIGHT_TRIGGER</pre>
-</li>
-</ul>
 <a id="DRIVER_SELECT">
 <!--   -->
 </a>
@@ -603,6 +578,24 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>DRIVER_RIGHT_JOYSTICK_BUTTON</h4>
 <pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> DRIVER_RIGHT_JOYSTICK_BUTTON</pre>
+</li>
+</ul>
+<a id="DRIVER_LEFT_TRIGGER">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>DRIVER_LEFT_TRIGGER</h4>
+<pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> DRIVER_LEFT_TRIGGER</pre>
+</li>
+</ul>
+<a id="DRIVER_RIGHT_TRIGGER">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>DRIVER_RIGHT_TRIGGER</h4>
+<pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> DRIVER_RIGHT_TRIGGER</pre>
 </li>
 </ul>
 <a id="MANIPULATOR_LEFT_JOYSTICK_Y">
@@ -731,24 +724,6 @@ the order they are declared.</div>
 <pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> MANIPULATOR_RIGHT_SHOULDER</pre>
 </li>
 </ul>
-<a id="MANIPULATOR_LEFT_TRIGGER">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>MANIPULATOR_LEFT_TRIGGER</h4>
-<pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> MANIPULATOR_LEFT_TRIGGER</pre>
-</li>
-</ul>
-<a id="MANIPULATOR_RIGHT_TRIGGER">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>MANIPULATOR_RIGHT_TRIGGER</h4>
-<pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> MANIPULATOR_RIGHT_TRIGGER</pre>
-</li>
-</ul>
 <a id="MANIPULATOR_SELECT">
 <!--   -->
 </a>
@@ -779,10 +754,28 @@ the order they are declared.</div>
 <a id="MANIPULATOR_RIGHT_JOYSTICK_BUTTON">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>MANIPULATOR_RIGHT_JOYSTICK_BUTTON</h4>
 <pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> MANIPULATOR_RIGHT_JOYSTICK_BUTTON</pre>
+</li>
+</ul>
+<a id="MANIPULATOR_LEFT_TRIGGER">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>MANIPULATOR_LEFT_TRIGGER</h4>
+<pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> MANIPULATOR_LEFT_TRIGGER</pre>
+</li>
+</ul>
+<a id="MANIPULATOR_RIGHT_TRIGGER">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>MANIPULATOR_RIGHT_TRIGGER</h4>
+<pre>public static final&nbsp;<a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a> MANIPULATOR_RIGHT_TRIGGER</pre>
 </li>
 </ul>
 </li>
@@ -853,22 +846,6 @@ not permitted.)</div>
 </dl>
 </li>
 </ul>
-<a id="getType()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getType</h4>
-<pre class="methodSignature">public&nbsp;<a href="../../framework/io/inputs/InputType.html" title="interface in org.wildstang.framework.io.inputs">InputType</a>&nbsp;getType()</pre>
-<div class="block">Returns the type of Input for the enumeration.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../framework/core/Inputs.html#getType()">getType</a></code>&nbsp;in interface&nbsp;<code><a href="../../framework/core/Inputs.html" title="interface in org.wildstang.framework.core">Inputs</a></code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>InputType of enumeration.</dd>
-</dl>
-</li>
-</ul>
 <a id="getConfig()">
 <!--   -->
 </a>
@@ -897,7 +874,7 @@ not permitted.)</div>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../framework/core/Inputs.html#isTrackingState()">isTrackingState</a></code>&nbsp;in interface&nbsp;<code><a href="../../framework/core/Inputs.html" title="interface in org.wildstang.framework.core">Inputs</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>True if of tracking state.</dd>
+<dd>True if the StateTracker should track this Input.</dd>
 </dl>
 </li>
 </ul>

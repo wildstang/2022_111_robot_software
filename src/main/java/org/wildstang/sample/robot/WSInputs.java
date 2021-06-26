@@ -2,10 +2,9 @@ package org.wildstang.sample.robot;
 
 import org.wildstang.framework.core.Inputs;
 import org.wildstang.framework.hardware.InputConfig;
-import org.wildstang.framework.io.inputs.InputType;
 import org.wildstang.hardware.JoystickConstants;
-import org.wildstang.hardware.roborio.inputs.WSInputType;
 import org.wildstang.hardware.roborio.inputs.config.WsJSButtonInputConfig;
+import org.wildstang.hardware.roborio.inputs.config.WsDPadButtonInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsJSJoystickInputConfig;
 
 /**
@@ -58,106 +57,74 @@ public enum WSInputs implements Inputs {
     // ---------------------------------
     // Driver Joysticks
     // ---------------------------------
-    DRIVER_LEFT_JOYSTICK_Y  ("Driver left joystick y",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_JOYSTICK_Y),  true),
-    DRIVER_LEFT_JOYSTICK_X  ("Driver left joystick x",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_JOYSTICK_X),  true),
-    DRIVER_RIGHT_JOYSTICK_Y ("Driver right joystick y",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_JOYSTICK_Y), true),
-    DRIVER_RIGHT_JOYSTICK_X ("Driver right joystick x",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_JOYSTICK_X), true),
+    DRIVER_LEFT_JOYSTICK_Y  ("Driver left joystick y",  new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_JOYSTICK_Y),  true),
+    DRIVER_LEFT_JOYSTICK_X  ("Driver left joystick x",  new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_JOYSTICK_X),  true),
+    DRIVER_RIGHT_JOYSTICK_Y ("Driver right joystick y", new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_JOYSTICK_Y), true),
+    DRIVER_RIGHT_JOYSTICK_X ("Driver right joystick x", new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_JOYSTICK_X), true),
     
     // ---------------------------------
     // Driver DPAD Buttons
     // ---------------------------------
-    DRIVER_DPAD_DOWN  ("Driver dpad down",
-            WSInputType.JS_DPAD_BUTTON, new WsJSButtonInputConfig(0, JoystickConstants.DPAD_Y_DOWN),  false),
-    DRIVER_DPAD_LEFT  ("Driver dpad left",
-            WSInputType.JS_DPAD_BUTTON, new WsJSButtonInputConfig(0, JoystickConstants.DPAD_X_LEFT),  false),
-    DRIVER_DPAD_RIGHT ("Driver dpad right",
-            WSInputType.JS_DPAD_BUTTON, new WsJSButtonInputConfig(0, JoystickConstants.DPAD_X_RIGHT), false),
-    DRIVER_DPAD_UP    ("Driver dpad up",
-            WSInputType.JS_DPAD_BUTTON, new WsJSButtonInputConfig(0, JoystickConstants.DPAD_Y_UP),    false),
+    DRIVER_DPAD_DOWN  ("Driver dpad down",  new WsDPadButtonInputConfig(0, JoystickConstants.DPAD_Y_DOWN),  false),
+    DRIVER_DPAD_LEFT  ("Driver dpad left",  new WsDPadButtonInputConfig(0, JoystickConstants.DPAD_X_LEFT),  false),
+    DRIVER_DPAD_RIGHT ("Driver dpad right", new WsDPadButtonInputConfig(0, JoystickConstants.DPAD_X_RIGHT), false),
+    DRIVER_DPAD_UP    ("Driver dpad up",    new WsDPadButtonInputConfig(0, JoystickConstants.DPAD_Y_UP),    false),
 
     // ---------------------------------
     // Driver Buttons
     // --------------------------------- 
-    DRIVER_FACE_DOWN             ("Driver face down",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 0),                                 false),
-    DRIVER_FACE_LEFT             ("Driver face left",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 2),                                 false),
-    DRIVER_FACE_RIGHT            ("Driver face right",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 1),                                 false),
-    DRIVER_FACE_UP               ("Driver face up",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 3),                                 false),
-    DRIVER_LEFT_SHOULDER         ("Driver left shoulder",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 4),                                 false),
-    DRIVER_RIGHT_SHOULDER        ("Driver right shoulder",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 5),                                 false),
-    DRIVER_LEFT_TRIGGER          ("Driver left trigger",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_TRIGGER),  false),
-    DRIVER_RIGHT_TRIGGER         ("Driver right trigger",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_TRIGGER), false),
-    DRIVER_SELECT                ("Driver select",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 6),                                 false),
-    DRIVER_START                 ("Driver start",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 7),                                 false),
-    DRIVER_LEFT_JOYSTICK_BUTTON  ("Driver left joystick button",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 8),                                 false),
-    DRIVER_RIGHT_JOYSTICK_BUTTON ("Driver right joystick button",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(0, 9),                                 false),
+    DRIVER_FACE_DOWN             ("Driver face down",             new WsJSButtonInputConfig(0, 0), false),
+    DRIVER_FACE_LEFT             ("Driver face left",             new WsJSButtonInputConfig(0, 2), false),
+    DRIVER_FACE_RIGHT            ("Driver face right",            new WsJSButtonInputConfig(0, 1), false),
+    DRIVER_FACE_UP               ("Driver face up",               new WsJSButtonInputConfig(0, 3), false),
+    DRIVER_LEFT_SHOULDER         ("Driver left shoulder",         new WsJSButtonInputConfig(0, 4), false),
+    DRIVER_RIGHT_SHOULDER        ("Driver right shoulder",        new WsJSButtonInputConfig(0, 5), false),
+    DRIVER_SELECT                ("Driver select",                new WsJSButtonInputConfig(0, 6), false),
+    DRIVER_START                 ("Driver start",                 new WsJSButtonInputConfig(0, 7), false),
+    DRIVER_LEFT_JOYSTICK_BUTTON  ("Driver left joystick button",  new WsJSButtonInputConfig(0, 8), false),
+    DRIVER_RIGHT_JOYSTICK_BUTTON ("Driver right joystick button", new WsJSButtonInputConfig(0, 9), false),
+
+    // ---------------------------------
+    // Driver Triggers
+    // ---------------------------------
+    DRIVER_LEFT_TRIGGER  ("Driver left trigger",  new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_TRIGGER),  false),
+    DRIVER_RIGHT_TRIGGER ("Driver right trigger", new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_TRIGGER), false),
 
     // ---------------------------------
     // Manipulator Joysticks
     // ---------------------------------
-    MANIPULATOR_LEFT_JOYSTICK_Y  ("Manipulator left joystick y",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_JOYSTICK_Y),  true),
-    MANIPULATOR_LEFT_JOYSTICK_X  ("Manipulator left joystick x",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_JOYSTICK_X),  true),
-    MANIPULATOR_RIGHT_JOYSTICK_Y ("Manipulator right joystick y",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_JOYSTICK_Y), true),
-    MANIPULATOR_RIGHT_JOYSTICK_X ("Manipulator right joystick x",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_JOYSTICK_X), true),
+    MANIPULATOR_LEFT_JOYSTICK_Y  ("Manipulator left joystick y",  new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_JOYSTICK_Y),  true),
+    MANIPULATOR_LEFT_JOYSTICK_X  ("Manipulator left joystick x",  new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_JOYSTICK_X),  true),
+    MANIPULATOR_RIGHT_JOYSTICK_Y ("Manipulator right joystick y", new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_JOYSTICK_Y), true),
+    MANIPULATOR_RIGHT_JOYSTICK_X ("Manipulator right joystick x", new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_JOYSTICK_X), true),
 
     // ---------------------------------
     // Manipulator DPAD Buttons
     // ---------------------------------
-    MANIPULATOR_DPAD_DOWN  ("Manipulator dpad down",
-            WSInputType.JS_DPAD_BUTTON, new WsJSButtonInputConfig(1, JoystickConstants.DPAD_Y_DOWN),  false),
-    MANIPULATOR_DPAD_LEFT  ("Manipulator dpad left",
-            WSInputType.JS_DPAD_BUTTON, new WsJSButtonInputConfig(1, JoystickConstants.DPAD_X_LEFT),  false),
-    MANIPULATOR_DPAD_RIGHT ("Manipulator dpad right",
-            WSInputType.JS_DPAD_BUTTON, new WsJSButtonInputConfig(1, JoystickConstants.DPAD_X_RIGHT), false),
-    MANIPULATOR_DPAD_UP    ("Manipulator dpad up",
-            WSInputType.JS_DPAD_BUTTON, new WsJSButtonInputConfig(1, JoystickConstants.DPAD_Y_UP),    false),
+    MANIPULATOR_DPAD_DOWN  ("Manipulator dpad down",  new WsDPadButtonInputConfig(1, JoystickConstants.DPAD_Y_DOWN),  false),
+    MANIPULATOR_DPAD_LEFT  ("Manipulator dpad left",  new WsDPadButtonInputConfig(1, JoystickConstants.DPAD_X_LEFT),  false),
+    MANIPULATOR_DPAD_RIGHT ("Manipulator dpad right", new WsDPadButtonInputConfig(1, JoystickConstants.DPAD_X_RIGHT), false),
+    MANIPULATOR_DPAD_UP    ("Manipulator dpad up",    new WsDPadButtonInputConfig(1, JoystickConstants.DPAD_Y_UP),    false),
 
     // ---------------------------------
     // Manipulator Buttons
     // ---------------------------------
-    MANIPULATOR_FACE_DOWN             ("Manipulator face down",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 0),                                 false),
-    MANIPULATOR_FACE_LEFT             ("Manipulator face left",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 2),                                 false),
-    MANIPULATOR_FACE_RIGHT            ("Manipulator face right",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 1),                                 false),
-    MANIPULATOR_FACE_UP               ("Manipulator face up",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 3),                                 false),
-    MANIPULATOR_LEFT_SHOULDER         ("Manipulator left shoulder",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 4),                                 false),
-    MANIPULATOR_RIGHT_SHOULDER        ("Manipulator right shoulder",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 5),                                 false),
-    MANIPULATOR_LEFT_TRIGGER          ("Manipulator left trigger",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_TRIGGER),  false),
-    MANIPULATOR_RIGHT_TRIGGER         ("Manipulator right trigger",
-            WSInputType.JS_JOYSTICK, new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_TRIGGER), false),
-    MANIPULATOR_SELECT                ("Manipulator select",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 6),                                 false),
-    MANIPULATOR_START                 ("Manipulator start",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 7),                                 false),
-    MANIPULATOR_LEFT_JOYSTICK_BUTTON  ("Manipulator left joystick button",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 8),                                 false),
-    MANIPULATOR_RIGHT_JOYSTICK_BUTTON ("Manipulator right joystick button",
-            WSInputType.JS_BUTTON,   new WsJSButtonInputConfig(1, 9),                                 false),
+    MANIPULATOR_FACE_DOWN             ("Manipulator face down",             new WsJSButtonInputConfig(1, 0), false),
+    MANIPULATOR_FACE_LEFT             ("Manipulator face left",             new WsJSButtonInputConfig(1, 2), false),
+    MANIPULATOR_FACE_RIGHT            ("Manipulator face right",            new WsJSButtonInputConfig(1, 1), false),
+    MANIPULATOR_FACE_UP               ("Manipulator face up",               new WsJSButtonInputConfig(1, 3), false),
+    MANIPULATOR_LEFT_SHOULDER         ("Manipulator left shoulder",         new WsJSButtonInputConfig(1, 4), false),
+    MANIPULATOR_RIGHT_SHOULDER        ("Manipulator right shoulder",        new WsJSButtonInputConfig(1, 5), false),
+    MANIPULATOR_SELECT                ("Manipulator select",                new WsJSButtonInputConfig(1, 6), false),
+    MANIPULATOR_START                 ("Manipulator start",                 new WsJSButtonInputConfig(1, 7), false),
+    MANIPULATOR_LEFT_JOYSTICK_BUTTON  ("Manipulator left joystick button",  new WsJSButtonInputConfig(1, 8), false),
+    MANIPULATOR_RIGHT_JOYSTICK_BUTTON ("Manipulator right joystick button", new WsJSButtonInputConfig(1, 9), false),
+
+    // ---------------------------------
+    // Manipulator Triggers
+    // ---------------------------------
+    MANIPULATOR_LEFT_TRIGGER  ("Manipulator left trigger",  new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_TRIGGER),  false),
+    MANIPULATOR_RIGHT_TRIGGER ("Manipulator right trigger", new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_TRIGGER), false),
 
     // ********************************
     // Digital IOs
@@ -170,8 +137,7 @@ public enum WSInputs implements Inputs {
     // ********************************
     // Others ...
     // ********************************
-    //GYRO                    ("Gyro", 
-    //        WSInputType.ANALOG_GYRO,   new WsAnalogGyroConfig(0, true),         false),
+    //GYRO                    ("Gyro", new WsAnalogGyroConfig(0, true),         false),
             
     ; // end of enum
     
@@ -182,7 +148,6 @@ public enum WSInputs implements Inputs {
      */
 
     private final String m_name;
-    private final InputType m_type;
 
     private InputConfig m_config = null;
 
@@ -193,13 +158,11 @@ public enum WSInputs implements Inputs {
     /**
      * Initialize a new Input.
      * @param p_name Name, must match that in class to prevent errors.
-     * @param p_type Type of Input to use.
      * @param p_config Corresponding configuration for InputType.
-     * @param p_trackingState If the Input is tracking.
+     * @param p_trackingState True if the StateTracker should track this Input.
      */
-    WSInputs(String p_name, InputType p_type, InputConfig p_config, boolean p_trackingState) {
+    WSInputs(String p_name, InputConfig p_config, boolean p_trackingState) {
         m_name = p_name;
-        m_type = p_type;
         m_config = p_config;
         m_trackingState = p_trackingState;
     }
@@ -213,14 +176,6 @@ public enum WSInputs implements Inputs {
     }
 
     /**
-     * Returns the type of Input for the enumeration.
-     * @return InputType of enumeration.
-     */
-    public InputType getType() {
-        return m_type;
-    }
-
-    /**
      * Returns the config of Input for the enumeration.
      * @return InputConfig of enumeration.
      */
@@ -230,7 +185,7 @@ public enum WSInputs implements Inputs {
 
     /**
      * Returns true if the Logger should track the Input's state.
-     * @return True if of tracking state.
+     * @return True if the StateTracker should track this Input.
      */
     public boolean isTrackingState() {
         return m_trackingState;

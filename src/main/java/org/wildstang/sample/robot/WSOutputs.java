@@ -3,13 +3,12 @@ package org.wildstang.sample.robot;
 // expand this and edit if trouble with Ws
 import org.wildstang.framework.core.Outputs;
 import org.wildstang.framework.hardware.OutputConfig;
-import org.wildstang.framework.io.outputs.OutputType;
+import org.wildstang.hardware.roborio.outputs.config.WsPhoenixConfig;
 
 /**
  * Output mappings are stored here.
  * Below each PWM, Digital Output, Solenoid, and Relay is enumerated with their appropriated IDs.
  * The enumeration includes a name, output type, output object, and tracking boolean.
- * Note, our motors are currently all controlled via the CAN bus, so they do not appear in this enum.
  */
 public enum WSOutputs implements Outputs {
 
@@ -19,6 +18,7 @@ public enum WSOutputs implements Outputs {
     // ---------------------------------
     // Motors
     // ---------------------------------
+    TEST_MOTOR("Test Motor", new WsPhoenixConfig(1, 0, true), false)
 
     // ---------------------------------
     // Servos
@@ -51,7 +51,6 @@ public enum WSOutputs implements Outputs {
      */
 
     private String m_name;
-    private OutputType m_type;
     private OutputConfig m_config;
     private boolean m_trackingState;
 
@@ -60,13 +59,11 @@ public enum WSOutputs implements Outputs {
     /**
      * Initialize a new Output.
      * @param p_name Name, must match that in class to prevent errors.
-     * @param p_type Type of Output to use.
      * @param p_config Corresponding configuration for OutputType.
-     * @param p_trackingState If the Output is tracking.
+     * @param p_trackingState True if the StateTracker should track this Output.
      */
-    WSOutputs(String p_name, OutputType p_type, OutputConfig p_config, boolean p_trackingState) {
+    WSOutputs(String p_name, OutputConfig p_config, boolean p_trackingState) {
         m_name = p_name;
-        m_type = p_type;
         m_config = p_config;
         m_trackingState = p_trackingState;
     }
@@ -80,14 +77,6 @@ public enum WSOutputs implements Outputs {
     }
 
     /**
-     * Returns the type of Output for the enumeration.
-     * @return OutputType of enumeration.
-     */
-    public OutputType getType() {
-        return m_type;
-    }
-
-    /**
      * Returns the config of Output for the enumeration.
      * @return OutputConfig of enumeration.
      */
@@ -97,7 +86,7 @@ public enum WSOutputs implements Outputs {
 
     /**
      * Returns true if the Logger should track the Output's state.
-     * @return True if of tracking state.
+     * @return True if the StateTracker should track this Output.
      */
     public boolean isTrackingState() {
         return m_trackingState;
