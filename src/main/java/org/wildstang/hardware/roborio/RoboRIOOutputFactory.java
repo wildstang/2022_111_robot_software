@@ -9,6 +9,7 @@ import org.wildstang.hardware.roborio.outputs.WSOutputType;
 import org.wildstang.hardware.roborio.outputs.WsDigitalOutput;
 import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoid;
 import org.wildstang.hardware.roborio.outputs.WsI2COutput;
+import org.wildstang.hardware.roborio.outputs.WsPhoenix;
 import org.wildstang.hardware.roborio.outputs.WsRelay;
 import org.wildstang.hardware.roborio.outputs.WsServo;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
@@ -19,6 +20,7 @@ import org.wildstang.hardware.roborio.outputs.WsRemoteDigitalOutput;
 import org.wildstang.hardware.roborio.outputs.config.WsDigitalOutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsDoubleSolenoidConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsI2COutputConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsPhoenixConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsRelayConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsServoConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSolenoidConfig;
@@ -89,6 +91,13 @@ public class RoboRIOOutputFactory {
         case RELAY:
             out = new WsRelay(p_output.getName(),
                     ((WsRelayConfig) p_output.getConfig()).getChannel());
+        break;
+        case PHOENIX:
+            out = new WsPhoenix(p_output.getName(),
+                    ((WsPhoenixConfig) p_output.getConfig()).getChannel(),
+                    ((WsPhoenixConfig) p_output.getConfig()).getDefault(),
+                    ((WsPhoenixConfig) p_output.getConfig()).isTalon(),
+                    ((WsPhoenixConfig) p_output.getConfig()).isInverted());
         break;
         case VICTOR:
             out = new WsVictor(p_output.getName(),

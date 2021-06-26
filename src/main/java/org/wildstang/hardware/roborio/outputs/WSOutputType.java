@@ -11,6 +11,7 @@ public enum WSOutputType implements OutputType {
     SERVO("Servo"),
     SOLENOID_SINGLE("Solenoid"),
     SOLENOID_DOUBLE("Double solenoid"),
+    PHOENIX("Phoenix"),
     VICTOR("Victor"),
     TALON("Talon"),
     RELAY("Relay"),

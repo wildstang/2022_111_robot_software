@@ -1,4 +1,4 @@
-# Inputs
+# Controller Inputs
 
 ## Buttons
 ```

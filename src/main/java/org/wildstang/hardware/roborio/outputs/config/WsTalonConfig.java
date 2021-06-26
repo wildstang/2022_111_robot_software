@@ -4,7 +4,9 @@ import org.wildstang.framework.hardware.OutputConfig;
 
 /**
  * Contains configurations for Talon motor controllers.
+ * @deprecated Since we use CAN, use TalonSRX instead.
  */
+@Deprecated
 public class WsTalonConfig implements OutputConfig {
 
     private int m_channel = 0;

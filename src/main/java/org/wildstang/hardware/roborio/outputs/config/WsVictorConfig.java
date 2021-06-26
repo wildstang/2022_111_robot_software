@@ -4,7 +4,9 @@ import org.wildstang.framework.hardware.OutputConfig;
 
 /**
  * Contains configurations for Victor motor controllers.
+ * @deprecated Since we use CAN, use TalonSRX instead.
  */
+@Deprecated
 public class WsVictorConfig implements OutputConfig {
 
     private int m_channel = 0;
