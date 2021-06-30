@@ -3,6 +3,7 @@ package org.wildstang.hardware.roborio.outputs;
 import org.wildstang.framework.io.outputs.AnalogOutput;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -79,6 +80,17 @@ public class WsPhoenix extends AnalogOutput {
     }
 
     /**
+     * Add a follower motor to the current motor.
+     * @param canConstant CAN constant of the new follower motor.
+     * @param oppose True if the follow should oppose the direction of this motor.
+     */
+    public void addFollower(int canConstant, boolean oppose) {
+        TalonSRX follower = new TalonSRX(canConstant);
+        follower.follow(motor);
+        follower.setInverted(oppose ? InvertType.OpposeMaster : InvertType.FollowMaster);
+    }
+
+    /**
      * Disables the current limit of the motor controller.
      * Only Talons support current limiting.
      */
@@ -86,6 +98,63 @@ public class WsPhoenix extends AnalogOutput {
         if (motor instanceof TalonSRX) {
             ((TalonSRX) motor).enableCurrentLimit(false);
         }
+    }
+
+    /**
+     * Returns the quadrature velocity from a Talon's encoder.
+     * @return Current velocity, 0 if not a Talon.
+     */
+    public int getVelocity() {
+        if (motor instanceof TalonSRX) {
+            return ((TalonSRX) motor).getSensorCollection().getQuadratureVelocity();
+        }
+        return 0;
+    }
+
+    /**
+     * Returns the quadrature position from a Talon's encoder.
+     * @return Current position, 0 if not a Talon.
+     */
+    public int getPosition() {
+        if (motor instanceof TalonSRX) {
+            return ((TalonSRX) motor).getSensorCollection().getQuadraturePosition();
+        }
+        return 0;
+    }
+    
+    /**
+     * Sets and runs the motion profile slot to use.
+     * @return Motion profile slot number.
+     */
+    public void runProfile(int slot) {
+        motor.set(ControlMode.MotionProfile, 0);
+        motor.selectProfileSlot(slot, 0);
+    }
+
+    /**
+     * Actively holds a given position, useful for braking.
+     * @return Motion profile slot number.
+     */
+    public void holdPosition(int slot) {
+        motor.selectProfileSlot(slot, 0);
+        motor.set(ControlMode.Position, motor.getSelectedSensorPosition());
+    }
+    
+    /**
+     * Resets the position of a Talon's encoder.
+     */
+    public void resetEncoder() {
+        if (motor instanceof TalonSRX) {
+            ((TalonSRX) motor).setSelectedSensorPosition(0, 0, -1);
+        }
+    }
+
+    /**
+     * Returns the current motor output percent..
+     * @return Current motor output as a percent.
+     */
+    public double getOutput() {
+        return motor.getMotorOutputPercent();
     }
 
     /**
