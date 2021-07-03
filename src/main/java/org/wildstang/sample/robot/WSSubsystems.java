@@ -9,7 +9,7 @@ import org.wildstang.framework.core.Subsystems;
 public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
-    //TEST("Test Subsystem", TestSubsystem.class)
+    //INPUT_TEST("Input Test", InputTestSubsystem.class)
     ;
 
     /**
