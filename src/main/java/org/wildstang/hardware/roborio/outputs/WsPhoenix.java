@@ -124,7 +124,7 @@ public class WsPhoenix extends AnalogOutput {
     
     /**
      * Sets and runs the motion profile slot to use.
-     * @return Motion profile slot number.
+     * @param slot Motion profile slot number.
      */
     public void runProfile(int slot) {
         motor.set(ControlMode.MotionProfile, 0);
@@ -133,7 +133,7 @@ public class WsPhoenix extends AnalogOutput {
 
     /**
      * Actively holds a given position, useful for braking.
-     * @return Motion profile slot number.
+     * @param slot Motion profile slot number.
      */
     public void holdPosition(int slot) {
         motor.selectProfileSlot(slot, 0);

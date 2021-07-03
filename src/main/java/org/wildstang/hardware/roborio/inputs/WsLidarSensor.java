@@ -71,6 +71,7 @@ public class WsLidarSensor extends DiscreteInput {
 
     /**
      * Returns the average of the last 5 readings.
+     * @return The rolling (5) average of the read distance.
      */
     public int getSmoothedDistance() {
         int accumulator = 0;

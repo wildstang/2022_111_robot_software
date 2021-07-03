@@ -27,6 +27,7 @@ public class WsPhoenixConfig implements OutputConfig {
      * @param channel Controller CAN constant.
      * @param p_default Default output value.
      * @param talon True if Talon, false if Victor.
+     * @param invert True if motor output should be inverted.
      */
     public WsPhoenixConfig(int channel, double p_default, boolean talon, boolean invert) {
         m_channel = channel;

@@ -13,7 +13,8 @@
 <!--[if IE]>
 <script type="text/javascript" src="jquery/jszip-utils/dist/jszip-utils-ie.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="jquery/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="jquery/jquery-migrate-3.0.1.js"></script>
 <script type="text/javascript" src="jquery/jquery-ui.js"></script>
 </head>
 <body>
@@ -96,6 +97,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">A</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#addFollower(int,boolean)">addFollower(int, boolean)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Add a follower motor to the current motor.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/InputManager.html#addInput(org.wildstang.framework.io.inputs.Input)">addInput(Input)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/InputManager.html" title="class in org.wildstang.framework.io">InputManager</a></dt>
 <dd>
 <div class="block">Adds an Input to the manager.</div>
@@ -902,6 +907,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the Writer used for logging.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#getOutput()">getOutput()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Returns the current motor output percent..</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/OutputManager.html#getOutput(java.lang.String)">getOutput(String)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/OutputManager.html" title="class in org.wildstang.framework.io">OutputManager</a></dt>
 <dd>
 <div class="block">Returns a named Output from the manager.</div>
@@ -937,6 +946,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsI2COutputConfig.html#getPort()">getPort()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsI2COutputConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsI2COutputConfig</a></dt>
 <dd>
 <div class="block">Return the I2C hardware port number, kOnboard or kMXP.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#getPosition()">getPosition()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Returns the quadrature position from a Talon's encoder.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getPreviousError()">getPreviousError()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>
@@ -1098,6 +1111,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Gets the value corresponding to a key in the config, with default.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#getVelocity()">getVelocity()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Returns the quadrature velocity from a Talon's encoder.</div>
+</dd>
 </dl>
 <a id="I:H">
 <!--   -->
@@ -1111,6 +1128,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#hasValueChanged()">hasValueChanged()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
 <dd>
 <div class="block">Returns true if the value of the Input has changed.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#holdPosition(int)">holdPosition(int)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Actively holds a given position, useful for braking.</div>
 </dd>
 </dl>
 <a id="I:I">
@@ -1365,8 +1386,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Adds an AutoStepStopAutonomous after a given AutoStep index from config.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/Logger.html#log(java.lang.String)">log(String)</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/Logger.html" title="class in org.wildstang.framework.logger">Logger</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#logCurrentState()">logCurrentState()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
 <dd>
 <div class="block">Logs the current state of the Input.</div>
@@ -1415,10 +1434,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Abstract function to log the hardware Input's state to the StateTracker.</div>
 </dd>
-<dt><a href="org/wildstang/framework/logger/Logger.html" title="class in org.wildstang.framework.logger"><span class="typeNameLink">Logger</span></a> - Class in <a href="org/wildstang/framework/logger/package-summary.html">org.wildstang.framework.logger</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/Logger.html#%3Cinit%3E()">Logger()</a></span> - Constructor for class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/Logger.html" title="class in org.wildstang.framework.logger">Logger</a></dt>
-<dd>&nbsp;</dd>
 </dl>
 <a id="I:M">
 <!--   -->
@@ -1833,6 +1848,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Resets all error values in controller.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#resetEncoder()">resetEncoder()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Resets the position of a Talon's encoder.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#resetErrorSum()">resetErrorSum()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>
 <div class="block">Resets the error sum to 0.</div>
@@ -1894,6 +1913,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#run()">run()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
 <dd>
 <div class="block">Thread that handles all logging.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#runProfile(int)">runProfile(int)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Sets and runs the motion profile slot to use.</div>
 </dd>
 </dl>
 <a id="I:S">

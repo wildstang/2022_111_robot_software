@@ -13,7 +13,8 @@
 <!--[if IE]>
 <script type="text/javascript" src="../../../../../jquery/jszip-utils/dist/jszip-utils-ie.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="../../../../../jquery/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="../../../../../jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="../../../../../jquery/jquery-migrate-3.0.1.js"></script>
 <script type="text/javascript" src="../../../../../jquery/jquery-ui.js"></script>
 </head>
 <body>
@@ -26,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -201,40 +202,90 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addFollower(int,boolean)">addFollower</a></span>&#8203;(int&nbsp;canConstant,
+           boolean&nbsp;oppose)</code></th>
+<td class="colLast">
+<div class="block">Add a follower motor to the current motor.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#disableCurrentLimit()">disableCurrentLimit</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Disables the current limit of the motor controller.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOutput()">getOutput</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the current motor output percent..</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPosition()">getPosition</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the quadrature position from a Talon's encoder.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVelocity()">getVelocity</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the quadrature velocity from a Talon's encoder.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#holdPosition(int)">holdPosition</a></span>&#8203;(int&nbsp;slot)</code></th>
+<td class="colLast">
+<div class="block">Actively holds a given position, useful for braking.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#notifyConfigChange()">notifyConfigChange</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Does nothing, config values only affects start state.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetEncoder()">resetEncoder</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Resets the position of a Talon's encoder.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#runProfile(int)">runProfile</a></span>&#8203;(int&nbsp;slot)</code></th>
+<td class="colLast">
+<div class="block">Sets and runs the motion profile slot to use.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendDataToOutput()">sendDataToOutput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets motor speed to current value, from -1.0 to 1.0.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setBrake()">setBrake</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to brake mode, will not freely spin.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCoast()">setCoast</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to coast mode, will freely spin.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCurrentLimit(int,int,int)">setCurrentLimit</a></span>&#8203;(int&nbsp;peakLimitAmps,
                int&nbsp;peakDuractionMs,
@@ -372,6 +423,22 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 </dl>
 </li>
 </ul>
+<a id="addFollower(int,boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addFollower</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;addFollower&#8203;(int&nbsp;canConstant,
+                        boolean&nbsp;oppose)</pre>
+<div class="block">Add a follower motor to the current motor.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>canConstant</code> - CAN constant of the new follower motor.</dd>
+<dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
+</dl>
+</li>
+</ul>
 <a id="disableCurrentLimit()">
 <!--   -->
 </a>
@@ -381,6 +448,86 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <pre class="methodSignature">public&nbsp;void&nbsp;disableCurrentLimit()</pre>
 <div class="block">Disables the current limit of the motor controller.
  Only Talons support current limiting.</div>
+</li>
+</ul>
+<a id="getVelocity()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getVelocity</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;getVelocity()</pre>
+<div class="block">Returns the quadrature velocity from a Talon's encoder.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Current velocity, 0 if not a Talon.</dd>
+</dl>
+</li>
+</ul>
+<a id="getPosition()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPosition</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;getPosition()</pre>
+<div class="block">Returns the quadrature position from a Talon's encoder.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Current position, 0 if not a Talon.</dd>
+</dl>
+</li>
+</ul>
+<a id="runProfile(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>runProfile</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;runProfile&#8203;(int&nbsp;slot)</pre>
+<div class="block">Sets and runs the motion profile slot to use.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>slot</code> - Motion profile slot number.</dd>
+</dl>
+</li>
+</ul>
+<a id="holdPosition(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>holdPosition</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;holdPosition&#8203;(int&nbsp;slot)</pre>
+<div class="block">Actively holds a given position, useful for braking.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>slot</code> - Motion profile slot number.</dd>
+</dl>
+</li>
+</ul>
+<a id="resetEncoder()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resetEncoder</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;resetEncoder()</pre>
+<div class="block">Resets the position of a Talon's encoder.</div>
+</li>
+</ul>
+<a id="getOutput()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOutput</h4>
+<pre class="methodSignature">public&nbsp;double&nbsp;getOutput()</pre>
+<div class="block">Returns the current motor output percent..</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Current motor output as a percent.</dd>
+</dl>
 </li>
 </ul>
 <a id="sendDataToOutput()">
