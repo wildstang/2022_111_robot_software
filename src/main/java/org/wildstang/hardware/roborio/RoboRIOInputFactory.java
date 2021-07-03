@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import org.wildstang.framework.core.Inputs;
 import org.wildstang.framework.hardware.InputConfig;
+import org.wildstang.framework.hardware.InputFactory;
 import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.hardware.roborio.inputs.WsAbsoluteEncoder;
 import org.wildstang.hardware.roborio.inputs.WsAnalogGyro;
@@ -36,7 +37,7 @@ import org.wildstang.hardware.roborio.inputs.config.WsRemoteDigitalInputConfig;
 /**
  * Builds inputs from WsInputs enumerations.
  */
-public class RoboRIOInputFactory {
+public class RoboRIOInputFactory implements InputFactory {
 
     private static Logger s_log = Logger.getLogger(RoboRIOInputFactory.class.getName());
     private static final String s_className = "RoboRIOInputFactory";

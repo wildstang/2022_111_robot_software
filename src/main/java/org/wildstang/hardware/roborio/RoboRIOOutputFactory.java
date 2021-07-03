@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import org.wildstang.framework.core.Outputs;
 import org.wildstang.framework.hardware.OutputConfig;
+import org.wildstang.framework.hardware.OutputFactory;
 import org.wildstang.framework.io.outputs.Output;
 import org.wildstang.hardware.roborio.outputs.WsDigitalOutput;
 import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoid;
@@ -32,7 +33,7 @@ import org.wildstang.hardware.roborio.outputs.config.WsRemoteDigitalOutputConfig
 /**
  * Builds outputs from WsOutputs enumerations.
  */
-public class RoboRIOOutputFactory {
+public class RoboRIOOutputFactory implements OutputFactory {
 
     private static Logger s_log = Logger.getLogger(RoboRIOOutputFactory.class.getName());
     private static final String s_className = "RoboRIOOutputFactory";
