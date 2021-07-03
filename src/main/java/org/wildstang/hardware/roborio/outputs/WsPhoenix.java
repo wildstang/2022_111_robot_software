@@ -81,6 +81,7 @@ public class WsPhoenix extends AnalogOutput {
 
     /**
      * Add a follower motor to the current motor.
+     * TODO: this method doesn't really comply with the WsOuputs model, technically a follower could be added twice
      * @param canConstant CAN constant of the new follower motor.
      * @param talon True if Talon, false if Victor.
      * @param oppose True if the follow should oppose the direction of this motor.
@@ -179,6 +180,13 @@ public class WsPhoenix extends AnalogOutput {
     public void setSpeed(double value) {
         setValue(value);
         sendDataToOutput();
+    }
+
+    /**
+     * Sets the motors to 0 speed.
+     */
+    public void stop() {
+        setSpeed(0);
     }
 
     /**
