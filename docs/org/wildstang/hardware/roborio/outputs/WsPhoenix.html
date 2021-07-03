@@ -13,8 +13,7 @@
 <!--[if IE]>
 <script type="text/javascript" src="../../../../../jquery/jszip-utils/dist/jszip-utils-ie.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="../../../../../jquery/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="../../../../../jquery/jquery-migrate-3.0.1.js"></script>
+<script type="text/javascript" src="../../../../../jquery/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="../../../../../jquery/jquery-ui.js"></script>
 </head>
 <body>
@@ -202,7 +201,8 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addFollower(int,boolean)">addFollower</a></span>&#8203;(int&nbsp;canConstant,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addFollower(int,boolean,boolean)">addFollower</a></span>&#8203;(int&nbsp;canConstant,
+           boolean&nbsp;talon,
            boolean&nbsp;oppose)</code></th>
 <td class="colLast">
 <div class="block">Add a follower motor to the current motor.</div>
@@ -423,18 +423,20 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 </dl>
 </li>
 </ul>
-<a id="addFollower(int,boolean)">
+<a id="addFollower(int,boolean,boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>addFollower</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;addFollower&#8203;(int&nbsp;canConstant,
+                        boolean&nbsp;talon,
                         boolean&nbsp;oppose)</pre>
 <div class="block">Add a follower motor to the current motor.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>canConstant</code> - CAN constant of the new follower motor.</dd>
+<dd><code>talon</code> - True if Talon, false if Victor.</dd>
 <dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
 </dl>
 </li>

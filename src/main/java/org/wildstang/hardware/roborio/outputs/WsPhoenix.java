@@ -45,7 +45,7 @@ public class WsPhoenix extends AnalogOutput {
         else {
             motor = new VictorSPX(channel);
         }
-        motor.setInverted(true);
+        motor.setInverted(invert);
     }
 
     /**
@@ -82,10 +82,17 @@ public class WsPhoenix extends AnalogOutput {
     /**
      * Add a follower motor to the current motor.
      * @param canConstant CAN constant of the new follower motor.
+     * @param talon True if Talon, false if Victor.
      * @param oppose True if the follow should oppose the direction of this motor.
      */
-    public void addFollower(int canConstant, boolean oppose) {
-        TalonSRX follower = new TalonSRX(canConstant);
+    public void addFollower(int canConstant, boolean talon, boolean oppose) {
+        BaseMotorController follower;
+        if (talon) {
+            follower = new TalonSRX(canConstant);
+        }
+        else {
+            follower = new VictorSPX(canConstant);
+        }
         follower.follow(motor);
         follower.setInverted(oppose ? InvertType.OpposeMaster : InvertType.FollowMaster);
     }

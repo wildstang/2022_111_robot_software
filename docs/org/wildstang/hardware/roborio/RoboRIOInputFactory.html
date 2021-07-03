@@ -13,8 +13,7 @@
 <!--[if IE]>
 <script type="text/javascript" src="../../../../jquery/jszip-utils/dist/jszip-utils-ie.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="../../../../jquery/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="../../../../jquery/jquery-migrate-3.0.1.js"></script>
+<script type="text/javascript" src="../../../../jquery/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="../../../../jquery/jquery-ui.js"></script>
 </head>
 <body>
@@ -130,9 +129,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="../../framework/hardware/InputFactory.html" title="interface in org.wildstang.framework.hardware">InputFactory</a></code></dd>
+</dl>
 <hr>
 <pre>public class <span class="typeNameLabel">RoboRIOInputFactory</span>
-extends java.lang.Object</pre>
+extends java.lang.Object
+implements <a href="../../framework/hardware/InputFactory.html" title="interface in org.wildstang.framework.hardware">InputFactory</a></pre>
 <div class="block">Builds inputs from WsInputs enumerations.</div>
 </li>
 </ul>
@@ -243,6 +247,10 @@ extends java.lang.Object</pre>
 <h4>init</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;init()</pre>
 <div class="block">Prepares logger.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../framework/hardware/InputFactory.html#init()">init</a></code>&nbsp;in interface&nbsp;<code><a href="../../framework/hardware/InputFactory.html" title="interface in org.wildstang.framework.hardware">InputFactory</a></code></dd>
+</dl>
 </li>
 </ul>
 <a id="createInput(org.wildstang.framework.core.Inputs)">
@@ -254,6 +262,8 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;<a href="../../framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a>&nbsp;createInput&#8203;(<a href="../../framework/core/Inputs.html" title="interface in org.wildstang.framework.core">Inputs</a>&nbsp;p_input)</pre>
 <div class="block">Creates an Input from an enumeration of WsInputs.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../framework/hardware/InputFactory.html#createInput(org.wildstang.framework.core.Inputs)">createInput</a></code>&nbsp;in interface&nbsp;<code><a href="../../framework/hardware/InputFactory.html" title="interface in org.wildstang.framework.hardware">InputFactory</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>p_input</code> - An enumeration of WsInputs.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
