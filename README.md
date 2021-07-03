@@ -24,6 +24,8 @@ In order to create a new code base for a new robot follow these steps:
 7. Update `teamNumber` in `.wpilib/wpilib_preferences.json` if necessary
 
 ## Setting up software
+- GitHub Desktop
+  - [Download](https://desktop.github.com/)
 - VS Code and other required components
   - [Instructions](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
   - [Download](https://github.com/wpilibsuite/allwpilib/releases/latest/)
