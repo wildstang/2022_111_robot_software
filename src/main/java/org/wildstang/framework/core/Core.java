@@ -251,7 +251,6 @@ public class Core {
         s_inputManager.update();
 
         if (m_autoManager != null) {
-            //System.out.println("Checkpoint 909 yay");
             m_autoManager.update();
         }
         // Let subsystems react to changes

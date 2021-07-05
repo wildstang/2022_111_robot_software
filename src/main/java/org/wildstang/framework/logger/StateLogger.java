@@ -9,6 +9,7 @@ import org.wildstang.framework.CoreUtils;
 
 /**
  * Manages logging in a Thread. Includes logging control and JSON formatting.
+ * This isn't currently used but can dump the state tracker into a file or console.
  */
 public class StateLogger implements Runnable {
 

@@ -64,9 +64,6 @@ public class WsHallEffectInput extends DiscreteInput {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (selectedHallEffectSensor != lastHallEffectSensor) {
-            System.out.println("READ HALL EFFECT: " + selectedHallEffectSensor);
-        }
         lastHallEffectSensor = selectedHallEffectSensor;
     }
 

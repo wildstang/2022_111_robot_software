@@ -20,7 +20,6 @@ public class WsRemoteDigitalOutput extends DigitalOutput {
      */
     public WsRemoteDigitalOutput(String name, String p_networkTbl, boolean p_default) {
         super(name, p_default);
-        System.out.println("Getting Network Table: " + p_networkTbl);
         remoteIOTable = NetworkTableInstance.getDefault().getTable(p_networkTbl);
     }
 

@@ -40,7 +40,6 @@ public class AutoStepDelay extends AutoStep {
     public void initialize() {
         timer.reset();
         timer.start();
-        System.out.println("Timer in init " + timer.get());
     }
 
     /**
@@ -51,7 +50,6 @@ public class AutoStepDelay extends AutoStep {
         if (timer.hasPeriodPassed(delay)) {
             timer.stop();
             setFinished(true);
-            System.out.println("Timer at finished " + timer.get());
         }
     }
 

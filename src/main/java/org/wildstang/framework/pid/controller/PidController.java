@@ -318,7 +318,6 @@ public class PidController {
 
         // Calculate the current error term
         currentError = setPoint - current_pv;
-        System.out.println(this.controllerName + " error: " + currentError);
 
         // Adjust our metrics depending on where the process variable is as
         // compared

@@ -3,6 +3,7 @@ package org.wildstang.sample.robot;
 import org.wildstang.framework.auto.AutoManager;
 
 import org.wildstang.framework.core.Core;
+import org.wildstang.framework.logger.Log;
 import org.wildstang.hardware.roborio.RoboRIOInputFactory;
 import org.wildstang.hardware.roborio.RoboRIOOutputFactory;
 
@@ -26,7 +27,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        System.out.println("Initializing robot.");
+        Log.info("Initializing robot.");
 
         core = new Core(RoboRIOInputFactory.class, RoboRIOOutputFactory.class);
         core.createInputs(WSInputs.values());
@@ -42,7 +43,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void disabledInit() {
-        System.out.println("Engaging disabled mode.");
+        Log.info("Engaging disabled mode.");
     }
 
     /**
@@ -50,6 +51,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
+        Log.danger("Engaging autonomous mode.");
         Core.getSubsystemManager().resetState();
 
         core.setAutoManager(AutoManager.getInstance());
@@ -61,7 +63,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopInit() {
-        System.out.println("Engaging teleoperation mode.");
+        Log.danger("Engaging teleoperation mode.");
         Core.getSubsystemManager().resetState();
     }
 
@@ -70,7 +72,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testInit() {
-        System.out.println("Engaging test mode.");
+        Log.danger("Engaging test mode.");
     }
 
     /**

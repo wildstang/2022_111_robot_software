@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.wildstang.framework.auto.AutoStep;
+import org.wildstang.framework.logger.Log;
 
 /**
  * Serial groups execute all contained steps sequentially.
@@ -41,7 +42,7 @@ public class AutoSerialStepGroup extends AutoStep {
         currentStep = 0;
         if (!steps.isEmpty()) {
             steps.get(currentStep).initialize();
-            System.out.println("Starting step " + steps.get(currentStep).toString());
+            Log.info("Starting step " + steps.get(currentStep).toString());
         }
         initialized = true;
     }
@@ -62,9 +63,10 @@ public class AutoSerialStepGroup extends AutoStep {
                 // We have reached the end of our list of steps, we're finished
                 setFinished(true);
                 return;
-            } else {
+            }
+            else {
                 steps.get(currentStep).initialize();
-                System.out.println("Starting step " + steps.get(currentStep).toString());
+                Log.info("Starting step " + steps.get(currentStep).toString());
             }
         }
         AutoStep step = steps.get(currentStep);

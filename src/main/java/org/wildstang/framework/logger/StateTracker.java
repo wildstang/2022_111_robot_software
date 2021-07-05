@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 /**
  * Used to track the various logs created before being written to log file.
  * There is one StateTracker that the framework's Core owns.
- * Additional StateTrackers may be made an given to new StateLoggers,
- * but the intended use case is one StateLogger belonging to the year's Robot.'
+ * Additional StateTrackers may be made and given to new StateLoggers,
+ * but the intended use case is one StateLogger belonging to the year's Robot.
  * StateTrackers track both descriptions of available IO as IOInfo grouped in IOSets,
  * as well as, StateInfo logs grouped in StateGroups.
  */

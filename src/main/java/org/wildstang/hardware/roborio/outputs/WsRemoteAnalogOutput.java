@@ -21,7 +21,6 @@ public class WsRemoteAnalogOutput extends AnalogOutput {
     public WsRemoteAnalogOutput(String name, String p_networkTbl, double p_default) {
         super(name, p_default);
         remoteIOTable = NetworkTableInstance.getDefault().getTable(p_networkTbl);
-        System.out.println("Got Table");
     }
 
     /**
