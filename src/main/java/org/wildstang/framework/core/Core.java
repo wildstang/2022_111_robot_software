@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import org.wildstang.framework.CoreUtils;
 import org.wildstang.framework.auto.AutoManager;
+import org.wildstang.framework.auto.AutoProgram;
 import org.wildstang.framework.config.ConfigManager;
 import org.wildstang.framework.hardware.InputFactory;
 import org.wildstang.framework.hardware.OutputFactory;
@@ -32,8 +33,7 @@ public class Core {
     private static StateTracker s_stateTracker;
     private static InputFactory s_inputFactory;
     private static OutputFactory s_outputFactory;
-
-    private AutoManager m_autoManager = null;
+    private static AutoManager s_autoManager;
 
     private Class<?> m_inputFactoryClass;
     private Class<?> m_outputFactoryClass;
@@ -66,6 +66,9 @@ public class Core {
 
         s_subsystemManager = new SubsystemManager();
         s_subsystemManager.init();
+
+        s_autoManager = new AutoManager();
+        s_autoManager.init();
 
         s_configManager = new ConfigManager();
         s_configManager.init();
@@ -175,6 +178,32 @@ public class Core {
     }
 
     /**
+     * Takes an array of enumerations of AutoPrograms and build an AutoProgram of each.
+     * @param p_programs All enumerations of AutoPrograms to be created.
+     */
+    public void createAutoPrograms(AutoPrograms[] p_programs) {
+        if (s_log.isLoggable(Level.FINER)) {
+            s_log.entering(s_className, "createAutoPrograms");
+        }
+
+        // Iterate over all input enum values and create a subsystem for each
+        for (AutoPrograms program : p_programs) {
+            if (s_log.isLoggable(Level.FINE)) {
+                s_log.fine("Creating subsystem: " + program.getName());
+            }
+
+            // Instantiate the class
+            AutoProgram prog = (AutoProgram) createObject(program.getProgramClass());
+
+            s_autoManager.addProgram(prog);
+        }
+
+        if (s_log.isLoggable(Level.FINER)) {
+            s_log.exiting(s_className, "createAutoPrograms");
+        }
+    }
+
+    /**
      * Returns the framework's InputManager.
      * @return InputManager belonging to the framework.
      */
@@ -196,6 +225,14 @@ public class Core {
      */
     public static SubsystemManager getSubsystemManager() {
         return s_subsystemManager;
+    }
+
+    /**
+     * Returns the framework's AutoManager.
+     * @return AutoManager belonging to the framework.
+     */
+    public static AutoManager getAutoManager() {
+        return s_autoManager;
     }
 
     /**
@@ -234,14 +271,6 @@ public class Core {
     }
 
     /**
-     * Sets the autonomous mode manager for the framework.
-     * @param p_autoManager New auto manager.
-     */
-    public void setAutoManager(AutoManager p_autoManager) {
-        m_autoManager = p_autoManager;
-    }
-
-    /**
      * Runs update function of all managers and trackers belonging to the framework.
      */
     public void executeUpdate() {
@@ -250,9 +279,9 @@ public class Core {
         // Read input from hardware
         s_inputManager.update();
 
-        if (m_autoManager != null) {
-            m_autoManager.update();
-        }
+        // Update the AutoPrograms, most of the time this is just sleeper
+        s_autoManager.update();
+
         // Let subsystems react to changes
         s_subsystemManager.update();
 

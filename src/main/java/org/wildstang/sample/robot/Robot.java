@@ -1,7 +1,5 @@
 package org.wildstang.sample.robot;
 
-import org.wildstang.framework.auto.AutoManager;
-
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.logger.Log;
 import org.wildstang.framework.logger.Log.LogLevel;
@@ -36,9 +34,7 @@ public class Robot extends TimedRobot {
         core.createInputs(WSInputs.values());
         core.createOutputs(WSOutputs.values());
         core.createSubsystems(WSSubsystems.values());
-
-        // Add auto programs here
-        //AutoManager.getInstance().addProgram(new ExampleAutoProgram());
+        core.createAutoPrograms(WSAutoPrograms.values());
         
         // create smart dashboard option for LogLevel
         logChooser = new SendableChooser<>();
@@ -64,9 +60,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         Log.danger("Engaging autonomous mode.");
         Core.getSubsystemManager().resetState();
-
-        core.setAutoManager(AutoManager.getInstance());
-        AutoManager.getInstance().startCurrentProgram();
+        Core.getAutoManager().startCurrentProgram();
     }
 
     /**

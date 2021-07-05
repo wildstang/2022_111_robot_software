@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutoManager {
 
-    private static AutoManager instance = null;
     private static Logger s_log = Logger.getLogger(AutoManager.class.getName());
 
     private List<AutoProgram> programs = new ArrayList<>();
@@ -31,18 +30,16 @@ public class AutoManager {
     /**
      * Loads in AutoPrograms and adds selectors to the SmartDashboard.
      */
-    private AutoManager() {
+    public AutoManager() {
         chooser = new SendableChooser<>();
         lockinChooser = new SendableChooser<>();
         lockinChooser.setDefaultOption("Unlocked", false);
         lockinChooser.addOption("Locked", true);
 
-        definePrograms();
+        defineDefaultPrograms();
 
         SmartDashboard.putData("Select Autonomous Program", chooser);
         SmartDashboard.putData("Lock in auto program", lockinChooser);
-
-        clear();
     }
 
     /**
@@ -88,7 +85,7 @@ public class AutoManager {
     /**
      * Resets the current program and all states.
      */
-    public void clear() {
+    public void init() {
         programFinished = false;
         if (runningProgram != null) {
             runningProgram.cleanup();
@@ -124,24 +121,12 @@ public class AutoManager {
     }
 
     /**
-     * Gets the instance of AutoManager or creates a new one.
-     * @return The instance of AutoManager.
-     */
-    public static AutoManager getInstance() {
-        if (AutoManager.instance == null) {
-            AutoManager.instance = new AutoManager();
-        }
-        return AutoManager.instance;
-    }
-
-    /**
      * Defines the default set of AutoPrograms.
      * The first should always be Sleeper, which does nothing and never finishes.
      * Do not change that.
      */
-    private void definePrograms() {
+    private void defineDefaultPrograms() {
         addProgram(new Sleeper());
-
     }
 
     /**

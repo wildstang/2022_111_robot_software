@@ -69,12 +69,14 @@ public abstract class AutoProgram {
                 programSteps.get(currentStep).initialize();
             }
         }
-        AutoStep step = programSteps.get(currentStep); // Prevent errors caused by mistyping.
-        SmartDashboard.putString("Current auto step", step.toString());
-        step.update();
-        if (step.isFinished()) {
-            s_log.logp(Level.FINE, "Auton", "Step Finished", step.toString());
-            finishedPreviousStep = true;
+        if (programSteps.size() > currentStep) {
+            AutoStep step = programSteps.get(currentStep); // Prevent errors caused by mistyping.
+            SmartDashboard.putString("Current auto step", step.toString());
+            step.update();
+            if (step.isFinished()) {
+                s_log.logp(Level.FINE, "Auton", "Step Finished", step.toString());
+                finishedPreviousStep = true;
+            }
         }
     }
 
