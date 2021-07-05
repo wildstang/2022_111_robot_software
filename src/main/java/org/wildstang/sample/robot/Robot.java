@@ -4,10 +4,12 @@ import org.wildstang.framework.auto.AutoManager;
 
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.logger.Log;
+import org.wildstang.framework.logger.Log.LogLevel;
 import org.wildstang.hardware.roborio.RoboRIOInputFactory;
 import org.wildstang.hardware.roborio.RoboRIOOutputFactory;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -21,6 +23,7 @@ public class Robot extends TimedRobot {
 
     Core core;
     private boolean AutoFirstRun = true;
+    private SendableChooser<LogLevel> logChooser;
 
     /**
      * Runs on initialization, creates and configure framework Core.
@@ -36,6 +39,14 @@ public class Robot extends TimedRobot {
 
         // Add auto programs here
         //AutoManager.getInstance().addProgram(new ExampleAutoProgram());
+        
+        // create smart dashboard option for LogLevel
+        logChooser = new SendableChooser<>();
+        logChooser.addOption(LogLevel.INFO.toString(), LogLevel.INFO);
+        logChooser.setDefaultOption(LogLevel.WARN.toString(), LogLevel.WARN);
+        logChooser.addOption(LogLevel.ERROR.toString(), LogLevel.ERROR);
+        logChooser.addOption(LogLevel.NONE.toString(), LogLevel.NONE);
+        SmartDashboard.putData("Log Level", logChooser);
     }
 
     /**
@@ -119,6 +130,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+        // update log level from chooser
+        Log.setLevel(logChooser.getSelected());
         try {
             // Update all inputs, outputs and subsystems
             long start = System.currentTimeMillis();
