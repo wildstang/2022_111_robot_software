@@ -7,8 +7,8 @@ import org.wildstang.hardware.roborio.outputs.config.WsPhoenixConfig;
 
 /**
  * Output mappings are stored here.
- * Below each PWM, Digital Output, Solenoid, and Relay is enumerated with their appropriated IDs.
- * The enumeration includes a name, output type, output object, and tracking boolean.
+ * Below each Motor, PWM, Digital Output, Solenoid, and Relay is enumerated with their appropriated IDs.
+ * The enumeration includes a name, output type, output config object, and tracking boolean.
  */
 public enum WSOutputs implements Outputs {
 
@@ -18,7 +18,7 @@ public enum WSOutputs implements Outputs {
     // ---------------------------------
     // Motors
     // ---------------------------------
-    TEST_MOTOR("Test Motor", new WsPhoenixConfig(1, 0, true), false)
+    TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, 0, true), false)
 
     // ---------------------------------
     // Servos
@@ -54,8 +54,6 @@ public enum WSOutputs implements Outputs {
     private OutputConfig m_config;
     private boolean m_trackingState;
 
-    private static boolean isLogging = true;
-
     /**
      * Initialize a new Output.
      * @param p_name Name, must match that in class to prevent errors.
@@ -90,15 +88,6 @@ public enum WSOutputs implements Outputs {
      */
     public boolean isTrackingState() {
         return m_trackingState;
-    }
-
-
-    /**
-     * Returns true if the Outputs are set to log.
-     * @return True if set to log.
-     */
-    public static boolean getLogging() {
-        return isLogging;
     }
 
 }

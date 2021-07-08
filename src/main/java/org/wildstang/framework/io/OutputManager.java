@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.CoreUtils;
+import org.wildstang.framework.core.Outputs;
 import org.wildstang.framework.io.outputs.Output;
 
 /**
@@ -87,6 +88,15 @@ public class OutputManager {
             s_log.warning("Removing output " + p_output.getName());
         }
         m_outputs.remove(p_output.getName());
+    }
+
+    /**
+     * Returns an Output with a matching name from the manager.
+     * @param p_output Output to fetch from the manager.
+     * @return Output belonging to the manager.
+     */
+    public Output getOutput(Outputs p_output) {
+        return getOutput(p_output.getName());
     }
 
     /**

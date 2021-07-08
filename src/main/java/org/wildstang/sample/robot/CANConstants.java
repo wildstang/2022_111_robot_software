@@ -9,7 +9,9 @@ package org.wildstang.sample.robot;
  */
 public final class CANConstants {
 
-    public static final int   EXAMPLE_MOTOR_CONTROLLER      = 1;
-    public static final int[] EXAMPLE_PAIRED_CONTROLLERS    = {2,3};
+    // Replace these examples.
+    // While not independently dangerous if implemented these could have unintended effects.
+    public static final int[] EXAMPLE_PAIRED_CONTROLLERS    = {1,2};
+    public static final int   EXAMPLE_MOTOR_CONTROLLER      = 3;
     
 }

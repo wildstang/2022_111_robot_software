@@ -11,8 +11,8 @@ import org.wildstang.hardware.roborio.inputs.config.WsJSJoystickInputConfig;
  * Input mappings are stored here.
  * We currently use two Xbox controller for input, driver and manipulator, plus additional sensors.
  * Below each button, axis, and sensor is enumerated with their appropriated IDs.
- * Unclaimed inputs should have a name representing the button.
- * Claimed inputs by changing the name to represent the control.
+ * Unclaimed inputs should have a name representing the input.
+ * Claim inputs by changing the name to represent the output.
  */
 public enum WSInputs implements Inputs {
     
@@ -57,10 +57,10 @@ public enum WSInputs implements Inputs {
     // ---------------------------------
     // Driver Joysticks
     // ---------------------------------
-    DRIVER_LEFT_JOYSTICK_Y  ("Driver left joystick y",  new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_JOYSTICK_Y),  true),
-    DRIVER_LEFT_JOYSTICK_X  ("Driver left joystick x",  new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_JOYSTICK_X),  true),
-    DRIVER_RIGHT_JOYSTICK_Y ("Driver right joystick y", new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_JOYSTICK_Y), true),
-    DRIVER_RIGHT_JOYSTICK_X ("Driver right joystick x", new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_JOYSTICK_X), true),
+    DRIVER_LEFT_JOYSTICK_Y  ("Driver left joystick y",  new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_JOYSTICK_Y),  false),
+    DRIVER_LEFT_JOYSTICK_X  ("Driver left joystick x",  new WsJSJoystickInputConfig(0, JoystickConstants.LEFT_JOYSTICK_X),  false),
+    DRIVER_RIGHT_JOYSTICK_Y ("Driver right joystick y", new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_JOYSTICK_Y), false),
+    DRIVER_RIGHT_JOYSTICK_X ("Driver right joystick x", new WsJSJoystickInputConfig(0, JoystickConstants.RIGHT_JOYSTICK_X), false),
     
     // ---------------------------------
     // Driver DPAD Buttons
@@ -93,10 +93,10 @@ public enum WSInputs implements Inputs {
     // ---------------------------------
     // Manipulator Joysticks
     // ---------------------------------
-    MANIPULATOR_LEFT_JOYSTICK_Y  ("Manipulator left joystick y",  new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_JOYSTICK_Y),  true),
-    MANIPULATOR_LEFT_JOYSTICK_X  ("Manipulator left joystick x",  new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_JOYSTICK_X),  true),
-    MANIPULATOR_RIGHT_JOYSTICK_Y ("Manipulator right joystick y", new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_JOYSTICK_Y), true),
-    MANIPULATOR_RIGHT_JOYSTICK_X ("Manipulator right joystick x", new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_JOYSTICK_X), true),
+    MANIPULATOR_LEFT_JOYSTICK_Y  ("Manipulator left joystick y",  new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_JOYSTICK_Y),  false),
+    MANIPULATOR_LEFT_JOYSTICK_X  ("Manipulator left joystick x",  new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_JOYSTICK_X),  false),
+    MANIPULATOR_RIGHT_JOYSTICK_Y ("Manipulator right joystick y", new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_JOYSTICK_Y), false),
+    MANIPULATOR_RIGHT_JOYSTICK_X ("Manipulator right joystick x", new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_JOYSTICK_X), false),
 
     // ---------------------------------
     // Manipulator DPAD Buttons
@@ -148,12 +148,8 @@ public enum WSInputs implements Inputs {
      */
 
     private final String m_name;
-
     private InputConfig m_config = null;
-
     private boolean m_trackingState;
-
-    private static boolean isLogging = true;
 
     /**
      * Initialize a new Input.
@@ -189,14 +185,6 @@ public enum WSInputs implements Inputs {
      */
     public boolean isTrackingState() {
         return m_trackingState;
-    }
-
-    /**
-     * Returns true if the Inputs are set to log.
-     * @return True if set to log.
-     */
-    public static boolean getLogging() {
-        return isLogging;
     }
 
 }
