@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -203,34 +203,41 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOutput(org.wildstang.framework.core.Outputs)">getOutput</a></span>&#8203;(<a href="../core/Outputs.html" title="interface in org.wildstang.framework.core">Outputs</a>&nbsp;p_output)</code></th>
+<td class="colLast">
+<div class="block">Returns an Output with a matching name from the manager.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#init()">init</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Initializes logger.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAll()">removeAll</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Removes all Outputs from the manager.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeOutput(org.wildstang.framework.io.outputs.Output)">removeOutput</a></span>&#8203;(<a href="outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a>&nbsp;p_output)</code></th>
 <td class="colLast">
 <div class="block">Removes an Output to the manager.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#size()">size</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the total size of all managed outputs.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -325,6 +332,22 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>p_output</code> - Output object to remove.</dd>
+</dl>
+</li>
+</ul>
+<a id="getOutput(org.wildstang.framework.core.Outputs)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOutput</h4>
+<pre class="methodSignature">public&nbsp;<a href="outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a>&nbsp;getOutput&#8203;(<a href="../core/Outputs.html" title="interface in org.wildstang.framework.core">Outputs</a>&nbsp;p_output)</pre>
+<div class="block">Returns an Output with a matching name from the manager.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_output</code> - Output to fetch from the manager.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Output belonging to the manager.</dd>
 </dl>
 </li>
 </ul>

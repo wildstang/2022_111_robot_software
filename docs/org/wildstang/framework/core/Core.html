@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -179,79 +179,86 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createAutoPrograms(org.wildstang.framework.core.AutoPrograms%5B%5D)">createAutoPrograms</a></span>&#8203;(<a href="AutoPrograms.html" title="interface in org.wildstang.framework.core">AutoPrograms</a>[]&nbsp;p_programs)</code></th>
+<td class="colLast">
+<div class="block">Takes an array of enumerations of AutoPrograms and build an AutoProgram of each.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createInputs(org.wildstang.framework.core.Inputs%5B%5D)">createInputs</a></span>&#8203;(<a href="Inputs.html" title="interface in org.wildstang.framework.core">Inputs</a>[]&nbsp;p_inputs)</code></th>
 <td class="colLast">
 <div class="block">Uses RoboRIOInputFactory to take an array of enumerations of Inputs and build an Input of each.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>protected java.lang.Object</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createObject(java.lang.Class)">createObject</a></span>&#8203;(java.lang.Class&lt;?&gt;&nbsp;p_class)</code></th>
 <td class="colLast">
 <div class="block">Creates an object from a Class object.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createOutputs(org.wildstang.framework.core.Outputs%5B%5D)">createOutputs</a></span>&#8203;(<a href="Outputs.html" title="interface in org.wildstang.framework.core">Outputs</a>[]&nbsp;p_outputs)</code></th>
 <td class="colLast">
 <div class="block">Uses RoboRIOOutputFactory to take an array of enumerations of Outputs and build an Output of each.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createSubsystems(org.wildstang.framework.core.Subsystems%5B%5D)">createSubsystems</a></span>&#8203;(<a href="Subsystems.html" title="interface in org.wildstang.framework.core">Subsystems</a>[]&nbsp;p_subsystems)</code></th>
 <td class="colLast">
 <div class="block">Takes an array of enumerations of Subsystems and build a Subsystem of each.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executeUpdate()">executeUpdate</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Runs update function of all managers and trackers belonging to the framework.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>static <a href="../auto/AutoManager.html" title="class in org.wildstang.framework.auto">AutoManager</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAutoManager()">getAutoManager</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the framework's AutoManager.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static <a href="../config/ConfigManager.html" title="class in org.wildstang.framework.config">ConfigManager</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getConfigManager()">getConfigManager</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the framework's ConfigManager.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static <a href="../io/InputManager.html" title="class in org.wildstang.framework.io">InputManager</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInputManager()">getInputManager</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the framework's InputManager.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static <a href="../io/OutputManager.html" title="class in org.wildstang.framework.io">OutputManager</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOutputManager()">getOutputManager</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the framework's OutputManager.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static <a href="../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStateTracker()">getStateTracker</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the framework's StateTracker.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static <a href="../subsystems/SubsystemManager.html" title="class in org.wildstang.framework.subsystems">SubsystemManager</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSubsystemManager()">getSubsystemManager</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the framework's SubsystemManager.</div>
-</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAutoManager(org.wildstang.framework.auto.AutoManager)">setAutoManager</a></span>&#8203;(<a href="../auto/AutoManager.html" title="class in org.wildstang.framework.auto">AutoManager</a>&nbsp;p_autoManager)</code></th>
-<td class="colLast">
-<div class="block">Sets the autonomous mode manager for the framework.</div>
 </td>
 </tr>
 </table>
@@ -346,6 +353,20 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a id="createAutoPrograms(org.wildstang.framework.core.AutoPrograms[])">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createAutoPrograms</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;createAutoPrograms&#8203;(<a href="AutoPrograms.html" title="interface in org.wildstang.framework.core">AutoPrograms</a>[]&nbsp;p_programs)</pre>
+<div class="block">Takes an array of enumerations of AutoPrograms and build an AutoProgram of each.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>p_programs</code> - All enumerations of AutoPrograms to be created.</dd>
+</dl>
+</li>
+</ul>
 <a id="getInputManager()">
 <!--   -->
 </a>
@@ -385,6 +406,20 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>SubsystemManager belonging to the framework.</dd>
+</dl>
+</li>
+</ul>
+<a id="getAutoManager()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAutoManager</h4>
+<pre class="methodSignature">public static&nbsp;<a href="../auto/AutoManager.html" title="class in org.wildstang.framework.auto">AutoManager</a>&nbsp;getAutoManager()</pre>
+<div class="block">Returns the framework's AutoManager.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>AutoManager belonging to the framework.</dd>
 </dl>
 </li>
 </ul>
@@ -429,20 +464,6 @@ extends java.lang.Object</pre>
 <dd><code>p_class</code> - Class to construct.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Constructed class.</dd>
-</dl>
-</li>
-</ul>
-<a id="setAutoManager(org.wildstang.framework.auto.AutoManager)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setAutoManager</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setAutoManager&#8203;(<a href="../auto/AutoManager.html" title="class in org.wildstang.framework.auto">AutoManager</a>&nbsp;p_autoManager)</pre>
-<div class="block">Sets the autonomous mode manager for the framework.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>p_autoManager</code> - New auto manager.</dd>
 </dl>
 </li>
 </ul>

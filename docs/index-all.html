@@ -100,6 +100,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Add a follower motor to the current motor.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#addFollower(int,boolean,boolean)">addFollower(int, boolean, boolean)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Add a follower motor to the current motor.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/InputManager.html#addInput(org.wildstang.framework.io.inputs.Input)">addInput(Input)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/InputManager.html" title="class in org.wildstang.framework.io">InputManager</a></dt>
 <dd>
 <div class="block">Adds an Input to the manager.</div>
@@ -178,6 +182,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Manages all autonomous and AutoPrograms for the framework.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoManager.html#%3Cinit%3E()">AutoManager()</a></span> - Constructor for class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoManager.html" title="class in org.wildstang.framework.auto">AutoManager</a></dt>
+<dd>
+<div class="block">Loads in AutoPrograms and adds selectors to the SmartDashboard.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/Robot.html#autonomousInit()">autonomousInit()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/Robot.html" title="class in org.wildstang.sample.robot">Robot</a></dt>
 <dd>
 <div class="block">Runs when autonomous is enabled.</div>
@@ -210,6 +218,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoProgram.html#%3Cinit%3E()">AutoProgram()</a></span> - Constructor for class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/wildstang/framework/core/AutoPrograms.html" title="interface in org.wildstang.framework.core"><span class="typeNameLink">AutoPrograms</span></a> - Interface in <a href="org/wildstang/framework/core/package-summary.html">org.wildstang.framework.core</a></dt>
+<dd>
+<div class="block">Used in implementations to enumerate AutoProgram.</div>
+</dd>
 <dt><a href="org/wildstang/framework/auto/steps/AutoSerialStepGroup.html" title="class in org.wildstang.framework.auto.steps"><span class="typeNameLink">AutoSerialStepGroup</span></a> - Class in <a href="org/wildstang/framework/auto/steps/package-summary.html">org.wildstang.framework.auto.steps</a></dt>
 <dd>
 <div class="block">Serial groups execute all contained steps sequentially.</div>
@@ -290,10 +302,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Remove all steps from the AutoProgram</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoManager.html#clear()">clear()</a></span> - Method in class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoManager.html" title="class in org.wildstang.framework.auto">AutoManager</a></dt>
-<dd>
-<div class="block">Resets the current program and all states.</div>
-</dd>
 <dt><a href="org/wildstang/framework/config/Config.html" title="class in org.wildstang.framework.config"><span class="typeNameLink">Config</span></a> - Class in <a href="org/wildstang/framework/config/package-summary.html">org.wildstang.framework.config</a></dt>
 <dd>
 <div class="block">This class represents the config parameters.</div>
@@ -329,6 +337,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/CoreUtils.html#%3Cinit%3E()">CoreUtils()</a></span> - Constructor for class org.wildstang.framework.<a href="org/wildstang/framework/CoreUtils.html" title="class in org.wildstang.framework">CoreUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/core/Core.html#createAutoPrograms(org.wildstang.framework.core.AutoPrograms%5B%5D)">createAutoPrograms(AutoPrograms[])</a></span> - Method in class org.wildstang.framework.core.<a href="org/wildstang/framework/core/Core.html" title="class in org.wildstang.framework.core">Core</a></dt>
+<dd>
+<div class="block">Takes an array of enumerations of AutoPrograms and build an AutoProgram of each.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/hardware/InputFactory.html#createInput(org.wildstang.framework.core.Inputs)">createInput(Inputs)</a></span> - Method in interface org.wildstang.framework.hardware.<a href="org/wildstang/framework/hardware/InputFactory.html" title="interface in org.wildstang.framework.hardware">InputFactory</a></dt>
 <dd>
 <div class="block">Creates an Input from an enumeration of WsInputs.</div>
@@ -383,6 +395,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Defines an AutoProgram's steps, executed in order added.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/TestProgram.html#defineSteps()">defineSteps()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/TestProgram.html" title="class in org.wildstang.sample.robot">TestProgram</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/steps/control/AutoStepDelay.html#delay">delay</a></span> - Variable in class org.wildstang.framework.auto.steps.control.<a href="org/wildstang/framework/auto/steps/control/AutoStepDelay.html" title="class in org.wildstang.framework.auto.steps.control">AutoStepDelay</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/wildstang/framework/io/inputs/DigitalInput.html" title="class in org.wildstang.framework.io.inputs"><span class="typeNameLink">DigitalInput</span></a> - Class in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
@@ -517,6 +531,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSInputs.html#DRIVER_START">DRIVER_START</a></span> - org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/wildstang/sample/robot/DriveStep.html" title="class in org.wildstang.sample.robot"><span class="typeNameLink">DriveStep</span></a> - Class in <a href="org/wildstang/sample/robot/package-summary.html">org.wildstang.sample.robot</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/DriveStep.html#%3Cinit%3E()">DriveStep()</a></span> - Constructor for class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/DriveStep.html" title="class in org.wildstang.sample.robot">DriveStep</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <a id="I:E">
 <!--   -->
@@ -589,6 +607,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Return the I2C address.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/core/Core.html#getAutoManager()">getAutoManager()</a></span> - Static method in class org.wildstang.framework.core.<a href="org/wildstang/framework/core/Core.html" title="class in org.wildstang.framework.core">Core</a></dt>
+<dd>
+<div class="block">Returns the framework's AutoManager.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsJSJoystickInputConfig.html#getAxis()">getAxis()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsJSJoystickInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsJSJoystickInputConfig</a></dt>
 <dd>
 <div class="block">Returns the joystick axis index.</div>
@@ -633,6 +655,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the hardware port number.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html#getChannel()">getChannel()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixFollowerConfig</a></dt>
+<dd>
+<div class="block">Returns the hardware port number.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsRelayConfig.html#getChannel()">getChannel()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsRelayConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsRelayConfig</a></dt>
 <dd>
 <div class="block">Returns the hardware port number.</div>
@@ -644,6 +670,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSolenoidConfig.html#getChannel()">getChannel()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSolenoidConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSolenoidConfig</a></dt>
 <dd>
 <div class="block">Return the channel number.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#getChannel()">getChannel()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dd>
+<div class="block">Returns the hardware port number.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html#getChannel()">getChannel()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxFollowerConfig</a></dt>
+<dd>
+<div class="block">Returns the hardware port number.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsTalonConfig.html#getChannel()">getChannel()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsTalonConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsTalonConfig</a></dt>
 <dd>
@@ -747,6 +781,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Return the default solenoid state.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#getDefault()">getDefault()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dd>
+<div class="block">Returns the default output value.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsTalonConfig.html#getDefault()">getDefault()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsTalonConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsTalonConfig</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -781,6 +819,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the current error value.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html#getFollowing()">getFollowing()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixFollowerConfig</a></dt>
+<dd>
+<div class="block">Returns the enumeration of followed motor controller.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html#getFollowing()">getFollowing()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxFollowerConfig</a></dt>
+<dd>
+<div class="block">Returns the name of the followed motor controller.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/InputManager.html#getHashMap()">getHashMap()</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/InputManager.html" title="class in org.wildstang.framework.io">InputManager</a></dt>
 <dd>
 <div class="block">Produces a HashMap of all managed Inputs.</div>
@@ -813,10 +859,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the framework's InputManager.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoManager.html#getInstance()">getInstance()</a></span> - Static method in class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoManager.html" title="class in org.wildstang.framework.auto">AutoManager</a></dt>
-<dd>
-<div class="block">Gets the instance of AutoManager or creates a new one.</div>
-</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/config/Config.html#getInt(java.lang.String,int)">getInt(String, int)</a></span> - Method in class org.wildstang.framework.config.<a href="org/wildstang/framework/config/Config.html" title="class in org.wildstang.framework.config">Config</a></dt>
 <dd>
 <div class="block">Gets the int corresponding to a key in the config, with default.</div>
@@ -834,14 +876,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Splits the input String on an equals (=) character, and returns the two parts
  as an array of two Strings.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSInputs.html#getLogging()">getLogging()</a></span> - Static method in enum org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></dt>
-<dd>
-<div class="block">Returns true if the Inputs are set to log.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSOutputs.html#getLogging()">getLogging()</a></span> - Static method in enum org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSOutputs.html" title="enum in org.wildstang.sample.robot">WSOutputs</a></dt>
-<dd>
-<div class="block">Returns true if the Outputs are set to log.</div>
-</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsAbsoluteEncoderConfig.html#getMaxVoltage()">getMaxVoltage()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsAbsoluteEncoderConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsAbsoluteEncoderConfig</a></dt>
 <dd>
 <div class="block">Returns the max voltage.</div>
@@ -853,6 +887,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSolenoidConfig.html#getModule()">getModule()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSolenoidConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSolenoidConfig</a></dt>
 <dd>
 <div class="block">Return the module number.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/core/AutoPrograms.html#getName()">getName()</a></span> - Method in interface org.wildstang.framework.core.<a href="org/wildstang/framework/core/AutoPrograms.html" title="interface in org.wildstang.framework.core">AutoPrograms</a></dt>
+<dd>
+<div class="block">Returns the name mapped to the AutoProgram.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/core/Inputs.html#getName()">getName()</a></span> - Method in interface org.wildstang.framework.core.<a href="org/wildstang/framework/core/Inputs.html" title="interface in org.wildstang.framework.core">Inputs</a></dt>
 <dd>
@@ -894,6 +932,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/SampleSubsystem.html#getName()">getName()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/SampleSubsystem.html" title="class in org.wildstang.sample.robot">SampleSubsystem</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSAutoPrograms.html#getName()">getName()</a></span> - Method in enum org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSAutoPrograms.html" title="enum in org.wildstang.sample.robot">WSAutoPrograms</a></dt>
+<dd>
+<div class="block">Returns the name mapped to the AutoProgram.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSInputs.html#getName()">getName()</a></span> - Method in enum org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></dt>
 <dd>
 <div class="block">Returns the name mapped to the Input.</div>
@@ -920,11 +962,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#getOutput()">getOutput()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
 <dd>
-<div class="block">Returns the current motor output percent..</div>
+<div class="block">Returns the current motor output percent.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#getOutput()">getOutput()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Returns the current motor output percent.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/OutputManager.html#getOutput(java.lang.String)">getOutput(String)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/OutputManager.html" title="class in org.wildstang.framework.io">OutputManager</a></dt>
 <dd>
 <div class="block">Returns a named Output from the manager.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/io/OutputManager.html#getOutput(org.wildstang.framework.core.Outputs)">getOutput(Outputs)</a></span> - Method in class org.wildstang.framework.io.<a href="org/wildstang/framework/io/OutputManager.html" title="class in org.wildstang.framework.io">OutputManager</a></dt>
+<dd>
+<div class="block">Returns an Output with a matching name from the manager.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/core/Core.html#getOutputManager()">getOutputManager()</a></span> - Static method in class org.wildstang.framework.core.<a href="org/wildstang/framework/core/Core.html" title="class in org.wildstang.framework.core">Core</a></dt>
 <dd>
@@ -962,6 +1012,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the quadrature position from a Talon's encoder.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#getPosition()">getPosition()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Returns the quadrature position from an encoder.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#getPreviousError()">getPreviousError()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>
 <div class="block">Returns the previous error value.</div>
@@ -969,6 +1023,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsMotionProfileControl.html#getProfileEnabled()">getProfileEnabled()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsMotionProfileControl.html" title="class in org.wildstang.hardware.roborio.inputs">WsMotionProfileControl</a></dt>
 <dd>
 <div class="block">Returns true if the motion profile is enabled.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/core/AutoPrograms.html#getProgramClass()">getProgramClass()</a></span> - Method in interface org.wildstang.framework.core.<a href="org/wildstang/framework/core/AutoPrograms.html" title="interface in org.wildstang.framework.core">AutoPrograms</a></dt>
+<dd>
+<div class="block">Returns AutoProgram's class.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSAutoPrograms.html#getProgramClass()">getProgramClass()</a></span> - Method in enum org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSAutoPrograms.html" title="enum in org.wildstang.sample.robot">WSAutoPrograms</a></dt>
+<dd>
+<div class="block">Returns AutoProgram's class.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsDigitalInputConfig.html#getPullup()">getPullup()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsDigitalInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsDigitalInputConfig</a></dt>
 <dd>
@@ -1126,6 +1188,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the quadrature velocity from a Talon's encoder.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#getVelocity()">getVelocity()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Returns the quadrature velocity from an encoder.</div>
+</dd>
 </dl>
 <a id="I:H">
 <!--   -->
@@ -1182,6 +1248,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/Log.LogLevel.html#INFO">INFO</a></span> - org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/Log.LogLevel.html" title="enum in org.wildstang.framework.logger">Log.LogLevel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoManager.html#init()">init()</a></span> - Method in class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoManager.html" title="class in org.wildstang.framework.auto">AutoManager</a></dt>
+<dd>
+<div class="block">Resets the current program and all states.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/config/ConfigManager.html#init()">init()</a></span> - Method in class org.wildstang.framework.config.<a href="org/wildstang/framework/config/ConfigManager.html" title="class in org.wildstang.framework.config">ConfigManager</a></dt>
 <dd>
 <div class="block">Create a new Config, belonging to the manager.</div>
@@ -1250,6 +1320,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Does nothing on initialization.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/DriveStep.html#initialize()">initialize()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/DriveStep.html" title="class in org.wildstang.sample.robot">DriveStep</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs"><span class="typeNameLink">Input</span></a> - Class in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
 <dd>
 <div class="block">Core input functions, primarily handling InputListeners.</div>
@@ -1258,6 +1330,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Constructor sets the name of the Input.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSSubsystems.html#INPUT_TEST">INPUT_TEST</a></span> - org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSSubsystems.html" title="enum in org.wildstang.sample.robot">WSSubsystems</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/wildstang/framework/hardware/InputConfig.html" title="interface in org.wildstang.framework.hardware"><span class="typeNameLink">InputConfig</span></a> - Interface in <a href="org/wildstang/framework/hardware/package-summary.html">org.wildstang.framework.hardware</a></dt>
 <dd>
 <div class="block">This interface could be deprecated as it provides no functionality
@@ -1315,6 +1389,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Interface for wrapping an Output to PID.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#isBrushless()">isBrushless()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dd>
+<div class="block">Returns true if the motor is brushless.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html#isBrushless()">isBrushless()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxFollowerConfig</a></dt>
+<dd>
+<div class="block">Returns true if the motor is brushless.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#isEnabled()">isEnabled()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
 <dd>
 <div class="block">Returns true if the Input is enabled, does nothing at this level.</div>
@@ -1339,9 +1421,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns if the controller should be inverted.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#isInverted()">isInverted()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dd>
+<div class="block">Returns if the controller should be inverted.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#isOnTarget()">isOnTarget()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>
 <div class="block">Returns true if the controller is in the target or stabilized state.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html#isOpposing()">isOpposing()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixFollowerConfig</a></dt>
+<dd>
+<div class="block">Returns if the follower should oppose the followed.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html#isOpposing()">isOpposing()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxFollowerConfig</a></dt>
+<dd>
+<div class="block">Returns if the follower should oppose the followed.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateLogger.html#isRunning()">isRunning()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateLogger.html" title="class in org.wildstang.framework.logger">StateLogger</a></dt>
 <dd>
@@ -1352,6 +1446,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns true if the controller is in the stabilized state.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html#isTalon()">isTalon()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixConfig</a></dt>
+<dd>
+<div class="block">Returns true if the motor controller is a Talon.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html#isTalon()">isTalon()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixFollowerConfig</a></dt>
 <dd>
 <div class="block">Returns true if the motor controller is a Talon.</div>
 </dd>
@@ -1483,6 +1581,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Do NOT add any static variables to this class, or any initialization at all.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/Main.html#%3Cinit%3E()">Main()</a></span> - Constructor for class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/Main.html" title="class in org.wildstang.sample.robot">Main</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSInputs.html#MANIPULATOR_DPAD_DOWN">MANIPULATOR_DPAD_DOWN</a></span> - org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSInputs.html#MANIPULATOR_DPAD_LEFT">MANIPULATOR_DPAD_LEFT</a></span> - org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></dt>
@@ -1556,6 +1656,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Does nothing, config values only affects start state.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSolenoid.html#notifyConfigChange()">notifyConfigChange()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSolenoid.html" title="class in org.wildstang.hardware.roborio.outputs">WsSolenoid</a></dt>
+<dd>
+<div class="block">Does nothing, config values only affects start state.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#notifyConfigChange()">notifyConfigChange()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
 <dd>
 <div class="block">Does nothing, config values only affects start state.</div>
 </dd>
@@ -1893,6 +1997,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Resets the position of a Talon's encoder.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#resetEncoder()">resetEncoder()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Resets the position of an encoder.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/controller/PidController.html#resetErrorSum()">resetErrorSum()</a></span> - Method in class org.wildstang.framework.pid.controller.<a href="org/wildstang/framework/pid/controller/PidController.html" title="class in org.wildstang.framework.pid.controller">PidController</a></dt>
 <dd>
 <div class="block">Resets the error sum to 0.</div>
@@ -2023,6 +2131,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Sets solenoid state to current value.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#sendDataToOutput()">sendDataToOutput()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Sets motor speed to current value, from -1.0 to 1.0.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsTalon.html#sendDataToOutput()">sendDataToOutput()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsTalon.html" title="class in org.wildstang.hardware.roborio.outputs">WsTalon</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -2033,15 +2145,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Sets Victor speed to current value, from -1.0 to 1.0.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/framework/core/Core.html#setAutoManager(org.wildstang.framework.auto.AutoManager)">setAutoManager(AutoManager)</a></span> - Method in class org.wildstang.framework.core.<a href="org/wildstang/framework/core/Core.html" title="class in org.wildstang.framework.core">Core</a></dt>
-<dd>
-<div class="block">Sets the autonomous mode manager for the framework.</div>
-</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#setBrake()">setBrake()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
 <dd>
 <div class="block">Sets the motor to brake mode, will not freely spin.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#setBrake()">setBrake()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Sets the motor to brake mode, will not freely spin.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#setCoast()">setCoast()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Sets the motor to coast mode, will freely spin.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#setCoast()">setCoast()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
 <dd>
 <div class="block">Sets the motor to coast mode, will freely spin.</div>
 </dd>
@@ -2050,6 +2166,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Set the 3 PID constants.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#setCurrentLimit(int,int,int)">setCurrentLimit(int, int, int)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Sets the current limit of the motor controller.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#setCurrentLimit(int,int,int)">setCurrentLimit(int, int, int)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
 <dd>
 <div class="block">Sets the current limit of the motor controller.</div>
 </dd>
@@ -2118,6 +2238,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Sets the set point.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#setSpeed(double)">setSpeed(double)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
+<dd>
+<div class="block">Sets the motor value and applys it to the controller.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#setSpeed(double)">setSpeed(double)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
 <dd>
 <div class="block">Sets the motor value and applys it to the controller.</div>
 </dd>
@@ -2277,6 +2401,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Sets the motors to 0 speed.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#stop()">stop()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Sets the motors to 0 speed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#stopTrackingState()">stopTrackingState()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
 <dd>
 <div class="block">Pauses state tracking.</div>
@@ -2313,8 +2441,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Runs repeatedly while teleoperated is enabled.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSOutputs.html#TEST_MOTOR">TEST_MOTOR</a></span> - org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSOutputs.html" title="enum in org.wildstang.sample.robot">WSOutputs</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/Robot.html#testInit()">testInit()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/Robot.html" title="class in org.wildstang.sample.robot">Robot</a></dt>
 <dd>
 <div class="block">Runs when test is enabled.</div>
@@ -2323,6 +2449,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Runs repeatedly while test is enabled.</div>
 </dd>
+<dt><a href="org/wildstang/sample/robot/TestProgram.html" title="class in org.wildstang.sample.robot"><span class="typeNameLink">TestProgram</span></a> - Class in <a href="org/wildstang/sample/robot/package-summary.html">org.wildstang.sample.robot</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/TestProgram.html#%3Cinit%3E()">TestProgram()</a></span> - Constructor for class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/TestProgram.html" title="class in org.wildstang.sample.robot">TestProgram</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/steps/control/AutoStepDelay.html#timer">timer</a></span> - Variable in class org.wildstang.framework.auto.steps.control.<a href="org/wildstang/framework/auto/steps/control/AutoStepDelay.html" title="class in org.wildstang.framework.auto.steps.control">AutoStepDelay</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoProgram.html#toString()">toString()</a></span> - Method in class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></dt>
@@ -2429,6 +2559,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Builds a JSON String describing the Phoenix config.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html#toString()">toString()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixFollowerConfig</a></dt>
+<dd>
+<div class="block">Builds a JSON String describing the Phoenix config.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsRelayConfig.html#toString()">toString()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsRelayConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsRelayConfig</a></dt>
 <dd>
 <div class="block">Builds a JSON String describing the relay config.</div>
@@ -2449,6 +2583,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Builds a JSON String describing the solenoid config.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#toString()">toString()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dd>
+<div class="block">Builds a JSON String describing the Spark Max config.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html#toString()">toString()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxFollowerConfig</a></dt>
+<dd>
+<div class="block">Builds a JSON String describing the Phoenix config.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsTalonConfig.html#toString()">toString()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsTalonConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsTalonConfig</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -2459,6 +2601,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Builds a JSON String describing the Victor config.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/DriveStep.html#toString()">toString()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/DriveStep.html" title="class in org.wildstang.sample.robot">DriveStep</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/TestProgram.html#toString()">toString()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/TestProgram.html" title="class in org.wildstang.sample.robot">TestProgram</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <a id="I:U">
 <!--   -->
@@ -2526,6 +2672,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Reads and calculates the distance.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/DriveStep.html#update()">update()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/DriveStep.html" title="class in org.wildstang.sample.robot">DriveStep</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/InputTestSubsystem.html#update()">update()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/InputTestSubsystem.html" title="class in org.wildstang.sample.robot">InputTestSubsystem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/SampleSubsystem.html#update()">update()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/SampleSubsystem.html" title="class in org.wildstang.sample.robot">SampleSubsystem</a></dt>
@@ -2549,6 +2697,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsRelayState.html#valueOf(java.lang.String)">valueOf(String)</a></span> - Static method in enum org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsRelayState.html" title="enum in org.wildstang.hardware.roborio.outputs">WsRelayState</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this type with the specified name.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSAutoPrograms.html#valueOf(java.lang.String)">valueOf(String)</a></span> - Static method in enum org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSAutoPrograms.html" title="enum in org.wildstang.sample.robot">WSAutoPrograms</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </dd>
@@ -2580,6 +2732,11 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsRelayState.html#values()">values()</a></span> - Static method in enum org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsRelayState.html" title="enum in org.wildstang.hardware.roborio.outputs">WsRelayState</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum type, in
+the order they are declared.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSAutoPrograms.html#values()">values()</a></span> - Static method in enum org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSAutoPrograms.html" title="enum in org.wildstang.sample.robot">WSAutoPrograms</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum type, in
 the order they are declared.</div>
@@ -2682,6 +2839,10 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsAnalogOutputConfig.html#%3Cinit%3E(int,double)">WsAnalogOutputConfig(int, double)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsAnalogOutputConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsAnalogOutputConfig</a></dt>
 <dd>
 <div class="block">Construct the analog output config.</div>
+</dd>
+<dt><a href="org/wildstang/sample/robot/WSAutoPrograms.html" title="enum in org.wildstang.sample.robot"><span class="typeNameLink">WSAutoPrograms</span></a> - Enum in <a href="org/wildstang/sample/robot/package-summary.html">org.wildstang.sample.robot</a></dt>
+<dd>
+<div class="block">All active AutoPrograms are enumerated here.</div>
 </dd>
 <dt><a href="org/wildstang/hardware/roborio/inputs/config/WsCameraInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config"><span class="typeNameLink">WsCameraInputConfig</span></a> - Class in <a href="org/wildstang/hardware/roborio/inputs/config/package-summary.html">org.wildstang.hardware.roborio.inputs.config</a></dt>
 <dd>
@@ -2919,6 +3080,14 @@ the order they are declared.</div>
 <dd>
 <div class="block">Construct the Phoenix config.</div>
 </dd>
+<dt><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config"><span class="typeNameLink">WsPhoenixFollowerConfig</span></a> - Class in <a href="org/wildstang/hardware/roborio/outputs/config/package-summary.html">org.wildstang.hardware.roborio.outputs.config</a></dt>
+<dd>
+<div class="block">Contains configurations for Phoenix Talon and Victor motor controller followers.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html#%3Cinit%3E(org.wildstang.framework.core.Outputs,int,boolean,boolean)">WsPhoenixFollowerConfig(Outputs, int, boolean, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixFollowerConfig</a></dt>
+<dd>
+<div class="block">Construct the Phoenix config.</div>
+</dd>
 <dt><a href="org/wildstang/hardware/roborio/outputs/WsRelay.html" title="class in org.wildstang.hardware.roborio.outputs"><span class="typeNameLink">WsRelay</span></a> - Class in <a href="org/wildstang/hardware/roborio/outputs/package-summary.html">org.wildstang.hardware.roborio.outputs</a></dt>
 <dd>
 <div class="block">Controls a relay.</div>
@@ -3042,6 +3211,38 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSolenoidConfig.html#%3Cinit%3E(int,int,boolean)">WsSolenoidConfig(int, int, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSolenoidConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSolenoidConfig</a></dt>
 <dd>
 <div class="block">Construct the solenoid config.</div>
+</dd>
+<dt><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs"><span class="typeNameLink">WsSparkMax</span></a> - Class in <a href="org/wildstang/hardware/roborio/outputs/package-summary.html">org.wildstang.hardware.roborio.outputs</a></dt>
+<dd>
+<div class="block">Controls a Spark Max motor controller.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#%3Cinit%3E(java.lang.String,int,boolean,double)">WsSparkMax(String, int, boolean, double)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Constructs the motor controller from config.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#%3Cinit%3E(java.lang.String,int,boolean,double,boolean)">WsSparkMax(String, int, boolean, double, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
+<dd>
+<div class="block">Constructs the motor controller from config.</div>
+</dd>
+<dt><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config"><span class="typeNameLink">WsSparkMaxConfig</span></a> - Class in <a href="org/wildstang/hardware/roborio/outputs/config/package-summary.html">org.wildstang.hardware.roborio.outputs.config</a></dt>
+<dd>
+<div class="block">Contains configurations for Spark Max motor controllers.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#%3Cinit%3E(int,boolean,double)">WsSparkMaxConfig(int, boolean, double)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dd>
+<div class="block">Construct the Phoenix config.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#%3Cinit%3E(int,boolean,double,boolean)">WsSparkMaxConfig(int, boolean, double, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dd>
+<div class="block">Construct the Phoenix config.</div>
+</dd>
+<dt><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config"><span class="typeNameLink">WsSparkMaxFollowerConfig</span></a> - Class in <a href="org/wildstang/hardware/roborio/outputs/config/package-summary.html">org.wildstang.hardware.roborio.outputs.config</a></dt>
+<dd>
+<div class="block">Contains configurations for Spark Max motor controller followers.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html#%3Cinit%3E(java.lang.String,int,boolean,boolean)">WsSparkMaxFollowerConfig(String, int, boolean, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxFollowerConfig</a></dt>
+<dd>
+<div class="block">Construct the Phoenix config.</div>
 </dd>
 <dt><a href="org/wildstang/sample/robot/WSSubsystems.html" title="enum in org.wildstang.sample.robot"><span class="typeNameLink">WSSubsystems</span></a> - Enum in <a href="org/wildstang/sample/robot/package-summary.html">org.wildstang.sample.robot</a></dt>
 <dd>

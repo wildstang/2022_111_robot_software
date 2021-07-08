@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":9,"i5":9};
+var data = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -145,8 +145,8 @@ implements <a href="../../framework/core/Inputs.html" title="interface in org.wi
 <div class="block">Input mappings are stored here.
  We currently use two Xbox controller for input, driver and manipulator, plus additional sensors.
  Below each button, axis, and sensor is enumerated with their appropriated IDs.
- Unclaimed inputs should have a name representing the button.
- Claimed inputs by changing the name to represent the control.</div>
+ Unclaimed inputs should have a name representing the input.
+ Claim inputs by changing the name to represent the output.</div>
 </li>
 </ul>
 </div>
@@ -352,34 +352,27 @@ implements <a href="../../framework/core/Inputs.html" title="interface in org.wi
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>static boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLogging()">getLogging</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Returns true if the Inputs are set to log.</div>
-</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getName()">getName</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the name mapped to the Input.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTrackingState()">isTrackingState</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns true if the Logger should track the Input's state.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#valueOf(java.lang.String)">valueOf</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#values()">values</a></span>()</code></th>
 <td class="colLast">
@@ -865,7 +858,7 @@ not permitted.)</div>
 <a id="isTrackingState()">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>isTrackingState</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isTrackingState()</pre>
@@ -875,20 +868,6 @@ not permitted.)</div>
 <dd><code><a href="../../framework/core/Inputs.html#isTrackingState()">isTrackingState</a></code>&nbsp;in interface&nbsp;<code><a href="../../framework/core/Inputs.html" title="interface in org.wildstang.framework.core">Inputs</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>True if the StateTracker should track this Input.</dd>
-</dl>
-</li>
-</ul>
-<a id="getLogging()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>getLogging</h4>
-<pre class="methodSignature">public static&nbsp;boolean&nbsp;getLogging()</pre>
-<div class="block">Returns true if the Inputs are set to log.</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>True if set to log.</dd>
 </dl>
 </li>
 </ul>
