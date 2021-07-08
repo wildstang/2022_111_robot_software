@@ -3,6 +3,7 @@ package org.wildstang.hardware.roborio;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.wildstang.framework.core.Core;
 import org.wildstang.framework.core.Outputs;
 import org.wildstang.framework.hardware.OutputConfig;
 import org.wildstang.framework.hardware.OutputFactory;
@@ -14,6 +15,7 @@ import org.wildstang.hardware.roborio.outputs.WsPhoenix;
 import org.wildstang.hardware.roborio.outputs.WsRelay;
 import org.wildstang.hardware.roborio.outputs.WsServo;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
+import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.hardware.roborio.outputs.WsTalon;
 import org.wildstang.hardware.roborio.outputs.WsVictor;
 import org.wildstang.hardware.roborio.outputs.WsRemoteAnalogOutput;
@@ -22,9 +24,12 @@ import org.wildstang.hardware.roborio.outputs.config.WsDigitalOutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsDoubleSolenoidConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsI2COutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsPhoenixFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsRelayConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsServoConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSolenoidConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsTalonConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsVictorConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsRemoteAnalogOutputConfig;
@@ -90,6 +95,27 @@ public class RoboRIOOutputFactory implements OutputFactory {
             WsPhoenixConfig c = (WsPhoenixConfig) config;
             out = new WsPhoenix(p_output.getName(), c.getChannel(), c.getDefault(),
                                 c.isTalon(), c.isInverted());
+        }
+        // Note a WsPhoenixFollower must be defined after its corresponding WsPhoenix
+        else if (config instanceof WsPhoenixFollowerConfig) {
+            WsPhoenixFollowerConfig c = (WsPhoenixFollowerConfig) config;
+            // Returns the follwed WsPhoenix because a return is required
+            // and duplicate outputs are thrown out when encountered.
+            out = Core.getOutputManager().getOutput(c.getFollowing());
+            ((WsPhoenix) out).addFollower(c.getChannel(), c.isTalon(), c.isOpposing());
+        }
+        else if (config instanceof WsSparkMaxConfig) {
+            WsSparkMaxConfig c = (WsSparkMaxConfig) config;
+            out = new WsSparkMax(p_output.getName(), c.getChannel(), c.isBrushless(),
+                                    c.getDefault(), c.isInverted());
+        }
+        // Note a WsSparkMaxFollower must be defined after its corresponding WsSparkMax
+        else if (config instanceof WsSparkMaxFollowerConfig) {
+            WsSparkMaxFollowerConfig c = (WsSparkMaxFollowerConfig) config;
+            // Returns the follwed WsSparkMax because a return is required
+            // and duplicate outputs are thrown out when encountered.
+            out = Core.getOutputManager().getOutput(c.getFollowing());
+            ((WsSparkMax) out).addFollower(c.getChannel(), c.isBrushless(), c.isOpposing());
         }
         else if (config instanceof WsVictorConfig) {
             WsVictorConfig c = (WsVictorConfig) config;

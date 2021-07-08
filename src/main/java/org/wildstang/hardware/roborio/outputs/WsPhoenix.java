@@ -81,7 +81,6 @@ public class WsPhoenix extends AnalogOutput {
 
     /**
      * Add a follower motor to the current motor.
-     * TODO: this method doesn't really comply with the WsOuputs model, technically a follower could be added twice
      * @param canConstant CAN constant of the new follower motor.
      * @param talon True if Talon, false if Victor.
      * @param oppose True if the follow should oppose the direction of this motor.
@@ -158,7 +157,7 @@ public class WsPhoenix extends AnalogOutput {
     }
 
     /**
-     * Returns the current motor output percent..
+     * Returns the current motor output percent.
      * @return Current motor output as a percent.
      */
     public double getOutput() {
