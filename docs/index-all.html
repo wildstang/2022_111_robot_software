@@ -2405,7 +2405,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#stop()">stop()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
 <dd>
-<div class="block">Sets the motors to 0 speed.</div>
+<div class="block">Sets the motors to 0 speed and enables brake mode.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#stop()">stop()</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
 <dd>
@@ -3072,17 +3072,25 @@ the order they are declared.</div>
 <dd>
 <div class="block">Contains configurations for Phoenix Talon and Victor motor controllers.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html#%3Cinit%3E(int,double,boolean)">WsPhoenixConfig(int, double, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixConfig</a></dt>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html#%3Cinit%3E(int,boolean)">WsPhoenixConfig(int, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixConfig</a></dt>
 <dd>
 <div class="block">Construct the Phoenix config.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html#%3Cinit%3E(int,double,boolean,boolean)">WsPhoenixConfig(int, double, boolean, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixConfig</a></dt>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html#%3Cinit%3E(int,boolean,boolean)">WsPhoenixConfig(int, boolean, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixConfig</a></dt>
+<dd>
+<div class="block">Construct the Phoenix config.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html#%3Cinit%3E(int,boolean,boolean,double)">WsPhoenixConfig(int, boolean, boolean, double)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixConfig</a></dt>
 <dd>
 <div class="block">Construct the Phoenix config.</div>
 </dd>
 <dt><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config"><span class="typeNameLink">WsPhoenixFollowerConfig</span></a> - Class in <a href="org/wildstang/hardware/roborio/outputs/config/package-summary.html">org.wildstang.hardware.roborio.outputs.config</a></dt>
 <dd>
 <div class="block">Contains configurations for Phoenix Talon and Victor motor controller followers.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html#%3Cinit%3E(org.wildstang.framework.core.Outputs,int,boolean)">WsPhoenixFollowerConfig(Outputs, int, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixFollowerConfig</a></dt>
+<dd>
+<div class="block">Construct the Phoenix config.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html#%3Cinit%3E(org.wildstang.framework.core.Outputs,int,boolean,boolean)">WsPhoenixFollowerConfig(Outputs, int, boolean, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsPhoenixFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsPhoenixFollowerConfig</a></dt>
 <dd>
@@ -3228,17 +3236,25 @@ the order they are declared.</div>
 <dd>
 <div class="block">Contains configurations for Spark Max motor controllers.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#%3Cinit%3E(int,boolean,double)">WsSparkMaxConfig(int, boolean, double)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#%3Cinit%3E(int,boolean)">WsSparkMaxConfig(int, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
 <dd>
 <div class="block">Construct the Phoenix config.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#%3Cinit%3E(int,boolean,double,boolean)">WsSparkMaxConfig(int, boolean, double, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#%3Cinit%3E(int,boolean,boolean)">WsSparkMaxConfig(int, boolean, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
+<dd>
+<div class="block">Construct the Phoenix config.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html#%3Cinit%3E(int,boolean,boolean,double)">WsSparkMaxConfig(int, boolean, boolean, double)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxConfig</a></dt>
 <dd>
 <div class="block">Construct the Phoenix config.</div>
 </dd>
 <dt><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config"><span class="typeNameLink">WsSparkMaxFollowerConfig</span></a> - Class in <a href="org/wildstang/hardware/roborio/outputs/config/package-summary.html">org.wildstang.hardware.roborio.outputs.config</a></dt>
 <dd>
 <div class="block">Contains configurations for Spark Max motor controller followers.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html#%3Cinit%3E(java.lang.String,int,boolean)">WsSparkMaxFollowerConfig(String, int, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxFollowerConfig</a></dt>
+<dd>
+<div class="block">Construct the Phoenix config.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html#%3Cinit%3E(java.lang.String,int,boolean,boolean)">WsSparkMaxFollowerConfig(String, int, boolean, boolean)</a></span> - Constructor for class org.wildstang.hardware.roborio.outputs.config.<a href="org/wildstang/hardware/roborio/outputs/config/WsSparkMaxFollowerConfig.html" title="class in org.wildstang.hardware.roborio.outputs.config">WsSparkMaxFollowerConfig</a></dt>
 <dd>
