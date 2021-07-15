@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
  */
 public class WsI2CInput extends I2CInput {
 
-    private I2C i2c;
+    protected I2C i2c;
 
     /**
      * Construct the I2C input.
@@ -31,9 +31,7 @@ public class WsI2CInput extends I2CInput {
     @Override
     protected byte[] readRawValue() {
         byte rcvBytes[] = new byte[1];
-
         i2c.readOnly(rcvBytes, 1);
-
-        return rcvBytes;// data;
+        return rcvBytes;
     }
 }

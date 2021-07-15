@@ -98,8 +98,6 @@ public abstract class Output {
         return m_stateTracker;
     }
 
-    // TODO: Actually do something with m_enabled?
-
     /**
      * Enables the Output, does nothing at the Input level.
      */

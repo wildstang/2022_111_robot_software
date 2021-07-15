@@ -1,18 +1,12 @@
 package org.wildstang.hardware.roborio.inputs;
 
-import java.util.TimerTask;
-
-import org.wildstang.framework.io.inputs.DiscreteInput;
-
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Reads a LIDAR sensor.
- * TODO: this should probably extend I2C.
  */
-public class WsLidarSensor extends DiscreteInput {
+public class WsLidarSensor extends WsContinuousI2CInput {
 
     /* Code to write to config register to begin measuring */
     private static final int INITIATE_MEASUREMENT = 0x04;
@@ -26,12 +20,7 @@ public class WsLidarSensor extends DiscreteInput {
     private static final int LIDAR_CONFIG_REGISTER = 0x00;
     private static final int LIDAR_DISTANCE_REGISTER = 0x8f;
 
-    private I2C i2c;
-    private byte[] distance;
-    private java.util.Timer updater;
     private Integer[] recordedDistances = new Integer[DISTANCE_HISTORY_LENGTH];
-
-    private final int LIDAR_ADDR;
 
     /**
      * Construct the sensor.
@@ -39,24 +28,15 @@ public class WsLidarSensor extends DiscreteInput {
      * @param port I2C port the sensor is connected to.
      * @param p_address I2C address of the sensor.
      */
-    public WsLidarSensor(String name, Port port, int p_address) {
-        super(name);
-
-        LIDAR_ADDR = p_address;
-        i2c = new I2C(port, LIDAR_ADDR);
-
-        distance = new byte[2];
-
-        updater = new java.util.Timer();
-        start();
+    public WsLidarSensor(String name, Port port, int p_address, int updateInterval) {
+        super(name, port, p_address, updateInterval);
     }
 
     /**
-     * Reads the raw value from the sensor.
-     * @return sensor value.
+     * Returns a single integer value.
+     * @return Int representation of latest sensor reading.
      */
-    @Override
-    protected int readRawValue() {
+    public int getIntValue() {
         return getSmoothedDistance();
     }
 
@@ -92,73 +72,22 @@ public class WsLidarSensor extends DiscreteInput {
     }
 
     /**
-     * Returns 0, from getDistance().
-     * @return 0.
-     */
-    public double pidGet() {
-        return getDistance();
-    }
-
-    /**
-     * Begins 10 Hz polling of the sensor.
-     */
-    public void start() {
-        updater.scheduleAtFixedRate(new LIDARUpdater(), 0, 100);
-    }
-
-    /**
-     * Begins polling for a given period.
-     * @param period Polling period in milliseconds.
-     */
-    public void start(int period) {
-        updater.scheduleAtFixedRate(new LIDARUpdater(), 0, period);
-    }
-
-    /**
-     * Stops sensor polling.
-     */
-    public void stop() {
-        updater.cancel();
-        updater = new java.util.Timer();
-    }
-
-    /**
      * Reads and calculates the distance.
      */
-    public void update() {
+    public void updateSensor() {
         i2c.write(LIDAR_CONFIG_REGISTER, INITIATE_MEASUREMENT);
         Timer.delay(MEASUREMENT_DELAY); // Delay for measurement to be taken
-        i2c.read(LIDAR_DISTANCE_REGISTER, 2, distance); // Read in measurement
+        i2c.read(LIDAR_DISTANCE_REGISTER, 2, currentValue); // Read in measurement
         Timer.delay(INTER_MEASUREMENT_DELAY); // Delay to prevent over polling
 
         // Store most recent results in a sliding window
         for (int i = 0; i < recordedDistances.length; i++) {
             if (i < recordedDistances.length - 1) {
                 recordedDistances[i] = recordedDistances[i + 1];
-            } else {
-                recordedDistances[i] = Integer.valueOf(getDistance());
             }
-        }
-    }
-
-    /**
-     * Timer to poll the sensor every 10 ms.
-     */
-    private class LIDARUpdater extends TimerTask {
-
-        /**
-         * Runnable run() that runs update() every 10 ms.
-         */
-        @Override
-        public void run() {
-            while (true) {
-                update();
-                try {
-                    // Why do we sleep here and also delay on line 84? Suspicious... FIXME
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            else {
+                // honestly this is a guess, previous version always had 0
+                recordedDistances[i] = (int) currentValue[0];
             }
         }
     }

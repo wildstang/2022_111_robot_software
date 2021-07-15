@@ -375,6 +375,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoProgram.html#currentStep">currentStep</a></span> - Variable in class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoProgram.html" title="class in org.wildstang.framework.auto">AutoProgram</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html#currentValue">currentValue</a></span> - Variable in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsContinuousI2CInput</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <a id="I:D">
 <!--   -->
@@ -863,6 +865,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the integral error threshold.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html#getIntValue()">getIntValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsContinuousI2CInput</a></dt>
+<dd>
+<div class="block">Returns a single integer value.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#getIntValue()">getIntValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
+<dd>
+<div class="block">Returns a single integer value.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/logger/StateTracker.html#getIoSet()">getIoSet()</a></span> - Method in class org.wildstang.framework.logger.<a href="org/wildstang/framework/logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></dt>
 <dd>
 <div class="block">Returns the current IOSet, it may be null.</div>
@@ -1132,6 +1142,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the type of IO for the state.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsContinuousI2CInputConfig.html#getUpdateInterval()">getUpdateInterval()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsContinuousI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsContinuousI2CInputConfig</a></dt>
+<dd>
+<div class="block">Return the update interval in ms.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/AnalogInput.html#getValue()">getValue()</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/AnalogInput.html" title="class in org.wildstang.framework.io.inputs">AnalogInput</a></dt>
 <dd>
 <div class="block">Returns the latest stored value from the Input.</div>
@@ -1213,6 +1227,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h2 class="title">I</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/PIDConstants.html#i">i</a></span> - Variable in class org.wildstang.framework.pid.<a href="org/wildstang/framework/pid/PIDConstants.html" title="class in org.wildstang.framework.pid">PIDConstants</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsI2CInput.html#i2c">i2c</a></span> - Variable in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsI2CInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsI2CInput</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/wildstang/framework/io/inputs/I2CInput.html" title="class in org.wildstang.framework.io.inputs"><span class="typeNameLink">I2CInput</span></a> - Class in <a href="org/wildstang/framework/io/inputs/package-summary.html">org.wildstang.framework.io.inputs</a></dt>
 <dd>
@@ -1811,10 +1827,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Constructs and initialized controller values.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#pidGet()">pidGet()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
-<dd>
-<div class="block">Returns 0, from getDistance().</div>
-</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/pid/input/IPidInput.html#pidRead()">pidRead()</a></span> - Method in interface org.wildstang.framework.pid.input.<a href="org/wildstang/framework/pid/input/IPidInput.html" title="interface in org.wildstang.framework.pid.input">IPidInput</a></dt>
 <dd>
 <div class="block">Gets a value from an Input.</div>
@@ -1899,6 +1911,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Reads the value from the analog input.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsContinuousI2CInput</a></dt>
+<dd>
+<div class="block">Reads the value from the sensor.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsDigitalInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsDigitalInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsDigitalInput</a></dt>
 <dd>
 <div class="block">Reads the value from the digital input.</div>
@@ -1906,10 +1922,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsDPadButton.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsDPadButton.html" title="class in org.wildstang.hardware.roborio.inputs">WsDPadButton</a></dt>
 <dd>
 <div class="block">Reads the value from the d-pad and appropriately sets button press.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsHallEffectInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsHallEffectInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsHallEffectInput</a></dt>
-<dd>
-<div class="block">Reads the value from the hall effect sensor.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsI2CInput.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsI2CInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsI2CInput</a></dt>
 <dd>
@@ -1926,10 +1938,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsJoystickToggleButton.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsJoystickToggleButton.html" title="class in org.wildstang.hardware.roborio.inputs">WsJoystickToggleButton</a></dt>
 <dd>
 <div class="block">Returns a toggled value each time the button is pressed.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
-<dd>
-<div class="block">Reads the raw value from the sensor.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsMotionProfileControl.html#readRawValue()">readRawValue()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsMotionProfileControl.html" title="class in org.wildstang.hardware.roborio.inputs">WsMotionProfileControl</a></dt>
 <dd>
@@ -2245,11 +2253,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html#setSpeed(double)">setSpeed(double)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsPhoenix.html" title="class in org.wildstang.hardware.roborio.outputs">WsPhoenix</a></dt>
 <dd>
-<div class="block">Sets the motor value and applys it to the controller.</div>
+<div class="block">Wraps setValue().</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html#setSpeed(double)">setSpeed(double)</a></span> - Method in class org.wildstang.hardware.roborio.outputs.<a href="org/wildstang/hardware/roborio/outputs/WsSparkMax.html" title="class in org.wildstang.hardware.roborio.outputs">WsSparkMax</a></dt>
 <dd>
-<div class="block">Sets the motor value and applys it to the controller.</div>
+<div class="block">Wraps setValue().</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/io/inputs/Input.html#setStateTracker(org.wildstang.framework.logger.StateTracker)">setStateTracker(StateTracker)</a></span> - Method in class org.wildstang.framework.io.inputs.<a href="org/wildstang/framework/io/inputs/Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></dt>
 <dd>
@@ -2341,17 +2349,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Resume logging.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#start()">start()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html#start(int)">start(int)</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsContinuousI2CInput</a></dt>
 <dd>
-<div class="block">Begins 10 Hz polling of the sensor.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsHallEffectInput.html#start(int)">start(int)</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsHallEffectInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsHallEffectInput</a></dt>
-<dd>
-<div class="block">Begin polling the hall effect sensor.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#start(int)">start(int)</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
-<dd>
-<div class="block">Begins polling for a given period.</div>
+<div class="block">Begin polling the sensor.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/framework/auto/AutoManager.html#startCurrentProgram()">startCurrentProgram()</a></span> - Method in class org.wildstang.framework.auto.<a href="org/wildstang/framework/auto/AutoManager.html" title="class in org.wildstang.framework.auto">AutoManager</a></dt>
 <dd>
@@ -2399,7 +2399,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Pause logging.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#stop()">stop()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html#stop()">stop()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsContinuousI2CInput</a></dt>
 <dd>
 <div class="block">Stops sensor polling.</div>
 </dd>
@@ -2447,8 +2447,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Runs repeatedly while teleoperated is enabled.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/WSOutputs.html#TEST_MOTOR">TEST_MOTOR</a></span> - org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/WSOutputs.html" title="enum in org.wildstang.sample.robot">WSOutputs</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/robot/Robot.html#testInit()">testInit()</a></span> - Method in class org.wildstang.sample.robot.<a href="org/wildstang/sample/robot/Robot.html" title="class in org.wildstang.sample.robot">Robot</a></dt>
 <dd>
 <div class="block">Runs when test is enabled.</div>
@@ -2510,6 +2508,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsAnalogInputConfig.html#toString()">toString()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsAnalogInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsAnalogInputConfig</a></dt>
 <dd>
 <div class="block">Builds a JSON String describing the analog output config.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsContinuousI2CInputConfig.html#toString()">toString()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsContinuousI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsContinuousI2CInputConfig</a></dt>
+<dd>
+<div class="block">Builds a JSON String describing the I2C input config.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsDigitalInputConfig.html#toString()">toString()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsDigitalInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsDigitalInputConfig</a></dt>
 <dd>
@@ -2670,14 +2672,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Updates all subsystems registered with the manager.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#update()">update()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
-<dd>
-<div class="block">Reads and calculates the distance.</div>
-</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/subsystems/InputTestSubsystem.html#update()">update()</a></span> - Method in class org.wildstang.sample.subsystems.<a href="org/wildstang/sample/subsystems/InputTestSubsystem.html" title="class in org.wildstang.sample.subsystems">InputTestSubsystem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/sample/subsystems/SampleSubsystem.html#update()">update()</a></span> - Method in class org.wildstang.sample.subsystems.<a href="org/wildstang/sample/subsystems/SampleSubsystem.html" title="class in org.wildstang.sample.subsystems">SampleSubsystem</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#updateSensor()">updateSensor()</a></span> - Method in class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
+<dd>
+<div class="block">Reads and calculates the distance.</div>
+</dd>
 </dl>
 <a id="I:V">
 <!--   -->
@@ -2852,6 +2854,26 @@ the order they are declared.</div>
 <dd>
 <div class="block">Construct the camera config.</div>
 </dd>
+<dt><a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html" title="class in org.wildstang.hardware.roborio.inputs"><span class="typeNameLink">WsContinuousI2CInput</span></a> - Class in <a href="org/wildstang/hardware/roborio/inputs/package-summary.html">org.wildstang.hardware.roborio.inputs</a></dt>
+<dd>
+<div class="block">Contiunously reads a sensor using I2C.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html#%3Cinit%3E(java.lang.String,edu.wpi.first.wpilibj.I2C.Port,int,int)">WsContinuousI2CInput(String, I2C.Port, int, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsContinuousI2CInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsContinuousI2CInput</a></dt>
+<dd>
+<div class="block">Construct the hall effect sensor.</div>
+</dd>
+<dt><a href="org/wildstang/hardware/roborio/inputs/config/WsContinuousI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config"><span class="typeNameLink">WsContinuousI2CInputConfig</span></a> - Class in <a href="org/wildstang/hardware/roborio/inputs/config/package-summary.html">org.wildstang.hardware.roborio.inputs.config</a></dt>
+<dd>
+<div class="block">Wrapper class to identify hall effect sensors separate from I2C inputs.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsContinuousI2CInputConfig.html#%3Cinit%3E(edu.wpi.first.wpilibj.I2C.Port,int)">WsContinuousI2CInputConfig(I2C.Port, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsContinuousI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsContinuousI2CInputConfig</a></dt>
+<dd>
+<div class="block">Construct the hall effect sensor config with the default update interval (20 ms).</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsContinuousI2CInputConfig.html#%3Cinit%3E(edu.wpi.first.wpilibj.I2C.Port,int,int)">WsContinuousI2CInputConfig(I2C.Port, int, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsContinuousI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsContinuousI2CInputConfig</a></dt>
+<dd>
+<div class="block">Construct the hall effect sensor config.</div>
+</dd>
 <dt><a href="org/wildstang/hardware/roborio/inputs/WsDigitalInput.html" title="class in org.wildstang.hardware.roborio.inputs"><span class="typeNameLink">WsDigitalInput</span></a> - Class in <a href="org/wildstang/hardware/roborio/inputs/package-summary.html">org.wildstang.hardware.roborio.inputs</a></dt>
 <dd>
 <div class="block">Reads a digital input.</div>
@@ -2917,22 +2939,6 @@ the order they are declared.</div>
 <div class="block">Wrapper class to identify d-pad buttons separate from joystick buttons.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsDPadButtonInputConfig.html#%3Cinit%3E(int,int)">WsDPadButtonInputConfig(int, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsDPadButtonInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsDPadButtonInputConfig</a></dt>
-<dd>
-<div class="block">Wrapper constructor.</div>
-</dd>
-<dt><a href="org/wildstang/hardware/roborio/inputs/WsHallEffectInput.html" title="class in org.wildstang.hardware.roborio.inputs"><span class="typeNameLink">WsHallEffectInput</span></a> - Class in <a href="org/wildstang/hardware/roborio/inputs/package-summary.html">org.wildstang.hardware.roborio.inputs</a></dt>
-<dd>
-<div class="block">Reads a hall effect sensor using I2C.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsHallEffectInput.html#%3Cinit%3E(java.lang.String,edu.wpi.first.wpilibj.I2C.Port,int)">WsHallEffectInput(String, I2C.Port, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsHallEffectInput.html" title="class in org.wildstang.hardware.roborio.inputs">WsHallEffectInput</a></dt>
-<dd>
-<div class="block">Construct the hall effect sensor.</div>
-</dd>
-<dt><a href="org/wildstang/hardware/roborio/inputs/config/WsHallEffectInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config"><span class="typeNameLink">WsHallEffectInputConfig</span></a> - Class in <a href="org/wildstang/hardware/roborio/inputs/config/package-summary.html">org.wildstang.hardware.roborio.inputs.config</a></dt>
-<dd>
-<div class="block">Wrapper class to identify hall effect sensors separate from I2C inputs.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsHallEffectInputConfig.html#%3Cinit%3E(edu.wpi.first.wpilibj.I2C.Port,int)">WsHallEffectInputConfig(I2C.Port, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsHallEffectInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsHallEffectInputConfig</a></dt>
 <dd>
 <div class="block">Wrapper constructor.</div>
 </dd>
@@ -3016,7 +3022,7 @@ the order they are declared.</div>
 <dd>
 <div class="block">Wrapper class to identify LIDAR sensors separate from I2C inputs.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsLidarInputConfig.html#%3Cinit%3E(edu.wpi.first.wpilibj.I2C.Port,int)">WsLidarInputConfig(I2C.Port, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsLidarInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsLidarInputConfig</a></dt>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/config/WsLidarInputConfig.html#%3Cinit%3E(edu.wpi.first.wpilibj.I2C.Port,int,int)">WsLidarInputConfig(I2C.Port, int, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.config.<a href="org/wildstang/hardware/roborio/inputs/config/WsLidarInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsLidarInputConfig</a></dt>
 <dd>
 <div class="block">Wrapper constructor.</div>
 </dd>
@@ -3024,7 +3030,7 @@ the order they are declared.</div>
 <dd>
 <div class="block">Reads a LIDAR sensor.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#%3Cinit%3E(java.lang.String,edu.wpi.first.wpilibj.I2C.Port,int)">WsLidarSensor(String, I2C.Port, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
+<dt><span class="memberNameLink"><a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html#%3Cinit%3E(java.lang.String,edu.wpi.first.wpilibj.I2C.Port,int,int)">WsLidarSensor(String, I2C.Port, int, int)</a></span> - Constructor for class org.wildstang.hardware.roborio.inputs.<a href="org/wildstang/hardware/roborio/inputs/WsLidarSensor.html" title="class in org.wildstang.hardware.roborio.inputs">WsLidarSensor</a></dt>
 <dd>
 <div class="block">Construct the sensor.</div>
 </dd>

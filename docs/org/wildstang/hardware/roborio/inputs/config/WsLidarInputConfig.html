@@ -119,7 +119,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="WsI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">org.wildstang.hardware.roborio.inputs.config.WsI2CInputConfig</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="WsContinuousI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">org.wildstang.hardware.roborio.inputs.config.WsContinuousI2CInputConfig</a></li>
+<li>
+<ul class="inheritance">
 <li>org.wildstang.hardware.roborio.inputs.config.WsLidarInputConfig</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -134,7 +139,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">WsLidarInputConfig</span>
-extends <a href="WsI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsI2CInputConfig</a></pre>
+extends <a href="WsContinuousI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsContinuousI2CInputConfig</a></pre>
 <div class="block">Wrapper class to identify LIDAR sensors separate from I2C inputs.</div>
 </li>
 </ul>
@@ -156,8 +161,9 @@ extends <a href="WsI2CInputConfig.html" title="class in org.wildstang.hardware.r
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(edu.wpi.first.wpilibj.I2C.Port,int)">WsLidarInputConfig</a></span>&#8203;(edu.wpi.first.wpilibj.I2C.Port&nbsp;p_port,
-                  int&nbsp;p_address)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(edu.wpi.first.wpilibj.I2C.Port,int,int)">WsLidarInputConfig</a></span>&#8203;(edu.wpi.first.wpilibj.I2C.Port&nbsp;p_port,
+                  int&nbsp;p_address,
+                  int&nbsp;updateInterval)</code></th>
 <td class="colLast">
 <div class="block">Wrapper constructor.</div>
 </td>
@@ -174,11 +180,18 @@ extends <a href="WsI2CInputConfig.html" title="class in org.wildstang.hardware.r
 </a>
 <h3>Method Summary</h3>
 <ul class="blockList">
+<li class="blockList"><a id="methods.inherited.from.class.org.wildstang.hardware.roborio.inputs.config.WsContinuousI2CInputConfig">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.wildstang.hardware.roborio.inputs.config.<a href="WsContinuousI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsContinuousI2CInputConfig</a></h3>
+<code><a href="WsContinuousI2CInputConfig.html#getUpdateInterval()">getUpdateInterval</a>, <a href="WsContinuousI2CInputConfig.html#toString()">toString</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.org.wildstang.hardware.roborio.inputs.config.WsI2CInputConfig">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.wildstang.hardware.roborio.inputs.config.<a href="WsI2CInputConfig.html" title="class in org.wildstang.hardware.roborio.inputs.config">WsI2CInputConfig</a></h3>
-<code><a href="WsI2CInputConfig.html#getAddress()">getAddress</a>, <a href="WsI2CInputConfig.html#getPort()">getPort</a>, <a href="WsI2CInputConfig.html#toString()">toString</a></code></li>
+<code><a href="WsI2CInputConfig.html#getAddress()">getAddress</a>, <a href="WsI2CInputConfig.html#getPort()">getPort</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -203,14 +216,15 @@ extends <a href="WsI2CInputConfig.html" title="class in org.wildstang.hardware.r
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(edu.wpi.first.wpilibj.I2C.Port,int)">
+<a id="&lt;init&gt;(edu.wpi.first.wpilibj.I2C.Port,int,int)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>WsLidarInputConfig</h4>
 <pre>public&nbsp;WsLidarInputConfig&#8203;(edu.wpi.first.wpilibj.I2C.Port&nbsp;p_port,
-                          int&nbsp;p_address)</pre>
+                          int&nbsp;p_address,
+                          int&nbsp;updateInterval)</pre>
 <div class="block">Wrapper constructor.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

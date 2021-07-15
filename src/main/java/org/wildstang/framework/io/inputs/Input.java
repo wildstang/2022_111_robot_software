@@ -226,8 +226,6 @@ public abstract class Input {
         return m_stateTracker;
     }
 
-    // TODO: Actually do something with m_enabled?
-
     /**
      * Enables the Input, does nothing at the Input level.
      */

@@ -10,9 +10,9 @@ import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.hardware.roborio.inputs.WsAbsoluteEncoder;
 import org.wildstang.hardware.roborio.inputs.WsAnalogGyro;
 import org.wildstang.hardware.roborio.inputs.WsAnalogInput;
+import org.wildstang.hardware.roborio.inputs.WsContinuousI2CInput;
 import org.wildstang.hardware.roborio.inputs.WsDPadButton;
 import org.wildstang.hardware.roborio.inputs.WsDigitalInput;
-import org.wildstang.hardware.roborio.inputs.WsHallEffectInput;
 import org.wildstang.hardware.roborio.inputs.WsI2CInput;
 import org.wildstang.hardware.roborio.inputs.WsJoystickAxis;
 import org.wildstang.hardware.roborio.inputs.WsJoystickButton;
@@ -23,9 +23,9 @@ import org.wildstang.hardware.roborio.inputs.WsRemoteDigitalInput;
 import org.wildstang.hardware.roborio.inputs.config.WsAbsoluteEncoderConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsAnalogGyroConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsAnalogInputConfig;
+import org.wildstang.hardware.roborio.inputs.config.WsContinuousI2CInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsDPadButtonInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsDigitalInputConfig;
-import org.wildstang.hardware.roborio.inputs.config.WsHallEffectInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsI2CInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsJSButtonInputConfig;
 import org.wildstang.hardware.roborio.inputs.config.WsJSJoystickInputConfig;
@@ -86,14 +86,14 @@ public class RoboRIOInputFactory implements InputFactory {
             WsAbsoluteEncoderConfig c = (WsAbsoluteEncoderConfig) config;
             in = new WsAbsoluteEncoder(p_input.getName(), c.getChannel(), c.getMaxVoltage());
         }
-        else if (config instanceof WsHallEffectInputConfig) {
-            WsHallEffectInputConfig c = (WsHallEffectInputConfig) config;
-            in = new WsHallEffectInput(p_input.getName(), c.getPort(), c.getAddress());
-        }
         else if (config instanceof WsLidarInputConfig) {
             // Port is the address, module is the port - such as I2C.kMXP
             WsLidarInputConfig c = (WsLidarInputConfig) config;
-            in = new WsLidarSensor(p_input.getName(), c.getPort(), c.getAddress());
+            in = new WsLidarSensor(p_input.getName(), c.getPort(), c.getAddress(), c.getUpdateInterval());
+        }
+        else if (config instanceof WsContinuousI2CInputConfig) {
+            WsContinuousI2CInputConfig c = (WsContinuousI2CInputConfig) config;
+            in = new WsContinuousI2CInput(p_input.getName(), c.getPort(), c.getAddress(), c.getUpdateInterval());
         }
         else if (config instanceof WsDPadButtonInputConfig) {
             WsDPadButtonInputConfig c = (WsDPadButtonInputConfig) config;

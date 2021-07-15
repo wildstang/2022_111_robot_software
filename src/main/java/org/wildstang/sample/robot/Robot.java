@@ -88,7 +88,9 @@ public class Robot extends TimedRobot {
         core.executeUpdate();
 
         // Empty the state tracker so we don't OOM out
-        // TODO: figure out what this thing is and why
+        // If getStateList() is never called the StateTracker will grow endlessly.
+        // By calling it here we ensure it is called (and cleared) at least once per loop.
+        // Not currently sure how this affects the StateLogger as its loop appears to be independent.
         Core.getStateTracker().getStateList();
     }
 

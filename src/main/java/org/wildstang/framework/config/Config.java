@@ -77,11 +77,21 @@ public class Config {
 
         CoreUtils.checkNotNull(p_line, "p_line is null");
 
-        String result;
-
-        // TODO: add error checking
         // split line into parts
-        result = p_line.split("#")[0].trim();
+        String result;
+        int commentIdx = p_line.indexOf("#");
+        // get text before #
+        if (commentIdx > 0) {
+            result = p_line.split("#")[0].trim();
+        }
+        // no comment, return line
+        else if (commentIdx < 0) {
+            result = p_line;
+        }
+        // whole line comment, return nothing
+        else {
+            result = "";
+        }
 
         if (s_log.isLoggable(Level.FINER)) {
             s_log.exiting(s_className, "stripComments");
