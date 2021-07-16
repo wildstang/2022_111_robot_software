@@ -1,8 +1,6 @@
 package org.wildstang.framework.core;
 
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.wildstang.framework.CoreUtils;
 import org.wildstang.framework.auto.AutoManager;
@@ -14,6 +12,7 @@ import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.io.InputManager;
 import org.wildstang.framework.io.outputs.Output;
 import org.wildstang.framework.io.OutputManager;
+import org.wildstang.framework.logger.Log;
 import org.wildstang.framework.logger.StateTracker;
 import org.wildstang.framework.subsystems.Subsystem;
 import org.wildstang.framework.subsystems.SubsystemManager;
@@ -23,7 +22,6 @@ import org.wildstang.framework.subsystems.SubsystemManager;
  */
 public class Core {
 
-    private static Logger s_log = Logger.getLogger(Core.class.getName());
     private static final String s_className = "Core";
 
     private static InputManager s_inputManager;
@@ -88,17 +86,11 @@ public class Core {
      * @param p_outputs All enumerations of Outputs to be created.
      */
     public void createOutputs(Outputs[] p_outputs) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "createOutputs");
-        }
-
         Output output = null;
 
         // Iterate over all output enum values and create an output for each
         for (Outputs output_enum : p_outputs) {
-            if (s_log.isLoggable(Level.FINE)) {
-                s_log.fine("Creating output for " + output_enum.getName());
-            }
+            Log.info("Creating output: " + output_enum.getName());
 
             // Check if it is digital or analog, to create the correct type
             output = s_outputFactory.createOutput(output_enum);
@@ -110,10 +102,6 @@ public class Core {
             }
             s_outputManager.addOutput(output);
         }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "createOutputs");
-        }
     }
 
     /**
@@ -121,17 +109,11 @@ public class Core {
      * @param p_inputs All enumerations of Inputs to be created.
      */
     public void createInputs(Inputs[] p_inputs) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "createInputs");
-        }
-
         Input input = null;
 
         // Iterate over all input enum values and create an input for each
         for (Inputs input_enum : p_inputs) {
-            if (s_log.isLoggable(Level.FINE)) {
-                s_log.fine("Creating input for " + input_enum.getName());
-            }
+            Log.info("Creating input: " + input_enum.getName());
 
             input = s_inputFactory.createInput(input_enum);
 
@@ -142,10 +124,6 @@ public class Core {
             }
             s_inputManager.addInput(input);
         }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "createInputs");
-        }
     }
 
     /**
@@ -153,15 +131,9 @@ public class Core {
      * @param p_subsystems All enumerations of Subsystems to be created.
      */
     public void createSubsystems(Subsystems[] p_subsystems) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "createSubsystems");
-        }
-
         // Iterate over all input enum values and create a subsystem for each
         for (Subsystems subsystem : p_subsystems) {
-            if (s_log.isLoggable(Level.FINE)) {
-                s_log.fine("Creating subsystem: " + subsystem.getName());
-            }
+            Log.info("Creating subsystem: " + subsystem.getName());
 
             // Instantiate the class
             Subsystem sub = (Subsystem) createObject(subsystem.getSubsystemClass());
@@ -171,10 +143,6 @@ public class Core {
 
             s_subsystemManager.addSubsystem(sub);
         }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "createSubsystems");
-        }
     }
 
     /**
@@ -182,24 +150,14 @@ public class Core {
      * @param p_programs All enumerations of AutoPrograms to be created.
      */
     public void createAutoPrograms(AutoPrograms[] p_programs) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "createAutoPrograms");
-        }
-
         // Iterate over all input enum values and create a subsystem for each
         for (AutoPrograms program : p_programs) {
-            if (s_log.isLoggable(Level.FINE)) {
-                s_log.fine("Creating subsystem: " + program.getName());
-            }
+            Log.info("Creating auto program: " + program.getName());
 
             // Instantiate the class
             AutoProgram prog = (AutoProgram) createObject(program.getProgramClass());
 
             s_autoManager.addProgram(prog);
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "createAutoPrograms");
         }
     }
 

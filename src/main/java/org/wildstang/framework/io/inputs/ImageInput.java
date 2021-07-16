@@ -1,16 +1,10 @@
 package org.wildstang.framework.io.inputs;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * First abstraction of Input representing "image" Inputs for vision purposes.
  * There are currently no implementations of this type.
  */
 public abstract class ImageInput extends Input {
-
-    private static Logger s_log = Logger.getLogger(ImageInput.class.getName());
-    private static final String s_className = "ImageInput";
 
     private Object m_currentValue = null;
 
@@ -27,24 +21,12 @@ public abstract class ImageInput extends Input {
      */
     @Override
     public void readDataFromInput() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "readDataFromInput");
-        }
-
         Object newValue = readRawValue();
 
         // Only update if the value has changed
-        if (s_log.isLoggable(Level.FINEST)) {
-            s_log.finest("Current value = " + m_currentValue + " : New value = " + newValue);
-        }
-
         if (!newValue.equals(m_currentValue)) {
             setCurrentValue(newValue);
             setValueChanged(true);
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "readDataFromInput");
         }
     }
 
@@ -75,14 +57,6 @@ public abstract class ImageInput extends Input {
      * Currently logs nothing as images are too complex for complete logs.
      */
     @Override
-    protected void logCurrentStateInternal() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "logCurrentState");
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "logCurrentState");
-        }
-    }
+    protected void logCurrentStateInternal() {}
 
 }

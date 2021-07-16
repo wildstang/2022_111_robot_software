@@ -1,17 +1,12 @@
 package org.wildstang.framework.io.outputs;
 
 import java.text.DecimalFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * First abstraction of Output representing "analog" Outputs
  * such as servos and motors. 
  */
 public abstract class AnalogOutput extends Output {
-
-    private static Logger s_log = Logger.getLogger(AnalogOutput.class.getName());
-    private static final String s_className = "AnalogOutput";
 
     private static final DecimalFormat s_format = new DecimalFormat("#.###");
 
@@ -56,15 +51,7 @@ public abstract class AnalogOutput extends Output {
      */
     @Override
     protected void logCurrentState() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "logCurrentState");
-        }
-
         getStateTracker().addState(getName(), getName(), s_format.format(getValue()));
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "logCurrentState");
-        }
     }
 
 }

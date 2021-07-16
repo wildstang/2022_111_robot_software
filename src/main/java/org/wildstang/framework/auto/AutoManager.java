@@ -2,8 +2,6 @@ package org.wildstang.framework.auto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.wildstang.framework.auto.program.Sleeper;
 import org.wildstang.framework.logger.Log;
@@ -19,8 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Nathan
  */
 public class AutoManager {
-
-    private static Logger s_log = Logger.getLogger(AutoManager.class.getName());
 
     private List<AutoProgram> programs = new ArrayList<>();
     private AutoProgram runningProgram;

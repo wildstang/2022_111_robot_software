@@ -2,12 +2,11 @@ package org.wildstang.framework.io;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.wildstang.framework.CoreUtils;
 import org.wildstang.framework.core.Inputs;
 import org.wildstang.framework.io.inputs.Input;
+import org.wildstang.framework.logger.Log;
 
 /**
  * Contains and updates all Inputs.
@@ -16,9 +15,6 @@ import org.wildstang.framework.io.inputs.Input;
  */
 public class InputManager {
 
-    private static Logger s_log = Logger.getLogger(InputManager.class.getName());
-    private static final String s_className = "InputManager";
-
     private HashMap<String, Input> m_inputs = new HashMap<>();
     private boolean s_initialised = false;
 
@@ -26,41 +22,21 @@ public class InputManager {
      * Initializes logger.
      */
     public void init() {
-        s_log.entering(s_className, "init");
-
         if (!s_initialised) {
             s_initialised = true;
         }
-
-        s_log.exiting(s_className, "init");
     }
 
     /**
      * Updates all managed inputs.
      */
     public void update() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "update");
-        }
-
         // Iterate over all inputs and update each one
         for (Input in : m_inputs.values()) {
             if (in.isEnabled()) {
-                if (s_log.isLoggable(Level.FINEST)) {
-                    s_log.finest("Updating Input: " + in.getName());
-                }
-
                 // Update the input
                 in.update();
-            } else {
-                if (s_log.isLoggable(Level.FINEST)) {
-                    s_log.finest("Input " + in.getName() + " is not enabled. Not calling update.");
-                }
             }
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "update");
         }
     }
 
@@ -85,11 +61,7 @@ public class InputManager {
      */
     public void removeInput(Input p_input) {
         CoreUtils.checkNotNull(p_input, "p_input is null");
-
-        if (s_log.isLoggable(Level.WARNING)) {
-            s_log.warning("Removing input " + p_input.getName());
-        }
-
+        Log.info("Removing input " + p_input.getName());
         m_inputs.remove(p_input.getName());
     }
 

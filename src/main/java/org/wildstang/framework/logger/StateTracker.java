@@ -2,8 +2,6 @@ package org.wildstang.framework.logger;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Used to track the various logs created before being written to log file.
@@ -14,9 +12,6 @@ import java.util.logging.Logger;
  * as well as, StateInfo logs grouped in StateGroups.
  */
 public class StateTracker {
-
-    private static Logger s_log = Logger.getLogger(StateTracker.class.getName());
-    private static final String s_className = "StateTracker";
 
     private boolean s_initialised = false;
 
@@ -32,13 +27,9 @@ public class StateTracker {
      * Sets the tracker as initialised.
      */
     public void init() {
-        s_log.entering(s_className, "init");
-
         if (!s_initialised) {
             s_initialised = true;
         }
-
-        s_log.exiting(s_className, "init");
     }
 
     /**
@@ -46,35 +37,16 @@ public class StateTracker {
      * @param p_timestamp Timestamp to create StateGroup at.
      */
     public void beginCycle(Date p_timestamp) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "beginCycle");
-        }
-
         if (m_trackingState) {
             if (m_currentState != null) {
                 // Error - still in a cycle
-                if (s_log.isLoggable(Level.FINER)) {
-                    s_log.finer("Current state is not null. Throwing exception.");
-                }
-
                 throw new IllegalStateException(
                         "Cannot being a new state cycle while already in a cycle.");
-            } else {
-                if (s_log.isLoggable(Level.FINER)) {
-                    s_log.finer("Beginning new StateGroup");
-                }
+            }
+            else {
 
                 m_currentState = new StateGroup(p_timestamp);
             }
-        } else {
-            // Do nothing
-            if (s_log.isLoggable(Level.FINER)) {
-                s_log.finer("Not currently logging state");
-            }
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "beginCycle");
         }
     }
 
@@ -85,35 +57,15 @@ public class StateTracker {
      * @param p_value Value of entry.
      */
     public void addState(String p_name, String p_parent, Object p_value) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "addState");
-        }
-
         if (m_trackingState) {
             if (m_currentState == null) {
                 // Error - not in a cycle
-                if (s_log.isLoggable(Level.FINER)) {
-                    s_log.finer("Current state is null. Throwing exception.");
-                }
-
                 throw new IllegalStateException(
                         "Cannot add state information while not in a cycle.");
-            } else {
-                if (s_log.isLoggable(Level.FINER)) {
-                    s_log.finer("Adding state");
-                }
-
+            }
+            else {
                 m_currentState.addState(p_name, p_parent, p_value);
             }
-        } else {
-            // Do nothing
-            if (s_log.isLoggable(Level.FINER)) {
-                s_log.finer("Not currently logging state");
-            }
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "addState");
         }
     }
 
@@ -121,39 +73,18 @@ public class StateTracker {
      * Adds the current StateGroup to the StateTracker's set, then clears it.
      */
     public void endCycle() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "endCycle");
-        }
-
         if (m_trackingState) {
             if (m_currentState == null) {
                 // Error not in a cycle
-
-                if (s_log.isLoggable(Level.FINER)) {
-                    s_log.finer("Current state is null. Throwing exception.");
-                }
-
                 throw new IllegalStateException("Cannot end a cycle while not in a cycle.");
-            } else {
-                if (s_log.isLoggable(Level.FINER)) {
-                    s_log.finer("Ending current cycle - adding current state to list");
-                }
-
+            }
+            else {
                 // Synchronise access to the list to avoid clashes with having the list swapped
                 synchronized (m_stateListLock) {
                     m_stateList.add(m_currentState);
                     m_currentState = null;
                 }
             }
-        } else {
-            // Do nothing
-            if (s_log.isLoggable(Level.FINER)) {
-                s_log.finer("Not currently logging state");
-            }
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "endCycle");
         }
     }
 
@@ -165,15 +96,7 @@ public class StateTracker {
      * @param p_port IO port or null if not applicable.
      */
     public void addIOInfo(String p_name, String p_type, String p_direction, Object p_port) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "addIOInfo");
-        }
-
         m_ioSet.addIOInfo(p_name, p_type, p_direction, p_port);
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "addIOInfo");
-        }
     }
 
     /**

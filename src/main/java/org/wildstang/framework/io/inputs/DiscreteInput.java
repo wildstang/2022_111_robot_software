@@ -1,16 +1,10 @@
 package org.wildstang.framework.io.inputs;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * First abstraction of Input representing "discrete" Inputs
  * such as hall effect and LIDAR sensors.
  */
 public abstract class DiscreteInput extends Input {
-
-    private static Logger s_log = Logger.getLogger(DiscreteInput.class.getName());
-    private static final String s_className = "DiscreteInput";
 
     private int m_currentValue = 0;
 
@@ -37,17 +31,7 @@ public abstract class DiscreteInput extends Input {
      */
     @Override
     public void readDataFromInput() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "readDataFromInput");
-        }
-
-        int newValue = readRawValue();
-
-        setNewValue(newValue);
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "readDataFromInput");
-        }
+        setNewValue(readRawValue());
     }
 
     /**
@@ -56,19 +40,11 @@ public abstract class DiscreteInput extends Input {
      * @param p_newValue New value read for the Input.
      */
     public void setValue(int p_newValue) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "setValue");
-        }
-
         setNewValue(p_newValue);
 
         logCurrentState();
 
         notifyListeners();
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "setValue");
-        }
     }
 
     /**
@@ -77,13 +53,11 @@ public abstract class DiscreteInput extends Input {
      */
     private void setNewValue(int p_newValue) {
         // Only update if the value has changed
-        if (s_log.isLoggable(Level.FINEST)) {
-            s_log.finest("Current value = " + m_currentValue + " : New value = " + p_newValue);
-        }
         if (p_newValue != m_currentValue) {
             m_currentValue = p_newValue;
             setValueChanged(true);
-        } else {
+        }
+        else {
             setValueChanged(false);
         }
     }
@@ -107,15 +81,7 @@ public abstract class DiscreteInput extends Input {
      */
     @Override
     protected void logCurrentStateInternal() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "logCurrentState");
-        }
-
         getStateTracker().addState(getName(), getName(), getValue());
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "logCurrentState");
-        }
     }
 
 }

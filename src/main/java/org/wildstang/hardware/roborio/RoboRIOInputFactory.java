@@ -1,8 +1,5 @@
 package org.wildstang.hardware.roborio;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.wildstang.framework.core.Inputs;
 import org.wildstang.framework.hardware.InputConfig;
 import org.wildstang.framework.hardware.InputFactory;
@@ -39,8 +36,6 @@ import org.wildstang.hardware.roborio.inputs.config.WsRemoteDigitalInputConfig;
  */
 public class RoboRIOInputFactory implements InputFactory {
 
-    private static Logger s_log = Logger.getLogger(RoboRIOInputFactory.class.getName());
-    private static final String s_className = "RoboRIOInputFactory";
     private boolean s_initialised = false;
 
     /**
@@ -52,16 +47,8 @@ public class RoboRIOInputFactory implements InputFactory {
      * Prepares logger.
      */
     public void init() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "init");
-        }
-
         if (!s_initialised) {
             s_initialised = true;
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "init");
         }
     }
 
@@ -71,16 +58,8 @@ public class RoboRIOInputFactory implements InputFactory {
      * @return A constructed Input.
      */
     public Input createInput(Inputs p_input) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "createAnalogInput");
-        }
-
         Input in = null;
         InputConfig config = p_input.getConfig();
-
-        if (s_log.isLoggable(Level.FINE)) {
-            s_log.fine("Creating analog input: Name = " + p_input.getName());
-        }
 
         if (config instanceof WsAbsoluteEncoderConfig) {
             WsAbsoluteEncoderConfig c = (WsAbsoluteEncoderConfig) config;
@@ -134,11 +113,7 @@ public class RoboRIOInputFactory implements InputFactory {
             WsDigitalInputConfig c = (WsDigitalInputConfig) config;
             in = new WsDigitalInput(p_input.getName(), c.getChannel(), c.getPullup());
         }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "createAnalogInput");
-        }
-
+        
         return in;
     }
 

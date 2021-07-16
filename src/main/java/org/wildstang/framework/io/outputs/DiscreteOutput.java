@@ -1,16 +1,10 @@
 package org.wildstang.framework.io.outputs;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * First abstraction of Output representing "analog" Outputs
  * such as relays and double solenoids. 
  */
 public abstract class DiscreteOutput extends Output {
-
-    private static Logger s_log = Logger.getLogger(DiscreteOutput.class.getName());
-    private static final String s_className = "DiscreteOutput";
 
     private int m_value;
 
@@ -53,15 +47,7 @@ public abstract class DiscreteOutput extends Output {
      */
     @Override
     protected void logCurrentState() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "logCurrentState");
-        }
-
         getStateTracker().addState(getName(), getName(), getValue());
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "logCurrentState");
-        }
     }
 
 }

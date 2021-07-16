@@ -1,16 +1,10 @@
 package org.wildstang.framework.io.outputs;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * First abstraction of Output representing I2C Outputs.
  * Currently there are no implementations of this type.
  */
 public abstract class I2COutput extends Output {
-
-    private static Logger s_log = Logger.getLogger(I2COutput.class.getName());
-    private static final String s_className = "I2COutput";
 
     private byte[] m_value;
 
@@ -42,14 +36,6 @@ public abstract class I2COutput extends Output {
      * Doesn't log anything right now.
      */
     @Override
-    protected void logCurrentState() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "logCurrentState");
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "logCurrentState");
-        }
-    }
+    protected void logCurrentState() {}
 
 }

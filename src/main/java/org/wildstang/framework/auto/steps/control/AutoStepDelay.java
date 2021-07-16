@@ -1,9 +1,7 @@
 package org.wildstang.framework.auto.steps.control;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.wildstang.framework.auto.AutoStep;
+import org.wildstang.framework.logger.Log;
 
 import edu.wpi.first.wpilibj.Timer;
 
@@ -14,8 +12,6 @@ import edu.wpi.first.wpilibj.Timer;
  * @author coder65535
  */
 public class AutoStepDelay extends AutoStep {
-    
-    private static Logger s_log = Logger.getLogger(AutoStepDelay.class.getName());
 
     protected final double delay;
     protected Timer timer;
@@ -28,8 +24,7 @@ public class AutoStepDelay extends AutoStep {
         this.delay = msDelay / 1000.0;
         this.timer = new Timer();
         if (msDelay < 0) {
-            s_log.logp(Level.FINE, this.getClass().getName(), "AutonomousStepDelay",
-                    "Delay must be greater than 0");
+            Log.warn("Delay must be greater than 0");
         }
     }
 

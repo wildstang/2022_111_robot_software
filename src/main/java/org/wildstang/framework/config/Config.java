@@ -3,10 +3,9 @@ package org.wildstang.framework.config;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.wildstang.framework.CoreUtils;
+import org.wildstang.framework.logger.Log;
 
 /**
  * This class represents the config parameters. It is a map of key/value pairs.
@@ -14,8 +13,6 @@ import org.wildstang.framework.CoreUtils;
  * @author Steve
  */
 public class Config {
-    private static Logger s_log = Logger.getLogger(Config.class.getName());
-    private static final String s_className = "Config";
 
     private HashMap<String, Object> m_configMap = new HashMap<>();
 
@@ -71,10 +68,6 @@ public class Config {
      * @throws NullPointerException True if the input String is null.
      */
     protected String stripComments(String p_line) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "stripComments");
-        }
-
         CoreUtils.checkNotNull(p_line, "p_line is null");
 
         // split line into parts
@@ -93,10 +86,6 @@ public class Config {
             result = "";
         }
 
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "stripComments");
-        }
-
         return result;
     }
 
@@ -109,17 +98,7 @@ public class Config {
      */
     protected String[] getKeyValuePair(String p_line) {
         String[] result;
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "getKeyValuePair");
-        }
-
         result = p_line.split("=");
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "getKeyValuePair");
-        }
-
         return result;
     }
 
@@ -133,47 +112,24 @@ public class Config {
     protected Object parseValue(String p_valueStr) {
         CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
 
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "parseValue");
-        }
-
-        Object result;
-
         // 1. if it contains . try to parse as double, otherwise take as string
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.finer("Parsing value: '" + p_valueStr + "'");
-            s_log.finer("Attempting to parse as double");
-        }
-        result = parseDouble(p_valueStr);
+        Object result = parseDouble(p_valueStr);
 
         // 2. parse as int
         if (result == null) {
-            if (s_log.isLoggable(Level.FINER)) {
-                s_log.finer("Failed parsing as double. Attempting to parse as int");
-            }
             result = parseInt(p_valueStr);
         }
 
         // 3. if it equals 'true' or 'false' ignoring case, parse as boolean
         if (result == null) {
-            if (s_log.isLoggable(Level.FINER)) {
-                s_log.finer("Failed parsing as int. Attempting to parse as boolean");
-            }
             result = parseBoolean(p_valueStr);
         }
 
         // 4. if all these tests or parses fail, leave as string
         if (result == null) {
-            if (s_log.isLoggable(Level.FINER)) {
-                s_log.finer("Failed parsing as boolean. Leaving as String value");
-            }
             if (p_valueStr != null && !p_valueStr.equals("")) {
                 result = p_valueStr;
             }
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "parseValue");
         }
 
         return result;
@@ -187,21 +143,12 @@ public class Config {
     protected Double parseDouble(String p_valueStr) {
         CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
 
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "parseDouble");
-        }
-
         Double d = null;
-
         if (p_valueStr.indexOf('.') >= 0) {
             try {
                 d = Double.valueOf(p_valueStr);
-            } catch (NumberFormatException e) {
             }
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "parseDouble");
+            catch (NumberFormatException e) {}
         }
 
         return d;
@@ -215,20 +162,12 @@ public class Config {
     protected Integer parseInt(String p_valueStr) {
         CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
 
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "parseInt");
-        }
-
         Integer i = null;
 
         try {
             i = Integer.valueOf(p_valueStr);
-        } catch (NumberFormatException e) {
         }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "parseInt");
-        }
+        catch (NumberFormatException e) {}
 
         return i;
     }
@@ -241,21 +180,13 @@ public class Config {
     protected Boolean parseBoolean(String p_valueStr) {
         CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
 
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "parseBoolean");
-        }
-
         Boolean b = null;
 
         if (p_valueStr.equalsIgnoreCase("true") || p_valueStr.equalsIgnoreCase("false")) {
             try {
                 b = Boolean.valueOf(p_valueStr);
-            } catch (NumberFormatException e) {
             }
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "parseBoolean");
+            catch (NumberFormatException e) {}
         }
 
         return b;
@@ -269,15 +200,7 @@ public class Config {
     public Object getValue(String p_key) {
         CoreUtils.checkNotNull(p_key, "p_key is null");
 
-        Object result = null;
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "getValue");
-        }
-
-        result = m_configMap.get(p_key);
-
-        return result;
+        return m_configMap.get(p_key);
     }
 
     /**
@@ -289,22 +212,11 @@ public class Config {
     public Object getValue(String p_key, Object p_default) {
         CoreUtils.checkNotNull(p_key, "p_key is null");
 
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "getValue");
-        }
-
         Object value = m_configMap.get(p_key);
 
         if (value == null) {
-            if (s_log.isLoggable(Level.FINER)) {
-                s_log.finer("No value for key " + p_key + ". Using default value: " + p_default);
-            }
-
+            Log.info("No value for key " + p_key + ". Using default value: " + p_default);
             value = p_default;
-        }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "getValue");
         }
 
         return value;
@@ -317,10 +229,6 @@ public class Config {
      * @return double corresponding to key, or default double.
      */
     public double getDouble(String p_key, double p_default) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "getDouble");
-        }
-
         Object value = getValue(p_key, p_default);
         if (!(value instanceof Double)) {
             throw new NumberFormatException("Value found for " + p_key
@@ -337,10 +245,6 @@ public class Config {
      * @return int corresponding to key, or default int.
      */
     public int getInt(String p_key, int p_default) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "getInt");
-        }
-
         Object value = getValue(p_key, p_default);
         if (!(value instanceof Integer)) {
             throw new NumberFormatException("Value found for " + p_key
@@ -357,10 +261,6 @@ public class Config {
      * @return boolean corresponding to key, or default boolean.
      */
     public boolean getBoolean(String p_key, boolean p_default) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "getBoolean");
-        }
-
         Object value = getValue(p_key, p_default);
         if (!(value instanceof Boolean)) {
             throw new NumberFormatException("Value found for " + p_key
@@ -377,10 +277,6 @@ public class Config {
      * @return String corresponding to key, or default String.
      */
     public String getString(String p_key, String p_default) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "getString");
-        }
-
         Object value = getValue(p_key, p_default);
         if (!(value instanceof String)) {
             throw new NumberFormatException("Value found for " + p_key

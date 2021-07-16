@@ -1,17 +1,12 @@
 package org.wildstang.framework.io.inputs;
 
 import java.text.DecimalFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * First abstraction of Input representing "analog" Inputs
  * such as joysticks and gyros. 
  */
 public abstract class AnalogInput extends Input {
-
-    private static Logger s_log = Logger.getLogger(AnalogInput.class.getName());
-    private static final String s_className = "AnalogInput";
 
     private static final DecimalFormat s_format = new DecimalFormat("#.###");
 
@@ -40,17 +35,7 @@ public abstract class AnalogInput extends Input {
      */
     @Override
     protected void readDataFromInput() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "readDataFromInput");
-        }
-
-        double newValue = readRawValue();
-
-        setNewValue(newValue);
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "readDataFromInput");
-        }
+        setNewValue(readRawValue());
     }
 
     /**
@@ -59,19 +44,11 @@ public abstract class AnalogInput extends Input {
      * @param p_newValue New value read for the Input.
      */
     public void setValue(double p_newValue) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "setValue");
-        }
-
         setNewValue(p_newValue);
 
         logCurrentState();
 
         notifyListeners();
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "setValue");
-        }
     }
 
     /**
@@ -86,10 +63,6 @@ public abstract class AnalogInput extends Input {
         // NOTE: For analog inputs, it is possible to change often due to noise
         // or sensitive sensors. May want to implement a tolerance/sensitivity
         // on value changes
-        if (s_log.isLoggable(Level.FINEST)) {
-            s_log.finest("Current value = " + m_currentValue + " : New value = " + p_newValue);
-        }
-
         if (p_newValue != m_currentValue) {
             m_currentValue = p_newValue;
             setValueChanged(true);
@@ -117,15 +90,7 @@ public abstract class AnalogInput extends Input {
      */
     @Override
     protected void logCurrentStateInternal() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "logCurrentState");
-        }
-
         getStateTracker().addState(getName(), getName(), s_format.format(getValue()));
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "logCurrentState");
-        }
     }
 
 }

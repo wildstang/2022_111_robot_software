@@ -1,8 +1,5 @@
 package org.wildstang.hardware.roborio.inputs;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.wildstang.framework.io.inputs.DigitalInput;
 
 /**
@@ -10,8 +7,6 @@ import org.wildstang.framework.io.inputs.DigitalInput;
  */
 public class WsMotionProfileControl extends DigitalInput {
 
-    private static Logger s_log = Logger.getLogger(DigitalInput.class.getName());
-    private static final String s_className = "WsMotionProfileInput";
     private boolean profileEnabled = false;
     private boolean resetKinematics = false;
 
@@ -45,19 +40,11 @@ public class WsMotionProfileControl extends DigitalInput {
      * @param p_newValue True to enable profile.
      */
     public void setProfileEnabled(boolean p_newValue) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "setProfileEnabled");
-        }
-
         profileEnabled = p_newValue;
 
         logCurrentState();
 
         notifyListeners();
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "setProfileEnabled");
-        }
     }
 
     /**
@@ -65,19 +52,11 @@ public class WsMotionProfileControl extends DigitalInput {
      * @param p_newValue True if kinematics should reset.
      */
     public void setResetKinematics(boolean p_newValue) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "setResetKinematics");
-        }
-
         resetKinematics = p_newValue;
 
         logCurrentState();
 
         notifyListeners();
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "setResetKinematics");
-        }
     }
 
     /**

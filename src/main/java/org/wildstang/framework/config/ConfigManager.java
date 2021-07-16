@@ -1,8 +1,6 @@
 package org.wildstang.framework.config;
 
 import java.io.BufferedReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class is the public interface to accessing and working with the
@@ -21,9 +19,6 @@ import java.util.logging.Logger;
  */
 public class ConfigManager {
 
-    private static Logger s_log = Logger.getLogger(ConfigManager.class.getName());
-    private static final String s_className = "ConfigManager";
-
     private boolean m_initialised = false;
 
     private Config m_config;
@@ -32,14 +27,10 @@ public class ConfigManager {
      * Create a new Config, belonging to the manager.
      */
     public void init() {
-        s_log.entering(s_className, "init");
-
         if (!m_initialised) {
             m_config = new Config();
             m_initialised = true;
         }
-
-        s_log.exiting(s_className, "init");
     }
 
     /**
@@ -55,15 +46,7 @@ public class ConfigManager {
      * @param p_reader BufferedReader opened on a file.
      */
     public void loadConfig(BufferedReader p_reader) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "loadConfig");
-        }
-
         m_config.load(p_reader);
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "load");
-        }
     }
 
 }

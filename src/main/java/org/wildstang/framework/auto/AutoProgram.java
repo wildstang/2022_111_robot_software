@@ -2,8 +2,6 @@ package org.wildstang.framework.auto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.wildstang.framework.auto.steps.control.AutoStepStopAutonomous;
 import org.wildstang.framework.core.Core;
@@ -16,8 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Nathan
  */
 public abstract class AutoProgram {
-
-    private static Logger s_log = Logger.getLogger(AutoProgram.class.getName());
 
     protected final List<AutoStep> programSteps = new ArrayList<>();
     protected int currentStep;
@@ -41,7 +37,6 @@ public abstract class AutoProgram {
         finishedPreviousStep = false;
         finished = false;
         startStep(currentStep);
-        s_log.logp(Level.FINE, "Auton", "Step Starting", programSteps.get(0).toString());
     }
 
     /**
@@ -74,7 +69,7 @@ public abstract class AutoProgram {
             SmartDashboard.putString("Current auto step", step.toString());
             step.update();
             if (step.isFinished()) {
-                s_log.logp(Level.FINE, "Auton", "Step Finished", step.toString());
+                Log.info("Finishing auto step: " + step.toString());
                 finishedPreviousStep = true;
             }
         }
@@ -121,12 +116,9 @@ public abstract class AutoProgram {
             int forceStop = forceStopAtStep;
             if ((forceStop <= programSteps.size()) && (forceStop > 0)) {
                 programSteps.set(forceStop, new AutoStepStopAutonomous());
-                s_log.logp(Level.ALL, "Auton", "Force Stop",
-                        "Program is forced to stop at Step " + forceStop);
+                Log.info("Force stopping auto step");
             } else {
-                s_log.logp(Level.SEVERE, "Auton", "Force Stop",
-                        "Force stop value is outside of bounds. (0 to "
-                                + (programSteps.size() - 1));
+                Log.warn("Force stop bounds exceeded");
             }
         }
     }

@@ -1,16 +1,10 @@
 package org.wildstang.framework.io.inputs;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * First abstraction of Input representing "digital" Inputs
  * such as buttons and limit switches. 
  */
 public abstract class DigitalInput extends Input {
-
-    private static Logger s_log = Logger.getLogger(DigitalInput.class.getName());
-    private static final String s_className = "DigitalInput";
 
     private boolean m_currentValue = false;
     private int m_cyclesOnCurrentValue = 0;
@@ -54,10 +48,6 @@ public abstract class DigitalInput extends Input {
      */
     @Override
     public void readDataFromInput() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "readDataFromInput");
-        }
-
         boolean newValue = readRawValue();
 
         if (m_debounced) {
@@ -65,7 +55,8 @@ public abstract class DigitalInput extends Input {
                 // The value has changed - reset the counter
                 m_cyclesOnCurrentValue = 0;
                 m_lastValue = newValue;
-            } else {
+            }
+            else {
                 // Otherwise, the value has held for longer - increment counter
                 m_cyclesOnCurrentValue++;
             }
@@ -74,12 +65,9 @@ public abstract class DigitalInput extends Input {
             if (m_cyclesOnCurrentValue >= DEBOUNCE_CYCLES) {
                 setNewValue(newValue);
             }
-        } else {
-            setNewValue(newValue);
         }
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "readDataFromInput");
+        else {
+            setNewValue(newValue);
         }
     }
 
@@ -89,19 +77,11 @@ public abstract class DigitalInput extends Input {
      * @param p_newValue New binary value read for the Input.
      */
     public void setValue(boolean p_newValue) {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "setValue");
-        }
-
         setNewValue(p_newValue);
 
         logCurrentState();
 
         notifyListeners();
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "setValue");
-        }
     }
 
     /**
@@ -109,11 +89,6 @@ public abstract class DigitalInput extends Input {
      * @param p_newValue New binary value to store.
      */
     private void setNewValue(boolean p_newValue) {
-        // Only update if the value has changed
-        if (s_log.isLoggable(Level.FINEST)) {
-            s_log.finest("Current value = " + m_currentValue + " : New value = " + p_newValue);
-        }
-
         if (p_newValue != m_currentValue) {
             m_currentValue = p_newValue;
             setValueChanged(true);
@@ -141,15 +116,7 @@ public abstract class DigitalInput extends Input {
      */
     @Override
     protected void logCurrentStateInternal() {
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.entering(s_className, "logCurrentState");
-        }
-
         getStateTracker().addState(getName(), getName(), getValue());
-
-        if (s_log.isLoggable(Level.FINER)) {
-            s_log.exiting(s_className, "logCurrentState");
-        }
     }
 
 }
