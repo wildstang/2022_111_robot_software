@@ -27,6 +27,7 @@ public class WsLidarSensor extends WsContinuousI2CInput {
      * @param name Descriptive name of the axis.
      * @param port I2C port the sensor is connected to.
      * @param p_address I2C address of the sensor.
+     * @param updateInterval Interval at which to fetch a value from the sensor.
      */
     public WsLidarSensor(String name, Port port, int p_address, int updateInterval) {
         super(name, port, p_address, updateInterval);
