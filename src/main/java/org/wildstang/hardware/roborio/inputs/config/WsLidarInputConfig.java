@@ -9,8 +9,9 @@ public class WsLidarInputConfig extends WsContinuousI2CInputConfig {
 
     /**
      * Wrapper constructor.
-     * @param p_port    I2C hardware port number.
+     * @param p_port I2C hardware port number.
      * @param p_address I2C address, normally static by device.
+     * @param updateInterval Interval at which to fetch a value from the sensor.
      */
     public WsLidarInputConfig(Port p_port, int p_address, int updateInterval) {
         super(p_port, p_address, updateInterval);

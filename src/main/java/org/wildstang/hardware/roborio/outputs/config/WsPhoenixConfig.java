@@ -34,8 +34,8 @@ public class WsPhoenixConfig implements OutputConfig {
     /**
      * Construct the Phoenix config.
      * @param channel Controller CAN constant.
-     * @param controller True if Talon, false if Victor.
      * @param controller Enumeration representing type of controller.
+     * @param invert True if motor output should be inverted.
      * @param p_default Default output value.
      */
     public WsPhoenixConfig(int channel, WsPhoenixControllers controller, boolean invert, double p_default) {
