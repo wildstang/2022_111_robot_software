@@ -1,11 +1,20 @@
 package org.wildstang.hardware.roborio.outputs;
 
 import org.wildstang.framework.io.outputs.AnalogOutput;
+import org.wildstang.hardware.roborio.outputs.config.WsPhoenixControllers;
 
+import java.util.ArrayList;
+
+import com.ctre.phoenix.motion.MotionProfileStatus;
+import com.ctre.phoenix.motion.SetValueMotionProfile;
+import com.ctre.phoenix.motion.TrajectoryPoint;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.can.BaseTalon;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -16,37 +25,87 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 public class WsPhoenix extends AnalogOutput {
 
     BaseMotorController motor;
-    
-    /**
-     * Constructs the motor controller from config.
-     * @param name Descriptive name of the controller.
-     * @param channel Motor controller CAN constant.
-     * @param p_default Default output value.
-     * @param talon True if Talon, false if Victor.
-     */
-    public WsPhoenix(String name, int channel, double p_default, boolean talon) {
-        this(name, channel, p_default, talon, false);
-    }
 
     /**
      * Constructs the motor controller from config.
      * @param name Descriptive name of the controller.
      * @param channel Motor controller CAN constant.
      * @param p_default Default output value.
-     * @param talon True if Talon, false if Victor.
+     * @param controller Enumeration representing type of controller.
      * @param invert Invert the motor's direction.
      */
-    public WsPhoenix(String name, int channel, double p_default, boolean talon, boolean invert) {
+    public WsPhoenix(String name, int channel, double p_default, WsPhoenixControllers controller, boolean invert) {
         super(name, p_default);
 
-        if (talon) {
-            motor = new TalonSRX(channel);
-        }
-        else {
-            motor = new VictorSPX(channel);
+        switch (controller) {
+            case TALON_SRX:
+                motor = new TalonSRX(channel);
+                break;
+            case VICTOR_SPX:
+                motor = new VictorSPX(channel);
+                break;
+            case TALON_FX:
+                motor = new TalonFX(channel);
+                break;
+            default:
+                return;
         }
         motor.setInverted(invert);
     }
+
+    /**
+     * Add a follower motor to the current motor.
+     * @param canConstant CAN constant of the new follower motor.
+     * @param controller Enumeration representing type of controller.
+     * @param oppose True if the follow should oppose the direction of this motor.
+     */
+    public void addFollower(int canConstant, WsPhoenixControllers controller, boolean oppose) {
+        BaseMotorController follower;
+        switch (controller) {
+            case TALON_SRX:
+                follower = new TalonSRX(canConstant);
+                break;
+            case VICTOR_SPX:
+                follower = new VictorSPX(canConstant);
+                break;
+            case TALON_FX:
+                follower = new TalonFX(canConstant);
+                break;
+            default:
+                return;
+        }
+        follower.follow(motor);
+        follower.setInverted(oppose ? InvertType.OpposeMaster : InvertType.FollowMaster);
+    }
+
+    /**
+     * Returns the BaseMotorController object representing the motor controller.
+     * @return BaseMotorController representation.
+     */
+    public BaseMotorController getController() {
+        return motor;
+    }
+
+    /**
+     * Determines the type of motor controller represented.
+     * @return Enumeration representing type of motor controller.
+     */
+    public WsPhoenixControllers getControllerType() {
+        if (motor instanceof TalonSRX) {
+            return WsPhoenixControllers.TALON_SRX;
+        }
+        else if (motor instanceof TalonFX) {
+            return WsPhoenixControllers.TALON_FX;
+        }
+        else if (motor instanceof VictorSPX) {
+            return WsPhoenixControllers.VICTOR_SPX;
+        }
+        return WsPhoenixControllers.UNKNOWN;
+    }
+
+    /**
+     * Brake Functions
+     */
 
     /**
      * Sets the motor to brake mode, will not freely spin.
@@ -63,6 +122,10 @@ public class WsPhoenix extends AnalogOutput {
     }
 
     /**
+     * Current Limit Functions
+     */
+
+    /**
      * Sets the current limit of the motor controller.
      * Only Talons support current limiting.
      * @param peakLimitAmps The instantaneous amount of amps drawn before limiting.
@@ -77,24 +140,9 @@ public class WsPhoenix extends AnalogOutput {
             t.configContinuousCurrentLimit(continuousLimitAmps);
             t.enableCurrentLimit(true);
         }
-    }
-
-    /**
-     * Add a follower motor to the current motor.
-     * @param canConstant CAN constant of the new follower motor.
-     * @param talon True if Talon, false if Victor.
-     * @param oppose True if the follow should oppose the direction of this motor.
-     */
-    public void addFollower(int canConstant, boolean talon, boolean oppose) {
-        BaseMotorController follower;
-        if (talon) {
-            follower = new TalonSRX(canConstant);
+        else if (motor instanceof TalonFX) {
+            ((TalonFX) motor).configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, continuousLimitAmps, peakLimitAmps, peakDuractionMs));
         }
-        else {
-            follower = new VictorSPX(canConstant);
-        }
-        follower.follow(motor);
-        follower.setInverted(oppose ? InvertType.OpposeMaster : InvertType.FollowMaster);
     }
 
     /**
@@ -105,7 +153,16 @@ public class WsPhoenix extends AnalogOutput {
         if (motor instanceof TalonSRX) {
             ((TalonSRX) motor).enableCurrentLimit(false);
         }
+        else if (motor instanceof TalonFX) {
+            StatorCurrentLimitConfiguration config = new StatorCurrentLimitConfiguration();
+            ((TalonFX) motor).configGetStatorCurrentLimit(config);
+            config.enable = false;
+        }
     }
+
+    /**
+     * Encoder Functions
+     */
 
     /**
      * Returns the quadrature velocity from a Talon's encoder.
@@ -114,6 +171,9 @@ public class WsPhoenix extends AnalogOutput {
     public int getVelocity() {
         if (motor instanceof TalonSRX) {
             return ((TalonSRX) motor).getSensorCollection().getQuadratureVelocity();
+        }
+        else if (motor instanceof TalonFX) {
+            return (int) ((TalonFX) motor).getSensorCollection().getIntegratedSensorVelocity();
         }
         return 0;
     }
@@ -126,8 +186,42 @@ public class WsPhoenix extends AnalogOutput {
         if (motor instanceof TalonSRX) {
             return ((TalonSRX) motor).getSensorCollection().getQuadraturePosition();
         }
+        else if (motor instanceof TalonFX) {
+            return (int) ((TalonFX) motor).getSensorCollection().getIntegratedSensorPosition();
+        }
         return 0;
     }
+    
+    /**
+     * Resets the position of a Talon's encoder.
+     */
+    public void resetEncoder() {
+        if (motor instanceof TalonSRX) {
+            ((TalonSRX) motor).setSelectedSensorPosition(0, 0, -1);
+        }
+        else if (motor instanceof TalonFX) {
+            ((TalonFX) motor).getSensorCollection().setIntegratedSensorPosition(0, -1);
+        }
+    }
+
+    /**
+     * Returns the state of a Talon's limit switches.
+     * @return Returns 1 if the forward limit switch is closed, 0 if neither or both,
+     * and -1 if the reverse limit switch is closed. 
+     */
+    public int limitSwitchState() {
+        int state = 0;
+        if (motor instanceof BaseTalon) {
+            BaseTalon t = (BaseTalon) motor;
+            // BaseTalon functions return 0 if open 1 if closed
+            state = t.isFwdLimitSwitchClosed() - t.isRevLimitSwitchClosed();
+        }
+        return state;
+    }
+
+    /**
+     * Motion Profile Functions
+     */
     
     /**
      * Sets and runs the motion profile slot to use.
@@ -136,6 +230,66 @@ public class WsPhoenix extends AnalogOutput {
     public void runProfile(int slot) {
         motor.set(ControlMode.MotionProfile, 0);
         motor.selectProfileSlot(slot, 0);
+    }
+    
+    /**
+     * Enables or disables motion profile.
+     * @param enable True if to enable profile.
+     */
+    public void enableProfile(boolean enable) {
+        if (!enable) {
+            motor.clearMotionProfileTrajectories();
+        }
+        motor.set(ControlMode.MotionProfile,
+            (enable ? SetValueMotionProfile.Enable : SetValueMotionProfile.Disable).value);
+    }
+    
+    /**
+     * Get the motor controller's motion profile status.
+     * @return Status of the motion profile.
+     */
+    public MotionProfileStatus getProfileStatus() {
+        MotionProfileStatus status = new MotionProfileStatus();
+        motor.getMotionProfileStatus(status);
+        return status;
+    }
+
+    /**
+     * Fills the motor controllers path buffers with the upcoming points.
+     * @param points List of upcoming trajectories.
+     */
+    public void fillProfile(ArrayList<TrajectoryPoint> points) {
+        if (getProfileStatus().hasUnderrun) {
+            //DriverStation.reportError("Left drive has underrun", false);
+            motor.clearMotionProfileHasUnderrun();
+        }
+
+        /*
+         * just in case we are interrupting another MP and there is still buffer points
+         * in memory, clear it.
+         */
+        motor.clearMotionProfileTrajectories();
+
+        /* This is fast since it's just into our TOP buffer */
+        for (int i = 0; i < points.size(); ++i) 
+        {
+            motor.pushMotionProfileTrajectory(points.get(i));                
+        }
+    }
+
+    /**
+     * Processes the current motion profile's buffer.
+     */
+    public void updateProfile() {
+        motor.processMotionProfileBuffer();
+    }
+
+    /**
+     * Sets the motion profiles control frame period.
+     * @param period Time in milliseconds.
+     */
+    public void setMotionControlFramePeriod(int period) {
+        motor.changeMotionControlFramePeriod(20);
     }
 
     /**
@@ -146,15 +300,10 @@ public class WsPhoenix extends AnalogOutput {
         motor.selectProfileSlot(slot, 0);
         motor.set(ControlMode.Position, motor.getSelectedSensorPosition());
     }
-    
+
     /**
-     * Resets the position of a Talon's encoder.
+     * Output Functions
      */
-    public void resetEncoder() {
-        if (motor instanceof TalonSRX) {
-            ((TalonSRX) motor).setSelectedSensorPosition(0, 0, -1);
-        }
-    }
 
     /**
      * Returns the current motor output percent.

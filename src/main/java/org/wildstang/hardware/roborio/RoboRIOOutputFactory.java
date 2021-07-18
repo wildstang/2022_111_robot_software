@@ -13,8 +13,6 @@ import org.wildstang.hardware.roborio.outputs.WsRelay;
 import org.wildstang.hardware.roborio.outputs.WsServo;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
-import org.wildstang.hardware.roborio.outputs.WsTalon;
-import org.wildstang.hardware.roborio.outputs.WsVictor;
 import org.wildstang.hardware.roborio.outputs.WsRemoteAnalogOutput;
 import org.wildstang.hardware.roborio.outputs.WsRemoteDigitalOutput;
 import org.wildstang.hardware.roborio.outputs.config.WsDigitalOutputConfig;
@@ -27,8 +25,6 @@ import org.wildstang.hardware.roborio.outputs.config.WsServoConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSolenoidConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxFollowerConfig;
-import org.wildstang.hardware.roborio.outputs.config.WsTalonConfig;
-import org.wildstang.hardware.roborio.outputs.config.WsVictorConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsRemoteAnalogOutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsRemoteDigitalOutputConfig;
 
@@ -73,7 +69,7 @@ public class RoboRIOOutputFactory implements OutputFactory {
         else if (config instanceof WsPhoenixConfig) {
             WsPhoenixConfig c = (WsPhoenixConfig) config;
             out = new WsPhoenix(p_output.getName(), c.getChannel(), c.getDefault(),
-                                c.isTalon(), c.isInverted());
+                                c.getType(), c.isInverted());
         }
         // Note a WsPhoenixFollower must be defined after its corresponding WsPhoenix
         else if (config instanceof WsPhoenixFollowerConfig) {
@@ -81,7 +77,7 @@ public class RoboRIOOutputFactory implements OutputFactory {
             // Returns the follwed WsPhoenix because a return is required
             // and duplicate outputs are thrown out when encountered.
             out = Core.getOutputManager().getOutput(c.getFollowing());
-            ((WsPhoenix) out).addFollower(c.getChannel(), c.isTalon(), c.isOpposing());
+            ((WsPhoenix) out).addFollower(c.getChannel(), c.getType(), c.isOpposing());
         }
         else if (config instanceof WsSparkMaxConfig) {
             WsSparkMaxConfig c = (WsSparkMaxConfig) config;
@@ -95,14 +91,6 @@ public class RoboRIOOutputFactory implements OutputFactory {
             // and duplicate outputs are thrown out when encountered.
             out = Core.getOutputManager().getOutput(c.getFollowing());
             ((WsSparkMax) out).addFollower(c.getChannel(), c.isBrushless(), c.isOpposing());
-        }
-        else if (config instanceof WsVictorConfig) {
-            WsVictorConfig c = (WsVictorConfig) config;
-            out = new WsVictor(p_output.getName(), c.getChannel(), c.getDefault());
-        }
-        else if (config instanceof WsTalonConfig) {
-            WsTalonConfig c = (WsTalonConfig) config;
-            out = new WsTalon(p_output.getName(), c.getChannel(), c.getDefault());
         }
         else if (config instanceof WsSolenoidConfig) {
             WsSolenoidConfig c = (WsSolenoidConfig) config;

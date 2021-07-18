@@ -10,7 +10,7 @@ public class WsPhoenixFollowerConfig implements OutputConfig {
 
     private Outputs following;
     private int m_channel = 0;
-    private boolean talon;
+    private WsPhoenixControllers controller;
     private boolean oppose;
 
     /**
@@ -19,8 +19,8 @@ public class WsPhoenixFollowerConfig implements OutputConfig {
      * @param channel Hardware port number.
      * @param talon True if Talon, false if Victor.
      */
-    public WsPhoenixFollowerConfig(Outputs following, int channel, boolean talon) {
-        this(following, channel, talon, false);
+    public WsPhoenixFollowerConfig(Outputs following, int channel, WsPhoenixControllers controller) {
+        this(following, channel, controller, false);
     }
 
     /**
@@ -30,10 +30,10 @@ public class WsPhoenixFollowerConfig implements OutputConfig {
      * @param talon True if Talon, false if Victor.
      * @param oppose True if the follow should oppose the direction of this motor.
      */
-    public WsPhoenixFollowerConfig(Outputs following, int channel, boolean talon, boolean oppose) {
+    public WsPhoenixFollowerConfig(Outputs following, int channel, WsPhoenixControllers controller, boolean oppose) {
         this.following = following;
         m_channel = channel;
-        this.talon = talon;
+        this.controller = controller;
         this.oppose = oppose;
     }
 
@@ -57,8 +57,8 @@ public class WsPhoenixFollowerConfig implements OutputConfig {
      * Returns true if the motor controller is a Talon.
      * @return True if Talon, false if Victor.
      */
-    public boolean isTalon() {
-        return talon;
+    public WsPhoenixControllers getType() {
+        return controller;
     }
 
     /**
@@ -78,8 +78,8 @@ public class WsPhoenixFollowerConfig implements OutputConfig {
         StringBuffer buf = new StringBuffer();
         buf.append("{\"channel\": ");
         buf.append(m_channel);
-        buf.append(", \"talon\": ");
-        buf.append(talon);
+        buf.append(", \"controller\": ");
+        buf.append(controller);
         buf.append(", \"oppose\": ");
         buf.append(oppose);
         buf.append("}");
