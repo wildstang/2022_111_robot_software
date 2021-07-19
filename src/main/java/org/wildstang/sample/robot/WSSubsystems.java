@@ -1,6 +1,7 @@
 package org.wildstang.sample.robot;
 
 import org.wildstang.framework.core.Subsystems;
+import org.wildstang.sample.subsystems.Drive;
 
 /**
  * All subsystems are enumerated here.
@@ -9,7 +10,7 @@ import org.wildstang.framework.core.Subsystems;
 public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
-    //INPUT_TEST("Input Test", InputTestSubsystem.class)
+    DRIVE("Drive", Drive.class)
     ;
 
     /**

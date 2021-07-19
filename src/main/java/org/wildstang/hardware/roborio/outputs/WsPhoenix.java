@@ -1,6 +1,7 @@
 package org.wildstang.hardware.roborio.outputs;
 
 import org.wildstang.framework.io.outputs.AnalogOutput;
+import org.wildstang.framework.logger.Log;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixControllers;
 
 import java.util.ArrayList;
@@ -227,8 +228,8 @@ public class WsPhoenix extends AnalogOutput {
      * Sets and runs the motion profile slot to use.
      * @param slot Motion profile slot number.
      */
-    public void runProfile(int slot) {
-        motor.set(ControlMode.MotionProfile, 0);
+    public void setProfile(int slot) {
+        motor.set(ControlMode.MotionProfile, SetValueMotionProfile.Disable.value);
         motor.selectProfileSlot(slot, 0);
     }
     
@@ -260,7 +261,6 @@ public class WsPhoenix extends AnalogOutput {
      */
     public void fillProfile(ArrayList<TrajectoryPoint> points) {
         if (getProfileStatus().hasUnderrun) {
-            //DriverStation.reportError("Left drive has underrun", false);
             motor.clearMotionProfileHasUnderrun();
         }
 
@@ -271,9 +271,8 @@ public class WsPhoenix extends AnalogOutput {
         motor.clearMotionProfileTrajectories();
 
         /* This is fast since it's just into our TOP buffer */
-        for (int i = 0; i < points.size(); ++i) 
-        {
-            motor.pushMotionProfileTrajectory(points.get(i));                
+        for (int i = 0; i < points.size(); ++i) {
+            motor.pushMotionProfileTrajectory(points.get(i));
         }
     }
 
