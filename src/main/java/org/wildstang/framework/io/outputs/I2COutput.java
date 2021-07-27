@@ -32,10 +32,4 @@ public abstract class I2COutput extends Output {
         m_value = p_value;
     }
 
-    /**
-     * Doesn't log anything right now.
-     */
-    @Override
-    protected void logCurrentState() {}
-
 }

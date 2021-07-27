@@ -42,8 +42,6 @@ public class WsMotionProfileControl extends DigitalInput {
     public void setProfileEnabled(boolean p_newValue) {
         profileEnabled = p_newValue;
 
-        logCurrentState();
-
         notifyListeners();
     }
 
@@ -53,8 +51,6 @@ public class WsMotionProfileControl extends DigitalInput {
      */
     public void setResetKinematics(boolean p_newValue) {
         resetKinematics = p_newValue;
-
-        logCurrentState();
 
         notifyListeners();
     }

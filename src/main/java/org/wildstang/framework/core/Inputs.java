@@ -21,9 +21,4 @@ public interface Inputs {
      */
     public InputConfig getConfig();
 
-    /**
-     * Returns true if the Logger should track the Input's state.
-     * @return True if the StateTracker should track this Input.
-     */
-    public boolean isTrackingState();
 }

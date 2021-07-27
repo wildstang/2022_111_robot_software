@@ -79,8 +79,6 @@ public abstract class DigitalInput extends Input {
     public void setValue(boolean p_newValue) {
         setNewValue(p_newValue);
 
-        logCurrentState();
-
         notifyListeners();
     }
 
@@ -109,14 +107,6 @@ public abstract class DigitalInput extends Input {
      */
     public boolean getValue() {
         return m_currentValue;
-    }
-
-    /**
-     * Logs the Input's state to the StateTracker.
-     */
-    @Override
-    protected void logCurrentStateInternal() {
-        getStateTracker().addState(getName(), getName(), getValue());
     }
 
 }
