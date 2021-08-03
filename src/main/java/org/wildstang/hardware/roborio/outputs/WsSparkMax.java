@@ -4,13 +4,14 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import org.wildstang.framework.io.outputs.AnalogOutput;
+import org.wildstang.framework.logger.Log;
+import org.wildstang.hardware.roborio.outputs.config.WsMotorControllers;
 
 /**
  * Controls a Spark Max motor controller.
  * @author Liam
  */
-public class WsSparkMax extends AnalogOutput {
+public class WsSparkMax extends WsMotorController {
 
     CANSparkMax motor;
     
@@ -65,6 +66,8 @@ public class WsSparkMax extends AnalogOutput {
         motor.burnFlash();
     }
 
+
+
     /**
      * Add a follower motor to the current motor.
      * @param canConstant CAN constant of the new follower motor.
@@ -72,6 +75,28 @@ public class WsSparkMax extends AnalogOutput {
      * @param oppose True if the follow should oppose the direction of this motor.
      */
     public void addFollower(int canConstant, boolean brushless, boolean oppose) {
+        addFollower(canConstant, brushless ? WsMotorControllers.SPARK_MAX_BRUSHLESS : WsMotorControllers.SPARK_MAX_BRUSHED, oppose);
+    }
+
+    /**
+     * Add a follower motor to the current motor.
+     * @param canConstant CAN constant of the new follower motor.
+     * @param controller Enumeration representing type of controller.
+     * @param oppose True if the follow should oppose the direction of this motor.
+     */
+    public void addFollower(int canConstant, WsMotorControllers controller, boolean oppose) {
+        boolean brushless;
+        switch (controller) {
+            case SPARK_MAX_BRUSHED:
+                brushless = false;
+                break;
+            case SPARK_MAX_BRUSHLESS:
+                brushless = true;
+                break;
+            default:
+                Log.error("Invalid follower motor control for WsSparkMax!");
+                return;
+        }
         CANSparkMax follower = new CANSparkMax(canConstant, brushless ? MotorType.kBrushless : MotorType.kBrushed);
         follower.follow(motor, oppose);
     }
@@ -108,6 +133,14 @@ public class WsSparkMax extends AnalogOutput {
     }
 
     /**
+     * Returns the temperature of the motor.
+     */
+    @Override
+    public double getTemperature() {
+        return motor.getMotorTemperature();
+    }
+
+    /**
      * Sets motor speed to current value, from -1.0 to 1.0.
      */
     @Override
@@ -116,22 +149,13 @@ public class WsSparkMax extends AnalogOutput {
     }
 
     /**
-     * Wraps setValue().
-     * @param value New motor percent speed, from -1.0 to 1.0.
-     */
-    public void setSpeed(double value) {
-        setValue(value);
-    }
-
-    /**
-     * Sets the motors to 0 speed.
-     */
-    public void stop() {
-        setSpeed(0);
-    }
-
-    /**
      * Does nothing, config values only affects start state.
      */
     public void notifyConfigChange() { }
+
+    /**
+     * Does nothing, SparkMax has no current limit disable function.
+     */
+    @Override
+    public void disableCurrentLimit() {}
 }

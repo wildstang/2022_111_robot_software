@@ -11,6 +11,7 @@ public class WsSparkMaxFollowerConfig implements OutputConfig {
     private int m_channel = 0;
     private boolean brushless;
     private boolean oppose;
+    private WsMotorControllers controller;
 
     /**
      * Construct the Phoenix config.
@@ -26,7 +27,7 @@ public class WsSparkMaxFollowerConfig implements OutputConfig {
      * Construct the Phoenix config.
      * @param following Name of motor controller being followed.
      * @param channel Hardware port number.
-     * @param brushless True if the motor is brushless, false if brushed.
+     * @param controller Enumeration representing type of controller.
      * @param oppose True if the follow should oppose the direction of this motor.
      */
     public WsSparkMaxFollowerConfig(String following, int channel, boolean brushless, boolean oppose) {
@@ -34,6 +35,7 @@ public class WsSparkMaxFollowerConfig implements OutputConfig {
         m_channel = channel;
         this.brushless = brushless;
         this.oppose = oppose;
+        this.controller = brushless ? WsMotorControllers.SPARK_MAX_BRUSHLESS : WsMotorControllers.SPARK_MAX_BRUSHED;
     }
 
     /**
@@ -58,6 +60,14 @@ public class WsSparkMaxFollowerConfig implements OutputConfig {
      */
     public boolean isBrushless() {
         return brushless;
+    }
+
+    /**
+     * Returns true if the motor controller is a Talon.
+     * @return True if Talon, false if Victor.
+     */
+    public WsMotorControllers getType() {
+        return controller;
     }
 
     /**
