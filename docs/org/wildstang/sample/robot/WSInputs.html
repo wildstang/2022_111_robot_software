@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":9};
+var data = {"i0":10,"i1":10,"i2":9,"i3":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -359,20 +359,13 @@ implements <a href="../../framework/core/Inputs.html" title="interface in org.wi
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTrackingState()">isTrackingState</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Returns true if the Logger should track the Input's state.</div>
-</td>
-</tr>
-<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#valueOf(java.lang.String)">valueOf</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="WSInputs.html" title="enum in org.wildstang.sample.robot">WSInputs</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#values()">values</a></span>()</code></th>
 <td class="colLast">
@@ -842,7 +835,7 @@ not permitted.)</div>
 <a id="getConfig()">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>getConfig</h4>
 <pre class="methodSignature">public&nbsp;<a href="../../framework/hardware/InputConfig.html" title="interface in org.wildstang.framework.hardware">InputConfig</a>&nbsp;getConfig()</pre>
@@ -852,22 +845,6 @@ not permitted.)</div>
 <dd><code><a href="../../framework/core/Inputs.html#getConfig()">getConfig</a></code>&nbsp;in interface&nbsp;<code><a href="../../framework/core/Inputs.html" title="interface in org.wildstang.framework.core">Inputs</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>InputConfig of enumeration.</dd>
-</dl>
-</li>
-</ul>
-<a id="isTrackingState()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>isTrackingState</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;isTrackingState()</pre>
-<div class="block">Returns true if the Logger should track the Input's state.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../framework/core/Inputs.html#isTrackingState()">isTrackingState</a></code>&nbsp;in interface&nbsp;<code><a href="../../framework/core/Inputs.html" title="interface in org.wildstang.framework.core">Inputs</a></code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>True if the StateTracker should track this Input.</dd>
 </dl>
 </li>
 </ul>

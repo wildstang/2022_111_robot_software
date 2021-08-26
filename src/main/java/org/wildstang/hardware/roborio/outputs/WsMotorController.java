@@ -79,6 +79,7 @@ public abstract class WsMotorController extends AnalogOutput {
 
     /**
      * Return the motor controller or motor temperature
+     * @return Current temperature.
      */
     public abstract double getTemperature();
     

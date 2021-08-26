@@ -27,7 +27,7 @@ public class WsSparkMaxFollowerConfig implements OutputConfig {
      * Construct the Phoenix config.
      * @param following Name of motor controller being followed.
      * @param channel Hardware port number.
-     * @param controller Enumeration representing type of controller.
+     * @param brushless True if the motor is brushless, false if brushed.
      * @param oppose True if the follow should oppose the direction of this motor.
      */
     public WsSparkMaxFollowerConfig(String following, int channel, boolean brushless, boolean oppose) {

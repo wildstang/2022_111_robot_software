@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":6,"i7":6,"i8":10,"i9":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":6,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -202,52 +202,31 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStateTracker()">getStateTracker</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Returns the StateTracker associated with the Input.</div>
-</td>
-</tr>
-<tr id="i4" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hashCode()">hashCode</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Produces a hashcode based off the Output's name.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isEnabled()">isEnabled</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns true if the Output is enabled, does nothing at this level.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>protected abstract void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#logCurrentState()">logCurrentState</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Abstract function to log the Output's state to the StateTracker.</div>
-</td>
-</tr>
-<tr id="i7" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>protected abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendDataToOutput()">sendDataToOutput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Abstract function to write the current value to hardware.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setStateTracker(org.wildstang.framework.logger.StateTracker)">setStateTracker</a></span>&#8203;(<a href="../../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a>&nbsp;p_tracker)</code></th>
-<td class="colLast">
-<div class="block">Associates a StateTracker with the Input.</div>
-</td>
-</tr>
-<tr id="i9" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Logs the current state to the StateTracker, if one exists.</div>
+<div class="block">.</div>
 </td>
 </tr>
 </table>
@@ -305,8 +284,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>update</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;update()</pre>
-<div class="block">Logs the current state to the StateTracker, if one exists.
- Then sends that state to the hardware O;utput.</div>
+<div class="block">.
+ Sends that state to the hardware Output.</div>
 </li>
 </ul>
 <a id="getName()">
@@ -321,16 +300,6 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Name of the Output.</dd>
 </dl>
-</li>
-</ul>
-<a id="logCurrentState()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>logCurrentState</h4>
-<pre class="methodSignature">protected abstract&nbsp;void&nbsp;logCurrentState()</pre>
-<div class="block">Abstract function to log the Output's state to the StateTracker.</div>
 </li>
 </ul>
 <a id="sendDataToOutput()">
@@ -356,34 +325,6 @@ extends java.lang.Object</pre>
 <dd><code>hashCode</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Newly generated hashcode.</dd>
-</dl>
-</li>
-</ul>
-<a id="setStateTracker(org.wildstang.framework.logger.StateTracker)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setStateTracker</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setStateTracker&#8203;(<a href="../../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a>&nbsp;p_tracker)</pre>
-<div class="block">Associates a StateTracker with the Input.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>p_tracker</code> - New StateTracker to associate with Input.</dd>
-</dl>
-</li>
-</ul>
-<a id="getStateTracker()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getStateTracker</h4>
-<pre class="methodSignature">public&nbsp;<a href="../../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a>&nbsp;getStateTracker()</pre>
-<div class="block">Returns the StateTracker associated with the Input.</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>Input's StateTracker.</dd>
 </dl>
 </li>
 </ul>

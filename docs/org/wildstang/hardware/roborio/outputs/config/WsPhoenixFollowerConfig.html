@@ -158,17 +158,17 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.wildstang.framework.core.Outputs,int,boolean)">WsPhoenixFollowerConfig</a></span>&#8203;(<a href="../../../../framework/core/Outputs.html" title="interface in org.wildstang.framework.core">Outputs</a>&nbsp;following,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.wildstang.framework.core.Outputs,int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers)">WsPhoenixFollowerConfig</a></span>&#8203;(<a href="../../../../framework/core/Outputs.html" title="interface in org.wildstang.framework.core">Outputs</a>&nbsp;following,
                        int&nbsp;channel,
-                       boolean&nbsp;talon)</code></th>
+                       <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller)</code></th>
 <td class="colLast">
 <div class="block">Construct the Phoenix config.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.wildstang.framework.core.Outputs,int,boolean,boolean)">WsPhoenixFollowerConfig</a></span>&#8203;(<a href="../../../../framework/core/Outputs.html" title="interface in org.wildstang.framework.core">Outputs</a>&nbsp;following,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.wildstang.framework.core.Outputs,int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">WsPhoenixFollowerConfig</a></span>&#8203;(<a href="../../../../framework/core/Outputs.html" title="interface in org.wildstang.framework.core">Outputs</a>&nbsp;following,
                        int&nbsp;channel,
-                       boolean&nbsp;talon,
+                       <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
                        boolean&nbsp;oppose)</code></th>
 <td class="colLast">
 <div class="block">Construct the Phoenix config.</div>
@@ -207,17 +207,17 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isOpposing()">isOpposing</a></span>()</code></th>
+<td class="colFirst"><code><a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getType()">getType</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Returns if the follower should oppose the followed.</div>
+<div class="block">Returns true if the motor controller is a Talon.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTalon()">isTalon</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isOpposing()">isOpposing</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Returns true if the motor controller is a Talon.</div>
+<div class="block">Returns if the follower should oppose the followed.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -251,7 +251,7 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.wildstang.framework.core.Outputs,int,boolean)">
+<a id="&lt;init&gt;(org.wildstang.framework.core.Outputs,int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -259,17 +259,17 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 <h4>WsPhoenixFollowerConfig</h4>
 <pre>public&nbsp;WsPhoenixFollowerConfig&#8203;(<a href="../../../../framework/core/Outputs.html" title="interface in org.wildstang.framework.core">Outputs</a>&nbsp;following,
                                int&nbsp;channel,
-                               boolean&nbsp;talon)</pre>
+                               <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller)</pre>
 <div class="block">Construct the Phoenix config.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>following</code> - Enumeration of motor controller being followed.</dd>
 <dd><code>channel</code> - Hardware port number.</dd>
-<dd><code>talon</code> - True if Talon, false if Victor.</dd>
+<dd><code>controller</code> - Enumeration representing type of controller.</dd>
 </dl>
 </li>
 </ul>
-<a id="&lt;init&gt;(org.wildstang.framework.core.Outputs,int,boolean,boolean)">
+<a id="&lt;init&gt;(org.wildstang.framework.core.Outputs,int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -277,14 +277,14 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 <h4>WsPhoenixFollowerConfig</h4>
 <pre>public&nbsp;WsPhoenixFollowerConfig&#8203;(<a href="../../../../framework/core/Outputs.html" title="interface in org.wildstang.framework.core">Outputs</a>&nbsp;following,
                                int&nbsp;channel,
-                               boolean&nbsp;talon,
+                               <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
                                boolean&nbsp;oppose)</pre>
 <div class="block">Construct the Phoenix config.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>following</code> - Enumeration of motor controller being followed.</dd>
 <dd><code>channel</code> - Hardware port number.</dd>
-<dd><code>talon</code> - True if Talon, false if Victor.</dd>
+<dd><code>controller</code> - Enumeration representing type of controller.</dd>
 <dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
 </dl>
 </li>
@@ -327,13 +327,13 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 </dl>
 </li>
 </ul>
-<a id="isTalon()">
+<a id="getType()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>isTalon</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;isTalon()</pre>
+<h4>getType</h4>
+<pre class="methodSignature">public&nbsp;<a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;getType()</pre>
 <div class="block">Returns true if the motor controller is a Talon.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
