@@ -3,6 +3,10 @@ package org.wildstang.hardware.roborio.outputs;
 import org.wildstang.framework.io.outputs.AnalogOutput;
 import org.wildstang.hardware.roborio.outputs.config.WsMotorControllers;
 
+/**
+ * Abstract class decribing those that control some kind of motor controller.
+ * @author Liam
+ */
 public abstract class WsMotorController extends AnalogOutput {
 
     /**
