@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -230,69 +230,83 @@ extends <a href="WsMotorController.html" title="class in org.wildstang.hardware.
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>com.revrobotics.CANSparkMax</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getController()">getController</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the raw motor controller Object.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>com.revrobotics.CANSparkMax</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFollower()">getFollower</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the raw follower motor controller Object.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOutput()">getOutput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the current motor output percent.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPosition()">getPosition</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the quadrature position from an encoder.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTemperature()">getTemperature</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the temperature of the motor.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVelocity()">getVelocity</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the quadrature velocity from an encoder.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#notifyConfigChange()">notifyConfigChange</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Does nothing, config values only affects start state.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetEncoder()">resetEncoder</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Resets the position of an encoder.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendDataToOutput()">sendDataToOutput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets motor speed to current value, from -1.0 to 1.0.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setBrake()">setBrake</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to brake mode, will not freely spin.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCoast()">setCoast</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to coast mode, will freely spin.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCurrentLimit(int,int,int)">setCurrentLimit</a></span>&#8203;(int&nbsp;stallLimitAmps,
                int&nbsp;freeLimitAmps,
@@ -398,6 +412,76 @@ extends <a href="WsMotorController.html" title="class in org.wildstang.hardware.
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="addFollower(int,boolean,boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addFollower</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;addFollower&#8203;(int&nbsp;canConstant,
+                        boolean&nbsp;brushless,
+                        boolean&nbsp;oppose)</pre>
+<div class="block">Add a follower motor to the current motor.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>canConstant</code> - CAN constant of the new follower motor.</dd>
+<dd><code>brushless</code> - True if the motor is brushless, false if brushed.</dd>
+<dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
+</dl>
+</li>
+</ul>
+<a id="addFollower(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addFollower</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;addFollower&#8203;(int&nbsp;canConstant,
+                        <a href="config/WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
+                        boolean&nbsp;oppose)</pre>
+<div class="block">Add a follower motor to the current motor.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#addFollower(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">addFollower</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>canConstant</code> - CAN constant of the new follower motor.</dd>
+<dd><code>controller</code> - Enumeration representing type of controller.</dd>
+<dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
+</dl>
+</li>
+</ul>
+<a id="getController()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getController</h4>
+<pre class="methodSignature">public&nbsp;com.revrobotics.CANSparkMax&nbsp;getController()</pre>
+<div class="block">Returns the raw motor controller Object.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#getController()">getController</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>CANSparkMax Object.</dd>
+</dl>
+</li>
+</ul>
+<a id="getFollower()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFollower</h4>
+<pre class="methodSignature">public&nbsp;com.revrobotics.CANSparkMax&nbsp;getFollower()</pre>
+<div class="block">Returns the raw follower motor controller Object.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#getFollower()">getFollower</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Follower motor controller object, null if no follower.</dd>
+</dl>
+</li>
+</ul>
 <a id="setBrake()">
 <!--   -->
 </a>
@@ -443,44 +527,6 @@ extends <a href="WsMotorController.html" title="class in org.wildstang.hardware.
 <dd><code>stallLimitAmps</code> - The amount of amps drawn before limiting while less than limitRPM.</dd>
 <dd><code>freeLimitAmps</code> - The amount of amps drawn before limiting while greater than limitRPM.</dd>
 <dd><code>limitRPM</code> - Sets the line between stallLimitAmps and freeLimitAmps.</dd>
-</dl>
-</li>
-</ul>
-<a id="addFollower(int,boolean,boolean)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>addFollower</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;addFollower&#8203;(int&nbsp;canConstant,
-                        boolean&nbsp;brushless,
-                        boolean&nbsp;oppose)</pre>
-<div class="block">Add a follower motor to the current motor.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>canConstant</code> - CAN constant of the new follower motor.</dd>
-<dd><code>brushless</code> - True if the motor is brushless, false if brushed.</dd>
-<dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
-</dl>
-</li>
-</ul>
-<a id="addFollower(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>addFollower</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;addFollower&#8203;(int&nbsp;canConstant,
-                        <a href="config/WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
-                        boolean&nbsp;oppose)</pre>
-<div class="block">Add a follower motor to the current motor.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="WsMotorController.html#addFollower(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">addFollower</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>canConstant</code> - CAN constant of the new follower motor.</dd>
-<dd><code>controller</code> - Enumeration representing type of controller.</dd>
-<dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
 </dl>
 </li>
 </ul>

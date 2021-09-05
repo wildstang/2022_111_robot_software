@@ -25,6 +25,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 public class WsPhoenix extends WsMotorController {
 
     BaseMotorController motor;
+    BaseMotorController follower;
 
     /**
      * Constructs the motor controller from config.
@@ -61,7 +62,6 @@ public class WsPhoenix extends WsMotorController {
      * @param oppose True if the follow should oppose the direction of this motor.
      */
     public void addFollower(int canConstant, WsMotorControllers controller, boolean oppose) {
-        BaseMotorController follower;
         switch (controller) {
             case TALON_SRX:
                 follower = new TalonSRX(canConstant);
@@ -81,11 +81,19 @@ public class WsPhoenix extends WsMotorController {
     }
 
     /**
-     * Returns the BaseMotorController object representing the motor controller.
-     * @return BaseMotorController representation.
+     * Returns the raw motor controller Object.
+     * @return CANSparkMax Object.
      */
     public BaseMotorController getController() {
         return motor;
+    }
+
+    /**
+     * Returns the raw follower motor controller Object.
+     * @return Follower motor controller object, null if no follower.
+     */
+    public BaseMotorController getFollower() {
+        return follower;
     }
 
     /**

@@ -14,6 +14,7 @@ import org.wildstang.hardware.roborio.outputs.config.WsMotorControllers;
 public class WsSparkMax extends WsMotorController {
 
     CANSparkMax motor;
+    CANSparkMax follower;
     
     /**
      * Constructs the motor controller from config.
@@ -40,33 +41,6 @@ public class WsSparkMax extends WsMotorController {
         motor = new CANSparkMax(channel, brushless ? MotorType.kBrushless : MotorType.kBrushed);
         motor.setInverted(invert);
     }
-
-    /**
-     * Sets the motor to brake mode, will not freely spin.
-     */
-    public void setBrake() {
-        motor.setIdleMode(IdleMode.kBrake);
-    }
-
-    /**
-     * Sets the motor to coast mode, will freely spin.
-     */
-    public void setCoast() {
-        motor.setIdleMode(IdleMode.kCoast);
-    }
-
-    /**
-     * Sets the current limit of the motor controller.
-     * @param stallLimitAmps The amount of amps drawn before limiting while less than limitRPM.
-     * @param freeLimitAmps The amount of amps drawn before limiting while greater than limitRPM.
-     * @param limitRPM Sets the line between stallLimitAmps and freeLimitAmps.
-     */
-    public void setCurrentLimit(int stallLimitAmps, int freeLimitAmps, int limitRPM) {
-        motor.setSmartCurrentLimit(stallLimitAmps, freeLimitAmps, limitRPM);
-        motor.burnFlash();
-    }
-
-
 
     /**
      * Add a follower motor to the current motor.
@@ -97,8 +71,49 @@ public class WsSparkMax extends WsMotorController {
                 Log.error("Invalid follower motor control for WsSparkMax!");
                 return;
         }
-        CANSparkMax follower = new CANSparkMax(canConstant, brushless ? MotorType.kBrushless : MotorType.kBrushed);
+        follower = new CANSparkMax(canConstant, brushless ? MotorType.kBrushless : MotorType.kBrushed);
         follower.follow(motor, oppose);
+    }
+
+    /**
+     * Returns the raw motor controller Object.
+     * @return CANSparkMax Object.
+     */
+    public CANSparkMax getController() {
+        return motor;
+    }
+
+    /**
+     * Returns the raw follower motor controller Object.
+     * @return Follower motor controller object, null if no follower.
+     */
+    public CANSparkMax getFollower() {
+        return follower;
+    }
+
+    /**
+     * Sets the motor to brake mode, will not freely spin.
+     */
+    public void setBrake() {
+        motor.setIdleMode(IdleMode.kBrake);
+    }
+
+    /**
+     * Sets the motor to coast mode, will freely spin.
+     */
+    public void setCoast() {
+        motor.setIdleMode(IdleMode.kCoast);
+    }
+
+    /**
+     * Sets the current limit of the motor controller.
+     * @param stallLimitAmps The amount of amps drawn before limiting while less than limitRPM.
+     * @param freeLimitAmps The amount of amps drawn before limiting while greater than limitRPM.
+     * @param limitRPM Sets the line between stallLimitAmps and freeLimitAmps.
+     */
+    public void setCurrentLimit(int stallLimitAmps, int freeLimitAmps, int limitRPM) {
+        motor.setSmartCurrentLimit(stallLimitAmps, freeLimitAmps, limitRPM);
+        motor.burnFlash();
     }
 
     /**

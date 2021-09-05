@@ -35,6 +35,18 @@ public abstract class WsMotorController extends AnalogOutput {
     public abstract void addFollower(int canConstant, WsMotorControllers controller, boolean oppose);
 
     /**
+     * Returns the raw motor controller Object.
+     * @return Motor controller object.
+     */
+    public abstract Object getController();
+
+    /**
+     * Returns the raw follower motor controller Object.
+     * @return Follower motor controller object, null if no follower.
+     */
+    public abstract Object getFollower();
+
+    /**
      * Sets the motor to brake mode, will not freely spin.
      */
     public abstract void setBrake();

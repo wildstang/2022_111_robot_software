@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":10,"i12":10};
+var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":10,"i14":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -214,62 +214,76 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>abstract java.lang.Object</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getController()">getController</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the raw motor controller Object.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>abstract java.lang.Object</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFollower()">getFollower</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the raw follower motor controller Object.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>abstract double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOutput()">getOutput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the current motor output percent.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>abstract double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPosition()">getPosition</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the quadrature position from an encoder.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>abstract double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTemperature()">getTemperature</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Return the motor controller or motor temperature</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>abstract double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVelocity()">getVelocity</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the quadrature velocity from an encoder.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetEncoder()">resetEncoder</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Resets the position of the encoder.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendDataToOutput()">sendDataToOutput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets motor speed to current value, from -1.0 to 1.0.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setBrake()">setBrake</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to brake mode, will not freely spin.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCoast()">setCoast</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to coast mode, will freely spin.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCurrentLimit(int,int,int)">setCurrentLimit</a></span>&#8203;(int&nbsp;a,
                int&nbsp;b,
@@ -278,14 +292,14 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <div class="block">Sets the current limit of the motor controller.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSpeed(double)">setSpeed</a></span>&#8203;(double&nbsp;value)</code></th>
 <td class="colLast">
 <div class="block">Wraps setValue().</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stop()">stop</a></span>()</code></th>
 <td class="colLast">
@@ -385,6 +399,34 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <dd><code>canConstant</code> - CAN constant of the new follower motor.</dd>
 <dd><code>controller</code> - Enumeration representing type of controller.</dd>
 <dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
+</dl>
+</li>
+</ul>
+<a id="getController()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getController</h4>
+<pre class="methodSignature">public abstract&nbsp;java.lang.Object&nbsp;getController()</pre>
+<div class="block">Returns the raw motor controller Object.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Motor controller object.</dd>
+</dl>
+</li>
+</ul>
+<a id="getFollower()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFollower</h4>
+<pre class="methodSignature">public abstract&nbsp;java.lang.Object&nbsp;getFollower()</pre>
+<div class="block">Returns the raw follower motor controller Object.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Follower motor controller object, null if no follower.</dd>
 </dl>
 </li>
 </ul>
