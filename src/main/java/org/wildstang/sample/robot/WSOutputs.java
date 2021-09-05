@@ -5,7 +5,12 @@ import org.wildstang.framework.core.Outputs;
 import org.wildstang.framework.hardware.OutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsServoConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsI2COutputConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsMotorControllers;
+import org.wildstang.hardware.roborio.outputs.config.WsDigitalOutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixFollowerConfig;
+
+import edu.wpi.first.wpilibj.I2C;
 
 /**
  * Output mappings are stored here.
@@ -20,19 +25,19 @@ public enum WSOutputs implements Outputs {
     // ---------------------------------
     // Motors
     // ---------------------------------
-    //TEST_PAIRED_MOTOR("Test Paired Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_PAIRED_CONTROLLERS[0], true)),
-    //TEST_FOLLOWER_MOTOR("Test Follower Motor", new WsPhoenixFollowerConfig(TEST_PAIRED_MOTOR, CANConstants.EXAMPLE_PAIRED_CONTROLLERS[1], true)),
-    //TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, false)),
+    TEST_PAIRED_MOTOR("Test Paired Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_PAIRED_CONTROLLERS[0], WsMotorControllers.TALON_SRX)),
+    TEST_FOLLOWER_MOTOR("Test Follower Motor", new WsPhoenixFollowerConfig(TEST_PAIRED_MOTOR, CANConstants.EXAMPLE_PAIRED_CONTROLLERS[1], WsMotorControllers.TALON_SRX)),
+    TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, WsMotorControllers.VICTOR_SPX)),
 
     // ---------------------------------
     // Servos
     // ---------------------------------
-    //TEST_SERVO("Test Servo", new WsServoConfig(0, 0)),
+    TEST_SERVO("Test Servo", new WsServoConfig(0, 0)),
 
     // ********************************
     // DIO Outputs
     // ********************************
-    //DIO_O_0("Test Digital Output 0", WSOutputType.DIGITAL_OUTPUT, new WsDigitalOutputConfig(0, true)), // Channel 0, Initially Low
+    DIO_O_0("Test Digital Output 0", new WsDigitalOutputConfig(0, true)), // Channel 0, Initially Low
 
     // ********************************
     // Solenoids
@@ -45,7 +50,7 @@ public enum WSOutputs implements Outputs {
     // ********************************
     // Others ...
     // ********************************
-    //LED("LEDs", WSOutputType.I2C, new WsI2COutputConfig(I2C.Port.kMXP, 0x10));
+    LED("LEDs", new WsI2COutputConfig(I2C.Port.kMXP, 0x10));
 
     ; // end of enum
 
