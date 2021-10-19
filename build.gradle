@@ -58,7 +58,7 @@ dependencies {
     implementation wpi.deps.vendor.java()
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
-    compile 'org.apache.commons:commons-csv:1.8'
+    compile 'com.github.Team319:BobTrajectory:v2.1.0'
 
     testImplementation 'junit:junit:4.12'
 
@@ -85,3 +85,7 @@ jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
 }
+repositories {
+      jcenter()
+      maven { url "https://jitpack.io" }
+   }

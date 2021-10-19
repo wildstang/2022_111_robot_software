@@ -71,57 +71,49 @@ public class Drive extends PathFollowingDrive {
         right.resetEncoder();
     }
 
-    @Override
-    public void initPathFollower(Path path, boolean isForwards) {
-        // do not initialize if the path is not a TankPath
-        if (!(path instanceof TankPath)) {
-            Log.error("Invalid Path, Drive requires TankPath");
-            return;
-        }
-        TankPath tPath = (TankPath) path;
+    // @Override
+    // public void initPathFollower(Path path) {
+    //     // do not initialize if the path is not a TankPath
+    //     if (!(path instanceof TankPath)) {
+    //         Log.error("Invalid Path, Drive requires TankPath");
+    //         return;
+    //     }
+    //     TankPath tPath = (TankPath) path;
         
-        left.setProfile(DrivePID.PATH.getSlot());
-        right.setProfile(DrivePID.PATH.getSlot());
+    //     left.setProfile(DrivePID.PATH.getSlot());
+    //     right.setProfile(DrivePID.PATH.getSlot());
 
-        left.setMotionControlFramePeriod(20);
-        right.setMotionControlFramePeriod(20);
+    //     left.setMotionControlFramePeriod(20);
+    //     right.setMotionControlFramePeriod(20);
 
-        left.fillProfile(tPath.getLeft().getTalonPoints());
-        right.fillProfile(tPath.getRight().getTalonPoints());
+    //     left.fillProfile(tPath.getLeft().getTalonPoints());
+    //     right.fillProfile(tPath.getRight().getTalonPoints());
 
-        profileNotifier = new Notifier(new PeriodicRunnable());
-    }
+    //     profileNotifier = new Notifier(new PeriodicRunnable());
+    // }
     
     @Override
     public void startPathFollower() {
-        left.enableProfile(true);
-        right.enableProfile(true);
-        profileNotifier.startPeriodic(0.005);
+        left.setProfile(DrivePID.PATH.getSlot());
+        right.setProfile(DrivePID.PATH.getSlot());
     }
     
     @Override
     public void stopPathFollower() {
-        profileNotifier.stop();
         left.enableProfile(false);
         right.enableProfile(false);
     }
 
     @Override
-    public void updatePathFollower() {
-        MotionProfileStatus leftStatus = left.getProfileStatus();
-        MotionProfileStatus rightStatus = right.getProfileStatus();
-
-        if ((leftStatus.activePointValid && leftStatus.isLast) ||
-            (rightStatus.activePointValid && rightStatus.isLast)) {
-            profileNotifier.stop();
-        }
+    public void updatePathFollower(double[] trajectoryInfo) {
+        //do stuff here
     }
 
-    class PeriodicRunnable implements java.lang.Runnable {
-        @Override
-        public void run() {
-            left.updateProfile();
-            right.updateProfile();
-        }
-    }
+    // class PeriodicRunnable implements java.lang.Runnable {
+    //     @Override
+    //     public void run() {
+    //         left.updateProfile();
+    //         right.updateProfile();
+    //     }
+    // }
 }

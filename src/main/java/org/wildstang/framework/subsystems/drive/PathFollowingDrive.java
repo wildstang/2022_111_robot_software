@@ -37,7 +37,7 @@ public abstract class PathFollowingDrive implements Subsystem {
      * @param path Path to follow.
      * @param isForwards True if to follow the path forwards.
      */
-    public abstract void initPathFollower(Path path, boolean isForwards);
+    // public abstract void initPathFollower(Path path);
 
     /**
      * Enable the motion profile and start its notifier. 
@@ -47,7 +47,7 @@ public abstract class PathFollowingDrive implements Subsystem {
     /**
      * Update the motion profile. 
      */
-    public abstract void updatePathFollower();
+    public abstract void updatePathFollower(double[] trajectoryInfo);
 
     /**
      * Disable the motion profile and stop its notifier. 
