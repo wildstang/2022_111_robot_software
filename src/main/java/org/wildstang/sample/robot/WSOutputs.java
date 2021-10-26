@@ -3,8 +3,7 @@ package org.wildstang.sample.robot;
 // expand this and edit if trouble with Ws
 import org.wildstang.framework.core.Outputs;
 import org.wildstang.framework.hardware.OutputConfig;
-import org.wildstang.hardware.roborio.outputs.config.WsPhoenixConfig;
-import org.wildstang.hardware.roborio.outputs.config.WsPhoenixControllers;
+import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxConfig;
 
 /**
  * Output mappings are stored here.
@@ -21,8 +20,8 @@ public enum WSOutputs implements Outputs {
     // ---------------------------------
     //TEST_PAIRED_MOTOR("Test Paired Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_PAIRED_CONTROLLERS[0], true), false),
     //TEST_FOLLOWER_MOTOR("Test Follower Motor", new WsPhoenixFollowerConfig(TEST_PAIRED_MOTOR, CANConstants.EXAMPLE_PAIRED_CONTROLLERS[1], true), false),
-    LEFT_DRIVE("Left Drive Motor", new WsPhoenixConfig(1, WsPhoenixControllers.TALON_SRX), false),
-    RIGHT_DRIVE("Right Drive Motor", new WsPhoenixConfig(1, WsPhoenixControllers.TALON_SRX), false),
+    LEFT_DRIVE("Left Drive Motor", new WsSparkMaxConfig(1, true), false),
+    RIGHT_DRIVE("Right Drive Motor", new WsSparkMaxConfig(1, true), false),
 
     // ---------------------------------
     // Servos
