@@ -195,6 +195,7 @@ public class WsSparkMax extends WsMotorController {
         } else {
             isChanged = true;
         }
+        controlType = ControlType.kDutyCycle;
         super.setSpeed(value);
     }
 
