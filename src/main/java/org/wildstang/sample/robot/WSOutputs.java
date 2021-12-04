@@ -9,6 +9,7 @@ import org.wildstang.hardware.roborio.outputs.config.WsI2COutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsMotorControllers;
 import org.wildstang.hardware.roborio.outputs.config.WsDigitalOutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixFollowerConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxConfig;
 
 import edu.wpi.first.wpilibj.I2C;
 
@@ -25,8 +26,8 @@ public enum WSOutputs implements Outputs {
     // ---------------------------------
     // Motors
     // ---------------------------------
-    TEST_PAIRED_MOTOR("Test Paired Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_PAIRED_CONTROLLERS[0], WsMotorControllers.TALON_SRX)),
-    TEST_FOLLOWER_MOTOR("Test Follower Motor", new WsPhoenixFollowerConfig(TEST_PAIRED_MOTOR, CANConstants.EXAMPLE_PAIRED_CONTROLLERS[1], WsMotorControllers.TALON_SRX)),
+    LEFT_DRIVE("Left Drive Motor", new WsSparkMaxConfig(1, true)),
+    RIGHT_DRIVE("Right Drive Motor", new WsSparkMaxConfig(2, true)),
     TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, WsMotorControllers.VICTOR_SPX)),
 
     // ---------------------------------
