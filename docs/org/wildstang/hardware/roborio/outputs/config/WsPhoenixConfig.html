@@ -158,23 +158,23 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,boolean)">WsPhoenixConfig</a></span>&#8203;(int&nbsp;channel,
-               boolean&nbsp;talon)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers)">WsPhoenixConfig</a></span>&#8203;(int&nbsp;channel,
+               <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller)</code></th>
 <td class="colLast">
 <div class="block">Construct the Phoenix config.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,boolean,boolean)">WsPhoenixConfig</a></span>&#8203;(int&nbsp;channel,
-               boolean&nbsp;talon,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">WsPhoenixConfig</a></span>&#8203;(int&nbsp;channel,
+               <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
                boolean&nbsp;invert)</code></th>
 <td class="colLast">
 <div class="block">Construct the Phoenix config.</div>
 </td>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,boolean,boolean,double)">WsPhoenixConfig</a></span>&#8203;(int&nbsp;channel,
-               boolean&nbsp;talon,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean,double)">WsPhoenixConfig</a></span>&#8203;(int&nbsp;channel,
+               <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
                boolean&nbsp;invert,
                double&nbsp;p_default)</code></th>
 <td class="colLast">
@@ -214,17 +214,17 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isInverted()">isInverted</a></span>()</code></th>
+<td class="colFirst"><code><a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getType()">getType</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Returns if the controller should be inverted.</div>
+<div class="block">Returns true if the motor controller is a Talon.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTalon()">isTalon</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isInverted()">isInverted</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Returns true if the motor controller is a Talon.</div>
+<div class="block">Returns if the controller should be inverted.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -258,55 +258,55 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(int,boolean)">
+<a id="&lt;init&gt;(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>WsPhoenixConfig</h4>
 <pre>public&nbsp;WsPhoenixConfig&#8203;(int&nbsp;channel,
-                       boolean&nbsp;talon)</pre>
+                       <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller)</pre>
 <div class="block">Construct the Phoenix config.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>channel</code> - Controller CAN constant.</dd>
-<dd><code>talon</code> - True if Talon, false if Victor.</dd>
+<dd><code>controller</code> - Enumeration representing type of controller.</dd>
 </dl>
 </li>
 </ul>
-<a id="&lt;init&gt;(int,boolean,boolean)">
+<a id="&lt;init&gt;(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>WsPhoenixConfig</h4>
 <pre>public&nbsp;WsPhoenixConfig&#8203;(int&nbsp;channel,
-                       boolean&nbsp;talon,
+                       <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
                        boolean&nbsp;invert)</pre>
 <div class="block">Construct the Phoenix config.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>channel</code> - Controller CAN constant.</dd>
-<dd><code>talon</code> - True if Talon, false if Victor.</dd>
+<dd><code>controller</code> - Enumeration representing type of controller.</dd>
 <dd><code>invert</code> - True if motor output should be inverted.</dd>
 </dl>
 </li>
 </ul>
-<a id="&lt;init&gt;(int,boolean,boolean,double)">
+<a id="&lt;init&gt;(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean,double)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>WsPhoenixConfig</h4>
 <pre>public&nbsp;WsPhoenixConfig&#8203;(int&nbsp;channel,
-                       boolean&nbsp;talon,
+                       <a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
                        boolean&nbsp;invert,
                        double&nbsp;p_default)</pre>
 <div class="block">Construct the Phoenix config.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>channel</code> - Controller CAN constant.</dd>
-<dd><code>talon</code> - True if Talon, false if Victor.</dd>
+<dd><code>controller</code> - Enumeration representing type of controller.</dd>
 <dd><code>invert</code> - True if motor output should be inverted.</dd>
 <dd><code>p_default</code> - Default output value.</dd>
 </dl>
@@ -350,13 +350,13 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 </dl>
 </li>
 </ul>
-<a id="isTalon()">
+<a id="getType()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>isTalon</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;isTalon()</pre>
+<h4>getType</h4>
+<pre class="methodSignature">public&nbsp;<a href="WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;getType()</pre>
 <div class="block">Returns true if the motor controller is a Talon.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -390,7 +390,7 @@ implements <a href="../../../../framework/hardware/OutputConfig.html" title="int
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Channel number and is talon.</dd>
+<dd>Channel number and controller type.</dd>
 </dl>
 </li>
 </ul>

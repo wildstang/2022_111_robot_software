@@ -9,7 +9,7 @@ public class WsPhoenixConfig implements OutputConfig {
 
     private int m_channel = 0;
     private double m_default;
-    private WsPhoenixControllers controller;
+    private WsMotorControllers controller;
     private boolean invert;
 
     /**
@@ -17,7 +17,7 @@ public class WsPhoenixConfig implements OutputConfig {
      * @param channel Controller CAN constant.
      * @param controller Enumeration representing type of controller.
      */
-    public WsPhoenixConfig(int channel, WsPhoenixControllers controller) {
+    public WsPhoenixConfig(int channel, WsMotorControllers controller) {
         this(channel, controller, false, 0);
     }
 
@@ -27,7 +27,7 @@ public class WsPhoenixConfig implements OutputConfig {
      * @param controller Enumeration representing type of controller.
      * @param invert True if motor output should be inverted.
      */
-    public WsPhoenixConfig(int channel, WsPhoenixControllers controller, boolean invert) {
+    public WsPhoenixConfig(int channel, WsMotorControllers controller, boolean invert) {
         this(channel, controller, invert, 0);
     }
 
@@ -38,7 +38,7 @@ public class WsPhoenixConfig implements OutputConfig {
      * @param invert True if motor output should be inverted.
      * @param p_default Default output value.
      */
-    public WsPhoenixConfig(int channel, WsPhoenixControllers controller, boolean invert, double p_default) {
+    public WsPhoenixConfig(int channel, WsMotorControllers controller, boolean invert, double p_default) {
         m_channel = channel;
         this.controller = controller;
         this.invert = invert;
@@ -65,7 +65,7 @@ public class WsPhoenixConfig implements OutputConfig {
      * Returns true if the motor controller is a Talon.
      * @return True if Talon, false if Victor.
      */
-    public WsPhoenixControllers getType() {
+    public WsMotorControllers getType() {
         return controller;
     }
 

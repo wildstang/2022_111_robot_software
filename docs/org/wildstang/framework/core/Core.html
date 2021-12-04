@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -216,7 +216,7 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executeUpdate()">executeUpdate</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Runs update function of all managers and trackers belonging to the framework.</div>
+<div class="block">Runs update function of all managers belonging to the framework.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
@@ -248,13 +248,6 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i10" class="altColor">
-<td class="colFirst"><code>static <a href="../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStateTracker()">getStateTracker</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Returns the framework's StateTracker.</div>
-</td>
-</tr>
-<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static <a href="../subsystems/SubsystemManager.html" title="class in org.wildstang.framework.subsystems">SubsystemManager</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSubsystemManager()">getSubsystemManager</a></span>()</code></th>
 <td class="colLast">
@@ -437,20 +430,6 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="getStateTracker()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getStateTracker</h4>
-<pre class="methodSignature">public static&nbsp;<a href="../logger/StateTracker.html" title="class in org.wildstang.framework.logger">StateTracker</a>&nbsp;getStateTracker()</pre>
-<div class="block">Returns the framework's StateTracker.</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>StateTracker belonging to the framework.</dd>
-</dl>
-</li>
-</ul>
 <a id="createObject(java.lang.Class)">
 <!--   -->
 </a>
@@ -474,7 +453,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>executeUpdate</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;executeUpdate()</pre>
-<div class="block">Runs update function of all managers and trackers belonging to the framework.</div>
+<div class="block">Runs update function of all managers belonging to the framework.</div>
 </li>
 </ul>
 </li>

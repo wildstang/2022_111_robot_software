@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -128,7 +128,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="../../../framework/io/outputs/AnalogOutput.html" title="class in org.wildstang.framework.io.outputs">org.wildstang.framework.io.outputs.AnalogOutput</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">org.wildstang.hardware.roborio.outputs.WsMotorController</a></li>
+<li>
+<ul class="inheritance">
 <li>org.wildstang.hardware.roborio.outputs.WsPhoenix</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -141,7 +146,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <hr>
 <pre>public class <span class="typeNameLabel">WsPhoenix</span>
-extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class in org.wildstang.framework.io.outputs">AnalogOutput</a></pre>
+extends <a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></pre>
 <div class="block">Controls a Talon or Victor motor controller as a Phoenix BaseMotorController.</div>
 </li>
 </ul>
@@ -163,19 +168,10 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,int,double,boolean)">WsPhoenix</a></span>&#8203;(java.lang.String&nbsp;name,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,int,double,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">WsPhoenix</a></span>&#8203;(java.lang.String&nbsp;name,
          int&nbsp;channel,
          double&nbsp;p_default,
-         boolean&nbsp;talon)</code></th>
-<td class="colLast">
-<div class="block">Constructs the motor controller from config.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,int,double,boolean,boolean)">WsPhoenix</a></span>&#8203;(java.lang.String&nbsp;name,
-         int&nbsp;channel,
-         double&nbsp;p_default,
-         boolean&nbsp;talon,
+         <a href="config/WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
          boolean&nbsp;invert)</code></th>
 <td class="colLast">
 <div class="block">Constructs the motor controller from config.</div>
@@ -201,8 +197,8 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addFollower(int,boolean,boolean)">addFollower</a></span>&#8203;(int&nbsp;canConstant,
-           boolean&nbsp;talon,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addFollower(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">addFollower</a></span>&#8203;(int&nbsp;canConstant,
+           <a href="config/WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
            boolean&nbsp;oppose)</code></th>
 <td class="colLast">
 <div class="block">Add a follower motor to the current motor.</div>
@@ -216,76 +212,132 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enableProfile(boolean)">enableProfile</a></span>&#8203;(boolean&nbsp;enable)</code></th>
+<td class="colLast">
+<div class="block">Enables or disables motion profile.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fillProfile(java.util.ArrayList)">fillProfile</a></span>&#8203;(java.util.ArrayList&lt;com.ctre.phoenix.motion.TrajectoryPoint&gt;&nbsp;points)</code></th>
+<td class="colLast">
+<div class="block">Fills the motor controllers path buffers with the upcoming points.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>com.ctre.phoenix.motorcontrol.can.BaseMotorController</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getController()">getController</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the raw motor controller Object.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="config/WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getControllerType()">getControllerType</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Determines the type of motor controller represented.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>com.ctre.phoenix.motorcontrol.can.BaseMotorController</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFollower()">getFollower</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the raw follower motor controller Object.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOutput()">getOutput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the current motor output percent.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>int</code></td>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPosition()">getPosition</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the quadrature position from a Talon's encoder.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>int</code></td>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>com.ctre.phoenix.motion.MotionProfileStatus</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getProfileStatus()">getProfileStatus</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get the motor controller's motion profile status.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTemperature()">getTemperature</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Return the motor controller temperature</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVelocity()">getVelocity</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the quadrature velocity from a Talon's encoder.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#holdPosition(int)">holdPosition</a></span>&#8203;(int&nbsp;slot)</code></th>
 <td class="colLast">
 <div class="block">Actively holds a given position, useful for braking.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#limitSwitchState()">limitSwitchState</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the state of a Talon's limit switches.</div>
+</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#notifyConfigChange()">notifyConfigChange</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Does nothing, config values only affects start state.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetEncoder()">resetEncoder</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Resets the position of a Talon's encoder.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#runProfile(int)">runProfile</a></span>&#8203;(int&nbsp;slot)</code></th>
 <td class="colLast">
 <div class="block">Sets and runs the motion profile slot to use.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendDataToOutput()">sendDataToOutput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets motor speed to current value, from -1.0 to 1.0.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setBrake()">setBrake</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to brake mode, will not freely spin.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCoast()">setCoast</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to coast mode, will freely spin.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCurrentLimit(int,int,int)">setCurrentLimit</a></span>&#8203;(int&nbsp;peakLimitAmps,
                int&nbsp;peakDuractionMs,
@@ -294,34 +346,41 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <div class="block">Sets the current limit of the motor controller.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSpeed(double)">setSpeed</a></span>&#8203;(double&nbsp;value)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMotionControlFramePeriod(int)">setMotionControlFramePeriod</a></span>&#8203;(int&nbsp;period)</code></th>
 <td class="colLast">
-<div class="block">Wraps setValue().</div>
+<div class="block">Sets the motion profiles control frame period.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stop()">stop</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateProfile()">updateProfile</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Sets the motors to 0 speed and enables brake mode.</div>
+<div class="block">Processes the current motion profile's buffer.</div>
 </td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a id="methods.inherited.from.class.org.wildstang.hardware.roborio.outputs.WsMotorController">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.wildstang.hardware.roborio.outputs.<a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></h3>
+<code><a href="WsMotorController.html#setSpeed(double)">setSpeed</a>, <a href="WsMotorController.html#stop()">stop</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.org.wildstang.framework.io.outputs.AnalogOutput">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.wildstang.framework.io.outputs.<a href="../../../framework/io/outputs/AnalogOutput.html" title="class in org.wildstang.framework.io.outputs">AnalogOutput</a></h3>
-<code><a href="../../../framework/io/outputs/AnalogOutput.html#getValue()">getValue</a>, <a href="../../../framework/io/outputs/AnalogOutput.html#logCurrentState()">logCurrentState</a>, <a href="../../../framework/io/outputs/AnalogOutput.html#setValue(double)">setValue</a></code></li>
+<code><a href="../../../framework/io/outputs/AnalogOutput.html#getValue()">getValue</a>, <a href="../../../framework/io/outputs/AnalogOutput.html#setValue(double)">setValue</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.org.wildstang.framework.io.outputs.Output">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.wildstang.framework.io.outputs.<a href="../../../framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></h3>
-<code><a href="../../../framework/io/outputs/Output.html#disable()">disable</a>, <a href="../../../framework/io/outputs/Output.html#enable()">enable</a>, <a href="../../../framework/io/outputs/Output.html#getName()">getName</a>, <a href="../../../framework/io/outputs/Output.html#getStateTracker()">getStateTracker</a>, <a href="../../../framework/io/outputs/Output.html#hashCode()">hashCode</a>, <a href="../../../framework/io/outputs/Output.html#isEnabled()">isEnabled</a>, <a href="../../../framework/io/outputs/Output.html#setStateTracker(org.wildstang.framework.logger.StateTracker)">setStateTracker</a>, <a href="../../../framework/io/outputs/Output.html#update()">update</a></code></li>
+<code><a href="../../../framework/io/outputs/Output.html#disable()">disable</a>, <a href="../../../framework/io/outputs/Output.html#enable()">enable</a>, <a href="../../../framework/io/outputs/Output.html#getName()">getName</a>, <a href="../../../framework/io/outputs/Output.html#hashCode()">hashCode</a>, <a href="../../../framework/io/outputs/Output.html#isEnabled()">isEnabled</a>, <a href="../../../framework/io/outputs/Output.html#update()">update</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -346,27 +405,7 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(java.lang.String,int,double,boolean)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>WsPhoenix</h4>
-<pre>public&nbsp;WsPhoenix&#8203;(java.lang.String&nbsp;name,
-                 int&nbsp;channel,
-                 double&nbsp;p_default,
-                 boolean&nbsp;talon)</pre>
-<div class="block">Constructs the motor controller from config.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>name</code> - Descriptive name of the controller.</dd>
-<dd><code>channel</code> - Motor controller CAN constant.</dd>
-<dd><code>p_default</code> - Default output value.</dd>
-<dd><code>talon</code> - True if Talon, false if Victor.</dd>
-</dl>
-</li>
-</ul>
-<a id="&lt;init&gt;(java.lang.String,int,double,boolean,boolean)">
+<a id="&lt;init&gt;(java.lang.String,int,double,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -375,7 +414,7 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <pre>public&nbsp;WsPhoenix&#8203;(java.lang.String&nbsp;name,
                  int&nbsp;channel,
                  double&nbsp;p_default,
-                 boolean&nbsp;talon,
+                 <a href="config/WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
                  boolean&nbsp;invert)</pre>
 <div class="block">Constructs the motor controller from config.</div>
 <dl>
@@ -383,7 +422,7 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <dd><code>name</code> - Descriptive name of the controller.</dd>
 <dd><code>channel</code> - Motor controller CAN constant.</dd>
 <dd><code>p_default</code> - Default output value.</dd>
-<dd><code>talon</code> - True if Talon, false if Victor.</dd>
+<dd><code>controller</code> - Enumeration representing type of controller.</dd>
 <dd><code>invert</code> - Invert the motor's direction.</dd>
 </dl>
 </li>
@@ -398,6 +437,72 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="addFollower(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addFollower</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;addFollower&#8203;(int&nbsp;canConstant,
+                        <a href="config/WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;controller,
+                        boolean&nbsp;oppose)</pre>
+<div class="block">Add a follower motor to the current motor.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#addFollower(int,org.wildstang.hardware.roborio.outputs.config.WsMotorControllers,boolean)">addFollower</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>canConstant</code> - CAN constant of the new follower motor.</dd>
+<dd><code>controller</code> - Enumeration representing type of controller.</dd>
+<dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
+</dl>
+</li>
+</ul>
+<a id="getController()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getController</h4>
+<pre class="methodSignature">public&nbsp;com.ctre.phoenix.motorcontrol.can.BaseMotorController&nbsp;getController()</pre>
+<div class="block">Returns the raw motor controller Object.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#getController()">getController</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>CANSparkMax Object.</dd>
+</dl>
+</li>
+</ul>
+<a id="getFollower()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFollower</h4>
+<pre class="methodSignature">public&nbsp;com.ctre.phoenix.motorcontrol.can.BaseMotorController&nbsp;getFollower()</pre>
+<div class="block">Returns the raw follower motor controller Object.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#getFollower()">getFollower</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Follower motor controller object, null if no follower.</dd>
+</dl>
+</li>
+</ul>
+<a id="getControllerType()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getControllerType</h4>
+<pre class="methodSignature">public&nbsp;<a href="config/WsMotorControllers.html" title="enum in org.wildstang.hardware.roborio.outputs.config">WsMotorControllers</a>&nbsp;getControllerType()</pre>
+<div class="block">Determines the type of motor controller represented.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Enumeration representing type of motor controller.</dd>
+</dl>
+</li>
+</ul>
 <a id="setBrake()">
 <!--   -->
 </a>
@@ -406,6 +511,10 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <h4>setBrake</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setBrake()</pre>
 <div class="block">Sets the motor to brake mode, will not freely spin.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#setBrake()">setBrake</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+</dl>
 </li>
 </ul>
 <a id="setCoast()">
@@ -416,6 +525,10 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <h4>setCoast</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setCoast()</pre>
 <div class="block">Sets the motor to coast mode, will freely spin.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#setCoast()">setCoast</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+</dl>
 </li>
 </ul>
 <a id="setCurrentLimit(int,int,int)">
@@ -430,28 +543,12 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <div class="block">Sets the current limit of the motor controller.
  Only Talons support current limiting.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#setCurrentLimit(int,int,int)">setCurrentLimit</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>peakLimitAmps</code> - The instantaneous amount of amps drawn before limiting.</dd>
 <dd><code>peakDuractionMs</code> - The amount of time peakLimitAmps must be broken before limiting, in milliseconds.</dd>
 <dd><code>continuousLimitAmps</code> - The continuous amount of amps drawn before limiting, normally less than peakLimitAmps.</dd>
-</dl>
-</li>
-</ul>
-<a id="addFollower(int,boolean,boolean)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>addFollower</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;addFollower&#8203;(int&nbsp;canConstant,
-                        boolean&nbsp;talon,
-                        boolean&nbsp;oppose)</pre>
-<div class="block">Add a follower motor to the current motor.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>canConstant</code> - CAN constant of the new follower motor.</dd>
-<dd><code>talon</code> - True if Talon, false if Victor.</dd>
-<dd><code>oppose</code> - True if the follow should oppose the direction of this motor.</dd>
 </dl>
 </li>
 </ul>
@@ -464,6 +561,10 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <pre class="methodSignature">public&nbsp;void&nbsp;disableCurrentLimit()</pre>
 <div class="block">Disables the current limit of the motor controller.
  Only Talons support current limiting.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#disableCurrentLimit()">disableCurrentLimit</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+</dl>
 </li>
 </ul>
 <a id="getVelocity()">
@@ -472,9 +573,11 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <ul class="blockList">
 <li class="blockList">
 <h4>getVelocity</h4>
-<pre class="methodSignature">public&nbsp;int&nbsp;getVelocity()</pre>
+<pre class="methodSignature">public&nbsp;double&nbsp;getVelocity()</pre>
 <div class="block">Returns the quadrature velocity from a Talon's encoder.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#getVelocity()">getVelocity</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Current velocity, 0 if not a Talon.</dd>
 </dl>
@@ -486,11 +589,42 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <ul class="blockList">
 <li class="blockList">
 <h4>getPosition</h4>
-<pre class="methodSignature">public&nbsp;int&nbsp;getPosition()</pre>
+<pre class="methodSignature">public&nbsp;double&nbsp;getPosition()</pre>
 <div class="block">Returns the quadrature position from a Talon's encoder.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#getPosition()">getPosition</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Current position, 0 if not a Talon.</dd>
+</dl>
+</li>
+</ul>
+<a id="resetEncoder()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resetEncoder</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;resetEncoder()</pre>
+<div class="block">Resets the position of a Talon's encoder.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#resetEncoder()">resetEncoder</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="limitSwitchState()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>limitSwitchState</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;limitSwitchState()</pre>
+<div class="block">Returns the state of a Talon's limit switches.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Returns 1 if the forward limit switch is closed, 0 if neither or both,
+ and -1 if the reverse limit switch is closed.</dd>
 </dl>
 </li>
 </ul>
@@ -508,6 +642,72 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 </dl>
 </li>
 </ul>
+<a id="enableProfile(boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>enableProfile</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;enableProfile&#8203;(boolean&nbsp;enable)</pre>
+<div class="block">Enables or disables motion profile.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>enable</code> - True if to enable profile.</dd>
+</dl>
+</li>
+</ul>
+<a id="getProfileStatus()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getProfileStatus</h4>
+<pre class="methodSignature">public&nbsp;com.ctre.phoenix.motion.MotionProfileStatus&nbsp;getProfileStatus()</pre>
+<div class="block">Get the motor controller's motion profile status.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Status of the motion profile.</dd>
+</dl>
+</li>
+</ul>
+<a id="fillProfile(java.util.ArrayList)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>fillProfile</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;fillProfile&#8203;(java.util.ArrayList&lt;com.ctre.phoenix.motion.TrajectoryPoint&gt;&nbsp;points)</pre>
+<div class="block">Fills the motor controllers path buffers with the upcoming points.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>points</code> - List of upcoming trajectories.</dd>
+</dl>
+</li>
+</ul>
+<a id="updateProfile()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>updateProfile</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;updateProfile()</pre>
+<div class="block">Processes the current motion profile's buffer.</div>
+</li>
+</ul>
+<a id="setMotionControlFramePeriod(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setMotionControlFramePeriod</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setMotionControlFramePeriod&#8203;(int&nbsp;period)</pre>
+<div class="block">Sets the motion profiles control frame period.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>period</code> - Time in milliseconds.</dd>
+</dl>
+</li>
+</ul>
 <a id="holdPosition(int)">
 <!--   -->
 </a>
@@ -522,16 +722,6 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 </dl>
 </li>
 </ul>
-<a id="resetEncoder()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>resetEncoder</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;resetEncoder()</pre>
-<div class="block">Resets the position of a Talon's encoder.</div>
-</li>
-</ul>
 <a id="getOutput()">
 <!--   -->
 </a>
@@ -541,8 +731,26 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <pre class="methodSignature">public&nbsp;double&nbsp;getOutput()</pre>
 <div class="block">Returns the current motor output percent.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#getOutput()">getOutput</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Current motor output as a percent.</dd>
+</dl>
+</li>
+</ul>
+<a id="getTemperature()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTemperature</h4>
+<pre class="methodSignature">public&nbsp;double&nbsp;getTemperature()</pre>
+<div class="block">Return the motor controller temperature</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="WsMotorController.html#getTemperature()">getTemperature</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Current temperature.</dd>
 </dl>
 </li>
 </ul>
@@ -556,32 +764,8 @@ extends <a href="../../../framework/io/outputs/AnalogOutput.html" title="class i
 <div class="block">Sets motor speed to current value, from -1.0 to 1.0.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../framework/io/outputs/Output.html#sendDataToOutput()">sendDataToOutput</a></code>&nbsp;in class&nbsp;<code><a href="../../../framework/io/outputs/Output.html" title="class in org.wildstang.framework.io.outputs">Output</a></code></dd>
+<dd><code><a href="WsMotorController.html#sendDataToOutput()">sendDataToOutput</a></code>&nbsp;in class&nbsp;<code><a href="WsMotorController.html" title="class in org.wildstang.hardware.roborio.outputs">WsMotorController</a></code></dd>
 </dl>
-</li>
-</ul>
-<a id="setSpeed(double)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setSpeed</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setSpeed&#8203;(double&nbsp;value)</pre>
-<div class="block">Wraps setValue().</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - New motor percent speed, from -1.0 to 1.0.</dd>
-</dl>
-</li>
-</ul>
-<a id="stop()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>stop</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;stop()</pre>
-<div class="block">Sets the motors to 0 speed and enables brake mode.</div>
 </li>
 </ul>
 <a id="notifyConfigChange()">

@@ -32,8 +32,6 @@ public abstract class I2CInput extends Input {
     public void setValue(byte[] p_newValue) {
         setNewValue(p_newValue);
 
-        logCurrentState();
-
         notifyListeners();
     }
 
@@ -64,10 +62,5 @@ public abstract class I2CInput extends Input {
     public byte[] getValue() {
         return m_currentValue;
     }
-
-    /**
-     * Doesn't log anything right now.
-     */
-    @Override
-    protected void logCurrentStateInternal() {}
+    
 }

@@ -1,7 +1,5 @@
 package org.wildstang.framework.core;
 
-import java.util.Date;
-
 import org.wildstang.framework.CoreUtils;
 import org.wildstang.framework.auto.AutoManager;
 import org.wildstang.framework.auto.AutoProgram;
@@ -13,7 +11,6 @@ import org.wildstang.framework.io.InputManager;
 import org.wildstang.framework.io.outputs.Output;
 import org.wildstang.framework.io.OutputManager;
 import org.wildstang.framework.logger.Log;
-import org.wildstang.framework.logger.StateTracker;
 import org.wildstang.framework.subsystems.Subsystem;
 import org.wildstang.framework.subsystems.SubsystemManager;
 
@@ -22,13 +19,10 @@ import org.wildstang.framework.subsystems.SubsystemManager;
  */
 public class Core {
 
-    private static final String s_className = "Core";
-
     private static InputManager s_inputManager;
     private static OutputManager s_outputManager;
     private static SubsystemManager s_subsystemManager;
     private static ConfigManager s_configManager;
-    private static StateTracker s_stateTracker;
     private static InputFactory s_inputFactory;
     private static OutputFactory s_outputFactory;
     private static AutoManager s_autoManager;
@@ -52,7 +46,7 @@ public class Core {
     }
 
     /**
-     * Create all managers, trackers, and factories for the subsystem.
+     * Create all managers and factories for the subsystem.
      * The previous author suggested this shouldn't be run on construction.
      */
     private void init() {
@@ -70,9 +64,6 @@ public class Core {
 
         s_configManager = new ConfigManager();
         s_configManager.init();
-
-        s_stateTracker = new StateTracker();
-        s_stateTracker.init();
 
         s_inputFactory = (InputFactory) createObject(m_inputFactoryClass);
         s_inputFactory.init();
@@ -96,10 +87,6 @@ public class Core {
             output = s_outputFactory.createOutput(output_enum);
 
             // Add the output to the output manager
-            if (output_enum.isTrackingState()) {
-                output.setStateTracker(s_stateTracker);
-                s_stateTracker.addIOInfo(output_enum.getName(), output_enum.getConfig().getClass().getSimpleName(), "Output", output_enum.getConfig());
-            }
             s_outputManager.addOutput(output);
         }
     }
@@ -118,10 +105,6 @@ public class Core {
             input = s_inputFactory.createInput(input_enum);
 
             // Add the input to the input manager
-            if (input_enum.isTrackingState()) {
-                input.setStateTracker(s_stateTracker);
-                s_stateTracker.addIOInfo(input_enum.getName(), input_enum.getConfig().getClass().getSimpleName(), "Input", input_enum.getConfig());
-            }
             s_inputManager.addInput(input);
         }
     }
@@ -202,14 +185,6 @@ public class Core {
     }
 
     /**
-     * Returns the framework's StateTracker.
-     * @return StateTracker belonging to the framework.
-     */
-    public static StateTracker getStateTracker() {
-        return s_stateTracker;
-    }
-
-    /**
      * Creates an object from a Class object.
      * @param p_class Class to construct.
      * @return Constructed class.
@@ -229,11 +204,9 @@ public class Core {
     }
 
     /**
-     * Runs update function of all managers and trackers belonging to the framework.
+     * Runs update function of all managers belonging to the framework.
      */
     public void executeUpdate() {
-        s_stateTracker.beginCycle(new Date());
-
         // Read input from hardware
         s_inputManager.update();
 
@@ -245,8 +218,6 @@ public class Core {
 
         // Update outputs - send data to devices
         s_outputManager.update();
-
-        s_stateTracker.endCycle();
     }
 
 }

@@ -52,11 +52,4 @@ public abstract class ImageInput extends Input {
         return m_currentValue;
     }
 
-    /**
-     * Logs the Input's state to the StateTracker.
-     * Currently logs nothing as images are too complex for complete logs.
-     */
-    @Override
-    protected void logCurrentStateInternal() {}
-
 }

@@ -46,8 +46,6 @@ public abstract class AnalogInput extends Input {
     public void setValue(double p_newValue) {
         setNewValue(p_newValue);
 
-        logCurrentState();
-
         notifyListeners();
     }
 
@@ -83,14 +81,6 @@ public abstract class AnalogInput extends Input {
      */
     public double getValue() {
         return m_currentValue;
-    }
-
-    /**
-     * Logs the Input's state to the StateTracker.
-     */
-    @Override
-    protected void logCurrentStateInternal() {
-        getStateTracker().addState(getName(), getName(), s_format.format(getValue()));
     }
 
 }

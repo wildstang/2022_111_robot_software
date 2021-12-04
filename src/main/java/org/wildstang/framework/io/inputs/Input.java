@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.wildstang.framework.CoreUtils;
 import org.wildstang.framework.io.InputListener;
-import org.wildstang.framework.logger.StateTracker;
 
 /**
  * Core input functions, primarily handling InputListeners.
@@ -20,8 +19,6 @@ public abstract class Input {
     private String m_name = "Undefined";
     private boolean m_valueChanged = false;
     private boolean m_enabled = true;
-
-    private StateTracker m_stateTracker;
 
     /**
      * Constructor sets the name of the Input.
@@ -89,20 +86,8 @@ public abstract class Input {
         // Read the raw input state
         readDataFromInput();
 
-        logCurrentState();
-
         // Notify any listeners
         notifyListeners();
-    }
-
-    /**
-     * Logs the current state of the Input.
-     */
-    protected void logCurrentState() {
-        // Log any state information
-        if (m_stateTracker != null) {
-            logCurrentStateInternal();
-        }
     }
 
     /**
@@ -130,11 +115,6 @@ public abstract class Input {
     }
 
     /**
-     * Abstract function to log the hardware Input's state to the StateTracker.
-     */
-    protected abstract void logCurrentStateInternal();
-
-    /**
      * Abstract function to read the hardware Input and store its value.
      */
     protected abstract void readDataFromInput();
@@ -144,22 +124,6 @@ public abstract class Input {
      */
     public void removeAllListeners() {
         m_listeners.clear();
-    }
-
-    /**
-     * Associates a StateTracker with the Input.
-     * @param p_tracker New StateTracker to associate with Input.
-     */
-    public void setStateTracker(StateTracker p_tracker) {
-        m_stateTracker = p_tracker;
-    }
-
-    /**
-     * Returns the StateTracker associated with the Input.
-     * @return Input's StateTracker.
-     */
-    public StateTracker getStateTracker() {
-        return m_stateTracker;
     }
 
     /**

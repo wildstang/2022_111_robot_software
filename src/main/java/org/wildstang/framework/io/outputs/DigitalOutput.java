@@ -42,12 +42,4 @@ public abstract class DigitalOutput extends Output {
         m_value = p_value;
     }
 
-    /**
-     * Logs the Output's state to the StateTracker.
-     */
-    @Override
-    protected void logCurrentState() {
-        getStateTracker().addState(getName(), getName(), getValue());
-    }
-
 }

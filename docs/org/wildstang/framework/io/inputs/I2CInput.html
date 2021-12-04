@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":6,"i4":10};
+var data = {"i0":10,"i1":10,"i2":6,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -195,26 +195,19 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#logCurrentStateInternal()">logCurrentStateInternal</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Doesn't log anything right now.</div>
-</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readDataFromInput()">readDataFromInput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Processes raw value read from Input's hardware.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>protected abstract byte[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readRawValue()">readRawValue</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Abstract function to request and return the raw value from hardware.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setValue(byte%5B%5D)">setValue</a></span>&#8203;(byte[]&nbsp;p_newValue)</code></th>
 <td class="colLast">
@@ -227,7 +220,7 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.wildstang.framework.io.inputs.<a href="Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></h3>
-<code><a href="Input.html#addInputListener(org.wildstang.framework.io.InputListener)">addInputListener</a>, <a href="Input.html#disable()">disable</a>, <a href="Input.html#enable()">enable</a>, <a href="Input.html#getInputListeners()">getInputListeners</a>, <a href="Input.html#getName()">getName</a>, <a href="Input.html#getStateTracker()">getStateTracker</a>, <a href="Input.html#hasValueChanged()">hasValueChanged</a>, <a href="Input.html#isEnabled()">isEnabled</a>, <a href="Input.html#logCurrentState()">logCurrentState</a>, <a href="Input.html#notifyListeners()">notifyListeners</a>, <a href="Input.html#removeAllListeners()">removeAllListeners</a>, <a href="Input.html#removeInputListener(org.wildstang.framework.io.InputListener)">removeInputListener</a>, <a href="Input.html#setStateTracker(org.wildstang.framework.logger.StateTracker)">setStateTracker</a>, <a href="Input.html#setValueChanged(boolean)">setValueChanged</a>, <a href="Input.html#update()">update</a></code></li>
+<code><a href="Input.html#addInputListener(org.wildstang.framework.io.InputListener)">addInputListener</a>, <a href="Input.html#disable()">disable</a>, <a href="Input.html#enable()">enable</a>, <a href="Input.html#getInputListeners()">getInputListeners</a>, <a href="Input.html#getName()">getName</a>, <a href="Input.html#hasValueChanged()">hasValueChanged</a>, <a href="Input.html#isEnabled()">isEnabled</a>, <a href="Input.html#notifyListeners()">notifyListeners</a>, <a href="Input.html#removeAllListeners()">removeAllListeners</a>, <a href="Input.html#removeInputListener(org.wildstang.framework.io.InputListener)">removeInputListener</a>, <a href="Input.html#setValueChanged(boolean)">setValueChanged</a>, <a href="Input.html#update()">update</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -322,7 +315,7 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <a id="getValue()">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>getValue</h4>
 <pre class="methodSignature">public&nbsp;byte[]&nbsp;getValue()</pre>
@@ -330,20 +323,6 @@ extends <a href="Input.html" title="class in org.wildstang.framework.io.inputs">
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Latest value store in the Input.</dd>
-</dl>
-</li>
-</ul>
-<a id="logCurrentStateInternal()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>logCurrentStateInternal</h4>
-<pre class="methodSignature">protected&nbsp;void&nbsp;logCurrentStateInternal()</pre>
-<div class="block">Doesn't log anything right now.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="Input.html#logCurrentStateInternal()">logCurrentStateInternal</a></code>&nbsp;in class&nbsp;<code><a href="Input.html" title="class in org.wildstang.framework.io.inputs">Input</a></code></dd>
 </dl>
 </li>
 </ul>

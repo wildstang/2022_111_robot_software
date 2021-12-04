@@ -16,7 +16,7 @@ The framework may import libraries for utility purposes, in this case WPILib's T
 
 In order to create a new code base for a new robot follow these steps:
 1. Fork this repo into a 20XX_robot_software repo
-2. In `src/main/java/org/wildstang/` duplicate `sample` to `20XX`
+2. In `src/main/java/org/wildstang/` duplicate `sample` to `year20XX`
 3. Rename package accordingly in each class and `ROBOT_MAIN_CLASS` in `build.gradle`
 4. Update `edu.wpi.first.GradleRIO` version in `build.gradle` to latest WPILib version
 5. Update `frcYear` in `settings.gradle` to competition year

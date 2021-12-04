@@ -21,9 +21,4 @@ public interface Outputs {
      */
     public OutputConfig getConfig();
 
-    /**
-     * Returns true if the Logger should track the Output's state.
-     * @return True if the StateTracker should track this Output.
-     */
-    public boolean isTrackingState();
 }

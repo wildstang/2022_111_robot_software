@@ -1,8 +1,7 @@
 package org.wildstang.hardware.roborio.outputs;
 
-import org.wildstang.framework.io.outputs.AnalogOutput;
 import org.wildstang.framework.logger.Log;
-import org.wildstang.hardware.roborio.outputs.config.WsPhoenixControllers;
+import org.wildstang.hardware.roborio.outputs.config.WsMotorControllers;
 
 import java.util.ArrayList;
 
@@ -23,9 +22,10 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
  * Controls a Talon or Victor motor controller as a Phoenix BaseMotorController.
  * @author Liam
  */
-public class WsPhoenix extends AnalogOutput {
+public class WsPhoenix extends WsMotorController {
 
     BaseMotorController motor;
+    BaseMotorController follower;
 
     /**
      * Constructs the motor controller from config.
@@ -35,7 +35,7 @@ public class WsPhoenix extends AnalogOutput {
      * @param controller Enumeration representing type of controller.
      * @param invert Invert the motor's direction.
      */
-    public WsPhoenix(String name, int channel, double p_default, WsPhoenixControllers controller, boolean invert) {
+    public WsPhoenix(String name, int channel, double p_default, WsMotorControllers controller, boolean invert) {
         super(name, p_default);
 
         switch (controller) {
@@ -49,6 +49,7 @@ public class WsPhoenix extends AnalogOutput {
                 motor = new TalonFX(channel);
                 break;
             default:
+                Log.error("Invalid motor control for WsPhoenix!");
                 return;
         }
         motor.setInverted(invert);
@@ -60,8 +61,7 @@ public class WsPhoenix extends AnalogOutput {
      * @param controller Enumeration representing type of controller.
      * @param oppose True if the follow should oppose the direction of this motor.
      */
-    public void addFollower(int canConstant, WsPhoenixControllers controller, boolean oppose) {
-        BaseMotorController follower;
+    public void addFollower(int canConstant, WsMotorControllers controller, boolean oppose) {
         switch (controller) {
             case TALON_SRX:
                 follower = new TalonSRX(canConstant);
@@ -73,6 +73,7 @@ public class WsPhoenix extends AnalogOutput {
                 follower = new TalonFX(canConstant);
                 break;
             default:
+                Log.error("Invalid follower motor control for WsPhoenix!");
                 return;
         }
         follower.follow(motor);
@@ -80,28 +81,36 @@ public class WsPhoenix extends AnalogOutput {
     }
 
     /**
-     * Returns the BaseMotorController object representing the motor controller.
-     * @return BaseMotorController representation.
+     * Returns the raw motor controller Object.
+     * @return CANSparkMax Object.
      */
     public BaseMotorController getController() {
         return motor;
     }
 
     /**
+     * Returns the raw follower motor controller Object.
+     * @return Follower motor controller object, null if no follower.
+     */
+    public BaseMotorController getFollower() {
+        return follower;
+    }
+
+    /**
      * Determines the type of motor controller represented.
      * @return Enumeration representing type of motor controller.
      */
-    public WsPhoenixControllers getControllerType() {
+    public WsMotorControllers getControllerType() {
         if (motor instanceof TalonSRX) {
-            return WsPhoenixControllers.TALON_SRX;
+            return WsMotorControllers.TALON_SRX;
         }
         else if (motor instanceof TalonFX) {
-            return WsPhoenixControllers.TALON_FX;
+            return WsMotorControllers.TALON_FX;
         }
         else if (motor instanceof VictorSPX) {
-            return WsPhoenixControllers.VICTOR_SPX;
+            return WsMotorControllers.VICTOR_SPX;
         }
-        return WsPhoenixControllers.UNKNOWN;
+        return WsMotorControllers.UNKNOWN;
     }
 
     /**
@@ -169,12 +178,12 @@ public class WsPhoenix extends AnalogOutput {
      * Returns the quadrature velocity from a Talon's encoder.
      * @return Current velocity, 0 if not a Talon.
      */
-    public int getVelocity() {
+    public double getVelocity() {
         if (motor instanceof TalonSRX) {
             return ((TalonSRX) motor).getSensorCollection().getQuadratureVelocity();
         }
         else if (motor instanceof TalonFX) {
-            return (int) ((TalonFX) motor).getSensorCollection().getIntegratedSensorVelocity();
+            return ((TalonFX) motor).getSensorCollection().getIntegratedSensorVelocity();
         }
         return 0;
     }
@@ -183,12 +192,12 @@ public class WsPhoenix extends AnalogOutput {
      * Returns the quadrature position from a Talon's encoder.
      * @return Current position, 0 if not a Talon.
      */
-    public int getPosition() {
+    public double getPosition() {
         if (motor instanceof TalonSRX) {
             return ((TalonSRX) motor).getSensorCollection().getQuadraturePosition();
         }
         else if (motor instanceof TalonFX) {
-            return (int) ((TalonFX) motor).getSensorCollection().getIntegratedSensorPosition();
+            return ((TalonFX) motor).getSensorCollection().getIntegratedSensorPosition();
         }
         return 0;
     }
@@ -313,6 +322,14 @@ public class WsPhoenix extends AnalogOutput {
     }
 
     /**
+     * Return the motor controller temperature
+     */
+    @Override
+    public double getTemperature() {
+        return motor.getTemperature();
+    }
+
+    /**
      * Sets motor speed to current value, from -1.0 to 1.0.
      */
     @Override
@@ -321,23 +338,7 @@ public class WsPhoenix extends AnalogOutput {
     }
 
     /**
-     * Wraps setValue().
-     * @param value New motor percent speed, from -1.0 to 1.0.
-     */
-    public void setSpeed(double value) {
-        setValue(value);
-    }
-
-    /**
-     * Sets the motors to 0 speed and enables brake mode.
-     */
-    public void stop() {
-        setSpeed(0);
-        setBrake();
-    }
-
-    /**
      * Does nothing, config values only affects start state.
      */
-    public void notifyConfigChange() { }
+    public void notifyConfigChange() {}
 }

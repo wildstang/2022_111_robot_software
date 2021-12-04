@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.wildstang.framework.CoreUtils;
-import org.wildstang.framework.core.Core;
 import org.wildstang.framework.core.Subsystems;
 import org.wildstang.framework.logger.Log;
 
@@ -116,15 +115,9 @@ public class SubsystemManager {
      * Tests all subsystems registered with the manager.
      */
     public void selfTestAll() {
-        // Turn off state tracking
-        Core.getStateTracker().stopTrackingState();
-
         for (Subsystem s : m_subsystems) {
             s.selfTest();
         }
-
-        // Turn back on state tracking
-        Core.getStateTracker().startTrackingState();
     }
 
     /**
