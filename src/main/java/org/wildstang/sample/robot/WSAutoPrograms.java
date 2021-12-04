@@ -10,7 +10,7 @@ import org.wildstang.sample.auto.SampleAutoProgram;
 public enum WSAutoPrograms implements AutoPrograms {
 
     // enumerate programs
-    //TEST_PROGRAM("Auto Test", SampleAutoProgram.class)
+    TEST_PROGRAM("Sample", SampleAutoProgram.class)
     ;
 
     /**
