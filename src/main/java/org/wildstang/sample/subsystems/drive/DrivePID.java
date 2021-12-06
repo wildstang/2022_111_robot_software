@@ -1,4 +1,4 @@
-package org.wildstang.sample.subsystems;
+package org.wildstang.sample.subsystems.drive;
 
 import org.wildstang.framework.pid.PIDConstants;
 
@@ -8,10 +8,9 @@ import org.wildstang.framework.pid.PIDConstants;
  */
 public enum DrivePID {
     
-    PATH(0, new PIDConstants(0.0652,1.00,0.0,0.0)),
-    BASE_LOCK(1, new PIDConstants(0.0, .8, 0.001, 10)),
-    MM_QUICK(2, new PIDConstants(0.55, .8, 0.001, 10)),
-    MM_DRIVE(3, new PIDConstants(0.0, .2, 0.001, 2));
+    PATH_POS(0, new PIDConstants(0.0652,1.00,0.0,0.0)),
+    PATH_HEAD(1, new PIDConstants(0.0, 1.00, 0.0, 10)),
+    BASE_LOCK(2, new PIDConstants(0.0, .8, 0.001, 10));
 
     private PIDConstants k;
     private int slot;

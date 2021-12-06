@@ -1,7 +1,7 @@
 package org.wildstang.sample.robot;
 
 import org.wildstang.framework.core.Subsystems;
-import org.wildstang.sample.subsystems.Drive;
+import org.wildstang.sample.subsystems.drive.Drive;
 
 /**
  * All subsystems are enumerated here.

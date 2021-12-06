@@ -1,4 +1,4 @@
-package org.wildstang.sample.subsystems;
+package org.wildstang.sample.subsystems.drive;
 
 import com.ctre.phoenix.motion.MotionProfileStatus;
 
@@ -18,6 +18,7 @@ public class Drive extends PathFollowingDrive {
 
     WsSparkMax left;
     WsSparkMax right;
+    WSDriveHelper helper = new WSDriveHelper();
 
     @Override
     public void init() {

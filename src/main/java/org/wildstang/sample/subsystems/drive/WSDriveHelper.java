@@ -39,4 +39,25 @@ public class WSDriveHelper {
     public static double limit(double v, double limit) {
         return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
     }
+
+    public DriveSignal autoDrive(double leftVelocityData, double rightVelocityData, double centerPositionData, double headingData, 
+        double centerPositionValue, double gyroValue){
+            double leftSignal = DrivePID.PATH_POS.getConstants().f * leftVelocityData;
+            double rightSignal = DrivePID.PATH_POS.getConstants().f * rightVelocityData;
+            leftSignal += DrivePID.PATH_POS.getConstants().p * (centerPositionData - centerPositionValue);
+            rightSignal += DrivePID.PATH_POS.getConstants().p * (centerPositionData - centerPositionValue);
+            leftSignal += DrivePID.PATH_HEAD.getConstants().p * angleDifference(headingData, gyroValue);
+            rightSignal += DrivePID.PATH_HEAD.getConstants().p * angleDifference(gyroValue, headingData);
+            return new DriveSignal(leftSignal, rightSignal);
+    }
+
+    /*
+    ** Calculates the difference in angle between first param and second param, all in degrees
+    */
+    public double angleDifference(double headingInitial, double headingActual){
+        double delta = headingInitial - headingActual;
+        if (delta < -180) return delta+360;
+        if (delta > 180) return delta-360;
+        return delta;
+    }
 }
