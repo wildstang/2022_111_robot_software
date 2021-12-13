@@ -23,6 +23,8 @@ In order to create a new code base for a new robot follow these steps:
 6. Update `projectYear` in `.wpilib/wpilib_preferences.json` to competition year
 7. Update `teamNumber` in `.wpilib/wpilib_preferences.json` if necessary
 
+The `fork.sh` script automates several of these steps.
+
 ## Setting up software
 - GitHub Desktop
   - [Download](https://desktop.github.com/)
