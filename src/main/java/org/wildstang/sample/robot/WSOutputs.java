@@ -10,6 +10,8 @@ import org.wildstang.hardware.roborio.outputs.config.WsMotorControllers;
 import org.wildstang.hardware.roborio.outputs.config.WsDigitalOutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxFollowerConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsSolenoidConfig;
 
 import edu.wpi.first.wpilibj.I2C;
 
@@ -28,6 +30,10 @@ public enum WSOutputs implements Outputs {
     // ---------------------------------
     LEFT_DRIVE("Left Drive Motor", new WsSparkMaxConfig(1, true)),
     RIGHT_DRIVE("Right Drive Motor", new WsSparkMaxConfig(2, true)),
+    LEFT_DRIVE_FOLLOWER("Left Drive Follower", new WsSparkMaxFollowerConfig("Left Drive Motor", 3, true)),
+    RIGHT_DRIVE_FOLLOWER("Right Drive Follower", new WsSparkMaxFollowerConfig("Right Drive Motor", 4, true)),
+    LAUNCHER_MOTOR("Launcher Motor", new WsSparkMaxConfig(5, true)),
+    LAUNCHER_MOTOR_FOLLOWER("Launcher Motor Follower", new WsSparkMaxFollowerConfig("Launcher Motor", 6, true)),
     TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, WsMotorControllers.VICTOR_SPX)),
 
     // ---------------------------------
@@ -43,6 +49,8 @@ public enum WSOutputs implements Outputs {
     // ********************************
     // Solenoids
     // ********************************
+
+    LAUNCHER_SOLENOID("Launcher Solenoid", new WsSolenoidConfig(0, 0, false)),
     
     // ********************************
     // Relays

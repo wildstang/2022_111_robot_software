@@ -126,6 +126,13 @@ public class WsSparkMax extends WsMotorController {
     }
 
     /**
+     * Enables voltage compensation.
+     */
+    public void enableVoltageCompensation(){
+        motor.enableVoltageCompensation(12);
+    }
+
+    /**
      * Returns the quadrature velocity from an encoder.
      * @return Current velocity.
      */
