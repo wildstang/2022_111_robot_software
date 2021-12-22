@@ -36,6 +36,16 @@ public enum WSOutputs implements Outputs {
     LAUNCHER_MOTOR_FOLLOWER("Launcher Motor Follower", new WsSparkMaxFollowerConfig("Launcher Motor", 6, true)),
     TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, WsMotorControllers.VICTOR_SPX)),
 
+    DRIVE1("Module 1 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE1, true)),
+    ANGLE1("Module 1 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE1, true)),
+    DRIVE2("Module 2 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE2, true)),
+    ANGLE2("Module 2 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE2, true)),
+    DRIVE3("Module 3 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE3, true)),
+    ANGLE3("Module 3 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE3, true)),
+    DRIVE4("Module 4 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE4, true)),
+    ANGLE4("Module 4 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE4, true)),
+    
+
     // ---------------------------------
     // Servos
     // ---------------------------------
