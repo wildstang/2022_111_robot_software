@@ -2,6 +2,7 @@ package org.wildstang.sample.robot;
 
 import org.wildstang.framework.core.Subsystems;
 import org.wildstang.sample.subsystems.drive.Drive;
+import org.wildstang.sample.subsystems.swerve.SwerveDrive;
 
 /**
  * All subsystems are enumerated here.
@@ -10,7 +11,8 @@ import org.wildstang.sample.subsystems.drive.Drive;
 public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
-    DRIVE("Drive", Drive.class)
+    DRIVE("Drive", Drive.class),
+    SWERVE_DRIVE("Swerve Drive", SwerveDrive.class)
     ;
 
     /**
