@@ -2,21 +2,22 @@ package org.wildstang.framework.auto.steps;
 
 import org.wildstang.framework.auto.AutoStep;
 import org.wildstang.framework.core.Core;
+import org.wildstang.framework.subsystems.swerve.SwerveDriveTemplate;
 import org.wildstang.sample.robot.WSSubsystems;
 import org.wildstang.sample.subsystems.swerve.SwerveDrive;
 
 public class PathHeadingStep extends AutoStep {
 
-    private SwerveDrive m_drive;
+    private SwerveDriveTemplate m_drive;
     private double heading;
 
     /** sets the robot in auto to face a certain direction, and stay facing that way
      * finishes automatically, just passes a value
      * @param heading field-centric value robot will align towards, in bearing degrees
      */
-    public PathHeadingStep(double heading) {
+    public PathHeadingStep(double heading, SwerveDriveTemplate drive) {
         this.heading = heading;
-        m_drive = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE.getName());
+        m_drive = drive;
     }
 
     @Override

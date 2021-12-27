@@ -8,6 +8,7 @@ import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.framework.subsystems.Subsystem;
+import org.wildstang.framework.subsystems.swerve.SwerveDriveTemplate;
 import org.wildstang.sample.robot.CANConstants;
 import org.wildstang.sample.robot.WSInputs;
 import org.wildstang.sample.robot.WSOutputs;
@@ -25,7 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * outputs: four swerveModule objects
  * description: controls a swerve drive for four swerveModules through autonomous and teleoperated control
  */
-public class SwerveDrive implements Subsystem {
+public class SwerveDrive extends SwerveDriveTemplate {
 
     private final SlewRateLimiter xSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
     private final SlewRateLimiter ySpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);

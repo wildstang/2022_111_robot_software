@@ -2,8 +2,7 @@ package org.wildstang.framework.auto.steps;
 
 import org.wildstang.framework.auto.AutoStep;
 import org.wildstang.framework.core.Core;
-import org.wildstang.sample.robot.WSSubsystems;
-import org.wildstang.sample.subsystems.swerve.SwerveDrive;
+import org.wildstang.framework.subsystems.swerve.SwerveDriveTemplate;
 
 public class SwervePathFollowerStep extends AutoStep {
 
@@ -14,7 +13,7 @@ public class SwervePathFollowerStep extends AutoStep {
     //dt, x, y, leftPos, leftVel, leftAcc, leftJer, centerPos, centerVel, centerAcc, centerJer, rightPos, rightVel, rightAcc, rightJer, heading
     //0   1  2    3          4       5        6          7          8         9          10        11         12       13        14       15
 
-    private SwerveDrive m_drive;
+    private SwerveDriveTemplate m_drive;
     private double[][] pathData;
 
     private int counter;
@@ -23,9 +22,9 @@ public class SwervePathFollowerStep extends AutoStep {
      * finishes after all values have been read to robot
      * @param pathData double[][] that contains path, should be from \frc\paths
      */
-    public SwervePathFollowerStep(double[][] pathData) {
+    public SwervePathFollowerStep(double[][] pathData, SwerveDriveTemplate drive) {
         this.pathData = pathData;
-        m_drive = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE.getName());
+        m_drive = drive;
     }
 
     @Override
