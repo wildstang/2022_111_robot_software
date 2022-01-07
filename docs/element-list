@@ -1,3 +1,4 @@
+frc.paths
 org.wildstang.framework
 org.wildstang.framework.auto
 org.wildstang.framework.auto.program
@@ -15,6 +16,7 @@ org.wildstang.framework.pid.controller
 org.wildstang.framework.pid.input
 org.wildstang.framework.pid.output
 org.wildstang.framework.subsystems
+org.wildstang.framework.subsystems.drive
 org.wildstang.hardware
 org.wildstang.hardware.roborio
 org.wildstang.hardware.roborio.inputs
