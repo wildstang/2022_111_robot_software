@@ -4,25 +4,42 @@
 # this script forks the framework at a given branch into a given existing (but empty) WildStang repo
 # it then adds a tag to this repo
 
-# check parameters
-if [ $# -lt 2 ]; then
-    echo "2 arguments required: fork name and branch to fork from"
-    exit 1
-fi
+UPSTREAM="git@github.com:wildstang/robot_framework.git"
+GITHUB="git@github.com:wildstang"
+UPSTREAM_BRANCH="main"
+
 fork=$1
 branch=$2
 
+# check parameters
+if [ $# -lt 2 ]; then
+    if [ $fork == "update" ]; then
+        branch=$UPSTREAM_BRANCH
+    else
+        echo "2 arguments required: fork name and branch to fork from"
+        exit 1
+    fi
+fi
+
+# update to upstream
+if [ $fork == "update" ]; then
+    git remote add upstream $UPSTREAM
+    git pull upstream $branch
+    git push
+    exit 0
+fi
+
 # clone and enter repo
-git clone git@github.com:wildstang/robot_framework.git framework_fork
+git clone $UPSTREAM framework_fork
 cd framework_fork
 
 # add new remote and push
-git remote add fork "git@github.com:wildstang/${fork}"
-git push fork $branch:main
+git remote add fork "${GITHUB}/${fork}"
+git push fork $branch:$UPSTREAM_BRANCH
 error=$?
 if [ $error -eq 128 ]; then
     echo ""
-    echo "Repo \"wildstang/${fork}\" could not be found"
+    echo "Repo \"${GITHUB}/${fork}\" could not be found"
     cd ..
     rm -rf framework_fork
     exit 2
@@ -41,7 +58,7 @@ git push origin $fork
 # remove old repo and reclone
 cd ..
 rm -rf framework_fork
-git clone "git@github.com:wildstang/${fork}"
+git clone "${GITHUB}/${fork}"
 cd $fork
 
 # update year
