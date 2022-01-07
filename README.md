@@ -23,7 +23,19 @@ In order to create a new code base for a new robot follow these steps:
 6. Update `projectYear` in `.wpilib/wpilib_preferences.json` to competition year
 7. Update `teamNumber` in `.wpilib/wpilib_preferences.json` if necessary
 
-The `fork.sh` script automates several of these steps.
+### Fork Script
+
+The `fork.sh` script automates much of the forking process.
+To fork a given branch to a given repo run the following:
+```
+robot_framework/fork.sh [repo] [branch]
+```
+Note, if you are looking to fork the framework to a non-WildStang owned repo you must edit the `GITHUB` variable in the script.
+
+The fork script can also be used to keep your fork up-to-date with the latest changes on a given branch of the framework, simply run:
+```
+./fork.sh update [branch]
+```
 
 ## Setting up software
 - GitHub Desktop
@@ -33,13 +45,16 @@ The `fork.sh` script automates several of these steps.
   - [Download](https://github.com/wpilibsuite/allwpilib/releases/latest/)
 - Driver Station and Utilities
   - [Instructions](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/frc-game-tools.html)
-  - [Download](https://www.ni.com/en-us/support/downloads/drivers/download.frc-game-tools.html#369633/)
+  - [Download](https://www.ni.com/en-us/support/downloads/drivers/download.frc-game-tools.html/)
 - RoboRIO Imager
   - [Instructions](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html)
   - Included with Driver Station
-- 2020 Radio Configuration Utility
+- 2022 Radio Configuration Utility
   - [Instructions](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html)
-  - [Download](https://firstfrc.blob.core.windows.net/frc2020/Radio/FRC_Radio_Configuration_20_0_0.zip)
+  - [Download](https://firstfrc.blob.core.windows.net/frc2022/Radio/FRC_Radio_Configuration_22_0_1.zip)
+- REV Hardware Client
+  - [Instructions](https://docs.revrobotics.com/rev-hardware-client/getting-started/installation-instructions)
+  - [Download](https://github.com/REVrobotics/REV-Software-Binaries/releases/latest)
 - Phoenix Tuner (CAN)
   - [Download](https://github.com/CrossTheRoadElec/Phoenix-Releases/releases/latest/)
 
@@ -57,3 +72,12 @@ To open the command palette use:
 ## Generate Docs
 
 `./gradlew javadoc`
+
+## External Documentation Links
+
+- [WPILib Docs Site](https://docs.wpilib.org/en/stable/index.html)
+- [WPILib Docs PDF](https://readthedocs.org/projects/frc-docs/downloads/pdf/latest/)
+- [REV Robotics Docs](https://www.revrobotics.com/software/)
+- [CTR Electronics Docs](https://docs.ctre-phoenix.com/en/stable/)
+- [navX Docs](https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/)
+- [2022 Season Materials](https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system)
