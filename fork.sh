@@ -12,13 +12,11 @@ fork=$1
 branch=$2
 
 # check parameters
-if [ $# -lt 2 ]; then
-    if [ $fork == "update" ]; then
-        branch=$UPSTREAM_BRANCH
-    else
-        echo "2 arguments required: fork name and branch to fork from"
-        exit 1
-    fi
+if [ $# -lt 1 ]; then
+    echo "Fork repository name is required"
+    exit 1
+elif [ $# -lt 2 ]; then
+    branch=$UPSTREAM_BRANCH
 fi
 
 # update to upstream
