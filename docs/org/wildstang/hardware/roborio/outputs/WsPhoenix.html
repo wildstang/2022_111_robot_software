@@ -311,33 +311,26 @@ extends <a href="WsMotorController.html" title="class in org.wildstang.hardware.
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#runProfile(int)">runProfile</a></span>&#8203;(int&nbsp;slot)</code></th>
-<td class="colLast">
-<div class="block">Sets and runs the motion profile slot to use.</div>
-</td>
-</tr>
-<tr id="i17" class="rowColor">
-<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendDataToOutput()">sendDataToOutput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets motor speed to current value, from -1.0 to 1.0.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setBrake()">setBrake</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to brake mode, will not freely spin.</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCoast()">setCoast</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the motor to coast mode, will freely spin.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCurrentLimit(int,int,int)">setCurrentLimit</a></span>&#8203;(int&nbsp;peakLimitAmps,
                int&nbsp;peakDuractionMs,
@@ -346,11 +339,18 @@ extends <a href="WsMotorController.html" title="class in org.wildstang.hardware.
 <div class="block">Sets the current limit of the motor controller.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMotionControlFramePeriod(int)">setMotionControlFramePeriod</a></span>&#8203;(int&nbsp;period)</code></th>
 <td class="colLast">
 <div class="block">Sets the motion profiles control frame period.</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setProfile(int)">setProfile</a></span>&#8203;(int&nbsp;slot)</code></th>
+<td class="colLast">
+<div class="block">Sets and runs the motion profile slot to use.</div>
 </td>
 </tr>
 <tr id="i22" class="altColor">
@@ -628,13 +628,13 @@ extends <a href="WsMotorController.html" title="class in org.wildstang.hardware.
 </dl>
 </li>
 </ul>
-<a id="runProfile(int)">
+<a id="setProfile(int)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>runProfile</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;runProfile&#8203;(int&nbsp;slot)</pre>
+<h4>setProfile</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setProfile&#8203;(int&nbsp;slot)</pre>
 <div class="block">Sets and runs the motion profile slot to use.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
