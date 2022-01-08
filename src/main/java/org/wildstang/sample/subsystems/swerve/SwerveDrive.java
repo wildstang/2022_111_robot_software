@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**Class: SwerveDrive
- * inputs: driver left joystick x/y, right joystick x, right trigger & bumper, select, face buttons all, gyro
+ * inputs: driver left joystick x/y, right joystick x, right trigger, right bumper, select, face buttons all, gyro
  * outputs: four swerveModule objects
  * description: controls a swerve drive for four swerveModules through autonomous and teleoperated control
  */
