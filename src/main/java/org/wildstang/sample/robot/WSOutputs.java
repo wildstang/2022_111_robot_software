@@ -28,12 +28,10 @@ public enum WSOutputs implements Outputs {
     // ---------------------------------
     // Motors
     // ---------------------------------
-    LEFT_DRIVE("Left Drive Motor", new WsSparkMaxConfig(1, true)),
-    RIGHT_DRIVE("Right Drive Motor", new WsSparkMaxConfig(2, true)),
-    LEFT_DRIVE_FOLLOWER("Left Drive Follower", new WsSparkMaxFollowerConfig("Left Drive Motor", 3, true)),
-    RIGHT_DRIVE_FOLLOWER("Right Drive Follower", new WsSparkMaxFollowerConfig("Right Drive Motor", 4, true)),
-    LAUNCHER_MOTOR("Launcher Motor", new WsSparkMaxConfig(5, true)),
-    LAUNCHER_MOTOR_FOLLOWER("Launcher Motor Follower", new WsSparkMaxFollowerConfig("Launcher Motor", 6, true)),
+    LEFT_DRIVE("Left Drive Motor", new WsSparkMaxConfig(CANConstants.LEFT_DRIVE, true)),
+    RIGHT_DRIVE("Right Drive Motor", new WsSparkMaxConfig(CANConstants.RIGHT_DRIVE, true)),
+    LEFT_DRIVE_FOLLOWER("Left Drive Follower", new WsSparkMaxFollowerConfig("Left Drive Motor", CANConstants.LEFT_DRIVE_FOLLOWER, true)),
+    RIGHT_DRIVE_FOLLOWER("Right Drive Follower", new WsSparkMaxFollowerConfig("Right Drive Motor", CANConstants.RIGHT_DRIVE_FOLLOWER, true)),
     TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, WsMotorControllers.VICTOR_SPX)),
 
     DRIVE1("Module 1 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE1, true)),
@@ -60,7 +58,7 @@ public enum WSOutputs implements Outputs {
     // Solenoids
     // ********************************
 
-    LAUNCHER_SOLENOID("Launcher Solenoid", new WsSolenoidConfig(0, 0, false)),
+    TEST_SOLENOID("Test Solenoid", new WsSolenoidConfig(0, 0, false)),
     
     // ********************************
     // Relays
