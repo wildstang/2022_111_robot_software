@@ -1,6 +1,8 @@
 package org.wildstang.hardware.roborio.outputs;
 
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -15,6 +17,10 @@ public class WsSparkMax extends WsMotorController {
 
     CANSparkMax motor;
     CANSparkMax follower;
+    CANPIDController controller;
+    boolean isUsingController;
+    boolean isChanged;
+    ControlType controlType;
     
     /**
      * Constructs the motor controller from config.
@@ -40,6 +46,9 @@ public class WsSparkMax extends WsMotorController {
 
         motor = new CANSparkMax(channel, brushless ? MotorType.kBrushless : MotorType.kBrushed);
         motor.setInverted(invert);
+        isUsingController = false;
+        isChanged = true;
+        controlType = ControlType.kDutyCycle;
     }
 
     /**
@@ -117,6 +126,13 @@ public class WsSparkMax extends WsMotorController {
     }
 
     /**
+     * Enables voltage compensation.
+     */
+    public void enableVoltageCompensation(){
+        motor.enableVoltageCompensation(12);
+    }
+
+    /**
      * Returns the quadrature velocity from an encoder.
      * @return Current velocity.
      */
@@ -156,11 +172,82 @@ public class WsSparkMax extends WsMotorController {
     }
 
     /**
-     * Sets motor speed to current value, from -1.0 to 1.0.
+     * Sets motor control
      */
     @Override
     public void sendDataToOutput() {
-        motor.set(getValue());
+        if (isChanged){
+            if (!isUsingController){
+                motor.set(getValue());
+            } else {
+                if (controlType == ControlType.kPosition){
+                    controller.setReference(super.getValue(), controlType);
+                } else if (controlType == ControlType.kVelocity){
+                    controller.setReference(super.getValue(), controlType);
+                } else if (controlType == ControlType.kDutyCycle){
+                    controller.setReference(super.getValue(), controlType);
+                }
+            }
+        }
+    }
+
+    /**
+     * Wraps setValue().
+     * @param value New motor percent speed, from -1.0 to 1.0.
+     */
+    @Override
+    public void setSpeed(double value){
+        if (controlType == ControlType.kDutyCycle && super.getValue()==value){
+            isChanged = false;
+        } else {
+            isChanged = true;
+        }
+        controlType = ControlType.kDutyCycle;
+        super.setSpeed(value);
+    }
+
+    /**
+     * Sets up closed loop control for the motor
+     * @param P the P value
+     * @param I the I value
+     * @param D the D value
+     * @param FF the feed forward constant
+     */
+    public void initClosedLoop(double P, double I, double D, double FF){
+        controller = motor.getPIDController();
+        controller.setP(P);
+        controller.setI(I);
+        controller.setD(D);
+        controller.setFF(FF);
+        isUsingController = true;
+    }
+
+    /**
+     * Sets the motor to track the given position
+     * @param target the encoder target value to track to
+     */
+    public void setPosition(double target){
+        if (super.getValue() == target && controlType == ControlType.kPosition){
+            isChanged = false;
+        } else{
+            isChanged = true;
+        }
+        super.setValue(target);
+        controlType = ControlType.kPosition;
+    }
+
+    /**
+     * Sets the motor to track the given velocity
+     * @param target the encoder target value velocity to track to
+     */
+    public void setVelocity(double target){
+        if (super.getValue() == target && controlType == ControlType.kVelocity){
+            isChanged = false;
+        } else{
+            isChanged = true;
+        }
+        super.setValue(target);
+        controlType = ControlType.kVelocity;
     }
 
     /**
