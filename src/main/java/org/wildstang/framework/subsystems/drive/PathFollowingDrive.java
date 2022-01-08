@@ -46,6 +46,7 @@ public abstract class PathFollowingDrive implements Subsystem {
 
     /**
      * Update the motion profile. 
+     * @param trajectoryInfo the line of double data for the current step of the path
      */
     public abstract void updatePathFollower(double[] trajectoryInfo);
 

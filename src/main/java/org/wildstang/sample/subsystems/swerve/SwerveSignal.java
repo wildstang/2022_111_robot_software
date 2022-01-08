@@ -27,11 +27,17 @@ public class SwerveSignal {
             speed[i] /= maxSpeed;
         }
     }
-    /**speed is normalized value [0, 1] */
+    /**speed is normalized value [0, 1] 
+     * @param i_module the module to get the speed from (1 through 4)
+     * @return double for the speed to set that module to
+    */
     public double getSpeed(int i_module){
         return speed[i_module];
     }
-    /**angle is robot centric, in bearing degrees */
+    /**angle is robot centric, in bearing degrees 
+     * @param i_module the module to get the angle from (1 through 4)
+     * @return double for the angle to set that module to
+    */
     public double getAngle(int i_module){
         return angle[i_module];
     }

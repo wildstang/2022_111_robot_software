@@ -21,6 +21,7 @@ public class SwervePathFollowerStep extends AutoStep {
     /** Sets the robot to track a new path
      * finishes after all values have been read to robot
      * @param pathData double[][] that contains path, should be from \frc\paths
+     * @param drive the swerveDrive subsystem
      */
     public SwervePathFollowerStep(double[][] pathData, SwerveDriveTemplate drive) {
         this.pathData = pathData;

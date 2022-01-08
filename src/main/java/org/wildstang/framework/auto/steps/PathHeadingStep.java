@@ -14,6 +14,7 @@ public class PathHeadingStep extends AutoStep {
     /** sets the robot in auto to face a certain direction, and stay facing that way
      * finishes automatically, just passes a value
      * @param heading field-centric value robot will align towards, in bearing degrees
+     * @param drive the swerveDrive subsystem
      */
     public PathHeadingStep(double heading, SwerveDriveTemplate drive) {
         this.heading = heading;

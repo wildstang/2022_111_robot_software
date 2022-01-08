@@ -69,7 +69,7 @@ public class WSSwerveHelper {
      * @param i_heading direction of translational vector, in field centric bearing degrees
      * @param i_rot the rotational joystick value, created by the heading controller
      * @param i_gyro the gyro value, field centric, in bearing degrees
-     * @return
+     * @return SwerveSignal that is the command for the robot to move
      */
     public SwerveSignal setAuto(double i_power, double i_heading, double i_rot, double i_gyro){
         return setDrive(i_power * Math.cos(Math.toRadians(i_heading)), i_power * Math.sin(Math.toRadians(i_heading)), i_rot, i_gyro);
