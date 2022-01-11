@@ -18,7 +18,7 @@ public class AutoStepDelay extends AutoStep {
 
     /**
      * Constructing creates a new timer for msDelay ms.
-     * @param msDelay Number of milliseconds to wait before finishing.
+     * @param msDelay Number of seconds to wait before finishing.
      */
     public AutoStepDelay(int msDelay) {
         this.delay = msDelay / 1000.0;
@@ -42,7 +42,7 @@ public class AutoStepDelay extends AutoStep {
      */
     @Override
     public void update() {
-        if (timer.hasPeriodPassed(delay)) {
+        if (timer.advanceIfElapsed(delay)) {
             timer.stop();
             setFinished(true);
         }
