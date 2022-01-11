@@ -18,7 +18,7 @@ import org.wildstang.sample.subsystems.swerve.WSSwerveHelper;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.SlewRateLimiter;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**Class: SwerveDrive

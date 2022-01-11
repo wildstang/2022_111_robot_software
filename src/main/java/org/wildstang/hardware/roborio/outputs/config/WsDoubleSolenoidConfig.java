@@ -3,12 +3,14 @@ package org.wildstang.hardware.roborio.outputs.config;
 import org.wildstang.framework.hardware.OutputConfig;
 import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoidState;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
 /**
  * Contains configurations for double solenoids.
  */
 public class WsDoubleSolenoidConfig implements OutputConfig {
 
-    private int m_module;
+    private PneumaticsModuleType m_module;
     private int m_channel1;
     private int m_channel2;
     private WsDoubleSolenoidState m_default;
@@ -20,7 +22,7 @@ public class WsDoubleSolenoidConfig implements OutputConfig {
      * @param channel2 Reverse channel number.
      * @param p_default Default state.
      */
-    public WsDoubleSolenoidConfig(int module, int channel1, int channel2,
+    public WsDoubleSolenoidConfig(PneumaticsModuleType module, int channel1, int channel2,
                                   WsDoubleSolenoidState p_default) {
         m_module = module;
         m_channel1 = channel1;
@@ -56,7 +58,7 @@ public class WsDoubleSolenoidConfig implements OutputConfig {
      * Return the module number.
      * @return The module number.
      */
-    public int getModule() {
+    public PneumaticsModuleType getModule() {
         return m_module;
     }
 

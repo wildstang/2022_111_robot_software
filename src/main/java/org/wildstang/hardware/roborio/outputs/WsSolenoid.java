@@ -2,6 +2,7 @@ package org.wildstang.hardware.roborio.outputs;
 
 import org.wildstang.framework.io.outputs.DigitalOutput;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -18,7 +19,7 @@ public class WsSolenoid extends DigitalOutput {
      * @param channel1 Hardware port number the solenoid is connected to.
      * @param p_default Default state.
      */
-    public WsSolenoid(String name, int module, int channel1, boolean p_default) {
+    public WsSolenoid(String name, PneumaticsModuleType module, int channel1, boolean p_default) {
         super(name, p_default);
 
         solenoid = new Solenoid(module, channel1);
@@ -32,7 +33,7 @@ public class WsSolenoid extends DigitalOutput {
      * @param channel1 Hardware port number the solenoid is connected to.
      */
     public WsSolenoid(String name, int channel1) {
-        this(name, 0, channel1, false);
+        this(name, PneumaticsModuleType.REVPH, channel1, false);
     }
 
     /**

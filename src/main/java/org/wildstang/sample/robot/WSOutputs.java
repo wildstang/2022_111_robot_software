@@ -14,6 +14,7 @@ import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSolenoidConfig;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 /**
  * Output mappings are stored here.
@@ -58,7 +59,7 @@ public enum WSOutputs implements Outputs {
     // Solenoids
     // ********************************
 
-    TEST_SOLENOID("Test Solenoid", new WsSolenoidConfig(0, 0, false)),
+    TEST_SOLENOID("Test Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 0, false)),
     
     // ********************************
     // Relays

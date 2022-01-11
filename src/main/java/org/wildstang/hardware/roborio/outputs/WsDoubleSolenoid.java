@@ -3,6 +3,7 @@ package org.wildstang.hardware.roborio.outputs;
 import org.wildstang.framework.io.outputs.DiscreteOutput;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 /**
  * Controls a double solenoid.
@@ -19,7 +20,7 @@ public class WsDoubleSolenoid extends DiscreteOutput {
      * @param channel2 Hardware port number the second solenoid is connected to.
      * @param p_default Default state.
      */
-    public WsDoubleSolenoid(String name, int module, int channel1, int channel2, WsDoubleSolenoidState p_default) {
+    public WsDoubleSolenoid(String name, PneumaticsModuleType module, int channel1, int channel2, WsDoubleSolenoidState p_default) {
         super(name, p_default.ordinal());
 
         solenoid = new DoubleSolenoid(module, channel1, channel2);

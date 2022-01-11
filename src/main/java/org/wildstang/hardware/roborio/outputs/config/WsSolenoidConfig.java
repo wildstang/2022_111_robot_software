@@ -2,12 +2,14 @@ package org.wildstang.hardware.roborio.outputs.config;
 
 import org.wildstang.framework.hardware.OutputConfig;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
 /**
  * Contains configurations for single solenoids.
  */
 public class WsSolenoidConfig implements OutputConfig {
 
-    private int m_module;
+    private PneumaticsModuleType m_module;
     private int m_channel;
     private boolean m_default;
 
@@ -17,7 +19,7 @@ public class WsSolenoidConfig implements OutputConfig {
      * @param channel Channel number.
      * @param p_default Default state.
      */
-    public WsSolenoidConfig(int module, int channel, boolean p_default) {
+    public WsSolenoidConfig(PneumaticsModuleType module, int channel, boolean p_default) {
         m_module = module;
         m_channel = channel;
         m_default = p_default;
@@ -43,7 +45,7 @@ public class WsSolenoidConfig implements OutputConfig {
      * Return the module number.
      * @return The module number.
      */
-    public int getModule() {
+    public PneumaticsModuleType getModule() {
         return m_module;
     }
 
