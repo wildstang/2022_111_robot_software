@@ -23,10 +23,10 @@ class Column:
 
     def Update(self,inp = None,oup = None,Learn = 0):
         self.Last = self.Vector
-        self.Vector = self.Sigmoid(np.dot(self.Waets,self.Vector)) #no biases? W matrix format is (neurons,connections)
-        if (inp):
+        self.Vector = self.Sigmoid(np.dot(np.transpose(self.Waets),self.Vector)) #no biases? W matrix format is (neurons,connections)
+        if (not inp == None):
             self.Vector[0:self.Inp] = inp
-        if (oup):
+        if (not oup == None):
             self.Vector[self.Inp,self.Inp+self.Oup] = oup
         if (not (Learn == 0)):
             self.Waets = (self.Waets*self.Gamma) +(Learn*np.outer(self.Vector,self.Last))
@@ -65,16 +65,18 @@ class Cortex:
     def Update(self,inp,oup = None,Reward = 1):
         self.Last = self.Vector
         totalIn = np.concatenate((inp,self.Vector))
-        self.Vector = self.Sigmoid(np.dot(self.Waets,totalIn))
+        self.Vector = self.Sigmoid(np.dot(np.transpose(self.Waets),totalIn))
         c = 0
         while(c<len(self.Columns)):
             blurgh = self.Columns[c].Update(inp = self.Vector[c*self.cp[1]:(c+1)*self.cp[1]],Learn = Reward*self.Learn)
             self.Vector[c*self.cp[1]:(c+1)*self.cp[1]] = self.Columns[c].Read()
             c += 1
-        if(oup):
+        if(not oup == None):
             self.Vector[c*self.cp[1]:] = oup
         if (not (self.Learn*Reward == 0)):
             self.Waets = (self.Waets*self.Gamma) +(self.Learn*np.outer(self.Vector,self.Last))
         return "SUPERRBLUURRGGH."
     def GetOutput(self):
         return self.Vector[len(self.Columns)*self.cp[1]:]
+    
+    

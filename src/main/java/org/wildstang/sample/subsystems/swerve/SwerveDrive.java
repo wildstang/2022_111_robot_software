@@ -30,7 +30,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     private final SlewRateLimiter xSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
     private final SlewRateLimiter ySpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
-    private final SlewRateLimiter rotSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
+    private final SlewRateLimiter rotSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);+
 
     private AnalogInput leftStickX;//translation joystick x
     private AnalogInput leftStickY;//translation joystick y

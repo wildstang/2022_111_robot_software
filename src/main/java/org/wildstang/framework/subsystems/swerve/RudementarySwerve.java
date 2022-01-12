@@ -186,7 +186,7 @@ public class Drive implements Subsystem {
             c += 1;
         }
     }
-    public double GetSwerveEncoders(){
+    public double[] GetSwerveEncoders(){
         double[] output = {0,0,0,0};
         int c = 0;
         while(c<4){
@@ -195,7 +195,7 @@ public class Drive implements Subsystem {
         }
         return output;
     }
-    public double GetDriveEncoders(){
+    public double[] GetDriveEncoders(){
         double[] output = {0,0,0,0};
         int c = 0;
         while(c<4){
