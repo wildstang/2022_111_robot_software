@@ -39,7 +39,7 @@ class Predictor:
         if(Reward == None):
           if(self.Re>self.Lre):
             superblurgh = self.Agent.Update(Reward = self.Re-self.Lre)
-           else:
+          else:
             superblurgh = self.Agent.Update(Reward = 0)
             
         else:
