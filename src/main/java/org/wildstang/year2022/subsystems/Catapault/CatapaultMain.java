@@ -58,6 +58,17 @@ public class CatapaultMain {
 
     private double DEADBAND = 0.05;
     
+    private double LATCHED = 0; //latched position in encoder ticks
+    
+    private double UNLATCHED = 1024; 
+    
+    private double WIND_SPEED = 0.3; // percent power to run windup motor at
+    
+    private double WOUND = 1000; // wound position in non-modal encoder ticks. 
+    private double UNWOUND = 0;
+    
+    private double windupPosition; 
+    
     public void init(){
 
       Latch = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CAT_LATCH); //vars not avalable until we decide
@@ -99,7 +110,8 @@ public class CatapaultMain {
     public void inputUpdate(Input source) {
     
       // double inputValue = inputName.getValue();
-      
+        
+      // handle input
       if(Launch.getValue() && IsLoaded){
         IsLoaded = false;
         IsFiring = true;
@@ -109,17 +121,52 @@ public class CatapaultMain {
         IsFiring = false;
       }
       if (Math.abs(ManualTargetDistance.getValue())>= DEADBAND){
-        TargetDist = ManualTargetDistance.getValue();
+        TargetDist = ManualTargetDistance.getValue()*MAXDIST;
       }
       else{
-        //Set automatic target dist here.
+          if (AutoTarget.getValue()){
+             //Set automatic target dist here.
+          }          
       }
+        
+        
+      // non- input based state changes
+      if(!IsLoaded &&! IsFiring){
+          if(windupPosition >= WOUND){
+              IsLoaded = true;
+          }
+      }
+      if(IsFiring){
+          if(windupPosition <= UNWOUND){ //once catapault unwinds, isfiring is no longer true.
+              windupPosition = UNWOUND;
+              IsFiring = false;
+          }
+          
+      }
+        
 
   }
   
   
     public void update(){
-
+        if(!IsLoaded){
+            Latch.setPosition(UNLATCHED);
+        }
+        else{
+            Latch.setPosition(LATCHED);
+        }
+        if(!IsLoaded && !IsFiring){
+            Windup.setSpeed(WINDUP_SPEED);
+        }
+        else{
+            Windup.setSpeed(0);
+        }
+        
+        Angle.setPosition(AimingAngle);
+        
+        windupPosition += Windup.getPosition(); // keep track of ticks the motor has gone.
+        Windup.resetEncoder();
+      
     }
 
     /**
@@ -129,7 +176,14 @@ public class CatapaultMain {
      */
     //@Override
     public void resetState(){
-
+        IsLoaded = true;
+        IsFiring = false;
+        AimingAngle = 0;
+        TargetDist = 0; // arbitrary value
+        Angle.resetEncoder();
+        Windup.resetEncoder();
+        Latch.resetEncoder();
+        windupPositon = WOUND;
     }
 
     /**
