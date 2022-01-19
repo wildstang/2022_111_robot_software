@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.wildstang.framework.CoreUtils;
 import org.wildstang.framework.io.InputListener;
+import org.wildstang.year2022.subsystems.Catapault.CatapaultMain;
 
 /**
  * Core input functions, primarily handling InputListeners.
@@ -32,14 +33,14 @@ public abstract class Input {
 
     /**
      * Attaches an InputListener to the Input.
-     * @param p_listener New InputListener to attach.
+     * @param catapaultMain New InputListener to attach.
      */
-    public void addInputListener(InputListener p_listener) {
-        CoreUtils.checkNotNull(p_listener, "p_listener is null");
+    public void addInputListener(CatapaultMain catapaultMain) {
+        CoreUtils.checkNotNull(catapaultMain, "p_listener is null");
 
         // Only add the listener if it does not exist in the list already
-        if (!m_listeners.contains(p_listener)) {
-            m_listeners.add(p_listener);
+        if (!m_listeners.contains(catapaultMain)) {
+            m_listeners.add(catapaultMain);
         }
     }
 

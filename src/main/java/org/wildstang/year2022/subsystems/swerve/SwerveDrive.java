@@ -151,7 +151,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         //create default swerveSignal
         swerveSignal = new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{0.0, 0.0, 0.0, 0.0});
     }
-    
+    // don't let james see this
+    // he is not good with the hand drill
     @Override
     public void selfTest() {
         // TODO Auto-generated method stub
