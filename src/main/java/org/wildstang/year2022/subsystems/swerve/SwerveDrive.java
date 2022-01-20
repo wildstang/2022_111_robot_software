@@ -37,6 +37,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private AnalogInput rightStickX;//rot joystick
     private AnalogInput rightTrigger;//thrust
     private DigitalInput rightBumper;//defense mode, aka cross
+    private DigitalInput leftBumper;//adjusts rotation locks for the hub
     private DigitalInput select;//gyro reset
     private DigitalInput faceUp;//rotation lock 0 degrees
     private DigitalInput faceRight;//rotation lock 90 degrees
@@ -85,16 +86,16 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
         //update auto trackign values
         if (faceUp.getValue()){
-            rotTarget = 0.0;
+            rotTarget = leftBumper.getValue() ? 339.0 : 0.0;
             rotLocked = true;
         } else if (faceLeft.getValue()){
-            rotTarget = 90.0;
+            rotTarget = leftBumper.getValue() ? 69.0 : 90.0;
             rotLocked = true;
         } else if (faceRight.getValue()){
-            rotTarget = 270.0;
+            rotTarget = leftBumper.getValue() ? 249.0 : 270.0;
             rotLocked = true;
         } else if (faceDown.getValue()){
-            rotTarget = 180.0;
+            rotTarget = leftBumper.getValue() ? 159.0 : 180.0;
             rotLocked = true;
         }
         //get rotational joystick
@@ -124,6 +125,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rightTrigger.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
+        leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_SHOULDER);
+        leftBumper.addInputListener(this);
         select = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_SELECT);
         select.addInputListener(this);
         faceUp = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_FACE_UP);
