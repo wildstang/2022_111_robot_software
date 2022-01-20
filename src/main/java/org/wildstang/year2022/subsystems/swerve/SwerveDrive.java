@@ -75,10 +75,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
             driveState = driveType.TELEOP;
         }
         //get x and y speeds
-        xSpeed = -xSpeedLimiter.calculate(leftStickY.getValue());
-        if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
-        ySpeed = ySpeedLimiter.calculate(leftStickX.getValue());
-        if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
+        xSpeed = -xSpeedLimiter.calculate(leftStickX.getValue());
+        if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
+        ySpeed = -ySpeedLimiter.calculate(leftStickY.getValue());
+        if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
         
         if (source == select && select.getValue()) gyro.reset();
         thrustValue = 1 - DriveConstants.DRIVE_THRUST + DriveConstants.DRIVE_THRUST * Math.abs(rightTrigger.getValue());
@@ -161,37 +161,44 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public void update() {
         switch (driveState) {
         case CROSS:
-            //if not translating, then set to cross
-            if (xSpeed == 0 && ySpeed == 0){
-                swerveSignal = swerveHelper.setCross();
-                drive();
-            } else {
-                //if translating, set to crab
-                swerveSignal = swerveHelper.setCrab(xSpeed, ySpeed, gyro.getAngle());
-                drive();
-            }
+            // //if not translating, then set to cross
+            // if (xSpeed == 0 && ySpeed == 0){
+            //     this.swerveSignal = swerveHelper.setCross();
+            //     drive();
+            // } else {
+            //     //if translating, set to crab
+            //     this.swerveSignal = swerveHelper.setCrab(xSpeed, ySpeed, gyro.getAngle());
+            //     drive();
+            // }
         case TELEOP:
             if (rotLocked){
                 //if rotation tracking, replace rotational joystick value with controller generated one
                 rotSpeed = swerveHelper.getRotControl(rotTarget, gyro.getAngle());
             }
-            swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, gyro.getAngle());
+            this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, gyro.getAngle());
+            SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
             drive();
         case AUTO:
-            //get controller generated rotation value
-            rotSpeed = swerveHelper.getRotControl(pathTarget, gyro.getAngle());
-            //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
-            if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
-            //update where the robot is, to determine error in path
-            updateAutoDistance();
-            swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, gyro.getAngle());
-            drive();
+            // //get controller generated rotation value
+            // rotSpeed = swerveHelper.getRotControl(pathTarget, gyro.getAngle());
+            // //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
+            // if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
+            // //update where the robot is, to determine error in path
+            // updateAutoDistance();
+            // this.swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, gyro.getAngle());
+            // drive();
 
         
         }
-        SmartDashboard.putNumber("Gyro Reading", gyro.getRotation2d().getDegrees());
+        SmartDashboard.putNumber("Gyro Reading", gyro.getAngle());
         SmartDashboard.putBoolean("Is field oriented", isFieldOriented);
         SmartDashboard.putNumber("Thrust value", thrustValue);
+        SmartDashboard.putNumber("X speed", xSpeed);
+        SmartDashboard.putNumber("Y speed", ySpeed);
+        SmartDashboard.putNumber("rotSpeed", rotSpeed);
+        SmartDashboard.putString("Drive mode", driveState.toString());
+        SmartDashboard.putBoolean("rotLocked", rotLocked);
+        SmartDashboard.putNumber("FL from signal", swerveSignal.getSpeed(0));
     }
 
     @Override
