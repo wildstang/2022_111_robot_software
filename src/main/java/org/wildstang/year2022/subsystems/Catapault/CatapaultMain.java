@@ -26,6 +26,10 @@ import edu.wpi.first.wpilibj.I2C;
 
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 public class CatapaultMain {
 
     /**
@@ -68,8 +72,26 @@ public class CatapaultMain {
     private double UNWOUND = 0;
     
     private double windupPosition; 
+
     
+
+    // For Limelight:
+    private NetworkTable LimeTable;
+    private NetworkTableEntry ty;
+    private NetworkTableEntry tx;
+    private NetworkTableEntry thor; // t horizontal
+    private NetworkTableEntry tvert;
+    
+    
+    private double CameraViewAngle = Math.PI/4; //fixthis
+    private double CAMMAXY = 100; //fixthis
+    private double TARGHEIGHTABOVECAMERA = 10; //fixthis
+    private double CAMABOVECAT = 0.25; //fix
+
+    private double TICKS = 4096; //ticks per rotation for catapault
+
     public void init(){
+
 
       Latch = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CAT_LATCH); //vars not avalable until we decide
       Windup = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CAT_WIND);
@@ -85,7 +107,17 @@ public class CatapaultMain {
       ManualWindup = (WsDigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
       ManualWindup.addInputListener(this);
       
+      //swerve
       driveBase = new SwerveDrive();
+
+
+      //limelight
+      LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
+
+      ty = LimeTable.getEntry("ty");
+      tx = LimeTable.getEntry("tx");
+      thor = LimeTable.getEntry("thor");
+      tvert = LimeTable.getEntry("tvert");
 
 
 
@@ -125,6 +157,9 @@ public class CatapaultMain {
       }
       else{
           if (AutoTarget.getValue()){
+            double TargetAngle = Math.asin(ty.getDouble(0)/CAMMAXY);
+            TargetDist = TARGHEIGHTABOVECAMERA/Math.tan(TargetAngle);
+            AimingAngle = (TICKS/Math.PI)*Math.atan((TARGHEIGHTABOVECAMERA-CAMABOVECAT)/TargetDist);
              //Set automatic target dist here.
           }          
       }
@@ -156,7 +191,7 @@ public class CatapaultMain {
             Latch.setPosition(LATCHED);
         }
         if(!IsLoaded && !IsFiring){
-            Windup.setSpeed(WINDUP_SPEED);
+            Windup.setSpeed(WIND_SPEED);
         }
         else{
             Windup.setSpeed(0);
@@ -183,7 +218,7 @@ public class CatapaultMain {
         Angle.resetEncoder();
         Windup.resetEncoder();
         Latch.resetEncoder();
-        windupPositon = WOUND;
+        windupPosition = WOUND;
     }
 
     /**

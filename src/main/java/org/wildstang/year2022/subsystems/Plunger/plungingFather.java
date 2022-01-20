@@ -28,12 +28,14 @@ public class PlungerMain {
      * Initialise the subsystem. Performs any required setup work.
      */
   //  @Override
-    private WsSparkMax punch, angle; // motors
+    private WsSparkMax angle, windup; // motors
 
 
     private WsAnalogInput ManualTargetDistance; 
 
     private WsDigitalInput Launch; 
+
+    private WsAnalogInput AngleChange;
 
     private WsDigitalInput ManualWindup; // if there is windup problem
 
@@ -46,14 +48,21 @@ public class PlungerMain {
     private double TargetDist;
     private double AimingAngle;
 
-    private Boolean IsLoaded;
-    private Boolean IsFiring;
+    private Boolean goForLaunch;
 
+    private Boolean launchBool = false;
+    private double time = 100;
     
     public void init(){
-      Latch = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CAT_LATCH); //vars not avalable until we decide
-      Windup = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CAT_WIND);
-      Angle = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CAT_ANGLE);
+      windup = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CAT_WIND);
+      angle = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CAT_ANGLE);
+
+    Launch = (WsDigitalInput) Core.getOutputManager().getInput(WSInputs.MANIPULATOR_FACE_LEFT);
+    Launch.addInputListener(this);
+    AngleChange = (WsDigitalInput) Core.getOutputManager().getInput(WSInputs.MANIPULATOR_RIGHT_JOYSTICK_Y);
+    AngleChange.addInputListener(this);
+
+    resetState();
     }
 
     /**
@@ -76,19 +85,28 @@ public class PlungerMain {
     
       // double inputValue = inputName.getValue();
       
-      if(Launch.getValue() && IsLoaded){
-        IsLoaded = false;
-        IsFiring = true;
+      launchBool = Launch.getValue();
+      if (launchBool) {
+          goForLaunch = true;
       }
-      else if (ManualWindup.getValue){
-
-      }
-
   }
   
   
     public void update(){
-
+      AimingAngle = Angle.getPosition();
+      if (((AimingAngle < 200 && AngleChange.getValue() > 0) || (AimingAngle > 5 && AngleChange.getValue() <0)) && (AngleChange.getValue() > .1 || AngleChange.getValue() < -.1)) {
+      Angle.setSpeed(AngleChange.getValue()*.1);
+      } else {
+        Angle.setSpeed(0);
+      }
+      if (goForLaunch) {
+        Windup.setSpeed(1);
+        time = time - 1;
+      }
+      if (time == 1) {
+        goForLaunch = false;
+        time = 100;
+      }
     }
 
     /**
@@ -98,7 +116,7 @@ public class PlungerMain {
      */
     //@Override
     public void resetState(){
-
+      Angle.resetEncoder();
     }
 
     /**
