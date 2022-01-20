@@ -89,6 +89,17 @@ public class SwerveModule {
             runAtAngle((angle+180.0)%360);
         }
     }
+    public void runCross(double power, double angle){
+        this.drivePower = power;
+        this.target = angle;
+        if (getDirection(angle)){
+            runAtPower(power);
+            runAtAngle(angle);
+        } else {
+            runAtPower(-power);
+            runAtAngle((angle+180.0)%360);
+        }
+    }
     /**runs at specified robot centric bearing degrees angle 
      * @param angle angle to run the module at, bearing degrees
     */

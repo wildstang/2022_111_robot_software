@@ -88,10 +88,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
             rotTarget = 0.0;
             rotLocked = true;
         } else if (faceLeft.getValue()){
-            rotTarget = 270.0;
+            rotTarget = 90.0;
             rotLocked = true;
         } else if (faceRight.getValue()){
-            rotTarget = 90.0;
+            rotTarget = 270.0;
             rotLocked = true;
         } else if (faceDown.getValue()){
             rotTarget = 180.0;
@@ -159,18 +159,12 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     @Override
     public void update() {
-        switch (driveState) {
-        case CROSS:
-            // //if not translating, then set to cross
-            // if (xSpeed == 0 && ySpeed == 0){
-            //     this.swerveSignal = swerveHelper.setCross();
-            //     drive();
-            // } else {
-            //     //if translating, set to crab
-            //     this.swerveSignal = swerveHelper.setCrab(xSpeed, ySpeed, gyro.getAngle());
-            //     drive();
-            // }
-        case TELEOP:
+        if (driveState == driveType.CROSS){
+            //set to cross
+            this.swerveSignal = swerveHelper.setCross();
+            drive();
+        }
+        if (driveState == driveType.TELEOP){
             if (rotLocked){
                 //if rotation tracking, replace rotational joystick value with controller generated one
                 rotSpeed = swerveHelper.getRotControl(rotTarget, gyro.getAngle());
@@ -178,15 +172,16 @@ public class SwerveDrive extends SwerveDriveTemplate {
             this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, gyro.getAngle());
             SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
             drive();
-        case AUTO:
-            // //get controller generated rotation value
-            // rotSpeed = swerveHelper.getRotControl(pathTarget, gyro.getAngle());
-            // //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
-            // if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
-            // //update where the robot is, to determine error in path
-            // updateAutoDistance();
-            // this.swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, gyro.getAngle());
-            // drive();
+        }
+        if (driveState == driveType.AUTO){
+            //get controller generated rotation value
+            rotSpeed = swerveHelper.getRotControl(pathTarget, gyro.getAngle());
+            //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
+            if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
+            //update where the robot is, to determine error in path
+            updateAutoDistance();
+            this.swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, gyro.getAngle());
+            drive();
 
         
         }
@@ -247,6 +242,12 @@ public class SwerveDrive extends SwerveDriveTemplate {
     }
     /**drives the robot at the current swerveSignal, and displays information for each swerve module */
     private void drive(){
+        if (driveState == driveType.CROSS){
+            for (int i = 0; i < modules.length; i++){
+                modules[i].runCross(swerveSignal.getSpeed(i), swerveSignal.getAngle(i));
+                modules[i].displayNumbers(DriveConstants.POD_NAMES[i]);
+            }
+        }
         for (int i = 0; i < modules.length; i++){
             modules[i].run(swerveSignal.getSpeed(i), swerveSignal.getAngle(i));
             modules[i].displayNumbers(DriveConstants.POD_NAMES[i]);

@@ -20,7 +20,7 @@ public class WSSwerveHelper {
      * @return driveSignal for cross, with 0 magnitude and crossed directions
      */
     public SwerveSignal setCross(){
-        return new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{135.0, 45.0, 45.0, 135.0});
+        return new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{45.0, 135.0, 135.0, 45.0});
     }
 
     /** sets the robot in the mobile defensive "crab" mode, where all modules are aligned
