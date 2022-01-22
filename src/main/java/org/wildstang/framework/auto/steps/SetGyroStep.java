@@ -32,7 +32,7 @@ public class SetGyroStep extends AutoStep {
 
     @Override
     public String toString() {
-        return "Swerve Path Heading";
+        return "Set Gyro";
     }
 
 }
