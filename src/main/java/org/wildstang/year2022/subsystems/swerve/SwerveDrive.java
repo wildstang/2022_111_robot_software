@@ -81,7 +81,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
         ySpeed = -ySpeedLimiter.calculate(leftStickY.getValue());
         if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
         
-        if (source == select && select.getValue()) gyro.reset();
+        if (source == select && select.getValue()) {
+            gyro.reset();
+            gyro.setAngleAdjustment(0);
+        }
         thrustValue = 1 - DriveConstants.DRIVE_THRUST + DriveConstants.DRIVE_THRUST * Math.abs(rightTrigger.getValue());
 
         //update auto trackign values
@@ -273,6 +276,16 @@ public class SwerveDrive extends SwerveDriveTemplate {
             autoTempY += modules[i].getPosition() * Math.sin(Math.toRadians(modules[i].getAngle()));
         }
         autoTravelled += Math.hypot(autoTempX/modules.length, autoTempY/modules.length);
+    }
+
+    /**
+     * Resets the gyro, and sets it the input number of degrees
+     * Used for starting the match at a non-0 angle
+     * @param degrees the current value the gyro should read
+     */
+    public void setGyro(double degrees){
+        gyro.reset();
+        gyro.setAngleAdjustment(degrees);
     }
     
 }
