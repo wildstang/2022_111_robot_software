@@ -4,10 +4,8 @@ import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
-import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
-import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -79,6 +77,21 @@ public class SwerveModule {
      * @param angle angle to run the robot at, bearing degrees
     */
     public void run(double power, double angle){
+        this.drivePower = power;
+        this.target = angle;
+        if (Math.abs(power) < 0.01){
+            runAtPower(power);
+        } else if (getDirection(angle)){
+            runAtPower(power);
+            runAtAngle(angle);
+        } else {
+            runAtPower(-power);
+            runAtAngle((angle+180.0)%360);
+        }
+    }
+    public void runCross(double power, double angle){
+        this.drivePower = power;
+        this.target = angle;
         if (getDirection(angle)){
             runAtPower(power);
             runAtAngle(angle);

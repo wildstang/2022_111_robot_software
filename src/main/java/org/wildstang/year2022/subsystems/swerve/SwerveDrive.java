@@ -37,6 +37,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private AnalogInput rightStickX;//rot joystick
     private AnalogInput rightTrigger;//thrust
     private DigitalInput rightBumper;//defense mode, aka cross
+    private DigitalInput leftBumper;//adjusts rotation locks for the hub
     private DigitalInput select;//gyro reset
     private DigitalInput faceUp;//rotation lock 0 degrees
     private DigitalInput faceRight;//rotation lock 90 degrees
@@ -75,26 +76,29 @@ public class SwerveDrive extends SwerveDriveTemplate {
             driveState = driveType.TELEOP;
         }
         //get x and y speeds
-        xSpeed = -xSpeedLimiter.calculate(leftStickY.getValue());
-        if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
-        ySpeed = ySpeedLimiter.calculate(leftStickX.getValue());
-        if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
+        xSpeed = -xSpeedLimiter.calculate(leftStickX.getValue());
+        if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
+        ySpeed = -ySpeedLimiter.calculate(leftStickY.getValue());
+        if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
         
-        if (source == select && select.getValue()) gyro.reset();
+        if (source == select && select.getValue()) {
+            gyro.reset();
+            gyro.setAngleAdjustment(0);
+        }
         thrustValue = 1 - DriveConstants.DRIVE_THRUST + DriveConstants.DRIVE_THRUST * Math.abs(rightTrigger.getValue());
 
         //update auto trackign values
         if (faceUp.getValue()){
-            rotTarget = 0.0;
+            rotTarget = leftBumper.getValue() ? 339.0 : 0.0;
             rotLocked = true;
         } else if (faceLeft.getValue()){
-            rotTarget = 270.0;
+            rotTarget = leftBumper.getValue() ? 69.0 : 90.0;
             rotLocked = true;
         } else if (faceRight.getValue()){
-            rotTarget = 90.0;
+            rotTarget = leftBumper.getValue() ? 249.0 : 270.0;
             rotLocked = true;
         } else if (faceDown.getValue()){
-            rotTarget = 180.0;
+            rotTarget = leftBumper.getValue() ? 159.0 : 180.0;
             rotLocked = true;
         }
         //get rotational joystick
@@ -124,6 +128,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rightTrigger.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
+        leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_SHOULDER);
+        leftBumper.addInputListener(this);
         select = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_SELECT);
         select.addInputListener(this);
         faceUp = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_FACE_UP);
@@ -159,39 +165,41 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     @Override
     public void update() {
-        switch (driveState) {
-        case CROSS:
-            //if not translating, then set to cross
-            if (xSpeed == 0 && ySpeed == 0){
-                swerveSignal = swerveHelper.setCross();
-                drive();
-            } else {
-                //if translating, set to crab
-                swerveSignal = swerveHelper.setCrab(xSpeed, ySpeed, gyro.getAngle());
-                drive();
-            }
-        case TELEOP:
+        if (driveState == driveType.CROSS){
+            //set to cross
+            this.swerveSignal = swerveHelper.setCross();
+            drive();
+        }
+        if (driveState == driveType.TELEOP){
             if (rotLocked){
                 //if rotation tracking, replace rotational joystick value with controller generated one
                 rotSpeed = swerveHelper.getRotControl(rotTarget, gyro.getAngle());
             }
-            swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, gyro.getAngle());
+            this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, gyro.getAngle());
+            SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
             drive();
-        case AUTO:
+        }
+        if (driveState == driveType.AUTO){
             //get controller generated rotation value
             rotSpeed = swerveHelper.getRotControl(pathTarget, gyro.getAngle());
             //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
             if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
             //update where the robot is, to determine error in path
             updateAutoDistance();
-            swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, gyro.getAngle());
+            this.swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, gyro.getAngle());
             drive();
 
         
         }
-        SmartDashboard.putNumber("Gyro Reading", gyro.getRotation2d().getDegrees());
+        SmartDashboard.putNumber("Gyro Reading", gyro.getAngle());
         SmartDashboard.putBoolean("Is field oriented", isFieldOriented);
         SmartDashboard.putNumber("Thrust value", thrustValue);
+        SmartDashboard.putNumber("X speed", xSpeed);
+        SmartDashboard.putNumber("Y speed", ySpeed);
+        SmartDashboard.putNumber("rotSpeed", rotSpeed);
+        SmartDashboard.putString("Drive mode", driveState.toString());
+        SmartDashboard.putBoolean("rotLocked", rotLocked);
+        SmartDashboard.putNumber("FL from signal", swerveSignal.getSpeed(0));
     }
 
     @Override
@@ -240,6 +248,12 @@ public class SwerveDrive extends SwerveDriveTemplate {
     }
     /**drives the robot at the current swerveSignal, and displays information for each swerve module */
     private void drive(){
+        if (driveState == driveType.CROSS){
+            for (int i = 0; i < modules.length; i++){
+                modules[i].runCross(swerveSignal.getSpeed(i), swerveSignal.getAngle(i));
+                modules[i].displayNumbers(DriveConstants.POD_NAMES[i]);
+            }
+        }
         for (int i = 0; i < modules.length; i++){
             modules[i].run(swerveSignal.getSpeed(i), swerveSignal.getAngle(i));
             modules[i].displayNumbers(DriveConstants.POD_NAMES[i]);
@@ -262,6 +276,16 @@ public class SwerveDrive extends SwerveDriveTemplate {
             autoTempY += modules[i].getPosition() * Math.sin(Math.toRadians(modules[i].getAngle()));
         }
         autoTravelled += Math.hypot(autoTempX/modules.length, autoTempY/modules.length);
+    }
+
+    /**
+     * Resets the gyro, and sets it the input number of degrees
+     * Used for starting the match at a non-0 angle
+     * @param degrees the current value the gyro should read
+     */
+    public void setGyro(double degrees){
+        gyro.reset();
+        gyro.setAngleAdjustment(degrees);
     }
     
 }
