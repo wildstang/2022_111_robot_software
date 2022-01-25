@@ -31,6 +31,8 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 import LimeConsts;
+import Data;
+import java.util.Arrays;
 
 public class AimHelper{
     
@@ -46,7 +48,10 @@ public class AimHelper{
 
 
     public void init(){
-        x,y,Angle,TargetDistance = 0;
+        x = 0;
+        y = 0;
+        Angle = 0;
+        TargetDistance = 0;
 
 
         LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
@@ -68,7 +73,27 @@ public class AimHelper{
         // l = h/sin(0) = d/cos(0)
         // d = cos(0)*h/sin(0) = h/tan(0)
         TargetDistance = LimeConsts.TARGET_HEIGHT/Math.tan(Math.PI*Angle/180);
-
+        return TargetDistance;
+    }
+    public int getIndex(String element,String[] array){
+        int out = 0;
+        int c = 0;
+        while(c<array.length){
+            if(array[c]){
+                if(array[c] == element){
+                    c = 999;
+                    out = c;
+                }
+                c += 1;
+                
+            }
+        }
+        return out;
+    }
+    public double ApproximateValue(double x,String Value){
+        String table = (String) LimeConsts[getIndex(Value,LimeConsts.Values)];
+        //Not done, not functional
+        return 0.0;
     }
 
 }
