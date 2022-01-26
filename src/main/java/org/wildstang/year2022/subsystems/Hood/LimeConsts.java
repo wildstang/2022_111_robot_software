@@ -10,6 +10,6 @@ public class LimeConsts{
     
     public double[] Dists = {0}; //dists from lowest to highest
 
-    public double[] Angles = {0};
+    public double[] Angles = {0}; //correspnding hood angles
 
 }

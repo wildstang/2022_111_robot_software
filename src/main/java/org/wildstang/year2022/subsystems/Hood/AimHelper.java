@@ -48,7 +48,7 @@ public class AimHelper{
 
     private LimeConsts LC;
 
-    public void init(){
+    public void init(){ //initialize. Call before use.
         LC = new LimeConsts();
         x = 0;
         y = 0;
@@ -61,21 +61,21 @@ public class AimHelper{
         ty = LimeTable.getEntry("ty");
         tx = LimeTable.getEntry("tx");
     }
-    public void calcTargetCoords(){
+    public void calcTargetCoords(){ //update target coords. For internal use
         x = tx.getDouble(0);
         y = ty.getDouble(0);
     }
-    public double getVertAngleFromCamera(){
+    public double getVertAngleFromCamera(){ //Get target angle from camera. For internal use.
         calcTargetCoords();
         Angle = ((y/LC.CAMERA_VERTICAL_DIVISIONS)+1)*0.5*LC.CAMERA_VEIW_ANGLE;
         return Angle;
     }
-    public double getHorzAngle(){
+    public double getHorzAngle(){ //Get target horizontal angle from camera.
         calcTargetCoords();
         double out = ((x/LC.CAMERA_HORIZONTAL_DIVISIONS)+1)*0.5*LC.CAMERA_VEIW_ANGLE;
         return out;
     }
-    public double getDistance(){
+    public double getDistance(){ //Get target dist. for internal use.
         double nonevar = getVertAngleFromCamera();
         //h = lsin(0), d = lcos(0)
         // l = h/sin(0) = d/cos(0)
@@ -84,7 +84,7 @@ public class AimHelper{
         return TargetDistance;
     }
 
-    public double getAngle(){
+    public double getAngle(){ //get hood angle for autoaim
         double nonevar = getDistance();
         return ApproximateAngle(TargetDistance);
     }
