@@ -31,7 +31,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 import LimeConsts;
-import Data;
+
 import java.util.Arrays;
 
 public class AimHelper{
@@ -65,10 +65,16 @@ public class AimHelper{
     }
     public double getVertAngleFromCamera(){
         calcTargetCoords();
-        Angle = ((y/LimeConsts.CAMERA_VERT_DIVISIONS)+1)*0.5*LimeConsts.CAMERA_VEIW_ANGLE;
+        Angle = ((y/LimeConsts.CAMERA_VERTICAL_DIVISIONS)+1)*0.5*LimeConsts.CAMERA_VEIW_ANGLE;
+        return Angle
+    }
+    public double getHorzAngle(){
+        calcTargetCoords();
+        double out = ((x/LimeConsts.CAMERA_HORIZONTAL_DIVISIONS)+1)*0.5*LimeConsts.CAMERA_VEIW_ANGLE;
+        return out
     }
     public double getDistance(){
-        getVertAngleFromCamera();
+        double nonevar = getVertAngleFromCamera();
         //h = lsin(0), d = lcos(0)
         // l = h/sin(0) = d/cos(0)
         // d = cos(0)*h/sin(0) = h/tan(0)
@@ -77,7 +83,7 @@ public class AimHelper{
     }
 
     public double getAngle(){
-        getDistance();
+        double nonevar = getDistance();
         return ApproximateAngle(TargetDistance);
     }
     public double ApproximateAngle(double dist){ //linear interlopation

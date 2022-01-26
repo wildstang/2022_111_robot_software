@@ -8,4 +8,8 @@ public class LimeConsts{
 
     public double TARGET_HEIGHT = 2; //meters? above camera
     
+    public double[] Dists = {0}; //dists from lowest to highest
+
+    public double[] Angles = {0};
+
 }
