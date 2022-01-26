@@ -30,7 +30,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-import LimeConsts;
+import org.wildstang.year2022.subsystems.Hood.AimHelper;
 
 import java.util.Arrays;
 
@@ -66,12 +66,12 @@ public class AimHelper{
     public double getVertAngleFromCamera(){
         calcTargetCoords();
         Angle = ((y/LimeConsts.CAMERA_VERTICAL_DIVISIONS)+1)*0.5*LimeConsts.CAMERA_VEIW_ANGLE;
-        return Angle
+        return Angle;
     }
     public double getHorzAngle(){
         calcTargetCoords();
         double out = ((x/LimeConsts.CAMERA_HORIZONTAL_DIVISIONS)+1)*0.5*LimeConsts.CAMERA_VEIW_ANGLE;
-        return out
+        return out;
     }
     public double getDistance(){
         double nonevar = getVertAngleFromCamera();
