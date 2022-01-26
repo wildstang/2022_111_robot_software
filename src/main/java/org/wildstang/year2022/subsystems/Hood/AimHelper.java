@@ -46,6 +46,7 @@ public class AimHelper{
     private double TargetDistance;
     private double Angle;
 
+    private LimeConsts LC = new LimeConsts();
 
     public void init(){
         x = 0;
@@ -65,12 +66,12 @@ public class AimHelper{
     }
     public double getVertAngleFromCamera(){
         calcTargetCoords();
-        Angle = ((y/LimeConsts.CAMERA_VERTICAL_DIVISIONS)+1)*0.5*LimeConsts.CAMERA_VEIW_ANGLE;
+        Angle = ((y/LC.CAMERA_VERTICAL_DIVISIONS)+1)*0.5*LC.CAMERA_VEIW_ANGLE;
         return Angle;
     }
     public double getHorzAngle(){
         calcTargetCoords();
-        double out = ((x/LimeConsts.CAMERA_HORIZONTAL_DIVISIONS)+1)*0.5*LimeConsts.CAMERA_VEIW_ANGLE;
+        double out = ((x/LC.CAMERA_HORIZONTAL_DIVISIONS)+1)*0.5*LC.CAMERA_VEIW_ANGLE;
         return out;
     }
     public double getDistance(){
@@ -78,7 +79,7 @@ public class AimHelper{
         //h = lsin(0), d = lcos(0)
         // l = h/sin(0) = d/cos(0)
         // d = cos(0)*h/sin(0) = h/tan(0)
-        TargetDistance = LimeConsts.TARGET_HEIGHT/Math.tan(Math.PI*Angle/180);
+        TargetDistance = LC.TARGET_HEIGHT/Math.tan(Math.PI*Angle/180);
         return TargetDistance;
     }
 
@@ -87,7 +88,7 @@ public class AimHelper{
         return ApproximateAngle(TargetDistance);
     }
     public double ApproximateAngle(double dist){ //linear interlopation
-        double[] dists = LimeConsts.Dists;
+        double[] dists = LC.Dists;
         int max = dists.length-1;
         int min = 0;
         int c = 0;
@@ -119,16 +120,16 @@ public class AimHelper{
         double out = 0;
         // now c is index of nearest value (rounded up)
         if(exact){
-            out = LimeConsts.Angles[c];
+            out = LC.Angles[c];
         }
         else{
             if(c-1 >= min){
                 double interval = dists[c]-dists[c-1];
-                double range = LimeConsts.Angles[c]-LimeConsts.Angles[c-1];
+                double range = LC.Angles[c]-LC.Angles[c-1];
                 out = (((dist-dists[c-1])/interval)*range)+dists[c-1];
             }
             else{ //outside of domain
-                out = LimeConsts.Angles[c];
+                out = LC.Angles[c];
             }
 
 

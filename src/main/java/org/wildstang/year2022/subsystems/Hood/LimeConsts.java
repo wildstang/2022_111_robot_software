@@ -1,4 +1,4 @@
-package org.wildstang.year2022.subsystems.Hood.AimHelper; 
+package org.wildstang.year2022.subsystems.Hood.LimeConsts; 
 
 public class LimeConsts{
     public double CAMERA_VERTICAL_DIVISIONS = 100;
