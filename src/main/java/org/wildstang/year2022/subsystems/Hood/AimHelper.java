@@ -75,25 +75,62 @@ public class AimHelper{
         TargetDistance = LimeConsts.TARGET_HEIGHT/Math.tan(Math.PI*Angle/180);
         return TargetDistance;
     }
-    public int getIndex(String element,String[] array){
-        int out = 0;
+
+    public double getAngle(){
+        getDistance();
+        return ApproximateAngle(TargetDistance);
+    }
+    public double ApproximateAngle(double dist){ //linear interlopation
+        double[] dists = LimeConsts.Dists;
+        int max = dists.length-1;
+        int min = 0;
         int c = 0;
-        while(c<array.length){
-            if(array[c]){
-                if(array[c] == element){
-                    c = 999;
-                    out = c;
+        boolean done = false;
+        boolean exact = false;
+        while(done == false){
+            if(max-min <= 1){
+                done = true;
+                c = max;
+            }
+            else{
+                c = (int) ((max-min)/2)+min;
+                
+                if(dists[c]>dist){
+                    max = c;
                 }
-                c += 1;
+                else if(dists[c] < dist){
+                    min = c;
+                }
+                else{
+                    exact = true;
+                    done = true;
+                }
                 
             }
+
+            
+        }
+        double out = 0;
+        // now c is index of nearest value (rounded up)
+        if(exact){
+            out = LimeConsts.Angles[c];
+        }
+        else{
+            if(c-1 >= min){
+                double interval = dists[c]-dists[c-1];
+                double range = LimeConsts.Angles[c]-LimeConsts.Angles[c-1];
+                out = (((dist-dists[c-1])/interval)*range)+dists[c-1];
+            }
+            else{ //outside of domain
+                out = LimeConsts.Angles[c];
+            }
+
+
         }
         return out;
+    
     }
-    public double ApproximateValue(double x,String Value){
-        String table = (String) LimeConsts[getIndex(Value,LimeConsts.Values)];
-        //Not done, not functional
-        return 0.0;
-    }
+
+    
 
 }
