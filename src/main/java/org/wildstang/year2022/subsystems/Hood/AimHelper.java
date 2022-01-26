@@ -46,9 +46,10 @@ public class AimHelper{
     private double TargetDistance;
     private double Angle;
 
-    private LimeConsts LC = new LimeConsts();
+    private LimeConsts LC;
 
     public void init(){
+        LC = new LimeConsts();
         x = 0;
         y = 0;
         Angle = 0;
