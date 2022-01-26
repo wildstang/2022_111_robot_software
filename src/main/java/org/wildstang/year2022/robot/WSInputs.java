@@ -124,7 +124,7 @@ public enum WSInputs implements Inputs {
     // Manipulator Triggers
     // ---------------------------------
     MANIPULATOR_LEFT_TRIGGER  ("Manipulator left trigger",  new WsJSJoystickInputConfig(1, JoystickConstants.LEFT_TRIGGER)),
-    MANIPULATOR_RIGHT_TRIGGER ("Manipulator right trigger", new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_TRIGGER)),
+    MANIPULATOR_RIGHT_TRIGGER ("Shoot", new WsJSJoystickInputConfig(1, JoystickConstants.RIGHT_TRIGGER)),
 
     // ********************************
     // Digital IOs
