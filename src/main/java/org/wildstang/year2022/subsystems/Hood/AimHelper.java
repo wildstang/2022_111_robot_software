@@ -1,4 +1,4 @@
-package org.wildstang.year2022.subsystems.Hood.AimHelper; 
+package org.wildstang.year2022.subsystems.Hood; 
 // ton of imports
 import org.wildstang.framework.subsystems.Subsystem;
 
