@@ -16,6 +16,7 @@ import org.wildstang.hardware.roborio.inputs.WsDigitalInput;
 import org.wildstang.hardware.roborio.inputs.WsJoystickButton;
 import org.wildstang.hardware.roborio.outputs.WsPhoenix;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
+import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 
@@ -36,6 +37,9 @@ public class Ballpath implements Subsystem{
     //Motor Speeds
     private double feedMotorSpeed;
     private double intakeMotorSpeed;
+
+    //Solenoids
+    private WsSolenoid intakeSolenoid;
 
     //Solenoid Value
     private boolean intakeSolenoidValue;
