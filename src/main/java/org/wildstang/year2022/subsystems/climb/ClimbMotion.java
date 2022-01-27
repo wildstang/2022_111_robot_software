@@ -13,8 +13,7 @@ import org.wildstang.year2022.robot.CANConstants;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
-import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoid;
-import org.wildstang.hardware.roborio.outputs.WsSolenoidState;
+import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoidState;
 import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 import org.wildstang.year2022.subsystems.swerve.SwerveSignal;
 import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
@@ -61,11 +60,11 @@ public class ClimbMotion {
         RightClimber.setSpeed(climberSpeed);
         LeftClimber.setSpeed(climberSpeed);
         if(IsRotated){
-            RightSol.setValue(WsSolenoidState.REVERSE); //because initialized to .FORWARD, and i'm assuming starts not rotated.
+            RightSol.setValue(WsDoubleSolenoidState.REVERSE); //because initialized to .FORWARD, and i'm assuming starts not rotated.
         }
         else{ 
         
-            LeftSol.setValue(WsSolenoidState.FORWARD);
+            LeftSol.setValue(WsDoubleSolenoidState.FORWARD);
         }
 
         // update ClimberTracker
