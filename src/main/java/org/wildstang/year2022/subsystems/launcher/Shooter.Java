@@ -16,44 +16,58 @@ import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 import org.wildstang.year2022.subsystems.swerve.SwerveSignal;
 import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
+import org.wildstang.hardware.roborio.outputs.WsSolenoid;
+
+import edu.wpi.first.wpilibj.Timer;
+
 
 public class Launcher implements Subsystem{
     private DigitalInput ShootInput;
-        //AutoInput.Name = "MANIPULATOR_RIGHT_TRIGGER";
+        ShootInput.WsName = "MANIPULATOR_RIGHT_TRIGGER";
 
-    private WsSparkMax shooterMotor;
+    private WsSparkMax shooterMotorOne;
         //shooterMotor.WsName = "shooterMotor";
-    private CANSparkMax kickerMotor;
+    private WsSparkMax shooterMotorTwo;
+    private WsSparkMax kickerMotor;
         //kickerMotor.WsName = "kickerMotor";
-    //Add solenoid output
 
-    public boolean IsShooterOn = false;
+    private WsSolenoid SolenoidOpener;
 
-    public static final double UPPER_GOAL_DISTANCE_LIMIT = 0.0;
-    public static final double REVS_PER_INCH = 1.0 / 2.0;
-    public static final double TICKS_PER_REV = 1024.0;
-    public static final double TICKS_PER_INCH = TICKS_PER_REV * REVS_PER_INCH;
-    
+    private Timer ShooterTime;
+    public Boolean ShooterOn;
+           ShooterOn.Override = Boolean false;
+    protected final double delay;
+
     public enum driveType {TELEOP, AUTO, CROSS};
     public driveType driveState;
     
     public void inputUpdate(Input source) {
-        if 
+        if (source == ShootInput){
+            if (ShootInput.getValue()) {
+                private TheInput = ShooterInput.getValue();
+                if (TheInput == 1) {
+                    ShooterTime.reset ()
+                }
+            }
+        }
+
     }
 
     public void init(){
-
+        ShooterTime.start ();
     }
 
     public void initInputs(){
-        bumperRight =
-        bumperLeft = 
-        LeftButtonUp = 
-        LeftButtonDown =
+        ShootInput = (DigitalInput) Core.getInputManager().getInput(WSInputs.["MANIPULATOR_RIGHT_TRIGGER"]);
+        ShootInput.addInputListener(this);
     }
 
     public void initOutputs(){
+        shooterMotorOne = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER1);
+        shooterMotorTwo = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER2);
+        kickerMotor = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.KICKER);
 
+        SolenoidOpener = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.KickerMotor);
     }
 
     @Override
@@ -62,7 +76,15 @@ public class Launcher implements Subsystem{
     }
 
     public void update() {
+        if (ShooterTime.get() < 1){
+            ShooterOn = true;
+        }
+        else {
+            ShooterOn = false;
+        }
+        if (ShooterOn = true && ShooterOn.Override = false){
 
+        }
     }
     
     @Override

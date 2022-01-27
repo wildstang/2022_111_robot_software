@@ -1,4 +1,4 @@
-package org.wildstang.year2022.subsystems.launcher;
+/*package org.wildstang.year2022.subsystems.launcher;
 
 import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
@@ -20,12 +20,28 @@ import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 
 public class Hood implements Subsystem{
     private AnalogInput ManualAim;
-        //ManualShoot.WsName = "MANIPULATOR_LEFT_JOYSTICK_Y";
-    private DigitalInput AutoAim;
-       // AutoAim.WsName = "MANIPULATOR_LEFT_TRIGGER";
+        ManualShoot.WsName = "MANIPULATOR_LEFT_JOYSTICK_Y";
+    private DigitalInput ManualAimInput;
+        AutoAim.WsName = "MANIPULATOR_LEFT_TRIGGER";
+
+    private DigitalInput PresetUp;
+        PresetUp.WsName = "MANIPULATOR_DPAD_UP";
+    private DigitalInput PresetDown;
+        PresetDown.WsName = "MANIPULATOR_DPAD_DOWN";
 
     private WsSparkMax hoodMotor;
-       // hoodMotor.WsName = "hoodMotor";
+        public static final double UPPER_GOAL_DISTANCE_LIMIT = 0.0;
+        public static final double REVS_PER_INCH = 1.0 / 2.0;
+        public static final double TICKS_PER_REV = 1024.0;
+        public static final double TICKS_PER_INCH = TICKS_PER_REV * REVS_PER_INCH;
+   
+        public void HoodAngle (){
+            return hoodMotor.AnalogInput()/TICKS_PER_REV
+        }
+        // hoodMotor.WsName = "hoodMotor";
+        //for analog input do hoodMotor.AnalogInput()
+
+    
 
     public static final double POINTBLANK_HOOD = 45; //hood angle for pointblank shot
     public static final double SAFE_SHOOTER_SPEED = 0*(3750 * TICKS_PER_REV) / 600.0;//dropped to 25600 from 34133
@@ -74,4 +90,43 @@ public class Hood implements Subsystem{
     private long hoodEncoderResetTimestamp;
 
     private double hoodEncoderOffset;
+
+    public void inputUpdate(Input source) {
+        if 
+    }
+
+    public void init(){
+
+    }
+
+    public void initInputs(){
+        autoAimInput =
+        manualAimInput = 
+
+        LeftButtonDown =
+    }
+
+    public void initOutputs(){
+        shooterMotor = 
+    }
+
+    @Override
+    public void selfTest(){
+        
+    }
+
+    public void update() {
+
+    }
+    
+    @Override
+    public void resetState() {
+
+    }
+
+    public String getName() {
+        // TODO Auto-generated method stub
+        return "Launcher";
+    }
+    
 }

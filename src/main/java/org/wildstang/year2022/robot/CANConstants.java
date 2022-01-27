@@ -28,5 +28,8 @@ public final class CANConstants {
     public static final int DRIVE4 = 14;
     public static final int ANGLE4 = 15;
     
+    public static final int LAUNCHER1 = -0;
+    public static final int LAUNCHER2 = -1;
+    public static final int KICKER = 1;
     
 }
