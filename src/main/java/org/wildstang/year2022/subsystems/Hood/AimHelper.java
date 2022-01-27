@@ -67,7 +67,7 @@ public class AimHelper{
         tv = LimeTable.getEntry("tv");
     }
     private void calcTargetCoords(){ //update target coords. For internal use
-        if(tv){
+        if(tv.getDouble(0) == 1){
             x = tx.getDouble(0);
             y = ty.getDouble(0);
             TargetInVeiw = true;
