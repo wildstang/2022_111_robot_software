@@ -39,20 +39,24 @@ public class AimHelper{
     private NetworkTable LimeTable;
     private NetworkTableEntry ty; //y angle
     private NetworkTableEntry tx; //x angle
+    private NetworkTableEntry tv;
     
     public double x;
     public double y;
+
+    public boolean TargetInVeiw;
 
     private double TargetDistance;
     private double Angle;
 
     private LimeConsts LC;
 
+
     public AimHelper(){ //initialize. Call before use.
         LC = new LimeConsts();
         x = 0;
         y = 0;
-        
+        TargetInVeiw = false;
         TargetDistance = 0;
 
 
@@ -60,10 +64,19 @@ public class AimHelper{
 
         ty = LimeTable.getEntry("ty");
         tx = LimeTable.getEntry("tx");
+        tv = LimeTable.getEntry("tv");
     }
     private void calcTargetCoords(){ //update target coords. For internal use
-        x = tx.getDouble(0);
-        y = ty.getDouble(0);
+        if(tv){
+            x = tx.getDouble(0);
+            y = ty.getDouble(0);
+            TargetInVeiw = true;
+        }
+        else{
+            x = 0; //no target case
+            y = 0;
+            TargetInVeiw = false;
+        }
     }
 
     private void getDistance(){ //update target dist. for internal use.
