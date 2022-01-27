@@ -104,7 +104,7 @@ public class Ballpath implements Subsystem{
         resetState();
     }
     private void initInputs(){
-        rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_TRIGGER_RIGHT);
+        rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_TRIGGER);
         rightTrigger.addInputListener(this);
         xButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_LEFT);
         xButton.addInputListener(this);
@@ -115,8 +115,8 @@ public class Ballpath implements Subsystem{
     }
 
     private void initOutputs(){
-        feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutput.BALLPATH_FEED);
-        intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutput.BALLPATH_INTAKE);
+        feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.BALLPATH_FEED);
+        intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.BALLPATH_INTAKE);
         intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_DEPLOY_SOLENOID);
     }
 
