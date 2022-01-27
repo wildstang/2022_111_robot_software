@@ -12,7 +12,7 @@ import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 /**
  * Hood system
  * Left Joystick Y: controls hood angle 
- * dpad: preset angle 
+ * dpad: preset angle
  * Left Trigger: Auto Aim
  * @author Bernard
  */
@@ -21,7 +21,7 @@ public class SampleSubsystem implements Subsystem {
     WsSparkMax hood_motor;
     WsJoystickAxis js;
     
-    double hood_position
+    double hood_position;
     
 
     @Override
