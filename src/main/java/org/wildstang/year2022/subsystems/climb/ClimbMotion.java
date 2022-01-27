@@ -32,8 +32,8 @@ public class ClimbMotion {
     private WsSparkMax RightClimber;
     private WsSparkMax LeftClimber;
 
-    private WsSolenoid RightSol;
-    private WsSolenoid LeftSol;
+    private WsDoubleSolenoid RightSol;
+    private WsDoubleSolenoid LeftSol;
 
     private ClimbConstants constant = new ClimbConstants();
     public boolean IsExtended;
