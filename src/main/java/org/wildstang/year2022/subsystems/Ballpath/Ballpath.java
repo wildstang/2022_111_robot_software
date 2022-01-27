@@ -41,7 +41,6 @@ public class Ballpath implements Subsystem{
     private boolean intakeSolenoidValue;
 
     //Shuffleboard entries
-    private ShuffleboardTab driveTab;
     private NetworkTableEntry maxDriveInputEntry;
 
     //Constants
@@ -77,7 +76,7 @@ public class Ballpath implements Subsystem{
             } else {
                 intakeMotorSpeed = FULL_SPEED;
             }
-        }
+        } 
         //intake solenoid toggle
         if (source == aButton) {
             if (aButton.getValue()) {
@@ -107,8 +106,6 @@ public class Ballpath implements Subsystem{
         yButton.addInputListener(this);
         aButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_DOWN.getName());
         aButton.addInputListener(this);
-        driveTab = Shuffleboard.getTab("Drive");
-        maxDriveInputEntry = driveTab.add("Max Input", 1).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
     }
 
     private void initOutputs(){
