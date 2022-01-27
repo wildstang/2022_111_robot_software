@@ -12,6 +12,7 @@ import org.wildstang.hardware.roborio.outputs.config.WsPhoenixFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSolenoidConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsDoubleSolenoidConfig;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
