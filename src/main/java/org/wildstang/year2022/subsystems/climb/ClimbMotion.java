@@ -61,11 +61,11 @@ public class ClimbMotion {
         RightClimber.setSpeed(climberSpeed);
         LeftClimber.setSpeed(climberSpeed);
         if(IsRotated){
-            RightSol.setValue(WsDoubleSolenoidState.REVERSE); //because initialized to .FORWARD, and i'm assuming starts not rotated.
+            RightSol.setValue(WsDoubleSolenoidState.REVERSE.ordinal()); //because initialized to .FORWARD, and i'm assuming starts not rotated.
         }
         else{ 
         
-            LeftSol.setValue(WsDoubleSolenoidState.FORWARD);
+            LeftSol.setValue(WsDoubleSolenoidState.FORWARD.ordinal());
         }
 
         // update ClimberTracker
