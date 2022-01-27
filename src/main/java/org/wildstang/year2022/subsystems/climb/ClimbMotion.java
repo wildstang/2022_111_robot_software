@@ -13,6 +13,8 @@ import org.wildstang.year2022.robot.CANConstants;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
+import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoid;
+import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoidState;
 import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 import org.wildstang.year2022.subsystems.swerve.SwerveSignal;
 import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
