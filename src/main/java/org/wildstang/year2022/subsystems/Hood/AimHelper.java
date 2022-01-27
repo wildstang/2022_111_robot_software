@@ -37,8 +37,8 @@ import java.util.Arrays;
 public class AimHelper{
     
     private NetworkTable LimeTable;
-    private NetworkTableEntry ty; //y position
-    private NetworkTableEntry tx; //x position
+    private NetworkTableEntry ty; //y angle
+    private NetworkTableEntry tx; //x angle
     
     public double x;
     public double y;
@@ -48,11 +48,11 @@ public class AimHelper{
 
     private LimeConsts LC;
 
-    public void init(){ //initialize. Call before use.
+    public AimHelper(){ //initialize. Call before use.
         LC = new LimeConsts();
         x = 0;
         y = 0;
-        Angle = 0;
+        
         TargetDistance = 0;
 
 
@@ -61,31 +61,22 @@ public class AimHelper{
         ty = LimeTable.getEntry("ty");
         tx = LimeTable.getEntry("tx");
     }
-    public void calcTargetCoords(){ //update target coords. For internal use
+    private void calcTargetCoords(){ //update target coords. For internal use
         x = tx.getDouble(0);
         y = ty.getDouble(0);
     }
-    public double getVertAngleFromCamera(){ //Get target angle from camera. For internal use.
+
+    double void getDistance(){ //update target dist. for internal use.
         calcTargetCoords();
-        Angle = ((y/LC.CAMERA_VERTICAL_DIVISIONS)+1)*0.5*LC.CAMERA_VEIW_ANGLE;
-        return Angle;
-    }
-    public double getHorzAngle(){ //Get target horizontal angle from camera.
-        calcTargetCoords();
-        double out = ((x/LC.CAMERA_HORIZONTAL_DIVISIONS)+1)*0.5*LC.CAMERA_VEIW_ANGLE;
-        return out;
-    }
-    public double getDistance(){ //Get target dist. for internal use.
-        double nonevar = getVertAngleFromCamera();
         //h = lsin(0), d = lcos(0)
         // l = h/sin(0) = d/cos(0)
         // d = cos(0)*h/sin(0) = h/tan(0)
-        TargetDistance = LC.TARGET_HEIGHT/Math.tan(Math.PI*Angle/180);
-        return TargetDistance;
+        TargetDistance = LC.TARGET_HEIGHT/Math.tan(y+(Math.PI*LC.CAMERA_OFFSET/180));
+        
     }
 
     public double getAngle(){ //get hood angle for autoaim
-        double nonevar = getDistance();
+        getDistance();
         return ApproximateAngle(TargetDistance);
     }
     public double ApproximateAngle(double dist){ //linear interlopation
