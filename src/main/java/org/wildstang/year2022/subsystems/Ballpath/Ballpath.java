@@ -112,9 +112,9 @@ public class Ballpath implements Subsystem{
     }
 
     private void initOutputs(){
-        feedMotor = new (WsSparkMax) Core.getOutputManager().getOutput(WSOutput.BALLPATH_FEED);
-        intakeMotor = new (WsSparkMax) Core.getOutputManager().getOutput(WSOutput.BALLPATH_INTAKE);
-        intakeSolenoid = new (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_DEPLOY_SOLENOID);
+        feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutput.BALLPATH_FEED);
+        intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutput.BALLPATH_INTAKE);
+        intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_DEPLOY_SOLENOID);
     }
 
     @Override
