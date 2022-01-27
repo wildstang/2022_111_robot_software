@@ -73,7 +73,7 @@ public class ClimbControl implements Subsystem {
             motion.AutoClimb();
         }
         if(dpadUp.getValue() && dpadUp == source){
-            if(motion.Extended){
+            if(motion.IsExtended){
                 motion.Retract();
             }
             else{

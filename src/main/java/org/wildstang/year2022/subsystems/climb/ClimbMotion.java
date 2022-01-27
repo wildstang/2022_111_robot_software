@@ -58,25 +58,25 @@ public class ClimbMotion {
         RightClimber.setSpeed(climberSpeed);
         LeftClimber.setSpeed(climberSpeed);
         if(IsRotated){
-            RightSol.setValue(WeSolenoidState.REVERSE); //because initialized to .FORWARD, and i'm assuming starts not rotated.
+            RightSol.setValue(WsSolenoidState.REVERSE); //because initialized to .FORWARD, and i'm assuming starts not rotated.
         }
         else{ 
         
-            LeftSol.setValue(WeSolenoidState.FORWARD);
+            LeftSol.setValue(WsSolenoidState.FORWARD);
         }
 
         // update ClimberTracker
-        if(RightClimber.getPosition()>(int) (constants.TICKS_PER_ROTATION/2) && !IsExtended){
+        if(RightClimber.getPosition()>(int) (constant.TICKS_PER_ROTATION/2) && !IsExtended){
             ClimberTracker += RightClimber.getPosition();
             RightClimber.resetEncoder();
         }
-        if(RightClimber.getPosition()<(int) (constants.TICKS_PER_ROTATION/2) && IsExtended){
+        if(RightClimber.getPosition()<(int) (constant.TICKS_PER_ROTATION/2) && IsExtended){
             ClimberTracker -= RightClimber.getPosition();
             RightClimber.resetEncoder();
         }
         
         // update climb state (is it done extending/retracting????)
-        if(IsExtended && (ClimberTracker - (consts.TICKS_PER_ROTATION-RightClimber.getPosition()))<=consts.RETRACTED_POS){
+        if(IsExtended && (ClimberTracker - (constant.TICKS_PER_ROTATION-RightClimber.getPosition()))<=consant.RETRACTED_POS){
             IsExtended = false;
             climberSpeed = 0;
             if (AutoClimbing){
@@ -84,7 +84,7 @@ public class ClimbMotion {
                 AutoClimbing = false;
             }
         }
-        else if (IsExtended && (ClimberTracker + (RightClimber.getPosition()))>=consts.EXTENDED_POS){
+        else if (IsExtended && (ClimberTracker + (RightClimber.getPosition()))>=consant.EXTENDED_POS){
             IsExtended = true;
             climberSpeed = 0;
             if(AutoClimbing){
@@ -99,10 +99,10 @@ public class ClimbMotion {
 
 
     public void Extend(){
-        climberSpeed = constants.CLIMB_SPEED;
+        climberSpeed = constant.CLIMB_SPEED;
     }
     public void Retract(){
-        climberSpeed = -1*constants.CLIMB_SPEED;
+        climberSpeed = -1*constant.CLIMB_SPEED;
     }
     public void Tilt(){
         IsRotated = true;
