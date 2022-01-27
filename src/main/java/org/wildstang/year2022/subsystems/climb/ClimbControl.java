@@ -28,7 +28,7 @@ import org.wildstang.year2022.subsystems.climb.ClimbMotion;
 public class ClimbControl implements Subsystem {
     
     private ClimbMotion motion = new ClimbMotion();
-    private ClimbConstants consts = new ClimbConsts();
+    private ClimbConstants consts = new ClimbConstants();
 
     private DigitalInput dpadUp;
     private DigitalInput dpadDown;
