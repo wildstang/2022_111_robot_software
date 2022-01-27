@@ -43,8 +43,8 @@ public class ClimbMotion {
     private double ClimberTracker; //keep track of climber position
     public void init() {
 
-        RightSol = (WsSolenoid) Core.getOutputManager().getIutput(WSOutputs.CLIMB_RIGHT_SOLENOID);
-        LeftSol = (WsSolenoid) Core.getOutputManager().getIutput(WSOutputs.CLIMB_LEFT_SOLENOID);
+        RightSol = (WsSolenoid) Core.getOutputManager().getIntput(WSOutputs.CLIMB_RIGHT_SOLENOID);
+        LeftSol = (WsSolenoid) Core.getOutputManager().getIntput(WSOutputs.CLIMB_LEFT_SOLENOID);
 
         RightClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.RIGHT_CLIMB);
         LeftClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LEFT_CLIMB);
@@ -76,7 +76,7 @@ public class ClimbMotion {
         }
         
         // update climb state (is it done extending/retracting????)
-        if(IsExtended && (ClimberTracker - (constant.TICKS_PER_ROTATION-RightClimber.getPosition()))<=consant.RETRACTED_POS){
+        if(IsExtended && (ClimberTracker - (constant.TICKS_PER_ROTATION-RightClimber.getPosition()))<=constant.RETRACTED_POS){
             IsExtended = false;
             climberSpeed = 0;
             if (AutoClimbing){
@@ -84,7 +84,7 @@ public class ClimbMotion {
                 AutoClimbing = false;
             }
         }
-        else if (IsExtended && (ClimberTracker + (RightClimber.getPosition()))>=consant.EXTENDED_POS){
+        else if (IsExtended && (ClimberTracker + (RightClimber.getPosition()))>=constant.EXTENDED_POS){
             IsExtended = true;
             climberSpeed = 0;
             if(AutoClimbing){

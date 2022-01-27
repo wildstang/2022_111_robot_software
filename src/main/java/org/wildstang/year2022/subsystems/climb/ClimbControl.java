@@ -40,7 +40,7 @@ public class ClimbControl implements Subsystem {
 
     @Override
     public void init() {
-        ClimbMotion.init();
+        motion.init();
 
         dpadUp = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_UP);
         dpadUp.addInputListener(this);
@@ -63,7 +63,7 @@ public class ClimbControl implements Subsystem {
 
     @Override
     public void update() {
-        ClimbMotion.update();
+        motion.update();
         
     }
 
