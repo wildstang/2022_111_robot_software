@@ -66,7 +66,7 @@ public class AimHelper{
         y = ty.getDouble(0);
     }
 
-    double void getDistance(){ //update target dist. for internal use.
+    private void getDistance(){ //update target dist. for internal use.
         calcTargetCoords();
         //h = lsin(0), d = lcos(0)
         // l = h/sin(0) = d/cos(0)
