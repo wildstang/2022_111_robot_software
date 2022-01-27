@@ -27,6 +27,14 @@ public final class CANConstants {
     public static final int ANGLE3 = 17;
     public static final int DRIVE4 = 14;
     public static final int ANGLE4 = 15;
+
+    //Climb constants
+    //Motors
+    public static final int RIGHT_CLIMB = 1;
+    public static final int LEFT_CLIMB = 2;
+    //Solenoids
+    public static final int CLIMB_RIGHT_SOLENOID = 3;
+    public static final int CLIMB_LEFT_SOLENOID = 4;
     
     
 }

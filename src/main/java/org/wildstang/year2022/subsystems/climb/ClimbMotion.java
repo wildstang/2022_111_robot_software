@@ -23,10 +23,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.wildstang.year2022.subsystems.climb.ClimbConstants;
 
+//Not a subsystem- motor control class for ClimbControl.
 public class ClimbMotion {
 
     private WsSparkMax RightClimber;
     private WsSparkMax LeftClimber;
+
+    private WsSolenoid RightSol;
+    private WsSolenoid LeftSol;
 
     private ClimbConstants constant = new ClimbConstants();
     private boolean IsExtended;
@@ -35,35 +39,89 @@ public class ClimbMotion {
     private double climberSpeed;
     private boolean AutoClimbing;
     
+
+    private double ClimberTracker; //keep track of climber position
     public void init() {
-        IsExtended = false;
-        IsRotated = false;
-        climberSpeed = 0;
-        AutoCliming = false;
 
+        RightSol = (WsSolenoid) Core.getOutputManager(),getIutput(WSOutputs.CLIMB_RIGHT_SOLENOID);
+        LeftSol = (WsSolenoid) Core.getOutputManager(),getIutput(WSOutputs.CLIMB_LEFT_SOLENOID);
 
+        RightClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.RIGHT_CLIMB);
+        LeftClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LEFT_CLIMB);
+        
+        
+        resetState();
     }
 
 
     public void update() {
         RightClimber.setSpeed(climberSpeed);
         LeftClimber.setSpeed(climberSpeed);
+        if(IsRotated){
+            RightSol.setValue(WeSolenoidState.REVERSE); //because initialized to .FORWARD, and i'm assuming starts not rotated.
+        }
+        else{ 
         
+            LeftSol.setValue(WeSolenoidState.FORWARD);
+        }
 
+        // update ClimberTracker
+        if(RightClimber.getPosition()>(int) (constants.TICKS_PER_ROTATION/2) && !IsExtended){
+            ClimberTracker += RightClimber.getPosition();
+            RightClimber.resetEncoder();
+        }
+        if(RightClimber.getPosition()<(int) (constants.TICKS_PER_ROTATION/2) && IsExtended){
+            ClimberTracker -= RightClimber.getPosition();
+            RightClimber.resetEncoder();
+        }
+        
+        // update climb state (is it done extending/retracting????)
+        if(IsExtended && (ClimberTracker - (consts.TICKS_PER_ROTATION-RightClimber.getPosition()))<=consts.RETRACTED_POS){
+            IsExtended = false;
+            climberSpeed = 0;
+            if (AutoClimbing){
+                Tilt();
+                AutoClimbing = false;
+            }
+        }
+        else if (IsExtended && (ClimberTracker + (RightClimber.getPosition()))>=consts.EXTENDED_POS){
+            IsExtended = true;
+            climberSpeed = 0;
+            if(AutoClimbing){
+                Retract();
+            }
+        }
+
+        
         
 
     }
 
 
+    public void Extend(){
+        climberSpeed = constants.CLIMB_SPEED;
+    }
+    public void Retract(){
+        climberSpeed = -1*constants.CLIMB_SPEED;
+    }
+    public void Tilt(){
+        IsRotated = true;
+    }
+    public void UnTilt(){
+        IsRotated = false;
+    }
 
-
+    public void AutoClimb(){
+        AutoClimbing = true;
+        Extend();
+    }
     public void selfTest() {
 
     }
 
 
     public void resetState() {
-
+        RightClimber.resetEncoder();
     }
 
 
