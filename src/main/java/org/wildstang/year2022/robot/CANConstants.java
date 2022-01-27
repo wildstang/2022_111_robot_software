@@ -27,6 +27,8 @@ public final class CANConstants {
     public static final int ANGLE3 = 17;
     public static final int DRIVE4 = 14;
     public static final int ANGLE4 = 15;
+    public static final int FEEDMOTOR = 20;
+    public static final int INTAKEMOTOR = 21;
     
     
 }

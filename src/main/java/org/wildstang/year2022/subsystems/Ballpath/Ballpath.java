@@ -123,9 +123,9 @@ public class Ballpath implements Subsystem{
 
     @Override
     public void update() {
-        intakeSolenoid.setValue(intakeSolenoidValue)
+        intakeSolenoid.setValue(intakeSolenoidValue);
         feedMotor.setSpeed(feedMotorSpeed);
-        intakeMotor.setSpeed(intakeMotorSpeed));
+        intakeMotor.setSpeed(intakeMotorSpeed);
     }
 
     @Override
