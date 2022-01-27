@@ -43,8 +43,8 @@ public class ClimbMotion {
     private double ClimberTracker; //keep track of climber position
     public void init() {
 
-        RightSol = (WsSolenoid) Core.getOutputManager(),getIutput(WSOutputs.CLIMB_RIGHT_SOLENOID);
-        LeftSol = (WsSolenoid) Core.getOutputManager(),getIutput(WSOutputs.CLIMB_LEFT_SOLENOID);
+        RightSol = (WsSolenoid) Core.getOutputManager().getIutput(WSOutputs.CLIMB_RIGHT_SOLENOID);
+        LeftSol = (WsSolenoid) Core.getOutputManager().getIutput(WSOutputs.CLIMB_LEFT_SOLENOID);
 
         RightClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.RIGHT_CLIMB);
         LeftClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LEFT_CLIMB);

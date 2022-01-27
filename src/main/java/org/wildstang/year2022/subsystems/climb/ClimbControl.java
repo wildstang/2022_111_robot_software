@@ -46,7 +46,7 @@ public class ClimbControl implements Subsystem {
         dpadUp.addInputListener(this);
         dpadDown = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_DOWN);
         dpadDown.addInputListener(this);
-        dpadLeft = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_LEFT;
+        dpadLeft = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_LEFT);
         dpadLeft.addInputListener(this);
         dpadRight = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_RIGHT);
         dpadRight.addInputListener(this);
