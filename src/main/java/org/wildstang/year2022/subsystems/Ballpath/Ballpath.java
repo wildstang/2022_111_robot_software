@@ -49,6 +49,9 @@ public class Ballpath implements Subsystem{
     //Shuffleboard entries
     private NetworkTableEntry maxDriveInputEntry;
 
+    //Booleans
+    private boolean toggleBallpath = true;
+
     //Constants
     private final double FULL_SPEED = 1.0;
     private final double KICKER_MOTOR_CONSTANT = 0.4;
@@ -63,7 +66,7 @@ public class Ballpath implements Subsystem{
     @Override
     public void inputUpdate(Input source) {
         //set feed and hopper motor speeds
-        if (Math.abs(rightTrigger.getValue())>0.75){ //MARK : When is it wanted at full speed/Right Trigger purpose
+        if (Math.abs(rightTrigger.getValue())>0.75){
             feedMotorSpeed = FULL_SPEED;
         } 
         if (source == xButton){
@@ -92,6 +95,20 @@ public class Ballpath implements Subsystem{
                 } else {
                     intakeMotorSpeed = FULL_SPEED;
                     intakeSolenoidValue = true;
+                }
+            }
+        }
+        //toggle ballpath run
+        if (source == xButton && xButton.getValue()) {
+            if (toggleBallpath = true) {
+                toggleBallpath = false;
+                intakeMotorSpeed = 0;
+                feedMotorSpeed = 0;
+            } else {
+                toggleBallpath = true;
+                feedMotorSpeed = FULL_SPEED;
+                if (intakeSolenoidValue) {
+                intakeMotorSpeed = FULL_SPEED;
                 }
             }
         }
