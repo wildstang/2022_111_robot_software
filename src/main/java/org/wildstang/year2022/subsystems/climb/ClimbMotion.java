@@ -112,10 +112,10 @@ public class ClimbMotion {
 
     //commands
     public void Extend(){
-        climberSpeed = constant.CLIMB_SPEED; 
+        climberSpeed = constant.CLIMB_PERCENT_SPEED; 
     }
     public void Retract(){
-        climberSpeed = -1*constant.CLIMB_SPEED;
+        climberSpeed = -1*constant.CLIMB_PERCENT_SPEED;
     }
     public void Tilt(){
         IsRotated = true;
@@ -137,6 +137,12 @@ public class ClimbMotion {
     }
 
     public void resetState() {
+        IsExtended = false;
+        IsRotated = false;
+        AutoClimbing = false;
+        climberSpeed = 0;
+        ClimberTracker = 0;
+
         RightClimber.resetEncoder();
     }
 

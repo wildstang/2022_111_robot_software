@@ -30,8 +30,8 @@ public final class CANConstants {
 
     //Climb constants
     //Motors
-    public static final int RIGHT_CLIMB = 1;
-    public static final int LEFT_CLIMB = 2;
+    public static final int CLIMBER = 26;
+    public static final int CLIMBER_FOLLOWER = 27;
     //Solenoids
     public static final int CLIMB_RIGHT_SOLENOID = 3;
     public static final int CLIMB_LEFT_SOLENOID = 4;

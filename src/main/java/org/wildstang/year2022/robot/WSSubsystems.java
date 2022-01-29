@@ -2,7 +2,7 @@ package org.wildstang.year2022.robot;
 
 import org.wildstang.framework.core.Subsystems;
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
-
+import org.wildstang.year2022.subsystems.climb.ClimbControl;
 /**
  * All subsystems are enumerated here.
  * It is used in Robot.java to initialize all subsystems.
@@ -10,7 +10,8 @@ import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
-    SWERVE_DRIVE("Swerve Drive", SwerveDrive.class)
+    SWERVE_DRIVE("Swerve Drive", SwerveDrive.class),
+    CLIMB("Climb", ClimbControl.class)
     ;
 
     /**
