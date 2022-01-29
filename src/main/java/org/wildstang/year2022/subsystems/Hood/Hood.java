@@ -32,17 +32,21 @@ public class Hood implements Subsystem {
     DigitalInput dpad_right;
 
     double hood_position;
-    
+    double range_constant;
+
     final double preset1 = 1;
     final double preset2 = .75;
     final double preset3 = .5;
     final double preset4 = .25;
 
+    final double max_angle = 45;
+    
     AimHelper aim;
     
     @Override
     public void init() {
         hood_motor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD_MOTOR);
+        hood_motor.initClosedLoop(1.0, 0.0, 0.0, 0.0);
         left_joystick_y = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_JOYSTICK_Y);
         left_trigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
         dpad_up = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_UP);
@@ -54,12 +58,13 @@ public class Hood implements Subsystem {
         dpad_right = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_RIGHT);
         dpad_right.addInputListener(this);
         hood_position = 0.0;
+        range_constant = max_angle / 360.0;
         aim = new AimHelper();
     }
 
     @Override
     public void update() {
-        hood_motor.setPosition(hood_position);
+        hood_motor.setPosition(hood_position * range_constant);
     }
 
     @Override
@@ -78,7 +83,7 @@ public class Hood implements Subsystem {
         hood_position = preset4;
     }     
     if (left_trigger.getValue() > 0.5){
-            hood_position = aim.getAngle() / 360.0;
+            hood_position = aim.getAngle() / max_angle;
          }
      
      else if (left_joystick_y.getValue() > 0){
