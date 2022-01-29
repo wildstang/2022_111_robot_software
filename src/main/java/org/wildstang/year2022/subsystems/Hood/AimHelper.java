@@ -56,8 +56,8 @@ public class AimHelper{
         LC = new LimeConsts();
         x = 0;
         y = 0;
-        TargetInVeiw = false;
-        TargetDistance = 0;
+        TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
+        TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
 
 
         LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
@@ -66,25 +66,25 @@ public class AimHelper{
         tx = LimeTable.getEntry("tx");
         tv = LimeTable.getEntry("tv");
     }
-    private void calcTargetCoords(){ //update target coords. For internal use
+    public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){
             x = tx.getDouble(0);
             y = ty.getDouble(0);
-            TargetInVeiw = true;
+            TargetInView = true;
         }
         else{
             x = 0; //no target case
             y = 0;
-            TargetInVeiw = false;
+            TargetInView = false;
         }
     }
 
-    private void getDistance(){ //update target dist. for internal use.
+    private void getDistance(){ //update target dist. for internal use. Distance is in feet.
         calcTargetCoords();
         //h = lsin(0), d = lcos(0)
         // l = h/sin(0) = d/cos(0)
         // d = cos(0)*h/sin(0) = h/tan(0)
-        TargetDistance = LC.TARGET_HEIGHT/Math.tan(y+(Math.PI*LC.CAMERA_OFFSET/180));
+        TargetDistance = LC.TARGET_HEIGHT/Math.tan(y+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
         
     }
 
