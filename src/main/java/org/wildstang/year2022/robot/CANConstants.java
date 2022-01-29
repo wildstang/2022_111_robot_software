@@ -23,16 +23,19 @@ public final class CANConstants {
     public static final int ANGLE1 = 11;
     public static final int DRIVE2 = 12;
     public static final int ANGLE2 = 13;
-    public static final int DRIVE3 = 16;
-    public static final int ANGLE3 = 17;
-    public static final int DRIVE4 = 14;
-    public static final int ANGLE4 = 15;
+    public static final int DRIVE3 = 14;
+    public static final int ANGLE3 = 15;
+    public static final int DRIVE4 = 16;
+    public static final int ANGLE4 = 17;
 
-    //Climb constants
-    //Motors
+    public static final int INTAKE = 20;
+    public static final int FEED = 21;
+    public static final int KICKER = 22;
+    public static final int SHOOTER = 23;
+    public static final int SHOOTER_FOLLOWER = 24;
+    public static final int HOOD = 25;
     public static final int CLIMBER = 26;
     public static final int CLIMBER_FOLLOWER = 27;
-    //Solenoids
     public static final int CLIMB_RIGHT_SOLENOID = 3;
     public static final int CLIMB_LEFT_SOLENOID = 4;
     
