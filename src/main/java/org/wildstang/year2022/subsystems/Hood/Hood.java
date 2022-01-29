@@ -23,6 +23,7 @@ import org.wildstang.year2022.subsystems.Hood.AimHelper;
 public class Hood implements Subsystem {
 
     WsSparkMax hood_motor;
+
     WsJoystickAxis left_joystick_y;
     AnalogInput left_trigger;
     DigitalInput dpad_up;
@@ -32,7 +33,10 @@ public class Hood implements Subsystem {
 
     double hood_position;
     
-
+    final double preset1 = 1;
+    final double preset2 = .75;
+    final double preset3 = .5
+    final double preset4 = .25;
 
     AimHelper aim;
     
@@ -62,16 +66,16 @@ public class Hood implements Subsystem {
     public void inputUpdate(Input source) {
     
     if (source == dpad_up){
-        hood_position = 1;
+        hood_position = preset1;
     }
     if (source == dpad_down){
-        hood_position = .75;
+        hood_position = preset2;
     }
     if (source == dpad_left){
-        hood_position = .5;
+        hood_position = preset3;
     }
     if (source == dpad_right){
-        hood_position = .25;
+        hood_position = preset4;
     }     
     if (left_trigger.getValue() > 0.5){
             hood_position = aim.getAngle() / 360.0;
