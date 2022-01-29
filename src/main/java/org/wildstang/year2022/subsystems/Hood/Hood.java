@@ -89,7 +89,7 @@ public class Hood implements Subsystem {
      
      else if (left_joystick_y.getValue() > .15 && hood_position < 1){
          hood_position += position_change;
-     }else if (left_joystick_y.getValue() < .15 && hood_position > 0){
+     }else if (left_joystick_y.getValue() < -.15 && hood_position > 0){
          hood_position += position_change * -1;
      }
      
