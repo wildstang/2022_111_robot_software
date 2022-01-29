@@ -40,11 +40,13 @@ public class ClimbMotion {
     public boolean IsExtended;
     public boolean IsRotated;
 
-    private double climberSpeed;
+    
     private boolean AutoClimbing;
     
+    private double climberSpeed;
 
-    private double ClimberTracker; //keep track of climber position
+    private double ClimberTracker; //keep track of climber motor position
+    
     public void ClimbMotion() {
 
         RightSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_RIGHT_SOLENOID);
@@ -59,6 +61,7 @@ public class ClimbMotion {
 
 
     public void update() {
+        //handle motor output
         RightClimber.setSpeed(climberSpeed);
         LeftClimber.setSpeed(climberSpeed);
         if(IsRotated){
@@ -79,6 +82,7 @@ public class ClimbMotion {
             RightClimber.resetEncoder(); //so that encoder tracks change and never exeeds maximum
         }
         
+
         // update climb state (is it done extending/retracting????)
         if(IsExtended && (ClimberTracker - (constant.TICKS_PER_ROTATION-RightClimber.getPosition()))<=constant.RETRACTED_POS){
             IsExtended = false; 
@@ -103,11 +107,10 @@ public class ClimbMotion {
         SmartDashboard.putBoolean("Is AutoClimbing", AutoClimbing);
 
         
-        
 
     }
 
-
+    //commands
     public void Extend(){
         climberSpeed = constant.CLIMB_SPEED; 
     }
@@ -128,15 +131,14 @@ public class ClimbMotion {
     public void StopAutoClimb(){
         AutoClimbing = false;
     }
+
+    
     public void selfTest() {
-
     }
-
 
     public void resetState() {
         RightClimber.resetEncoder();
     }
-
 
     public String getName() {
         return "Climb Motion";
