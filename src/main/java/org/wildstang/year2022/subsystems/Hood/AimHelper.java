@@ -44,7 +44,7 @@ public class AimHelper{
     public double x;
     public double y;
 
-    public boolean TargetInVeiw;
+    public boolean TargetInView;
 
     private double TargetDistance;
     private double Angle;
@@ -54,7 +54,7 @@ public class AimHelper{
 
     public AimHelper(){ //initialize. Call before use.
         LC = new LimeConsts();
-        x = 0;
+        x = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
         y = 0;
         TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
         TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
