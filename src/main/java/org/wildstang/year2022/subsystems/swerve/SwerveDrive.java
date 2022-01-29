@@ -36,8 +36,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private AnalogInput leftStickY;//translation joystick y
     private AnalogInput rightStickX;//rot joystick
     private AnalogInput rightTrigger;//thrust
+    private AnalogInput leftTrigger;//reserved for limelight aiming
     private DigitalInput rightBumper;//defense mode, aka cross
-    private DigitalInput leftBumper;//adjusts rotation locks for the hub
+    private DigitalInput leftBumper;//reserved for intake
     private DigitalInput select;//gyro reset
     private DigitalInput faceUp;//rotation lock 0 degrees
     private DigitalInput faceRight;//rotation lock 90 degrees
@@ -87,18 +88,29 @@ public class SwerveDrive extends SwerveDriveTemplate {
         }
         thrustValue = 1 - DriveConstants.DRIVE_THRUST + DriveConstants.DRIVE_THRUST * Math.abs(rightTrigger.getValue());
 
-        //update auto trackign values
-        if (faceUp.getValue()){
-            rotTarget = leftBumper.getValue() ? 339.0 : 0.0;
+        //update auto tracking values
+        if (source == faceUp && faceUp.getValue()){
+            if (faceLeft.getValue()){ rotTarget = 69.0;
+            } else if (faceRight.getValue()){ rotTarget = 339.0;
+            } else  rotTarget = 0.0;
             rotLocked = true;
-        } else if (faceLeft.getValue()){
-            rotTarget = leftBumper.getValue() ? 69.0 : 90.0;
+        }
+        if (source == faceLeft && faceLeft.getValue()){
+            if (faceUp.getValue()){ rotTarget = 69.0;
+            } else if (faceDown.getValue()){ rotTarget = 159.0;
+            } else rotTarget = 90.0;
             rotLocked = true;
-        } else if (faceRight.getValue()){
-            rotTarget = leftBumper.getValue() ? 249.0 : 270.0;
+        }
+        if (source == faceDown && faceDown.getValue()){
+            if (faceLeft.getValue()){ rotTarget = 159.0;
+            } else if (faceRight.getValue()){ rotTarget = 249.0;
+            } else rotTarget = 180.0;
             rotLocked = true;
-        } else if (faceDown.getValue()){
-            rotTarget = leftBumper.getValue() ? 159.0 : 180.0;
+        }
+        if (source == faceRight && faceRight.getValue()){
+            if (faceUp.getValue()){ rotTarget = 339.0;
+            } else if (faceDown.getValue()){ rotTarget = 249.0;
+            } else rotTarget = 270.0;
             rotLocked = true;
         }
         //get rotational joystick
@@ -126,6 +138,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rightStickX.addInputListener(this);
         rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_TRIGGER);
         rightTrigger.addInputListener(this);
+        leftTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
+        leftTrigger.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
         leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_SHOULDER);
