@@ -33,13 +33,14 @@ public class Hood implements Subsystem {
 
     double hood_position;
     double range_constant;
-
+    
     final double preset1 = 1;
     final double preset2 = .75;
     final double preset3 = .5;
     final double preset4 = .25;
 
     final double max_angle = 45;
+    final double position_change = .1;
     
     AimHelper aim;
     
@@ -86,8 +87,10 @@ public class Hood implements Subsystem {
             hood_position = aim.getAngle() / max_angle;
          }
      
-     else if (left_joystick_y.getValue() > 0){
-         hood_position = left_joystick_y.getValue();
+     else if (left_joystick_y.getValue() > .15 && hood_position < 1){
+         hood_position += position_change;
+     }else if (left_joystick_y.getValue() < .15 && hood_position > 0){
+         hood_position += position_change * -1;
      }
      
     }
