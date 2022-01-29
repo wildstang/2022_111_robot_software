@@ -58,9 +58,8 @@ public class Hood implements Subsystem {
         dpad_left.addInputListener(this);
         dpad_right = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_RIGHT);
         dpad_right.addInputListener(this);
-        hood_position = 0.0;
-        range_constant = max_angle / 360.0;
         aim = new AimHelper();
+        resetState();
     }
 
     @Override
@@ -102,7 +101,8 @@ public class Hood implements Subsystem {
 
     @Override
     public void resetState() {
-     hood_position = 0.0;
+        hood_position = 0.0;
+        range_constant = max_angle / 360.0;
     }
 
     @Override
