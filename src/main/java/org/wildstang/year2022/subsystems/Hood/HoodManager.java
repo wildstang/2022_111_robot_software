@@ -11,7 +11,6 @@ import org.wildstang.hardware.roborio.inputs.WsJoystickAxis;
 
 import org.wildstang.year2022.subsystems.Hood.LimeConsts;
 
-import java.util.Arrays;
 import org.wildstang.year2022.subsystems.Hood.AimHelper;;
 
 
@@ -36,7 +35,7 @@ public class HoodManager{
 
     //set inputs
 
-    //@Overide
+    //@Override
     public void init() {
         //analog
         HoodMovement = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_JOYSTICK_Y);
@@ -53,7 +52,7 @@ public class HoodManager{
     }
 
     // it was annoying me on overides
-    //@Overide
+    //@Override
     public void update() {
         //move hood with left joysick 
         //input range -1 to 1 
@@ -73,16 +72,18 @@ public class HoodManager{
 
 
         //threads to do multiple things at once
+        //i hope these dont just multiply every frame
         Thread moveHoodUp = new Thread(() -> {
             do {
                 HoodMotor.setValue(-HoodMoveSpeed); 
-            } while (HoodEncoder.getValue() > LC.Dists[PresetIndex[0]]);});
+            } while (true);});
         
         Thread moveHoodDown = new Thread(() -> {
             do {
                 HoodMotor.setValue(HoodMoveSpeed); 
-            } while (HoodEncoder.getValue() > LC.Dists[PresetIndex[0]]);});
+            } while (true);});
 
+        
 
         if (AutoAim.getValue() >0.75){
             //intregrate jonahs stuff
