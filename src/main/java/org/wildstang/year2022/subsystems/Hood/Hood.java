@@ -16,10 +16,10 @@ import org.wildstang.hardware.roborio.outputs.WsSparkMax;
  * Left Trigger: Auto Aim
  * @author Bernard
  */
-public class SampleSubsystem implements Subsystem {
+public class Hood implements Subsystem {
 
     WsSparkMax hood_motor;
-    WsJoystickAxis js;
+    WsJoystickAxis left_joystick_y;
     
     double hood_position;
     
@@ -28,7 +28,7 @@ public class SampleSubsystem implements Subsystem {
     public void init() {
         hood_motor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD_MOTOR);
         left_joystick_y = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_JOYSTICK_Y);
-
+        
         hood_position = 0.0;
     }
 
