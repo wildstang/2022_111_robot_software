@@ -2,16 +2,11 @@ package org.wildstang.year2022.subsystems.Hood;
 import org.wildstang.framework.core.Core;
 import org.wildstang.hardware.roborio.inputs.WsAnalogInput;
 import org.wildstang.hardware.roborio.inputs.WsDigitalInput;
-import org.wildstang.hardware.roborio.inputs.WsJoystickButton;
 import org.wildstang.hardware.roborio.outputs.WsPhoenix;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.hardware.roborio.inputs.WsJoystickAxis;
-
-import org.wildstang.year2022.subsystems.Hood.LimeConsts;
-
-import org.wildstang.year2022.subsystems.Hood.AimHelper;;
 
 
 //Goals bind controls to the asigned buttons. refrence aim helper 
@@ -75,12 +70,12 @@ public class HoodManager{
         //i hope these dont just multiply every frame
         Thread moveHoodUp = new Thread(() -> {
             do {
-                HoodMotor.setValue(-HoodMoveSpeed); 
+                HoodMotor.setValue(HoodMoveSpeed); //positive is up (goal)
             } while (true);});
         
         Thread moveHoodDown = new Thread(() -> {
             do {
-                HoodMotor.setValue(HoodMoveSpeed); 
+                HoodMotor.setValue(-HoodMoveSpeed); //negitive is down (goal)
             } while (true);});
 
         
@@ -140,5 +135,4 @@ public class HoodManager{
             }
         }
     }
-
 }

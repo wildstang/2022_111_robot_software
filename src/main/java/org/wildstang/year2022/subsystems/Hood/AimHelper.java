@@ -1,38 +1,8 @@
 package org.wildstang.year2022.subsystems.Hood; 
-// ton of imports
-import org.wildstang.framework.subsystems.Subsystem;
-
-import com.ctre.phoenix.motion.MotionProfileStatus;
-import com.kauailabs.navx.frc.AHRS;
-
-import org.wildstang.framework.core.Core;
-import com.revrobotics.CANSparkMax;
-import org.wildstang.framework.io.inputs.Input;
-import org.wildstang.framework.logger.Log;
-import org.wildstang.framework.pid.PIDConstants;
-import org.wildstang.framework.subsystems.drive.Path;
-import org.wildstang.framework.subsystems.drive.PathFollowingDrive;
-import org.wildstang.framework.subsystems.drive.TankPath;
-import org.wildstang.hardware.roborio.inputs.WsAnalogInput;
-import org.wildstang.hardware.roborio.inputs.WsDigitalInput;
-import org.wildstang.hardware.roborio.inputs.WsJoystickButton;
-import org.wildstang.hardware.roborio.outputs.WsPhoenix;
-import org.wildstang.hardware.roborio.outputs.WsSparkMax;
-import org.wildstang.year2022.robot.WSInputs;
-import org.wildstang.year2022.robot.WSOutputs;
-
-import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.I2C;
-
-import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-import org.wildstang.year2022.subsystems.Hood.LimeConsts;
-
-import java.util.Arrays;
 
 public class AimHelper{
     
@@ -47,7 +17,6 @@ public class AimHelper{
     public boolean TargetInVeiw;
 
     private double TargetDistance;
-    private double Angle;
 
     private LimeConsts LC;
 
