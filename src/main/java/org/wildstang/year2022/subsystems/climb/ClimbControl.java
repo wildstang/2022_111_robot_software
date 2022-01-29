@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.wildstang.year2022.subsystems.climb.ClimbMotion;
 
-/** this class takes input and executes commands through ClimbMotion. Does not directly accsess motors. */
+/** this class takes controller input and executes commands through ClimbMotion. Does not directly accsess motors. */
 
 public class ClimbControl implements Subsystem {
     
@@ -38,9 +38,19 @@ public class ClimbControl implements Subsystem {
     private DigitalInput select;
     private DigitalInput start;
 
+    /* Controls:
+    Dpad:
+        up: press to toggle extended/retracted
+        right: tilt
+        left: tilt
+        down: recenter (untilt)
+
+    Press select and start at the same time to climb a bar. (so it must be pressed 3 time total to reach transversal semi-automatically.)
+
+    */
+    
     @Override
     public void init() {
-        motion.init();
 
         dpadUp = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_UP);
         dpadUp.addInputListener(this);
@@ -63,16 +73,16 @@ public class ClimbControl implements Subsystem {
 
     @Override
     public void update() {
-        motion.update();
+        motion.update(); //movement delegated to ClimbMotion
         
     }
 
     @Override
     public void inputUpdate(Input source) {
-        if(select.getValue() && start.getValue()){
-            motion.AutoClimb();
+        if(select.getValue() && start.getValue()){//when start and select pressed, climb one bar
+            motion.AutoClimb(); 
         }
-        if(dpadUp.getValue() && dpadUp == source){
+        if(dpadUp.getValue() && dpadUp == source){ //up on dpad to toggle retracted/extended
             if(motion.IsExtended){
                 motion.Retract();
             }
@@ -80,11 +90,14 @@ public class ClimbControl implements Subsystem {
                 motion.Extend();
             }
         }
-        if(dpadRight.getValue() || dpadLeft.getValue()){
+        if(dpadRight.getValue() || dpadLeft.getValue()){ //right or left to tilt
             motion.Tilt();
         }
-        if(dpadDown.getValue()){
+        if(dpadDown.getValue()){ //down to untilt/center
             motion.UnTilt();
+        }
+        if(dpadUp.getValue() || dpadRight.getValue() || dpadLeft.getValue() || dpadDown.getValue()){ //if manual commands, ensure not autoclimbing
+            motion.StopAutoClimb();
         }
     }
 
@@ -95,7 +108,7 @@ public class ClimbControl implements Subsystem {
 
     @Override
     public void resetState() {
-
+        motion.resetState();
     }
 
     @Override

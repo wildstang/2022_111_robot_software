@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.wildstang.year2022.subsystems.climb.ClimbConstants;
 
 //Not a subsystem- motor control class for ClimbControl.
+
 public class ClimbMotion {
 
     private WsSparkMax RightClimber;
@@ -44,7 +45,7 @@ public class ClimbMotion {
     
 
     private double ClimberTracker; //keep track of climber position
-    public void init() {
+    public void ClimbMotion() {
 
         RightSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_RIGHT_SOLENOID);
         LeftSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_LEFT_SOLENOID);
@@ -69,31 +70,37 @@ public class ClimbMotion {
         }
 
         // update ClimberTracker
-        if(RightClimber.getPosition()>(int) (constant.TICKS_PER_ROTATION/2) && !IsExtended){
+        if(RightClimber.getPosition()>(int) (constant.TICKS_PER_ROTATION/2) && !IsExtended){  //if moved more than half rotation since last reset and extending
             ClimberTracker += RightClimber.getPosition();
-            RightClimber.resetEncoder();
-        }
-        if(RightClimber.getPosition()<(int) (constant.TICKS_PER_ROTATION/2) && IsExtended){
+            RightClimber.resetEncoder(); //so that encoder tracks change and never exeeds maximum
+        } 
+        if(RightClimber.getPosition()<(int) (constant.TICKS_PER_ROTATION/2) && IsExtended){ //if moved more than half rotation since reset and retracting
             ClimberTracker -= RightClimber.getPosition();
-            RightClimber.resetEncoder();
+            RightClimber.resetEncoder(); //so that encoder tracks change and never exeeds maximum
         }
         
         // update climb state (is it done extending/retracting????)
         if(IsExtended && (ClimberTracker - (constant.TICKS_PER_ROTATION-RightClimber.getPosition()))<=constant.RETRACTED_POS){
-            IsExtended = false;
+            IsExtended = false; 
             climberSpeed = 0;
-            if (AutoClimbing){
+            if (AutoClimbing){ //if auto climbing, tilt and stop autoclimbing. autoclimb must be pressed again to climb another bar.
                 Tilt();
                 AutoClimbing = false;
             }
         }
-        else if (IsExtended && (ClimberTracker + (RightClimber.getPosition()))>=constant.EXTENDED_POS){
-            IsExtended = true;
+        else if (!IsExtended && (ClimberTracker + (RightClimber.getPosition()))>=constant.EXTENDED_POS){
+            IsExtended = true; 
             climberSpeed = 0;
-            if(AutoClimbing){
+            if(AutoClimbing){ //if auto climbing, it is time to start retracting.
                 Retract();
             }
         }
+
+        //SmartDashboard
+        SmartDashboard.putNumber("Climb Motor Speed", climberSpeed);
+        SmartDashboard.putBoolean("Is Rotated", IsRotated);
+        SmartDashboard.putBoolean("Is Extended", IsExtended);
+        SmartDashboard.putBoolean("Is AutoClimbing", AutoClimbing);
 
         
         
@@ -102,7 +109,7 @@ public class ClimbMotion {
 
 
     public void Extend(){
-        climberSpeed = constant.CLIMB_SPEED;
+        climberSpeed = constant.CLIMB_SPEED; 
     }
     public void Retract(){
         climberSpeed = -1*constant.CLIMB_SPEED;
@@ -116,7 +123,10 @@ public class ClimbMotion {
 
     public void AutoClimb(){
         AutoClimbing = true;
-        Extend();
+        Extend(); //first step to climb any bar is to extend.
+    }
+    public void StopAutoClimb(){
+        AutoClimbing = false;
     }
     public void selfTest() {
 
