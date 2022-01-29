@@ -92,7 +92,7 @@ public class AimHelper{
         getDistance();
         return ApproximateAngle(TargetDistance);
     }
-    public double ApproximateAngle(double dist){ //linear interlopation
+    public double ApproximateAngle(double dist){ //linear interlopation. 
         double[] dists = LC.Dists;
         int max = dists.length-1;
         int min = 0;
@@ -124,10 +124,12 @@ public class AimHelper{
         }
         double out = 0;
         // now c is index of nearest value (rounded up)
-        if(exact){
-            out = LC.Angles[c];
+
+        if(exact){ 
+            //exact is always true out of the while loop
+            out = LC.Angles[c]; //we have the required angle in our databace so  use it
         }
-        else{
+        else{ //incase its not
             if(c-1 >= min){
                 double interval = dists[c]-dists[c-1];
                 double range = LC.Angles[c]-LC.Angles[c-1];
@@ -136,8 +138,6 @@ public class AimHelper{
             else{ //outside of domain
                 out = LC.Angles[c];
             }
-
-
         }
         return out;
     

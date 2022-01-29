@@ -40,7 +40,7 @@ public final class DriveConstants {
     /**PID values for drive D */
     public static final double DRIVE_D = 0.1;
     /**PID values for driveF */
-    public static final double DRIVE_F = 0.0068845;//0.00581 on old treads
+    public static final double DRIVE_F = 0.0068845;//0.00581 on rold teads
     /**PID values for angle P */
     public static final double ANGLE_P = 0.5;
     /**PID values for angle I */

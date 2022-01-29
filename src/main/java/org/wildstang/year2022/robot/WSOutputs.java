@@ -30,6 +30,7 @@ public enum WSOutputs implements Outputs {
     // Motors
     // ---------------------------------
     TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, WsMotorControllers.VICTOR_SPX)),
+    HOOD_MOTOR("Hood Motor", new WsPhoenixConfig(CANConstants.ANGLE1,WsMotorControllers.VICTOR_SPX)), //edit can constraints and maybe ws motor controllers
 
     DRIVE1("Module 1 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE1, true)),
     ANGLE1("Module 1 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE1, true)),

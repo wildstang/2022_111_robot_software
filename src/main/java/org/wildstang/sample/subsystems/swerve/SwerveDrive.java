@@ -67,7 +67,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public driveType driveState;
 
     @Override
-    public void inputUpdate(Input source) {
+    public void inputUpdate(Input source) { //function
         //determine if we are in cross or teleop
         if (driveState != driveType.AUTO && rightBumper.getValue()){
             driveState = driveType.CROSS;
