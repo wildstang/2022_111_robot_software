@@ -36,22 +36,23 @@ public class shooter implements Subsystem {
     public void init() {
         
         wheelMotor1 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER_WHEEL1);
-        wheelMotor2 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER_WHEEL2);
-        wheelMotor1 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER_FLYWHEEL);
+        //wheelMotor2 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER_WHEEL2);
+        shooterFlywheel = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER_FLYWHEEL);
         feedSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.FEED_SOLENOID);
         shooterTrigger = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_TRIGGER);
         shooterTrigger.addInputListener(this);
 
+        shooterFlywheel.setValue(1);
+
         resetState();
     }
-
     @Override
     public void update() {
         
         wheelMotor1.setValue(motorSpeed);
-        wheelMotor2.setValue(motorSpeed);
+        //wheelMotor2.setValue(motorSpeed);
         feedSolenoid.setValue(solenoidVal);
-        shooterFlywheel.setValue(motorSpeed);
+        //shooterFlywheel.setValue(motorSpeed);
     }
 
     @Override
@@ -60,6 +61,9 @@ public class shooter implements Subsystem {
             motorSpeed = 1;
             solenoidVal = true;
 
+        }else{
+            motorSpeed = 0;
+            solenoidVal = false;
         }
     }
 
