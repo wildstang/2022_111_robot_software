@@ -1,4 +1,4 @@
-package org.wildstang.year2022.subsystems;
+package org.wildstang.year2022.subsystems.Hood;
 
 
 import org.wildstang.framework.core.Core;
@@ -11,7 +11,7 @@ import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
-//  import org.wildstang.year2022.subsystems.Hood.AimHelper;
+import org.wildstang.year2022.subsystems.Hood.AimHelper;
 
 /**
  * Hood system
@@ -34,7 +34,7 @@ public class Hood implements Subsystem {
     
 
 
-    // AimHelper aim;
+    AimHelper aim;
     
     @Override
     public void init() {
@@ -50,7 +50,7 @@ public class Hood implements Subsystem {
         dpad_right = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_RIGHT);
         dpad_right.addInputListener(this);
         hood_position = 0.0;
-        //aim = new AimHelper();
+        aim = new AimHelper();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Hood implements Subsystem {
         hood_position = .25;
     }     
     if (left_trigger.getValue() > 0.5){
-            //hood_position = aim.getAngle();
+            hood_position = aim.getAngle() / 360.0;
          }
      
      else if (left_joystick_y.getValue() > 0){
