@@ -1,10 +1,8 @@
 package org.wildstang.year2022.subsystems.launcher;
 
-import org.wildstang.year2022.robot.CANConstants;
 import org.wildstang.year2022.robot.WSInputs;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import org.wildstang.year2022.robot.WSOutputs;
+import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.io.Input;
@@ -12,10 +10,10 @@ import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.framework.subsystems.Subsystem;
 
 /**
- * Class:       Hopper.java
- * Inputs:      1 DigitalInput (Manipulator face right)
- * Outputs:     1 VictorSPX
- * Description: Hold manipulator face right to run outtake
+ * Class:       launcher.java
+ * Inputs:      1 DigitalInput (Right Trigger)
+ * Outputs:     3 Neo 550
+ * Description: Shoot
  */
 public class launcher implements Subsystem {
 
@@ -23,7 +21,7 @@ public class launcher implements Subsystem {
     private DigitalInput launchButton;
 
     // outputs
-    private VictorSPX motor;
+    private WsSparkMax motor;
 
     // variables
     private double speed = 0.0;
@@ -42,12 +40,12 @@ public class launcher implements Subsystem {
     }
 
     public void initOutputs() {
-        motor = new VictorSPX(CANConstants.SHOOTER);
+        motor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER1);
     }
 
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
-        motor.set(ControlMode.PercentOutput, speed*maxSpeed);
+        motor.setValue(speed*maxSpeed);
     }
 
     // respond to input updates
