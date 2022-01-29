@@ -67,7 +67,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public driveType driveState;
 
     @Override
-    public void inputUpdate(Input source) { //function
+    public void inputUpdate(Input source) { 
         //determine if we are in cross or teleop
         if (driveState != driveType.AUTO && rightBumper.getValue()){
             driveState = driveType.CROSS;
@@ -263,13 +263,11 @@ public class SwerveDrive extends SwerveDriveTemplate {
         }
         autoTravelled += Math.hypot(autoTempX/modules.length, autoTempY/modules.length);
     }
-        /**
-     * Resets the gyro, and sets it the input number of degrees
-     * Used for starting the match at a non-0 angle
-     * @param degrees the current value the gyro should read
-     */
-    public void setGyro(double degrees){
-        gyro.reset();
-        gyro.setAngleAdjustment(degrees);
+
+    @Override
+    public void setGyro(double degrees) {
+        // TODO Auto-generated method stub
+        
     }
+    
 }

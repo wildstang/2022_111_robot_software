@@ -1,5 +1,6 @@
 package org.wildstang.year2022.subsystems.Hood; 
 import org.wildstang.framework.core.Core;
+import org.wildstang.framework.subsystems.SubsystemManager;
 import org.wildstang.hardware.roborio.inputs.WsAnalogInput;
 import org.wildstang.hardware.roborio.inputs.WsDigitalInput;
 import org.wildstang.hardware.roborio.outputs.WsPhoenix;
@@ -7,15 +8,16 @@ import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.hardware.roborio.inputs.WsJoystickAxis;
-
+import org.wildstang.framework.subsystems.Subsystem;
+import org.wildstang.framework.io.inputs.Input;
+import java.util.Arrays;
 
 //Goals bind controls to the asigned buttons. refrence aim helper 
 
-public class HoodManager{
+public class HoodManager implements Subsystem{
     //get inputs
     private WsJoystickAxis HoodMovement;
     private WsAnalogInput AutoAim;
-    private WsSparkMax HoodEncoder;
     private LimeConsts LC;
     private AimHelper Aim;
     //presets
@@ -23,14 +25,18 @@ public class HoodManager{
     private WsDigitalInput Preset2;
     private WsDigitalInput Preset3;
     private WsDigitalInput Preset4;
-
+    
     //get outputs
-    private WsPhoenix HoodMotor;
+    private WsSparkMax HoodMotor;
 
-
+    //vars
+    private int HoodMoveSpeed;
+    private int[] PresetIndex = {0,0,0,0};
+    private double encoderToAngle;
+    
     //set inputs
 
-    //@Override
+    @Override
     public void init() {
         //analog
         HoodMovement = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_JOYSTICK_Y);
@@ -42,98 +48,108 @@ public class HoodManager{
         Preset3 = (WsDigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_RIGHT);
         Preset4 = (WsDigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_DOWN);
 
-        //motors
-        HoodMotor = (WsPhoenix) Core.getOutputManager().getOutput(WSOutputs.HOOD_MOTOR); //no real motor yet replace wen added
+        //add the listners
+        Preset1.addInputListener(this);
+        Preset2.addInputListener(this);
+        Preset3.addInputListener(this);
+        Preset4.addInputListener(this);
+
+        AutoAim.addInputListener(this);
+        HoodMovement.addInputListener(this);
+
+        //motors also an encoder
+        HoodMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD_MOTOR); //no real motor yet replace wen added
+        
+        HoodMoveSpeed = 10; //positive is up
+        encoderToAngle = 1; //number of encoder angle values per degrees
     }
 
-    // it was annoying me on overides
-    //@Override
+    
+    @Override
     public void update() {
-        //move hood with left joysick 
-        //input range -1 to 1 
-        //anything below like -0.75 is gonna be moving it down
-        //anything above 0.75 is moving up
-        
-        int HoodMoveSpeed = 10; //positive is up
-        int[] PresetIndex = {0,0,0,0};
-        int encoderToAngle = 1; //number of encoder angle values per degrees
-
-
-        
-
-
-        //threads to do multiple things at once
-        //i hope these dont just multiply every frame
-        Thread moveHoodUp = new Thread(() -> {
-            do {
-                HoodMotor.setValue(HoodMoveSpeed); //positive is up (goal)
-            } while (true);});
-        
-        Thread moveHoodDown = new Thread(() -> {
-            do {
-                HoodMotor.setValue(-HoodMoveSpeed); //negitive is down (goal)
-            } while (true);});
-
-        
-        //rn you haveto hold the button for anything to happen this could be a toggle but thats for later
-        if (AutoAim.getValue() >0.75){
+        if (HoodMovement.getValue() > 0.75 || HoodMovement.getValue() < -0.75){
+            inputUpdate(HoodMovement);
+        }else if (Preset1.getValue()){
+            inputUpdate(Preset1);
+        }else if (Preset2.getValue()){
+            inputUpdate(Preset2);
+        }else if (Preset3.getValue()){
+            inputUpdate(Preset3);
+        }else if (Preset4.getValue()){
+            inputUpdate(Preset4);
+        }else if (AutoAim.getValue() >0.75){
+            inputUpdate(AutoAim);
+        }else{
+            HoodMotor.setSpeed(0.0);;
+        }
+    }
+    
+    @Override
+    public void inputUpdate(Input source) {
+        if(source == AutoAim){
             //intregrate jonahs stuff
             Double HoodAngle = (Double) Aim.getAngle();
-            if (HoodAngle > (Double) (HoodEncoder.getValue() / encoderToAngle)){
-                moveHoodUp.start();
-                moveHoodDown.interrupt();
-            }else if (HoodAngle < (Double) (HoodEncoder.getValue() / encoderToAngle)){
-                moveHoodDown.start();
-                moveHoodUp.interrupt();
+            if (HoodAngle > (Double) (HoodMotor.getValue() / encoderToAngle)){
+                HoodMotor.setSpeed(HoodMoveSpeed);
+            }else if (HoodAngle < (Double) (HoodMotor.getValue() / encoderToAngle)){
+                HoodMotor.setSpeed(-HoodMoveSpeed);
             }
         }
-
         //preset stuff
-        else if (Preset1.getValue()){
-            if (HoodEncoder.getValue() > LC.Dists[PresetIndex[0]]){
-                moveHoodUp.start();
-                moveHoodDown.interrupt();
-            }else if (HoodEncoder.getValue() < LC.Dists[PresetIndex[0]]){
-                moveHoodDown.start();
-                moveHoodUp.interrupt();
+        if (source == Preset1){
+            if (HoodMotor.getValue() > LC.Dists[PresetIndex[0]]){
+                HoodMotor.setSpeed(HoodMoveSpeed);
+                
+            }else if (HoodMotor.getValue() < LC.Dists[PresetIndex[0]]){
+                HoodMotor.setSpeed(-HoodMoveSpeed);
             }
         }
-        else if (Preset2.getValue()){
-            if (HoodEncoder.getValue() > LC.Dists[PresetIndex[1]]){
-                moveHoodUp.start();
-                moveHoodDown.interrupt();
-            }else if (HoodEncoder.getValue() < LC.Dists[PresetIndex[1]]){
-                moveHoodDown.start();
-                moveHoodUp.interrupt();
+        if (source == Preset2){
+            if (HoodMotor.getValue() > LC.Dists[PresetIndex[1]]){
+                HoodMotor.setSpeed(HoodMoveSpeed);
+                
+            }else if (HoodMotor.getValue() < LC.Dists[PresetIndex[1]]){
+                HoodMotor.setSpeed(-HoodMoveSpeed);
+                
             }
         }
-        else if (Preset3.getValue()){
-            if (HoodEncoder.getValue() > LC.Dists[PresetIndex[2]]){
-                moveHoodUp.start();
-                moveHoodDown.interrupt();
-            }else if (HoodEncoder.getValue() < LC.Dists[PresetIndex[2]]){
-                moveHoodDown.start();
-                moveHoodUp.interrupt();
+        if (source == Preset3){
+            if (HoodMotor.getValue() > LC.Dists[PresetIndex[2]]){
+                HoodMotor.setSpeed(HoodMoveSpeed);
+            }else if (HoodMotor.getValue() < LC.Dists[PresetIndex[2]]){
+                HoodMotor.setSpeed(-HoodMoveSpeed);
             }
         }
-        else if (Preset4.getValue()){
-            if (HoodEncoder.getValue() > LC.Dists[PresetIndex[3]]){
-                moveHoodUp.start();
-                moveHoodDown.interrupt();
-            }else if (HoodEncoder.getValue() < LC.Dists[PresetIndex[3]]){
-                moveHoodDown.start();
-                moveHoodUp.interrupt();
+        if (source == Preset4){
+            if (HoodMotor.getValue() > LC.Dists[PresetIndex[3]]){
+                HoodMotor.setSpeed(HoodMoveSpeed);
+                
+            }else if (HoodMotor.getValue() < LC.Dists[PresetIndex[3]]){
+                HoodMotor.setSpeed(-HoodMoveSpeed);
+                
             }
         } 
         //manual controls
-        else if (HoodMovement.getValue() >0.75) {
-            HoodMotor.setValue(HoodMoveSpeed);
-        } else if (HoodMovement.getValue() <-0.75){
-            HoodMotor.setValue(-HoodMoveSpeed);
-        }else{//if there is no reason for the motor to move stop it
-            moveHoodUp.interrupt();
-            moveHoodDown.interrupt();
-            HoodMotor.stop();
+        if(source == HoodMovement)
+            if (HoodMovement.getValue() >0.75) {
+                HoodMotor.setSpeed(HoodMoveSpeed);
+            } else{
+                HoodMotor.setSpeed(-HoodMoveSpeed);
         }
+    }
+
+    @Override
+    public void selfTest() {
+
+    }
+
+    @Override
+    public void resetState() {
+
+    }
+
+    @Override
+    public String getName() {
+        return "HoodManager";
     }
 }
