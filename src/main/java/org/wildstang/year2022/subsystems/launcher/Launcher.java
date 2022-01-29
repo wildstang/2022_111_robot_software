@@ -26,7 +26,7 @@ import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.hardware.roborio.outputs.config.WsServoConfig;
 
-public final class Launcher{
+public final class Launcher implements Subsystem{
 
     private AnalogInput FIRE_TRIGGER;
 
@@ -42,7 +42,7 @@ public final class Launcher{
     private int reverseVariable = -1;
     //We don't know which motor is going to be in the negative direction, so we will worry about this later
 
-    //@Override
+    @Override
     public void init() {
         leftFlywheelMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_LEFT);
         rightFlywheelMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_RIGHT);
@@ -54,20 +54,24 @@ public final class Launcher{
         resetState();
     }
 
-    //@Override
-    public void update() throws InterruptedException {
+    @Override
+    public void update(){
         if (FIRE_TRIGGER.getValue() > 0.5){
             leftFlywheelMotor.setValue(speed/* * reverseVariable*/);
             rightFlywheelMotor.setValue(speed/* * reverseVariable*/);
                 //we will uncomment whichever we are using backwards later
-            Thread.sleep(3000/*startup delay */);
+            try {
+                Thread.sleep(3000/*startup delay */);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();;
+            }
             ballLatch.setValue(false);
         }else{
             resetState();
         }
     }
 
-   // @Override
+    @Override
     public void inputUpdate(Input source) {
         if (source == FIRE_TRIGGER){
             speed = maxSpeed;
@@ -76,25 +80,21 @@ public final class Launcher{
         }
     }
 
-    //@Override
+    @Override
     public void selfTest() {
        
     }
 
-    //@Override
+    @Override
     public void resetState() {
         speed = 0.0;
         kickerSpeed = maxSpeed;
         ballLatch.setValue(true);
     }
 
-    //@Override
+    @Override
     public String getName() {
         return "Launcher";
     }
 
 }
-
-//leftFlywheelMotor.setValue(speed);
-//rightFlywheelMotor.setValue(speed);
-    //I will put these somehwere when I figure out what to do with them
