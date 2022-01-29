@@ -35,7 +35,7 @@ public class Hood implements Subsystem {
     
     final double preset1 = 1;
     final double preset2 = .75;
-    final double preset3 = .5
+    final double preset3 = .5;
     final double preset4 = .25;
 
     AimHelper aim;
