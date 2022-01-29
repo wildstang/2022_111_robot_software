@@ -30,8 +30,7 @@ import org.wildstang.year2022.subsystems.climb.ClimbConstants;
 
 public class ClimbMotion {
 
-    private WsSparkMax RightClimber;
-    private WsSparkMax LeftClimber;
+    private WsSparkMax RightClimber; //left is follower
 
     private WsDoubleSolenoid RightSol;
     private WsDoubleSolenoid LeftSol;
@@ -53,8 +52,7 @@ public class ClimbMotion {
         LeftSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_LEFT_SOLENOID);
 
         RightClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.RIGHT_CLIMB);
-        LeftClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LEFT_CLIMB);
-        
+        RightClimber.addFollower(CANConstants.CLIMBER_FOLLOWER,false,true); //add opposing follower (left climb motor)   
         
         resetState();
     }
@@ -63,7 +61,7 @@ public class ClimbMotion {
     public void update() {
         //handle motor output
         RightClimber.setSpeed(climberSpeed);
-        LeftClimber.setSpeed(climberSpeed);
+        
         if(IsRotated){
             RightSol.setValue(WsDoubleSolenoidState.REVERSE.ordinal()); //because initialized to .FORWARD, and i'm assuming starts not rotated.
         }

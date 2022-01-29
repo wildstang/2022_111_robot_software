@@ -45,7 +45,7 @@ public enum WSOutputs implements Outputs {
 
     RIGHT_CLIMB("Right Climb Motor", new WsSparkMaxConfig(CANConstants.CLIMBER, true)),
 
-    LEFT_CLIMB("Right Climb Motor", new WsSparkMaxConfig(CANConstants.CLIMBER_FOLLOWER, true)),
+  
 
     // ---------------------------------
     // Servos
