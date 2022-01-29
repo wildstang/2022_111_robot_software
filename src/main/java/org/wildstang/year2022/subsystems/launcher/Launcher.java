@@ -15,9 +15,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import org.wildstang.framework.core.Core;
-import org.wildstang.framework.io.Input;
 import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.io.inputs.DigitalInput;
+import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.pid.PIDConstants;
 import org.wildstang.framework.subsystems.Subsystem;
 import org.wildstang.framework.timer.WsTimer;
@@ -34,12 +34,15 @@ public final class Launcher{
 
     private WsSolenoid ballLatch;
 
-    private int speed, kickerSpeed;
+    private double speed, kickerSpeed;
+
+    private double maxSpeed = 342.0;
+    //This is the max speed a motor can go without burning out
 
     private int reverseVariable = -1;
     //We don't know which motor is going to be in the negative direction, so we will worry about this later
 
-    @Override
+    //@Override
     public void init() {
         leftFlywheelMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_LEFT);
         rightFlywheelMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_RIGHT);
@@ -48,31 +51,44 @@ public final class Launcher{
         ballLatch = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
 
         FIRE_TRIGGER = (WsAnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_TRIGGER);
+        resetState();
     }
 
-    @Override
-    public void update() {
-        leftFlywheelMotor.setValue(FIRE_TRIGGER.getValue()/* * reverseVariable*/);
-        rightFlywheelMotor.setValue(FIRE_TRIGGER.getValue()/* * reverseVariable*/);
-        //we will uncomment whichever we are using backwards later
+    //@Override
+    public void update() throws InterruptedException {
+        if (FIRE_TRIGGER.getValue() > 0.5){
+            leftFlywheelMotor.setValue(speed/* * reverseVariable*/);
+            rightFlywheelMotor.setValue(speed/* * reverseVariable*/);
+                //we will uncomment whichever we are using backwards later
+            Thread.sleep(3000/*startup delay */);
+            ballLatch.setValue(false);
+        }else{
+            resetState();
+        }
     }
 
-    @Override
+   // @Override
     public void inputUpdate(Input source) {
-
+        if (source == FIRE_TRIGGER){
+            speed = maxSpeed;
+        }else{
+            resetState();
+        }
     }
 
-    @Override
+    //@Override
     public void selfTest() {
        
     }
 
-    @Override
+    //@Override
     public void resetState() {
-        speed = 0;
+        speed = 0.0;
+        kickerSpeed = maxSpeed;
+        ballLatch.setValue(true);
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "Launcher";
     }
