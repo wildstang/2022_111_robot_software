@@ -41,21 +41,23 @@ import org.wildstang.year2022.subsystems.Hood.AimHelper;;
 
 public class HoodManager{
     //get inputs
-    WsJoystickAxis HoodMovement;
-    WsAnalogInput AutoAim;
+    private WsJoystickAxis HoodMovement;
+    private WsAnalogInput AutoAim;
+    private WsSparkMax HoodEncoder;
+    private LimeConsts LC;
 
     //presets
-    WsDigitalInput Preset1;
-    WsDigitalInput Preset2;
-    WsDigitalInput Preset3;
-    WsDigitalInput Preset4;
+    private WsDigitalInput Preset1;
+    private WsDigitalInput Preset2;
+    private WsDigitalInput Preset3;
+    private WsDigitalInput Preset4;
 
     //get outputs
-    WsPhoenix HoodMotor;
+    private WsPhoenix HoodMotor;
 
 
     //set inputs
-    
+
     //@Overide
     public void init() {
         //analog
@@ -81,6 +83,7 @@ public class HoodManager{
         //anything above 0.75 is moving up
         
         int HoodMoveSpeed = 10; //positive is up
+        int[] PresetIndex = {0,0,0,0};
 
         if (HoodMovement.getValue() >0.75) {
             HoodMotor.setValue(HoodMoveSpeed);
@@ -90,6 +93,59 @@ public class HoodManager{
 
         if (AutoAim.getValue() >0.75){
             //intregrate jonahs stuff
+            
+        }
+
+
+
+        //preset stuff
+            //threads to do multiple things at once
+        Thread moveHoodUp = new Thread(() -> {
+            do {
+                HoodMotor.setValue(-HoodMoveSpeed); 
+            } while (HoodEncoder.getValue() > LC.Dists[PresetIndex[0]]);});
+        
+        Thread moveHoodDown = new Thread(() -> {
+            do {
+                HoodMotor.setValue(HoodMoveSpeed); 
+            } while (HoodEncoder.getValue() > LC.Dists[PresetIndex[0]]);});
+
+            //now we do the presets kinda just bulk
+        if (Preset1.getValue()){
+            if (HoodEncoder.getValue() > LC.Dists[PresetIndex[0]]){
+                moveHoodUp.start();
+                moveHoodDown.stop();
+            }else if (HoodEncoder.getValue() < LC.Dists[PresetIndex[0]]){
+                moveHoodDown.start();
+                moveHoodUp.stop();
+            }
+        }
+        if (Preset2.getValue()){
+            if (HoodEncoder.getValue() > LC.Dists[PresetIndex[1]]){
+                moveHoodUp.start();
+                moveHoodDown.stop();
+            }else if (HoodEncoder.getValue() < LC.Dists[PresetIndex[1]]){
+                moveHoodDown.start();
+                moveHoodUp.stop();
+            }
+        }
+        if (Preset3.getValue()){
+            if (HoodEncoder.getValue() > LC.Dists[PresetIndex[2]]){
+                moveHoodUp.start();
+                moveHoodDown.stop();
+            }else if (HoodEncoder.getValue() < LC.Dists[PresetIndex[2]]){
+                moveHoodDown.start();
+                moveHoodUp.stop();
+            }
+        }
+        if (Preset4.getValue()){
+            if (HoodEncoder.getValue() > LC.Dists[PresetIndex[3]]){
+                moveHoodUp.start();
+                moveHoodDown.stop();
+            }else if (HoodEncoder.getValue() < LC.Dists[PresetIndex[3]]){
+                moveHoodDown.start();
+                moveHoodUp.stop();
+            }
         }
     }
 
