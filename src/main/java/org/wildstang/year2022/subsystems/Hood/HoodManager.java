@@ -59,11 +59,7 @@ public class HoodManager{
         int encoderToAngle = 1; //number of encoder angle values per degrees
 
 
-        if (HoodMovement.getValue() >0.75) {
-            HoodMotor.setValue(HoodMoveSpeed);
-        } else if (HoodMovement.getValue() <-0.75){
-            HoodMotor.setValue(-HoodMoveSpeed);
-        }
+        
 
 
         //threads to do multiple things at once
@@ -79,7 +75,7 @@ public class HoodManager{
             } while (true);});
 
         
-
+        //rn you haveto hold the button for anything to happen this could be a toggle but thats for later
         if (AutoAim.getValue() >0.75){
             //intregrate jonahs stuff
             Double HoodAngle = (Double) Aim.getAngle();
@@ -92,13 +88,8 @@ public class HoodManager{
             }
         }
 
-
-
         //preset stuff
-            
-        
-            //now we do the presets kinda just bulk
-        if (Preset1.getValue()){
+        else if (Preset1.getValue()){
             if (HoodEncoder.getValue() > LC.Dists[PresetIndex[0]]){
                 moveHoodUp.start();
                 moveHoodDown.interrupt();
@@ -107,7 +98,7 @@ public class HoodManager{
                 moveHoodUp.interrupt();
             }
         }
-        if (Preset2.getValue()){
+        else if (Preset2.getValue()){
             if (HoodEncoder.getValue() > LC.Dists[PresetIndex[1]]){
                 moveHoodUp.start();
                 moveHoodDown.interrupt();
@@ -116,7 +107,7 @@ public class HoodManager{
                 moveHoodUp.interrupt();
             }
         }
-        if (Preset3.getValue()){
+        else if (Preset3.getValue()){
             if (HoodEncoder.getValue() > LC.Dists[PresetIndex[2]]){
                 moveHoodUp.start();
                 moveHoodDown.interrupt();
@@ -125,7 +116,7 @@ public class HoodManager{
                 moveHoodUp.interrupt();
             }
         }
-        if (Preset4.getValue()){
+        else if (Preset4.getValue()){
             if (HoodEncoder.getValue() > LC.Dists[PresetIndex[3]]){
                 moveHoodUp.start();
                 moveHoodDown.interrupt();
@@ -133,6 +124,16 @@ public class HoodManager{
                 moveHoodDown.start();
                 moveHoodUp.interrupt();
             }
+        } 
+        //manual controls
+        else if (HoodMovement.getValue() >0.75) {
+            HoodMotor.setValue(HoodMoveSpeed);
+        } else if (HoodMovement.getValue() <-0.75){
+            HoodMotor.setValue(-HoodMoveSpeed);
+        }else{//if there is no reason for the motor to move stop it
+            moveHoodUp.interrupt();
+            moveHoodDown.interrupt();
+            HoodMotor.stop();
         }
     }
 }
