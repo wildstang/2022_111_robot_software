@@ -20,7 +20,6 @@ import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.pid.PIDConstants;
 import org.wildstang.framework.subsystems.Subsystem;
-import org.wildstang.framework.timer.WsTimer;
 import org.wildstang.hardware.roborio.inputs.WsAnalogInput;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
