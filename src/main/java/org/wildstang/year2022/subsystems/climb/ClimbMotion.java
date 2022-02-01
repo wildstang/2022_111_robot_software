@@ -43,8 +43,6 @@ public class ClimbMotion {
     private boolean AutoClimbing;
     
     private double climberSpeed;
-
-    private double ClimberTracker; //keep track of climber motor position
     
     public void ClimbMotion() {
 
@@ -52,7 +50,6 @@ public class ClimbMotion {
         LeftSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_LEFT_SOLENOID);
 
         RightClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.RIGHT_CLIMB);
-        RightClimber.addFollower(CANConstants.CLIMBER_FOLLOWER,false,true); //add opposing follower (left climb motor)   
         
         resetState();
     }
@@ -69,20 +66,10 @@ public class ClimbMotion {
         
             LeftSol.setValue(WsDoubleSolenoidState.FORWARD.ordinal());
         }
-
-        // update ClimberTracker
-        if(RightClimber.getPosition()>(int) (constant.TICKS_PER_ROTATION/2) && !IsExtended){  //if moved more than half rotation since last reset and extending
-            ClimberTracker += RightClimber.getPosition();
-            RightClimber.resetEncoder(); //so that encoder tracks change and never exeeds maximum
-        } 
-        if(RightClimber.getPosition()<(int) (constant.TICKS_PER_ROTATION/2) && IsExtended){ //if moved more than half rotation since reset and retracting
-            ClimberTracker -= RightClimber.getPosition();
-            RightClimber.resetEncoder(); //so that encoder tracks change and never exeeds maximum
-        }
         
 
         // update climb state (is it done extending/retracting????)
-        if(IsExtended && (ClimberTracker - (constant.TICKS_PER_ROTATION-RightClimber.getPosition()))<=constant.RETRACTED_POS){
+        if(IsExtended && (RightClimber.getPosition()<=constant.RETRACTED_POS)){
             IsExtended = false; 
             climberSpeed = 0;
             if (AutoClimbing){ //if auto climbing, tilt and stop autoclimbing. autoclimb must be pressed again to climb another bar.
@@ -90,7 +77,7 @@ public class ClimbMotion {
                 AutoClimbing = false;
             }
         }
-        else if (!IsExtended && (ClimberTracker + (RightClimber.getPosition()))>=constant.EXTENDED_POS){
+        else if (!IsExtended && (RightClimber.getPosition())>=constant.EXTENDED_POS){
             IsExtended = true; 
             climberSpeed = 0;
             if(AutoClimbing){ //if auto climbing, it is time to start retracting.
@@ -139,7 +126,6 @@ public class ClimbMotion {
         IsRotated = false;
         AutoClimbing = false;
         climberSpeed = 0;
-        ClimberTracker = 0;
 
         RightClimber.resetEncoder();
     }
