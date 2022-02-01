@@ -32,7 +32,6 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Ballpath implements Subsystem{
-
     //Motors
     private WsSparkMax feedMotor, intakeMotor;
 
@@ -69,21 +68,12 @@ public class Ballpath implements Subsystem{
         if (Math.abs(rightTrigger.getValue())>0.75){
             feedMotorSpeed = FULL_SPEED;
         } 
-        if (source == xButton){
-            if (xButton.getValue()) {
-                if (feedMotorSpeed != 0) {
-                    feedMotorSpeed = 0;
-                } else {
-                    feedMotorSpeed = FULL_SPEED;
-                }
-            }
-        }
         //set intake motor speed
         if (source == yButton) {
             if (yButton.getValue()) {
                 intakeMotorSpeed = REVERSE_SPEED;
             } else {
-                intakeMotorSpeed = FULL_SPEED;
+                intakeMotorSpeed = 0;
             }
         } 
         //intake solenoid toggle
@@ -152,6 +142,7 @@ public class Ballpath implements Subsystem{
     public void resetState() {
         feedMotorSpeed = 0.0;
         intakeMotorSpeed = 0.0;
+        intakeSolenoidValue = false;
     }
 
     @Override
