@@ -39,8 +39,8 @@ public enum WSOutputs implements Outputs {
     ANGLE3("Module 3 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE3, true)),
     DRIVE4("Module 4 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE4, true)),
     ANGLE4("Module 4 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE4, true)),
-    BALLPATH_INTAKE("Intake Wheels Motor", new WsSparkMaxConfig(CANConstants.INTAKEMOTOR, true)),
-    BALLPATH_FEED("Feed Motor", new WsSparkMaxConfig(CANConstants.FEEDMOTOR, true)),
+    BALLPATH_INTAKE("Intake Wheels Motor", new WsSparkMaxConfig(CANConstants.INTAKE, true)),
+    BALLPATH_FEED("Feed Motor", new WsSparkMaxConfig(CANConstants.FEED, true)),
 
     // ---------------------------------
     // Servos
