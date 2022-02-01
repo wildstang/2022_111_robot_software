@@ -2,6 +2,10 @@ package org.wildstang.year2022.subsystems.launcher;
 
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
+import org.wildstang.framework.io.outputs.DigitalOutput;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
+import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 
 import org.wildstang.framework.core.Core;
@@ -21,11 +25,14 @@ public class launcher implements Subsystem {
     private DigitalInput launchButton;
 
     // outputs
-    private WsSparkMax motor;
+    private WsSparkMax motor1;
+    private WsSparkMax motor2;
+    private WsSolenoid latch;
 
     // variables
     private double speed = 0.0;
     private double maxSpeed = 1.0;
+    private double maxOutputVelocity = 240.0;
     
     // initializes the subsystem
     public void init() {
@@ -40,19 +47,30 @@ public class launcher implements Subsystem {
     }
 
     public void initOutputs() {
-        motor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER1);
+        motor1 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER1);
+        motor2 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER2);
+        latch = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.SHOOTER4);
+
     }
 
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
-        motor.setValue(speed*maxSpeed);
+        motor1.setValue(speed*maxSpeed);
+        if(motor2.getVelocity()< 0.7*maxOutputVelocity) {
+            motor2.setValue(maxSpeed);
+        }
+        else {
+            motor2.setValue(0.7*maxSpeed)
+        }
     }
 
     // respond to input updates
     public void inputUpdate(Input signal) {
         if (signal == launchButton){
             if (launchButton.getValue()){
+                latch.setValue(false);
                 speed = 1.0;
+                
             }
             else {
                 resetState();
@@ -74,6 +92,7 @@ public class launcher implements Subsystem {
     // resets all variables to the default state
     public void resetState() {
         speed = 0.0;
+        latch.setValue(true);
     }
 
     // returns the unique name of the subsystem
