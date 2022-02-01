@@ -53,10 +53,9 @@ public class BallpathSubsystem_V2 implements Subsystem{
     
     //Constants
     private final double FULL_SPEED = 1.0;
-    private final double KICKER_MOTOR_CONSTANT = 0.4;
     private final double REVERSE_SPEED = -1.0;
-    private final boolean OPEN = true; //out
-    private final boolean CLOSE = !OPEN; //in
+    private final boolean OPEN = true; //intake deployed
+    private final boolean CLOSE = !OPEN; //intake retracted 
 
     //Inputs
     private AnalogInput rightTrigger;
