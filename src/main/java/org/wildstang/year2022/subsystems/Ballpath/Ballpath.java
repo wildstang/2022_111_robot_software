@@ -45,9 +45,6 @@ public class Ballpath implements Subsystem{
     //Solenoid Value
     private boolean intakeSolenoidValue;
 
-    //Shuffleboard entries
-    private NetworkTableEntry maxDriveInputEntry;
-
     //Booleans
     private boolean toggleBallpath = true;
 
@@ -148,17 +145,5 @@ public class Ballpath implements Subsystem{
     @Override
     public String getName() {
         return "Ballpath";
-    }
-    public void turnOnIntake(){
-        intakeMotorSpeed = FULL_SPEED;
-    }
-    public void turnOffIntake(){
-        intakeMotorSpeed = 0;
-    }
-    public void turnOnFeed(){
-        feedMotorSpeed = FULL_SPEED;
-    }
-    public void turnOffFeed(){
-        feedMotorSpeed = 0.0;
     }
 }
