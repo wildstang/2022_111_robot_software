@@ -7,6 +7,7 @@ import org.wildstang.hardware.roborio.outputs.config.WsServoConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsI2COutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsMotorControllers;
+import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.hardware.roborio.outputs.config.WsDigitalOutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxConfig;
@@ -30,7 +31,7 @@ public enum WSOutputs implements Outputs {
     // Motors
     // ---------------------------------
     TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, WsMotorControllers.VICTOR_SPX)),
-    HOOD_MOTOR("Hood Motor", new WsPhoenixConfig(CANConstants.HOOD,WsMotorControllers.SPARK_MAX_BRUSHLESS)),
+    HOOD_MOTOR("Hood Motor", new WsSparkMaxConfig(CANConstants.HOOD,true)),
     
     DRIVE1("Module 1 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE1, true)),
     ANGLE1("Module 1 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE1, true)),

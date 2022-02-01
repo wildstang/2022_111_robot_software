@@ -12,6 +12,8 @@ import org.wildstang.framework.subsystems.Subsystem;
 import org.wildstang.framework.io.inputs.Input;
 import java.util.Arrays;
 
+import com.google.common.util.concurrent.Service.State;
+
 //Goals bind controls to the asigned buttons. refrence aim helper 
 
 public class HoodManager implements Subsystem{
@@ -33,6 +35,7 @@ public class HoodManager implements Subsystem{
     private int HoodMoveSpeed;
     private int[] PresetIndex = {0,0,0,0};
     private double encoderToAngle;
+    public String State;
     
     //set inputs
 
@@ -67,26 +70,15 @@ public class HoodManager implements Subsystem{
     
     @Override
     public void update() {
-        if (HoodMovement.getValue() > 0.75 || HoodMovement.getValue() < -0.75){
-            inputUpdate(HoodMovement);
-        }else if (Preset1.getValue()){
-            inputUpdate(Preset1);
-        }else if (Preset2.getValue()){
-            inputUpdate(Preset2);
-        }else if (Preset3.getValue()){
-            inputUpdate(Preset3);
-        }else if (Preset4.getValue()){
-            inputUpdate(Preset4);
-        }else if (AutoAim.getValue() >0.75){
-            inputUpdate(AutoAim);
-        }else{
-            HoodMotor.setSpeed(0.0);;
+        if (State == "Manual"){ //generaly defult
+            if (HoodMovement.getValue() >0.75) {
+                HoodMotor.setSpeed(HoodMoveSpeed);
+            }
+            if (HoodMovement.getValue() < -0.75){
+                HoodMotor.setSpeed(-HoodMoveSpeed);
+            }
         }
-    }
-    
-    @Override
-    public void inputUpdate(Input source) {
-        if(source == AutoAim){
+        if (State == "Auto"){
             //intregrate jonahs stuff
             Double HoodAngle = (Double) Aim.getAngle();
             if (HoodAngle > (Double) (HoodMotor.getValue() / encoderToAngle)){
@@ -95,46 +87,60 @@ public class HoodManager implements Subsystem{
                 HoodMotor.setSpeed(-HoodMoveSpeed);
             }
         }
-        //preset stuff
-        if (source == Preset1){
-            if (HoodMotor.getValue() > LC.Dists[PresetIndex[0]]){
+        if (State == "P1"){
+            if (HoodMotor.getValue() > LC.Dists[PresetIndex[0]]){//hope that the presets are in encoder values
                 HoodMotor.setSpeed(HoodMoveSpeed);
                 
             }else if (HoodMotor.getValue() < LC.Dists[PresetIndex[0]]){
                 HoodMotor.setSpeed(-HoodMoveSpeed);
             }
         }
-        if (source == Preset2){
+        if (State == "P2"){
             if (HoodMotor.getValue() > LC.Dists[PresetIndex[1]]){
                 HoodMotor.setSpeed(HoodMoveSpeed);
                 
             }else if (HoodMotor.getValue() < LC.Dists[PresetIndex[1]]){
                 HoodMotor.setSpeed(-HoodMoveSpeed);
-                
             }
         }
-        if (source == Preset3){
+        if (State == "P3"){
             if (HoodMotor.getValue() > LC.Dists[PresetIndex[2]]){
                 HoodMotor.setSpeed(HoodMoveSpeed);
             }else if (HoodMotor.getValue() < LC.Dists[PresetIndex[2]]){
                 HoodMotor.setSpeed(-HoodMoveSpeed);
             }
         }
-        if (source == Preset4){
+        if (State == "P4"){
             if (HoodMotor.getValue() > LC.Dists[PresetIndex[3]]){
                 HoodMotor.setSpeed(HoodMoveSpeed);
                 
             }else if (HoodMotor.getValue() < LC.Dists[PresetIndex[3]]){
                 HoodMotor.setSpeed(-HoodMoveSpeed);
-                
             }
+        }
+    }
+    
+    @Override
+    public void inputUpdate(Input source) {
+        if(source == AutoAim){
+            State = "Auto";
+        }
+        //preset stuff
+        if (source == Preset1){
+            State = "P1";
+        }
+        if (source == Preset2){
+            State = "P2";
+        }
+        if (source == Preset3){
+            State = "P3";
+        }
+        if (source == Preset4){
+            State = "P4";
         } 
         //manual controls
-        if(source == HoodMovement)
-            if (HoodMovement.getValue() >0.75) {
-                HoodMotor.setSpeed(HoodMoveSpeed);
-            } else{
-                HoodMotor.setSpeed(-HoodMoveSpeed);
+        if(source == HoodMovement) {
+            State = "Manual";
         }
     }
 
@@ -145,7 +151,8 @@ public class HoodManager implements Subsystem{
 
     @Override
     public void resetState() {
-
+        HoodMotor.setSpeed(0.0);
+        HoodMotor.setValue(0.0);//encoder to neo encoder calc (encoder - (Ea/MaxGa)*range)
     }
 
     @Override
