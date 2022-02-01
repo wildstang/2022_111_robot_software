@@ -12,8 +12,6 @@ import org.wildstang.framework.subsystems.Subsystem;
 import org.wildstang.framework.io.inputs.Input;
 import java.util.Arrays;
 
-import com.google.common.util.concurrent.Service.State;
-
 //Goals bind controls to the asigned buttons. refrence aim helper 
 
 public class HoodManager implements Subsystem{
