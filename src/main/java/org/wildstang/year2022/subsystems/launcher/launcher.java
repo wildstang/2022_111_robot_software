@@ -60,7 +60,7 @@ public class launcher implements Subsystem {
             motor2.setValue(maxSpeed);
         }
         else {
-            motor2.setValue(0.7*maxSpeed)
+            motor2.setValue(0.7*maxSpeed);
         }
     }
 
