@@ -35,8 +35,10 @@ public final class Launcher implements Subsystem{
 
     private double speed, kickerSpeed;
 
+    private String state;
+
     private double maxSpeed = 342.0;
-    //This is the max speed a motor can go without burning out
+    //This is the max speed a motor can go without burning out. 342.0 is a placeholder
 
     private int reverseVariable = -1;
     //We don't know which motor is going to be in the negative direction, so we will worry about this later
@@ -55,16 +57,18 @@ public final class Launcher implements Subsystem{
 
     @Override
     public void update(){
-        if (FIRE_TRIGGER.getValue() > 0.5){
-            leftFlywheelMotor.setValue(speed/* * reverseVariable*/);
-            rightFlywheelMotor.setValue(speed/* * reverseVariable*/);
-                //we will uncomment whichever we are using backwards later
-            try {
-                Thread.sleep(3000/*startup delay */);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();;
+        if (state == "Primed"){
+            if(FIRE_TRIGGER.getValue() >= 0.5){
+                leftFlywheelMotor.setValue((speed / maxSpeed)/* * reverseVariable*/);
+                rightFlywheelMotor.setValue((speed / maxSpeed)/* * reverseVariable*/);
+                    //we will uncomment whichever we are using backwards later
+                try {
+                    Thread.sleep(3000/*startup delay */);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();;
+                }
+                ballLatch.setValue(false);
             }
-            ballLatch.setValue(false);
         }else{
             resetState();
         }
@@ -73,7 +77,7 @@ public final class Launcher implements Subsystem{
     @Override
     public void inputUpdate(Input source) {
         if (source == FIRE_TRIGGER){
-            speed = maxSpeed;
+            state = "Primed";
         }else{
             resetState();
         }
@@ -89,6 +93,7 @@ public final class Launcher implements Subsystem{
         speed = 0.0;
         kickerSpeed = maxSpeed;
         ballLatch.setValue(true);
+        kickerMotor.setValue(1);
     }
 
     @Override
@@ -97,3 +102,16 @@ public final class Launcher implements Subsystem{
     }
 
 }
+
+//if(velocity <= desiredVelocity){
+    //speed = maxspeed;
+//}else{
+    //speed = targetSpeed;
+//}
+
+
+//if(velocity <= 0.95 * desiredVelocity){
+    //speed = maxspeed;
+//}else if(velocity <= desiredVelocity){
+
+//}
