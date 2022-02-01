@@ -50,17 +50,13 @@ public class BallpathSubsystem_V2 implements Subsystem{
 
     //Shuffleboard entries
     private NetworkTableEntry maxDriveInputEntry;
-
-    //Booleans
-    private boolean toggleBallpath = true;
     
-
     //Constants
     private final double FULL_SPEED = 1.0;
     private final double KICKER_MOTOR_CONSTANT = 0.4;
     private final double REVERSE_SPEED = -1.0;
-    private final boolean OPEN = true; //open to the hood
-    private final boolean CLOSE = !OPEN;
+    private final boolean OPEN = true; //out
+    private final boolean CLOSE = !OPEN; //in
 
     //Inputs
     private AnalogInput rightTrigger;
@@ -70,20 +66,22 @@ public class BallpathSubsystem_V2 implements Subsystem{
 
     @Override
     public void inputUpdate(Input source) {
-        //set feed and hopper motor speeds
-        if (Math.abs(rightTrigger.getValue())>0.75){
-            feedMotorSpeed = FULL_SPEED;
+
+        //dynamicly controls hopper speed
+        if (Math.abs(rightTrigger.getValue())>0.15){
+            feedMotorSpeed = rightTrigger.getValue();
         } 
         
-        //set intake motor speed
+        //intake reverse 
         if (source == yButton) {
             if (yButton.getValue()) {
                 intakeMotorSpeed = REVERSE_SPEED;
             } else {
-                intakeMotorSpeed = FULL_SPEED;
+                intakeMotorSpeed = 0;
             }
         } 
-        //intake solenoid toggle
+
+        //intake full speed - also opens intake
         if (source == aButton) {
             if (aButton.getValue()) {
                 intakeSolenoidValue = OPEN;
@@ -93,15 +91,15 @@ public class BallpathSubsystem_V2 implements Subsystem{
             }
 
         }
-        //toggle ballpath run
-        if (source == xButton) { // Run All Max
+
+        //feed & intake full speed
+        if (source == xButton) {
             if (xButton.getValue()) {
                 feedMotorSpeed = FULL_SPEED;
                 intakeSolenoidValue = OPEN;
                 intakeMotorSpeed = FULL_SPEED;
             } else {
                 feedMotorSpeed = 0;
-                intakeSolenoidValue = CLOSE;
                 intakeMotorSpeed = 0;
             }
         }
