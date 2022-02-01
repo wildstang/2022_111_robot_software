@@ -35,7 +35,7 @@ public class HoodManager implements Subsystem{
     private int HoodMoveSpeed;
     private int[] PresetIndex = {0,0,0,0};
     private double encoderToAngle;
-    public String State;
+    private String State;
     
     //set inputs
 
