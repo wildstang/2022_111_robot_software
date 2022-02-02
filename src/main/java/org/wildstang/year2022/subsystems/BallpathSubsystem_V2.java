@@ -48,9 +48,6 @@ public class BallpathSubsystem_V2 implements Subsystem{
     //Solenoid Value
     private boolean intakeSolenoidValue;
 
-    //Shuffleboard entries
-    private NetworkTableEntry maxDriveInputEntry;
-    
     //Constants
     private final double FULL_SPEED = 1.0;
     private final double REVERSE_SPEED = -1.0;
@@ -68,7 +65,7 @@ public class BallpathSubsystem_V2 implements Subsystem{
 
         //dynamicly controls hopper speed
         if (Math.abs(rightTrigger.getValue())>0.15){
-            feedMotorSpeed = rightTrigger.getValue();
+            feedMotorSpeed = FULL_SPEED;
         } 
         
         //intake reverse 
@@ -85,8 +82,11 @@ public class BallpathSubsystem_V2 implements Subsystem{
             if (aButton.getValue()) {
                 intakeSolenoidValue = OPEN;
                 intakeMotorSpeed = FULL_SPEED;
+                feedMotorSpeed = FULL_SPEED;
             } else {
+                intakeSolenoidValue = CLOSE;
                 intakeMotorSpeed = 0;
+                feedMotorSpeed = 0;
             }
 
         }
@@ -95,11 +95,8 @@ public class BallpathSubsystem_V2 implements Subsystem{
         if (source == xButton) {
             if (xButton.getValue()) {
                 feedMotorSpeed = FULL_SPEED;
-                intakeSolenoidValue = OPEN;
-                intakeMotorSpeed = FULL_SPEED;
             } else {
                 feedMotorSpeed = 0;
-                intakeMotorSpeed = 0;
             }
         }
         
@@ -165,6 +162,4 @@ public class BallpathSubsystem_V2 implements Subsystem{
     public void turnOffFeed(){
         feedMotorSpeed = 0.0;
     }
-}class BallPathSubsytem {
-    
 }
