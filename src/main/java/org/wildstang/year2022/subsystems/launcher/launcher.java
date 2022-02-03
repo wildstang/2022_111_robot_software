@@ -33,6 +33,7 @@ public class launcher implements Subsystem {
     private double speed = 0.0;
     private double maxSpeed = 1.0;
     private double maxOutputVelocity = 240.0;
+    private double outputVelocityThresholdPercent = 0.7;
     
     // initializes the subsystem
     public void init() {
@@ -56,11 +57,11 @@ public class launcher implements Subsystem {
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
         motor1.setValue(speed*maxSpeed);
-        if(motor2.getVelocity()< 0.7*maxOutputVelocity) {
+        if(motor2.getVelocity()< outputVelocityThresholdPercent*maxOutputVelocity) {
             motor2.setValue(maxSpeed);
         }
         else {
-            motor2.setValue(0.7*maxSpeed);
+            motor2.setValue(outputVelocityThresholdPercent*maxSpeed);
         }
     }
 
