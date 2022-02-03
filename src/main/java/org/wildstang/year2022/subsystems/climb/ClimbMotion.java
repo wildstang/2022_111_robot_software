@@ -61,9 +61,10 @@ public class ClimbMotion {
         
         if(IsRotated){
             RightSol.setValue(WsDoubleSolenoidState.REVERSE.ordinal()); //because initialized to .FORWARD, and i'm assuming starts not rotated.
+            LeftSol.setValue(WsDoubleSolenoidState.REVERSE.ordinal());
         }
         else{ 
-        
+            RightSol.setValue(WsDoubleSolenoidState.FORWARD.ordinal());
             LeftSol.setValue(WsDoubleSolenoidState.FORWARD.ordinal());
         }
         
@@ -97,10 +98,10 @@ public class ClimbMotion {
 
     //commands
     public void Extend(){
-        climberSpeed = constant.CLIMB_PERCENT_SPEED; 
+        climberSpeed = constant.DEPLOY_PERCENT_SPEED; 
     }
     public void Retract(){
-        climberSpeed = -1*constant.CLIMB_PERCENT_SPEED;
+        climberSpeed = -1;
     }
     public void Tilt(){
         IsRotated = true;
