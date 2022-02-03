@@ -40,7 +40,7 @@ public class Hood implements Subsystem {
     final double preset4 = .25;
 
     final double max_angle = 45;
-    final double position_change = .1;
+    final double position_change = .02;
     
     AimHelper aim;
     
