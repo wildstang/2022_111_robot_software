@@ -35,10 +35,10 @@ public interface Input {
     public void removeInputListener(InputListener listener);
 
     /**
-     * Removes the listener from the list of registered listeners.
+     * Gets the listener from the list of registered listeners.
      *
-     * @param listener
-     *            the listener to remove
+     * 
+     *           
      */
     public List<InputListener> getInputListeners();
 
