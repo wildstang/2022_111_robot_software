@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SwerveModule {
 
     private double target;
+    private double encoderTarget;
     private double drivePower;
 
     private WsSparkMax driveMotor;
@@ -32,6 +33,9 @@ public class SwerveModule {
         this.canCoder = canCoder;
         this.driveMotor.setCoast();
         this.angleMotor.setBrake();
+
+        driveMotor.setCurrentLimit(50, 50, 0);
+        angleMotor.setCurrentLimit(25, 25, 0);
 
         //set up angle and drive with pid and kpid respectively
         driveMotor.initClosedLoop(DriveConstants.DRIVE_P, DriveConstants.DRIVE_I, DriveConstants.DRIVE_D, DriveConstants.DRIVE_F);
@@ -56,7 +60,9 @@ public class SwerveModule {
         SmartDashboard.putNumber(name + " CANCoder", canCoder.getAbsolutePosition());
         SmartDashboard.putNumber(name + " NEO angle encoder", angleMotor.getPosition());
         SmartDashboard.putNumber(name + " NEO angle target", target);
+        SmartDashboard.putNumber(name + " NEO angle encoder target", encoderTarget);
         SmartDashboard.putNumber(name + " NEO drive power", drivePower);
+        SmartDashboard.putNumber(name + " NEO drive position", driveMotor.getPosition());
     }
     /** resets drive encoder */
     public void resetDriveEncoders(){
@@ -115,7 +121,7 @@ public class SwerveModule {
         double deltaRotation = -currentRotation + angle;
         double deltaTicks = deltaRotation/360 * DriveConstants.TICKS_PER_REV * DriveConstants.ANGLE_RATIO;
         double currentTicks = angleMotor.getPosition();
-        angleMotor.setPosition(currentTicks + deltaTicks);
+        angleMotor.setPosition(currentTicks + deltaTicks); encoderTarget = currentTicks + deltaTicks;
     }
     /**runs module drive at specified power [-1, 1] 
      * @param power the power to run the module at, [-1, 1]
