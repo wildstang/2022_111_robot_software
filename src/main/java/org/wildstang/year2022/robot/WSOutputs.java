@@ -39,6 +39,13 @@ public enum WSOutputs implements Outputs {
     ANGLE3("Module 3 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE3, true)),
     DRIVE4("Module 4 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE4, true)),
     ANGLE4("Module 4 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE4, true)),
+
+    INTAKE("Intake Motor", new WsSparkMaxConfig(CANConstants.INTAKE, true)),
+    FEED("Feed Motor", new WsSparkMaxConfig(CANConstants.FEED, true)),
+    KICKER("Kicker Motor", new WsSparkMaxConfig(CANConstants.KICKER, true)),
+    HOOD("Hood Motor", new WsSparkMaxConfig(CANConstants.HOOD, true)),
+    LAUNCHER("Launcher Motor", new WsSparkMaxConfig(CANConstants.SHOOTER, true)),
+    LAUNCHER_FOLLOWER("Launcher Follower Motor", new WsSparkMaxFollowerConfig("Launcher Motor",CANConstants.SHOOTER_FOLLOWER, true, true)),
     
 
     // ---------------------------------
