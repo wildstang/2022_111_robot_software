@@ -23,8 +23,10 @@ public class SwerveSignal {
                 maxSpeed = Math.abs(speed[i]);
             }
         }
-        for (int i = 0; i < speed.length; i++){
-            speed[i] /= maxSpeed;
+        if (maxSpeed > 1.0){
+            for (int i = 0; i < speed.length; i++){
+                speed[i] /= maxSpeed;
+            }
         }
     }
     /**speed is normalized value [0, 1] 

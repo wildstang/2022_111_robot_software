@@ -20,7 +20,7 @@ public class WSSwerveHelper {
      * @return driveSignal for cross, with 0 magnitude and crossed directions
      */
     public SwerveSignal setCross(){
-        return new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{135.0, 45.0, 45.0, 135.0});
+        return new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{45.0, 135.0, 135.0, 45.0});
     }
 
     /** sets the robot in the mobile defensive "crab" mode, where all modules are aligned
@@ -53,8 +53,8 @@ public class WSSwerveHelper {
 
         //cartesian vector addition of translation and rotation vectors
         //note rotation vector angle advances in the cos -> sin -> -cos -> -sin fashion
-        xCoords = new double[]{i_tx + rotMag*Math.cos(baseV), i_tx + rotMag*Math.sin(baseV), i_tx - rotMag*Math.cos(baseV), i_tx - rotMag*Math.sin(baseV)}; 
-        yCoords = new double[]{i_ty + rotMag*Math.sin(baseV), i_ty - rotMag*Math.cos(baseV), i_ty - rotMag*Math.sin(baseV), i_ty + rotMag*Math.cos(baseV)};
+        xCoords = new double[]{i_tx + rotMag*Math.cos(baseV), i_tx + rotMag*Math.sin(baseV), i_tx - rotMag*Math.sin(baseV), i_tx - rotMag*Math.cos(baseV)}; 
+        yCoords = new double[]{i_ty + rotMag*Math.sin(baseV), i_ty - rotMag*Math.cos(baseV), i_ty + rotMag*Math.cos(baseV), i_ty - rotMag*Math.sin(baseV)};
 
         //create drivesignal, with magnitudes and directions of x and y
         swerveSignal = new SwerveSignal(new double[]{getMagnitude(xCoords[0], yCoords[0]), getMagnitude(xCoords[1], yCoords[1]), getMagnitude(xCoords[2], yCoords[2]), getMagnitude(xCoords[3], yCoords[3])}, 
@@ -112,7 +112,7 @@ public class WSSwerveHelper {
     }
     /**x,y inputs are cartesian, angle values are in bearing, returns 0 - 360 */
     private double getDirection(double x, double y, double angle){
-        double measurement =  Math.toDegrees(Math.atan2(x,y));//returns angle in bearing form
+        double measurement =  360-Math.toDegrees(Math.atan2(x,y));//returns angle in bearing form
         if (measurement<0) measurement = 360+measurement;
         measurement = measurement - angle;
         if (measurement<0) measurement = 360+measurement;

@@ -14,25 +14,28 @@ public final class CANConstants {
     public static final int[] EXAMPLE_PAIRED_CONTROLLERS    = {1,2};
     public static final int   EXAMPLE_MOTOR_CONTROLLER      = 3;
 
-    //tank drive constants
-    public static final int LEFT_DRIVE = 11;
-    public static final int RIGHT_DRIVE = 12;
-    public static final int LEFT_DRIVE_FOLLOWER = 13;
-    public static final int RIGHT_DRIVE_FOLLOWER = 14;
-
     //swerve constants
-    public static final int ENC1 = 41;
-    public static final int ENC2 = 42;
-    public static final int ENC3 = 43;
-    public static final int ENC4 = 44;
-    public static final int DRIVE1 = 11;
-    public static final int ANGLE1 = 12;
-    public static final int DRIVE2 = 13;
-    public static final int ANGLE2 = 14;
-    public static final int DRIVE3 = 15;
-    public static final int ANGLE3 = 16;
-    public static final int DRIVE4 = 17;
-    public static final int ANGLE4 = 18;
+    public static final int ENC1 = 31;
+    public static final int ENC2 = 32;
+    public static final int ENC3 = 33;
+    public static final int ENC4 = 34;
+    public static final int DRIVE1 = 10;
+    public static final int ANGLE1 = 11;
+    public static final int DRIVE2 = 12;
+    public static final int ANGLE2 = 13;
+    public static final int DRIVE3 = 14;
+    public static final int ANGLE3 = 15;
+    public static final int DRIVE4 = 16;
+    public static final int ANGLE4 = 17;
+
+    public static final int INTAKE = 20;
+    public static final int FEED = 21;
+    public static final int KICKER = 22;
+    public static final int SHOOTER = 23;
+    public static final int SHOOTER_FOLLOWER = 24;
+    public static final int HOOD = 25;
+    public static final int CLIMBER = 26;
+    public static final int CLIMBER_FOLLOWER = 27;
     
     
 }

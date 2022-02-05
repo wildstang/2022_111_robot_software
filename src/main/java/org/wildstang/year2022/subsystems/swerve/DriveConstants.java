@@ -7,7 +7,7 @@ public final class DriveConstants {
     /** robot width from swerve pod to swerve pod, in inches */
     public static final double ROBOT_WIDTH = 11.5;
     /**speed with which the robot rotates relative to drive speed */
-    public static final double ROTATION_SPEED = 0.1;
+    public static final double ROTATION_SPEED = 0.4;
     /**drive motor gear ratio */
     public static final double DRIVE_RATIO = 6.86;
     /**angle motor gear ratio */
@@ -48,6 +48,6 @@ public final class DriveConstants {
     /**PID values for angle D */
     public static final double ANGLE_D = 0.0;
     /**Swerve Module Names */
-    public static final String[] POD_NAMES = new String[]{"Front Left", "Front Right", "Back Left", "Back Right"};
+    public static final String[] POD_NAMES = new String[]{"FL", "FR", "BL", "BR"};
 
 }
