@@ -83,8 +83,10 @@ public class HoodManager implements Subsystem{
             if (HoodMovement.getValue() >0.75) {
                 HoodMotor.setSpeed(HoodMoveSpeed);
             }
-            if (HoodMovement.getValue() < -0.75){
+            else if (HoodMovement.getValue() < -0.75){
                 HoodMotor.setSpeed(-HoodMoveSpeed);
+            }else {
+                HoodMotor.stop();
             }
         }
         if (State == "Auto" && AutoAim.getValue() > 0.75){
@@ -128,8 +130,8 @@ public class HoodManager implements Subsystem{
             State = "P4";
         } 
         //manual controls
-        else if((source == HoodMovement) && (HoodMovement.getValue() > 0.75 || HoodMovement.getValue() < -0.75) ){
-            State = "Manual";
+        else if(source == HoodMovement){
+            State = "Manual"; // make sure
         } 
         else{
             State = "Nutural";
