@@ -1,5 +1,7 @@
 package org.wildstang.year2022.subsystems.test;
 
+import com.revrobotics.SparkMaxAnalogSensor.Mode;
+
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.io.inputs.DigitalInput;
@@ -10,18 +12,20 @@ import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.robot.WSOutputs;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.wildstang.year2022.robot.WSInputs;
 
 public class Tester implements Subsystem{
 
-    private DigitalInput aButton, xButton, yButton, bButton, leftbumper, rightBumper;
+    private DigitalInput aButton, xButton, yButton, bButton, leftbumper, rightBumper, startButton;
     private AnalogInput rightTrigger;
     
     private WsSparkMax intakeMotor, feedMotor, launcherMotor, kickerMotor, hoodMotor;
 
     private double feedSpeed, intakeSpeed, launcherSpeed, kickerSpeed, hoodSpeed;
     private double modifier;
+    private boolean kickerState;
 
     private final double LAUNCHER_INITIAL = 0.7;
 
@@ -38,10 +42,11 @@ public class Tester implements Subsystem{
             intakeSpeed = 0;
             feedSpeed = 0;
         }
+        if (source == startButton && startButton.getValue()) kickerState = !kickerState;
 
         if (Math.abs(rightTrigger.getValue()) > 0.5){
             launcherSpeed = LAUNCHER_INITIAL + modifier;
-            kickerSpeed = LAUNCHER_INITIAL + modifier;
+            kickerSpeed = kickerState ? LAUNCHER_INITIAL + modifier : 1.0;
         } else {
             launcherSpeed = 0;
             kickerSpeed = 0;
@@ -79,6 +84,8 @@ public class Tester implements Subsystem{
         leftbumper.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
+        startButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_START);
+        startButton.addInputListener(this);
 
         intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.INTAKE);
         feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.FEED);   
@@ -90,6 +97,8 @@ public class Tester implements Subsystem{
         launcherMotor.setCurrentLimit(50, 50, 0);
         kickerMotor.setCurrentLimit(25, 25, 0);
         hoodMotor.setCurrentLimit(25, 25, 0);
+
+        resetState();
     }
 
     @Override
@@ -105,6 +114,12 @@ public class Tester implements Subsystem{
         intakeMotor.setSpeed(intakeSpeed);
         kickerMotor.setSpeed(kickerSpeed);
         hoodMotor.setSpeed(hoodSpeed);
+
+        SmartDashboard.putNumber("Flywheel velocity", launcherMotor.getVelocity());
+        SmartDashboard.putNumber("Flywheel percent output", LAUNCHER_INITIAL+modifier);
+        SmartDashboard.putNumber("hoodPosition", hoodMotor.getPosition());
+        SmartDashboard.putNumber("hood MA3", hoodMotor.getController().getAnalog(Mode.kAbsolute).getVoltage());
+        SmartDashboard.putBoolean("is kicker mirroring flywheel", kickerState);
     }
 
     @Override
@@ -114,6 +129,7 @@ public class Tester implements Subsystem{
         launcherSpeed = 0;
         modifier = 0;
         hoodSpeed = 0;
+        kickerState = true;
     }
 
     @Override
