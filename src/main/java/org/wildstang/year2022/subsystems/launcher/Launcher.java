@@ -55,23 +55,16 @@ public final class Launcher implements Subsystem{
             rightFlywheelMotor.setValue(maxSpeed);
                 //we will uncomment whichever we are using backwards later
             timeTracker.start();
-            while (leftFlywheelMotor.getVelocity() < desiredVelocity && rightFlywheelMotor.getVelocity() < desiredVelocity){
-                //this is waiting for the motors to get to speed before we can retract the solenoid
+            if (leftFlywheelMotor.getVelocity() >= desiredVelocity && rightFlywheelMotor.getVelocity() >= desiredVelocity){
+                ballLatch.setValue(false);
             }
-            ballLatch.setValue(false);
-            Timer.delay(0.5);
-            ballLatch.setValue(true);
-            timeTracker.stop();
-                //this whole text wall is so we can retract the solenoid, wait so we do not crush the balls being shot, then reactivate te solenoid
-            state = "void";
-                //resets state to neutral
+            //the ballLatch will return to true when the trigger is released
         }
     }
 
     @Override
     public void inputUpdate(Input source) {
         if (source == fireTrigger){
-            state = "triggerPressed";
             if (fireTrigger.getValue() >= 0.5){
                 state = "goodToGo";
                 //the ball is ready to be shot
