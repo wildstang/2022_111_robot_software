@@ -92,7 +92,7 @@ public class HoodManager implements Subsystem{
         if (State == "Auto" && AutoAim.getValue() > 0.75){
             //intregrate jonahs stuff
             Double HoodAngle = (Double) Aim.getAngle();
-            HoodMotor.setPosition(HoodAngle*angleToEncoder); //angle value to encoder
+            HoodMotor.setPosition(HoodAngle*angleToEncoder);
         }
         if (State == "P1"){
             HoodMotor.setPosition(PresetIndex[0]);
@@ -106,8 +106,8 @@ public class HoodManager implements Subsystem{
         if (State == "P4"){
             HoodMotor.setPosition(PresetIndex[3]);
         }
-        if (State == "Nutural"){ //requires buttons to be held down for it to move
-            
+        if (State == "Nutural"){ 
+            HoodMotor.stop();
         }
     }
     
@@ -131,7 +131,7 @@ public class HoodManager implements Subsystem{
         } 
         //manual controls
         else if(source == HoodMovement){
-            State = "Manual"; // make sure
+            State = "Manual"; 
         } 
         else{
             State = "Nutural";
