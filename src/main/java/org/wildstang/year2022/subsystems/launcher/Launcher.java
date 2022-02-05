@@ -11,23 +11,30 @@ import org.wildstang.hardware.roborio.inputs.WsAnalogInput;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 
+import edu.wpi.first.wpilibj.Timer;
+
+
 public final class Launcher implements Subsystem{
 
-    private AnalogInput FIRE_TRIGGER;
+    private AnalogInput fireTrigger;
 
     private WsSparkMax leftFlywheelMotor, rightFlywheelMotor, kickerMotor;
 
     private WsSolenoid ballLatch;
 
-    private double speed, kickerSpeed;
-
     private String state;
 
-    private double maxSpeed = 342.0;
-    //This is the max speed a motor can go without burning out. 342.0 is a placeholder
+    //timer
+    private Timer timeTracker;
 
-    private int reverseVariable = -1;
-    //We don't know which motor is going to be in the negative direction, so we will worry about this later
+    //speeds
+    private double speed, kickerSpeed;
+
+    private double desiredVelocity;
+    //the desired velocity of a motor. Will have a value identifier later
+
+    private final double maxSpeed = 1;
+    //This is the max speed a motor can go without burning out.
 
     @Override
     public void init() {
@@ -37,33 +44,40 @@ public final class Launcher implements Subsystem{
 
         ballLatch = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
 
-        FIRE_TRIGGER = (WsAnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_TRIGGER);
+     fireTrigger = (WsAnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_TRIGGER);
         resetState();
     }
 
     @Override
     public void update(){
-        if (state == "Primed"){
-            if(FIRE_TRIGGER.getValue() >= 0.5){
-                leftFlywheelMotor.setValue((speed / maxSpeed)/* * reverseVariable*/);
-                rightFlywheelMotor.setValue((speed / maxSpeed)/* * reverseVariable*/);
-                    //we will uncomment whichever we are using backwards later
-                try {
-                    Thread.sleep(3000/*startup delay */);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();;
-                }
-                ballLatch.setValue(false);
+        if (state == "goodToGo"){
+            leftFlywheelMotor.setValue(maxSpeed);
+            rightFlywheelMotor.setValue(maxSpeed);
+                //we will uncomment whichever we are using backwards later
+            timeTracker.start();
+            while (leftFlywheelMotor.getVelocity() < desiredVelocity && rightFlywheelMotor.getVelocity() < desiredVelocity){
+                //this is waiting for the motors to get to speed before we can retract the solenoid
             }
-        }else{
-            resetState();
+            ballLatch.setValue(false);
+            Timer.delay(0.5);
+            ballLatch.setValue(true);
+            timeTracker.stop();
+                //this whole text wall is so we can retract the solenoid, wait so we do not crush the balls being shot, then reactivate te solenoid
+            state = "void";
+                //resets state to neutral
         }
     }
 
     @Override
     public void inputUpdate(Input source) {
-        if (source == FIRE_TRIGGER){
-            state = "Primed";
+        if (source == fireTrigger){
+            state = "triggerPressed";
+            if (fireTrigger.getValue() >= 0.5){
+                state = "goodToGo";
+                //the ball is ready to be shot
+            }else{
+                resetState();
+            }
         }else{
             resetState();
         }
@@ -76,10 +90,12 @@ public final class Launcher implements Subsystem{
 
     @Override
     public void resetState() {
+        state = "void";
+            //resets state to an unidentifieable string
         speed = 0.0;
         kickerSpeed = maxSpeed;
         ballLatch.setValue(true);
-        kickerMotor.setValue(1);
+        kickerMotor.setValue(kickerSpeed);
     }
 
     @Override
