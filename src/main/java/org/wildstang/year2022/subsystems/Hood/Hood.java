@@ -77,7 +77,6 @@ public class Hood implements Subsystem {
 
     @Override
     public void inputUpdate(Input source) {
-    
     if (source == dpad_Up){
         hood_Position = PRESET1;
     }
@@ -91,13 +90,13 @@ public class Hood implements Subsystem {
         hood_Position = PRESET4;
     }     
     if (left_Trigger.getValue() > 0.5){
-            hood_Position = aim.getAngle() / MAX_ANGLE;
-         }
+        hood_Position = aim.getAngle() / MAX_ANGLE;
+    }
      
-     else if (left_Joystick_y.getValue() > .15 && hood_Position < 1){
-         hood_Position += POSITION_CHANGE;
-     }else if (left_Joystick_y.getValue() < -.15 && hood_Position > 0){
-         hood_Position += POSITION_CHANGE * -1;
+    else if (left_Joystick_y.getValue() > .15 && hood_Position < 1){
+        hood_Position += POSITION_CHANGE;
+    }else if (left_Joystick_y.getValue() < -.15 && hood_Position > 0){
+        hood_Position += POSITION_CHANGE * -1;
      }
      
     }
