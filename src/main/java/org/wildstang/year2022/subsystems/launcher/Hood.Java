@@ -126,7 +126,8 @@ public class Hood implements Subsystem{
 
     public String getName() {
         // TODO Auto-generated method stub
-        return "Launcher";
+        return "Launcher";  
     }
     
 }
+*/

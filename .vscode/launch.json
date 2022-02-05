@@ -8,6 +8,13 @@
       "type": "java",
       "name": "Launch Main",
       "request": "launch",
+      "mainClass": "org.wildstang.year2022.robot.Main",
+      "projectName": "2022_111_robot_software"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
       "mainClass": "org.wildstang.sample.robot.Main",
       "projectName": "2022_111_robot_software"
     },
