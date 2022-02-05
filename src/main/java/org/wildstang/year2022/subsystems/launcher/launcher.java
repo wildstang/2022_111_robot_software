@@ -11,12 +11,12 @@ import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.framework.subsystems.Subsystem;
 
 /**
- * Class:       launcher.java
+ * Class:       Launcher.java
  * Inputs:      1 DigitalInput (Right Trigger)
  * Outputs:     3 Neo 550
  * Description: Right Trigger to Shoot
  */
-public class launcher implements Subsystem {
+public class Launcher implements Subsystem {
 
     // inputs
     private DigitalInput launchButton;
