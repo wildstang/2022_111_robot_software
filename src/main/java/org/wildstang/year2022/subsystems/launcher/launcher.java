@@ -1,15 +1,12 @@
 package org.wildstang.year2022.subsystems.launcher;
 
+
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
-import org.wildstang.framework.io.outputs.DigitalOutput;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 
 import org.wildstang.framework.core.Core;
-import org.wildstang.framework.io.Input;
 import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.framework.subsystems.Subsystem;
 
@@ -17,7 +14,7 @@ import org.wildstang.framework.subsystems.Subsystem;
  * Class:       launcher.java
  * Inputs:      1 DigitalInput (Right Trigger)
  * Outputs:     3 Neo 550
- * Description: Shoot
+ * Description: Right Trigger to Shoot
  */
 public class launcher implements Subsystem {
 
@@ -25,8 +22,8 @@ public class launcher implements Subsystem {
     private DigitalInput launchButton;
 
     // outputs
-    private WsSparkMax motor1;
-    private WsSparkMax motor2;
+    private WsSparkMax kickerMotor;
+    private WsSparkMax flywheelMotor;
     private WsSolenoid latch;
 
     // variables
@@ -48,25 +45,25 @@ public class launcher implements Subsystem {
     }
 
     public void initOutputs() {
-        motor1 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER1);
-        motor2 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.SHOOTER2);
-        latch = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.SHOOTER4);
+        kickerMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.KICKER);
+        flywheelMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.FLYWHEEL);
+        latch = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.BALL_LATCH);
 
     }
 
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
-        motor1.setValue(speed*maxSpeed);
-        if(motor2.getVelocity()< outputVelocityThresholdPercent*maxOutputVelocity) {
-            motor2.setValue(maxSpeed);
+        kickerMotor.setValue(speed*maxSpeed);
+        if(flywheelMotor.getVelocity()< outputVelocityThresholdPercent*maxOutputVelocity) {
+            flywheelMotor.setValue(maxSpeed);
         }
         else {
-            motor2.setValue(outputVelocityThresholdPercent*maxSpeed);
+            flywheelMotor.setValue(outputVelocityThresholdPercent*maxSpeed);
         }
     }
 
     // respond to input updates
-    public void inputUpdate(Input signal) {
+    public void inputUpdate(org.wildstang.framework.io.inputs.Input signal) {
         if (signal == launchButton){
             if (launchButton.getValue()){
                 latch.setValue(false);
@@ -101,9 +98,11 @@ public class launcher implements Subsystem {
         return "Launcher";
     }
 
-	@Override
-	public void inputUpdate(org.wildstang.framework.io.inputs.Input source) {
-		// TODO Auto-generated method stub
-		
-	}
+   
+
+ 
+
+    
+
+
 }
