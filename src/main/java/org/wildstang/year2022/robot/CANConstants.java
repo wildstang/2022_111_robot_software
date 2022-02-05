@@ -36,6 +36,8 @@ public final class CANConstants {
     public static final int HOOD = 25;
     public static final int CLIMBER = 26;
     public static final int CLIMBER_FOLLOWER = 27;
+    public static final int CLIMB_RIGHT_SOLENOID = 3;
+    public static final int CLIMB_LEFT_SOLENOID = 4;
     
     
 }

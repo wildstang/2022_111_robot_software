@@ -12,6 +12,8 @@ import org.wildstang.hardware.roborio.outputs.config.WsPhoenixFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSolenoidConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsDoubleSolenoidConfig;
+import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoidState;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -41,6 +43,10 @@ public enum WSOutputs implements Outputs {
     ANGLE4("Module 4 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE4, true)),
     
 
+    RIGHT_CLIMB("Right Climb Motor", new WsSparkMaxConfig(CANConstants.CLIMBER, true)),
+    LEFT_CLIMB("Climb Motor Follower",new WsSparkMaxFollowerConfig("Right Climb Motor", CANConstants.CLIMBER_FOLLOWER, true, true)),
+  
+
     // ---------------------------------
     // Servos
     // ---------------------------------
@@ -57,6 +63,8 @@ public enum WSOutputs implements Outputs {
 
     TEST_SOLENOID("Test Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 0, false)),
     
+    CLIMB_RIGHT_SOLENOID("Right Climb Solenoid", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH,1,2,WsDoubleSolenoidState.FORWARD)),
+    CLIMB_LEFT_SOLENOID("Left Climb Solenoid", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH,1,2,WsDoubleSolenoidState.FORWARD)),    
     // ********************************
     // Relays
     // ********************************
