@@ -101,7 +101,7 @@ public class ClimbMotion {
         climberSpeed = constant.DEPLOY_PERCENT_SPEED; 
     }
     public void Retract(){
-        climberSpeed = -1;
+        climberSpeed = -constant.RETRACT_PERCENT_SPEED;
     }
     public void Tilt(){
         IsRotated = true;
