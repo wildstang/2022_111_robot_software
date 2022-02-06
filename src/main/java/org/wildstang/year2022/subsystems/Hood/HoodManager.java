@@ -3,7 +3,6 @@ import org.wildstang.framework.core.Core;
 import org.wildstang.framework.subsystems.SubsystemManager;
 import org.wildstang.hardware.roborio.inputs.WsAnalogInput;
 import org.wildstang.hardware.roborio.inputs.WsDigitalInput;
-import org.wildstang.hardware.roborio.inputs.WsAbsoluteEncoder;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
@@ -11,6 +10,7 @@ import org.wildstang.hardware.roborio.inputs.WsJoystickAxis;
 import org.wildstang.framework.subsystems.Subsystem;
 import org.wildstang.framework.io.inputs.Input;
 import java.util.Arrays;
+import com.revrobotics.SparkMaxAnalogSensor.Mode;
 
 
 //Goals bind controls to the asigned buttons. refrence aim helper 
@@ -22,7 +22,6 @@ public class HoodManager implements Subsystem{
     private LimeConsts LC;
     private AimHelper Aim;
 
-    private WsAbsoluteEncoder trueEncoder;
     //presets
     private WsDigitalInput Preset1;
     private WsDigitalInput Preset2;
@@ -37,8 +36,9 @@ public class HoodManager implements Subsystem{
     private int[] PresetIndex = {0,0,0,0};
     private double angleToEncoder;
     private double AbsoluteToMotor;
-    private double maxDegrees;
     private String State;
+    private double upperBound;
+    private double lowerbound;
     
     //set inputs
 
@@ -67,7 +67,8 @@ public class HoodManager implements Subsystem{
         HoodMoveSpeed = 10; //positive is up
         angleToEncoder = 1; //number of encoder angle values per degrees
         AbsoluteToMotor = 10; // (Ea/MaxGa)
-        maxDegrees = 45;
+        upperBound = 100;
+        lowerbound = 0;
 
         //motors also an encoder
         
@@ -80,16 +81,16 @@ public class HoodManager implements Subsystem{
     @Override
     public void update() {
         if (State == "Manual"){ 
-            if (HoodMovement.getValue() >0.75) {
+            if (HoodMovement.getValue() >0.75 && HoodMotor.getValue() <= upperBound) {
                 HoodMotor.setSpeed(HoodMoveSpeed);
             }
-            else if (HoodMovement.getValue() < -0.75){
+            else if (HoodMovement.getValue() < -0.75 && HoodMotor.getValue() >= lowerbound){
                 HoodMotor.setSpeed(-HoodMoveSpeed);
             }else {
                 HoodMotor.stop();
             }
         }
-        if (State == "Auto" && AutoAim.getValue() > 0.75){
+        if (State == "Auto"){
             //intregrate jonahs stuff
             Double HoodAngle = (Double) Aim.getAngle();
             HoodMotor.setPosition(HoodAngle*angleToEncoder);
@@ -113,24 +114,24 @@ public class HoodManager implements Subsystem{
     
     @Override
     public void inputUpdate(Input source) {
-        if(source == AutoAim){
+        if(source == AutoAim && AutoAim.getValue() > 0.75){
             State = "Auto";
         }
         //preset stuff
-        else if (source == Preset1){
+        else if (source == Preset1 && Preset1.getValue()){ //digital inputs come in true or false only
             State = "P1";
         }
-        else if (source == Preset2){
+        else if (source == Preset2 && Preset2.getValue()){
             State = "P2";
         }
-        else if (source == Preset3){
+        else if (source == Preset3 && Preset3.getValue()){
             State = "P3";
         }
-        else if (source == Preset4){
+        else if (source == Preset4 && Preset4.getValue()){
             State = "P4";
         } 
         //manual controls
-        else if(source == HoodMovement){
+        else if(source == HoodMovement && Math.abs(HoodMovement.getValue()) > 0.75){
             State = "Manual"; 
         } 
         else{
@@ -147,7 +148,7 @@ public class HoodManager implements Subsystem{
     public void resetState() {
         HoodMotor.setSpeed(0.0);
         HoodMotor.resetEncoder();
-        HoodMotor.setValue(trueEncoder.getValue() - (AbsoluteToMotor*maxDegrees));//encoder to neo encoder calc (encoder - (Ea/MaxGa)*range)
+        HoodMotor.setValue(HoodMotor.getController().getAnalog(Mode.kAbsolute).getVoltage()*AbsoluteToMotor);// a number from 0.0 - 3.3 to angle 0-maxdeg
     }
 
     @Override
