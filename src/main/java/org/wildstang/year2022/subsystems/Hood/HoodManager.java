@@ -131,7 +131,7 @@ public class HoodManager implements Subsystem{
             State = "P4";
         } 
         //manual controls
-        else if(source == HoodMovement && Math.abs(HoodMovement.getValue()) > 0.75){
+        else if(source == HoodMovement && Math.abs(HoodMovement.getValue()) > 0.75){ // to get both the positive and negitive bounds in one command
             State = "Manual"; 
         } 
         else{
@@ -146,7 +146,7 @@ public class HoodManager implements Subsystem{
 
     @Override
     public void resetState() {
-        HoodMotor.setSpeed(0.0);
+        HoodMotor.stop();
         HoodMotor.resetEncoder();
         HoodMotor.setValue(HoodMotor.getController().getAnalog(Mode.kAbsolute).getVoltage()*AbsoluteToMotor);// a number from 0.0 - 3.3 to angle 0-maxdeg
     }
@@ -154,5 +154,19 @@ public class HoodManager implements Subsystem{
     @Override
     public String getName() {
         return "HoodManager";
+    }
+
+    /**
+     * Moves hood to requested position.
+     * @param Pos Target position to get to
+     */
+    public void MoveHoodTo(double Pos){
+        if (Pos > upperBound){ //just in case someone puts 999999999999999999999999999999999999 in there things dont break to badly
+            HoodMotor.setPosition(upperBound);
+        }else if (Pos < lowerbound){
+            HoodMotor.setPosition(lowerbound);
+        }else{
+            HoodMotor.setPosition(Pos);
+        }
     }
 }
