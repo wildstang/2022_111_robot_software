@@ -16,6 +16,9 @@ import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.*;
@@ -26,25 +29,32 @@ public class Shooter implements Subsystem{
         private AnalogInput ShootInput;
 
         private WsSparkMax shooterMotorOne;
-        private WsSparkMax shooterMotorTwo;
         private WsSparkMax kickerMotor;
 
         private WsSolenoid SolenoidOpener;
 
     //Variables defining shooter speed -- percent output
-        public static final double SAFE_SHOOTER_SPEED = .6;
-            public static final double SAFE_SHOOTER_SPEED_RPM = 3;
-        public static final double POINT_BLANK_SHOOTER_SPEED = .8;
-            public static final double POINT_BLANK_SHOOTER_SPEED_RPM = 4;
-        public static final double AIM_MODE_SHOOTER_SPEED = 1;
-            public static final double AIM_MODE_SHOOTER_SPEED_RPM = 5;
-        public static final double IDLE_SPEED = 0.6;
-            public static final double IDLE_SPEED_RPM = 3;
+    public enum SHOOTER_MODES{
+        SAFE_SHOOTER (.5,3),
+        POINT_BLANK (.8,4),
+        AIM_MODE(1,5),
+        IDLE_SPEED(.5,3);
+
+        private final double SPEED;
+        private final double RPM;
+
+        SHOOTER_MODES(double SPEED, double RPM) {
+            this.SPEED = SPEED;
+            this.RPM = RPM;
+        }
+        private double getSpeed(){ return SPEED;}
+        private double getRPM(){return RPM;}
+        }
+        public SHOOTER_MODES currentMode;
 
     //Is Shooter On?
         private Timer ShooterTime;
         public Boolean ShooterOn;
-        public String ShooterMode = "IDLE";
         protected final double delay = 0;
 
     //Override Speeds
@@ -56,10 +66,19 @@ public class Shooter implements Subsystem{
     //What Mode Are We In?
         public enum driveType {TELEOP, AUTO, CROSS};
         public driveType driveState;
-        
+            
     //For SmartDashboard
+        ShuffleboardTab OVERRIDE_TURRET = Shuffleboard.getTab("OVERRIDE_TURRET");
+        
+        NetworkTableEntry SmartDashboardOverride = OVERRIDE_TURRET.add("Turn On Override?",boolean SmartDashboardOverride_Val);
+            SmartDashboardOverride.setBoolean(false);
+        NetworkTableEntry SmartDashboardShooter = OVERRIDE_TURRET.add ("Shooter (RPM)",double SmartDashboardShooter_Val);
+            SmartDashboardShooter.setDouble(0);
+        NetworkTableEntry SmartDashboardKicker = OVERRIDE_TURRET.add ("Kicker (RPM)",double SmartDashboardKicker_Val);
+            SmartDashboardKicker.setDouble(0);
+        NetworkTableEntry SmartDashboardSolenoid = OVERRIDE_TURRET.add ("Solenoid (ON)", boolean SmartDashboardSolenoid_Val);
+            SmartDashboardSolenoid.setBoolean(false);
 
-    
     public void inputUpdate(Input source) {
         if (source == ShootInput){
             if (ShootInput.getValue() >.5 ) {
@@ -95,6 +114,13 @@ public class Shooter implements Subsystem{
         SmartDashboard.putNumber("Kicker Speed (RPM)", kickerMotor.getVelocity());
         SmartDashboard.putBoolean("SolenoidOpener On (Bool)", SolenoidOpener.getValue());
         
+        if (SmartDashboardOverride.getBoolean(SmartDashboardOverride_Val)){
+            ShooterOverride = true;
+        }
+        else{
+            ShooterOverride = false;
+        }
+
         if (ShooterTime.get() < 1){
             ShooterOn = true;
         }
@@ -103,31 +129,12 @@ public class Shooter implements Subsystem{
         }
         
         if (ShooterOn == true && ShooterOverride == false){
-            kickerMotor.setSpeed(1);
-            SolenoidOpener.setValue(true);
+            double DESIRED_RPM;
+            double DESIRED_SPEED;
 
-            switch(ShooterMode){
-                case "IDLE":
-                    if (IDLE_SPEED_RPM > shooterMotorOne.getVelocity()){
-                        shooterMotorOne.setSpeed(IDLE_SPEED);
-                    }
-                    break;  
-                case "AIM_MODE": 
-                    if (AIM_MODE_SHOOTER_SPEED_RPM > shooterMotorOne.getVelocity()){
-                        shooterMotorOne.setSpeed(AIM_MODE_SHOOTER_SPEED);
-                    }
-                    break;
-                case "POINT_BLANK": 
-                    if (POINT_BLANK_SHOOTER_SPEED_RPM > shooterMotorOne.getVelocity()){
-                        shooterMotorOne.setSpeed(POINT_BLANK_SHOOTER_SPEED);
-                    }
-                    break;
-                case "SAFE_SHOOTER": 
-                    if (SAFE_SHOOTER_SPEED_RPM > shooterMotorOne.getVelocity()){
-                        shooterMotorOne.setSpeed(SAFE_SHOOTER_SPEED);
-                    }
-                    break;
-            }
+            DESIRED_RPM = currentMode.getRPM();
+            DESIRED_SPEED = currentMode.getSpeed();
+            //currentMode = SHOOTER_MODES.SAFE_SHOOTER;
         }
         else{
             if (ShooterOverride != true){
@@ -136,9 +143,9 @@ public class Shooter implements Subsystem{
                 kickerMotor.setSpeed(.5);
                 SolenoidOpener.setValue(false);
             }
-            shooterMotorOne.setSpeed(SHOOTER_OVERRIDE_SPEED);
-            kickerMotor.setSpeed(KICKER_OVERRIDE_SPEED);
-            SolenoidOpener.setValue(SOLENOID_OVERRIDE);
+            shooterMotorOne.setSpeed(SmartDashboardShooter.getDouble(SmartDashboardShooter_Val));
+            kickerMotor.setSpeed(SmartDashboardKicker.getDouble(SmartDashboardKicker_Val));
+            SolenoidOpener.setValue(SmartDashboardSolenoid.getBoolean(SmartDashboardSolenoid_Val));
         }   
     }
     
