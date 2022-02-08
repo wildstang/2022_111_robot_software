@@ -66,8 +66,7 @@ public class Launcher implements Subsystem {
     public void inputUpdate(org.wildstang.framework.io.inputs.Input signal) {
         if (signal == launchButton){
             if (launchButton.getValue()){
-                latch.setValue(false);
-                speed = 1.0;
+                fire();
                 
             }
             else {
@@ -79,6 +78,10 @@ public class Launcher implements Subsystem {
         }
     }
 
+    public void fire() {
+        latch.setValue(false);
+                speed = 1.0;
+    }
     // used for testing
     public void selfTest() {}
 
