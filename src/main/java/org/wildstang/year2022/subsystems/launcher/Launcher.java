@@ -90,6 +90,10 @@ public class Launcher implements Subsystem {
         speed = i;
     }
 
+    public void setVelocity(double velocity) {
+        outputVelocityThresholdPercent = (velocity/maxOutputVelocity)
+    }
+
     // resets all variables to the default state
     public void resetState() {
         speed = 0.0;
