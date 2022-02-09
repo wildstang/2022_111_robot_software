@@ -12,6 +12,7 @@ import org.wildstang.year2022.robot.WSOutputs;
 
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.subsystems.Hood.AimHelper;
+import com.revrobotics.SparkMaxAnalogSensor.Mode;
 
 /**
  * Hood system
@@ -33,7 +34,9 @@ public class Hood implements Subsystem {
 
     double hood_position;
     double range_constant;
-    
+    double offset;
+
+    final double zero_position = .5; // to be changed
     final double preset1 = 1;
     final double preset2 = .75;
     final double preset3 = .5;
@@ -60,12 +63,17 @@ public class Hood implements Subsystem {
         dpad_right.addInputListener(this);
         aim = new AimHelper();
         resetState();
+        
     }
 
     @Override
     public void update() {
-        hood_motor.setPosition(hood_position * range_constant);
+        hood_motor.setPosition(hood_position * range_constant + offset);
     }
+// zero = .5
+// at 0 = .6
+// offset = -.1
+// 0 + -.1 = .5
 
     @Override
     public void inputUpdate(Input source) {
@@ -94,14 +102,21 @@ public class Hood implements Subsystem {
      
     }
 
+    public double offset_from_initial(WsSparkMax motor,double initial){
+        return initial - motor.getController().getAnalog(Mode.kAbsolute).getVoltage() / 3.3;
+    }
+
     @Override
     public void selfTest() {
 
     }
 
+
     @Override
     public void resetState() {
         hood_position = 0.0;
+        hood_motor.resetEncoder();
+        offset = offset_from_initial(hood_motor,zero_position);
         range_constant = max_angle / 360.0;
     }
 
