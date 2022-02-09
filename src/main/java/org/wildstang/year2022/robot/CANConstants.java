@@ -37,8 +37,4 @@ public final class CANConstants {
     public static final int CLIMBER = 26;
     public static final int CLIMBER_FOLLOWER = 27;
     
-    public static final int LAUNCHER1 = -0;
-    public static final int LAUNCHER2 = -1;
-    public static final int KICKER = 1;
-    
 }
