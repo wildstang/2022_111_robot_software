@@ -13,39 +13,54 @@ import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.robot.WSOutputs;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.wildstang.year2022.robot.WSInputs;
 
 public class Tester implements Subsystem{
 
-    //a runs feed forward, y runs it backwards, x and b increase/decrease flywheel speed
+    //a toggles intake forward, y toggles feed, x and b increase/decrease flywheel speed
     //RT runs the flywheel and its solenoid, left and right bumper move the hood
     //start switches the kicker from mirroring the flywheel and just 100%, select toggles tilt solenoids
     private DigitalInput aButton, xButton, yButton, bButton, leftbumper, rightBumper, startButton, selectButton;
     private AnalogInput rightTrigger;
     
-    private WsSparkMax feedMotor, launcherMotor, kickerMotor, hoodMotor;
-    private WsSolenoid launcherSolenoid;
+    private WsSparkMax feedMotor, launcherMotor, kickerMotor, hoodMotor, intakeMotor;
+    private WsSolenoid launcherSolenoid, intakeSolenoid;
     private WsDoubleSolenoid tiltSolenoid1, tiltSolenoid2;
 
-    private double feedSpeed, launcherSpeed, kickerSpeed, hoodSpeed;
+    private double feedSpeed, launcherSpeed, kickerSpeed, hoodSpeed, intakeSpeed;
     private double modifier;
-    private boolean kickerState, launcherSolenoidState, tiltState;
+    private boolean kickerState, launcherSolenoidState, intakeSolenoidState, tiltState;
 
     private final double LAUNCHER_INITIAL = 0.7;
+    private final double modifyAmount = 0.02;
+    private final double feedMaxSpeed = 1.0;
+    private final double intakeMaxSpeed = 1.0;
+    private final double hoodMaxSpeed = 0.2;
 
 
     @Override
     public void inputUpdate(Input source) {
-        if (aButton.getValue()){
-            feedSpeed = 1.0;
-        } else if (yButton.getValue()){
-            feedSpeed = -0.5;
-        } else {
+        if (aButton.getValue() && source == aButton){
+            intakeSpeed = intakeMaxSpeed;
+            intakeSolenoidState = false;
+        } else if (source == aButton && !aButton.getValue()) {
+            intakeSpeed = 0;
+            intakeSolenoidState = false;
+        }
+
+        if (yButton.getValue() && source == yButton){
+            feedSpeed = feedMaxSpeed;
+        } else if (yButton.getValue() && source == yButton){
             feedSpeed = 0;
         }
+        
+
         if (source == startButton && startButton.getValue()) kickerState = !kickerState;
 
         if (Math.abs(rightTrigger.getValue()) > 0.5){
@@ -58,24 +73,23 @@ public class Tester implements Subsystem{
             kickerSpeed = 0;
         }
         if (source == xButton && xButton.getValue()){
-            modifier += 0.02;
+            modifier += modifyAmount;
         }
         if (source == bButton && bButton.getValue()){
-            modifier -= 0.02;
+            modifier -= modifyAmount;
         }
 
         if (rightBumper.getValue()){
-            hoodSpeed = 0.2;
+            hoodSpeed = hoodMaxSpeed;
         } else if (leftbumper.getValue()){
-            hoodSpeed = -0.2;
+            hoodSpeed = -hoodMaxSpeed;
         } else {
             hoodSpeed = 0;
         }
 
         if (source == selectButton && selectButton.getValue()){
             tiltState = !tiltState;
-        }
-        
+        }  
     }
 
     @Override
@@ -103,22 +117,23 @@ public class Tester implements Subsystem{
         launcherMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER);    
         kickerMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.KICKER); 
         hoodMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
+        intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.INTAKE);
         feedMotor.setCurrentLimit(25, 25, 0);
         launcherMotor.setCurrentLimit(50, 50, 0);
         kickerMotor.setCurrentLimit(25, 25, 0);
         hoodMotor.setCurrentLimit(25, 25, 0);
+        intakeMotor.setCurrentLimit(25, 25, 0);
 
         launcherSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
         tiltSolenoid1 = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_1);
         tiltSolenoid2 = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_2);
+        intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_SOLENOID);
 
         resetState();
     }
 
     @Override
     public void selfTest() {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
@@ -127,6 +142,7 @@ public class Tester implements Subsystem{
         feedMotor.setSpeed(feedSpeed);
         kickerMotor.setSpeed(kickerSpeed);
         hoodMotor.setSpeed(hoodSpeed);
+        intakeMotor.setSpeed(intakeSpeed);
 
         launcherSolenoid.setValue(launcherSolenoidState);
         if (tiltState){
@@ -151,7 +167,9 @@ public class Tester implements Subsystem{
         launcherSpeed = 0;
         modifier = 0;
         hoodSpeed = 0;
+        intakeSpeed = 0;
         kickerState = true;
+        intakeSolenoidState = false;
         launcherSolenoidState = true;
         tiltState = true;
     }
@@ -160,5 +178,4 @@ public class Tester implements Subsystem{
     public String getName() {
         return "Tester";
     }
-    
 }

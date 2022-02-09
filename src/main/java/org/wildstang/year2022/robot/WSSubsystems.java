@@ -12,7 +12,7 @@ public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
     SWERVE_DRIVE("Swerve Drive", SwerveDrive.class),
-    //TESTER("Tester", Tester.class)
+    TESTER("Tester", Tester.class)
     ;
 
     /**
