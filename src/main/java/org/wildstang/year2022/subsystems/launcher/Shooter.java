@@ -1,5 +1,7 @@
 package org.wildstang.year2022.subsystems.launcher;
 
+import javax.lang.model.util.ElementScanner14;
+
 import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -136,9 +138,11 @@ public class Shooter implements Subsystem{
                 kickerMotor.setSpeed(.5);
                 SolenoidOpener.setValue(false);
             }
-            shooterMotorOne.setSpeed(SmartDashboardShooter.getDouble(0));
-            kickerMotor.setSpeed(SmartDashboardKicker.getDouble(0));
-            SolenoidOpener.setValue(SmartDashboardSolenoid.getBoolean(false));
+            else{
+                shooterMotorOne.setSpeed(SmartDashboardShooter.getDouble(0));
+                kickerMotor.setSpeed(SmartDashboardKicker.getDouble(0));
+                SolenoidOpener.setValue(SmartDashboardSolenoid.getBoolean(false));
+            }
         }   
     }
     
