@@ -71,13 +71,9 @@ public class Shooter implements Subsystem{
         ShuffleboardTab OVERRIDE_TURRET = Shuffleboard.getTab("OVERRIDE_TURRET");
 
         NetworkTableEntry SmartDashboardOverride = OVERRIDE_TURRET.add("Turn On Override?", false).getEntry();
-            SmartDashboardOverride.setBoolean(false);
         NetworkTableEntry SmartDashboardShooter = OVERRIDE_TURRET.add ("Shooter (RPM)", 0).getEntry();
-            SmartDashboardShooter.setDouble(0);
         NetworkTableEntry SmartDashboardKicker = OVERRIDE_TURRET.add ("Kicker (RPM)", 0).getEntry();
-            SmartDashboardKicker.setDouble(0);
         NetworkTableEntry SmartDashboardSolenoid = OVERRIDE_TURRET.add ("Solenoid (ON)", false).getEntry();
-            SmartDashboardSolenoid.setBoolean(false);
 
     public void inputUpdate(Input source) {
         if (source == ShootInput){
@@ -114,7 +110,7 @@ public class Shooter implements Subsystem{
         SmartDashboard.putNumber("Kicker Speed (RPM)", kickerMotor.getVelocity());
         SmartDashboard.putBoolean("SolenoidOpener On (Bool)", SolenoidOpener.getValue());
         
-        if (SmartDashboardOverride.getBoolean(SmartDashboardOverride)){
+        if (SmartDashboardOverride.getBoolean(false)){
             ShooterOverride = true;
         }
         else{
@@ -129,23 +125,22 @@ public class Shooter implements Subsystem{
         }
         
         if (ShooterOn == true && ShooterOverride == false){
-            double DESIRED_RPM;
-            double DESIRED_SPEED;
-
-            DESIRED_RPM = currentMode.getRPM();
-            DESIRED_SPEED = currentMode.getSpeed();
-            //currentMode = SHOOTER_MODES.SAFE_SHOOTER;
+            if (shooterMotorOne.getVelocity()<currentMode.getRPM()){
+                shooterMotorOne.setSpeed(currentMode.getSpeed());
+            }
+            kickerMotor.setSpeed(1);
+            SolenoidOpener.setValue(true);
         }
         else{
             if (ShooterOverride != true){
                 //IDLE Shooter
-                shooterMotorOne.setSpeed(IDLE_SPEED);
+                shooterMotorOne.setSpeed(SHOOTER_MODES.IDLE_SPEED.getSpeed());
                 kickerMotor.setSpeed(.5);
                 SolenoidOpener.setValue(false);
             }
-            shooterMotorOne.setSpeed(SmartDashboardShooter.getDouble(SmartDashboardShooter_Val));
-            kickerMotor.setSpeed(SmartDashboardKicker.getDouble(SmartDashboardKicker_Val));
-            SolenoidOpener.setValue(SmartDashboardSolenoid.getBoolean(SmartDashboardSolenoid_Val));
+            shooterMotorOne.setSpeed(SmartDashboardShooter.getDouble(0));
+            kickerMotor.setSpeed(SmartDashboardKicker.getDouble(0));
+            SolenoidOpener.setValue(SmartDashboardSolenoid.getBoolean(false));
         }   
     }
     
