@@ -1,7 +1,5 @@
 package org.wildstang.year2022.subsystems.launcher;
 
-import javax.lang.model.util.ElementScanner14;
-
 import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
 
