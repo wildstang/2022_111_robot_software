@@ -69,14 +69,14 @@ public class Shooter implements Subsystem{
             
     //For SmartDashboard
         ShuffleboardTab OVERRIDE_TURRET = Shuffleboard.getTab("OVERRIDE_TURRET");
-        
-        NetworkTableEntry SmartDashboardOverride = OVERRIDE_TURRET.add("Turn On Override?",boolean SmartDashboardOverride_Val);
+
+        NetworkTableEntry SmartDashboardOverride = OVERRIDE_TURRET.add("Turn On Override?", false).getEntry();
             SmartDashboardOverride.setBoolean(false);
-        NetworkTableEntry SmartDashboardShooter = OVERRIDE_TURRET.add ("Shooter (RPM)",double SmartDashboardShooter_Val);
+        NetworkTableEntry SmartDashboardShooter = OVERRIDE_TURRET.add ("Shooter (RPM)", 0).getEntry();
             SmartDashboardShooter.setDouble(0);
-        NetworkTableEntry SmartDashboardKicker = OVERRIDE_TURRET.add ("Kicker (RPM)",double SmartDashboardKicker_Val);
+        NetworkTableEntry SmartDashboardKicker = OVERRIDE_TURRET.add ("Kicker (RPM)", 0).getEntry();
             SmartDashboardKicker.setDouble(0);
-        NetworkTableEntry SmartDashboardSolenoid = OVERRIDE_TURRET.add ("Solenoid (ON)", boolean SmartDashboardSolenoid_Val);
+        NetworkTableEntry SmartDashboardSolenoid = OVERRIDE_TURRET.add ("Solenoid (ON)", false).getEntry();
             SmartDashboardSolenoid.setBoolean(false);
 
     public void inputUpdate(Input source) {
@@ -114,7 +114,7 @@ public class Shooter implements Subsystem{
         SmartDashboard.putNumber("Kicker Speed (RPM)", kickerMotor.getVelocity());
         SmartDashboard.putBoolean("SolenoidOpener On (Bool)", SolenoidOpener.getValue());
         
-        if (SmartDashboardOverride.getBoolean(SmartDashboardOverride_Val)){
+        if (SmartDashboardOverride.getBoolean(SmartDashboardOverride)){
             ShooterOverride = true;
         }
         else{
