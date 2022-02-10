@@ -4,7 +4,10 @@ import org.wildstang.framework.auto.AutoStep;
 import org.wildstang.framework.core.Core;
 import org.wildstang.year2022.robot.WSSubsystems;
 import org.wildstang.year2022.subsystems.launcher.Launcher;
-
+/**
+ * Auto step that fires the launcher.
+ * @author John
+ */
 public class AutoFire extends AutoStep {
     private Launcher launcher;
 

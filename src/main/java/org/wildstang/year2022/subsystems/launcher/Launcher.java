@@ -29,7 +29,7 @@ public class Launcher implements Subsystem {
     // variables
     private double speed = 0.0;
     private double maxSpeed = 1.0;
-    private double maxOutputVelocity = 240.0;
+    public static double maxOutputVelocity = 240.0;
     private double outputVelocityThresholdPercent = 0.7;
     
     // initializes the subsystem
