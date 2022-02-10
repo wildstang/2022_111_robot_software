@@ -65,9 +65,9 @@ public enum WSOutputs implements Outputs {
     // ********************************
 
     //TEST_SOLENOID("Test Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 0, false)),
-    LAUNCHER_SOLENOID("Launcher Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 0, true)),
-    INTAKE_SOLENOID("Intake Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 1, true)),
-    CLIMB_SOLENOID_1("Climb Solenoid 1", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH, 2, 3, WsDoubleSolenoidState.FORWARD)),
+    LAUNCHER_SOLENOID("Launcher Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 3, true)),
+    INTAKE_SOLENOID("Intake Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 2, true)),
+    CLIMB_SOLENOID_1("Climb Solenoid 1", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH, 6, 7, WsDoubleSolenoidState.FORWARD)),
     CLIMB_SOLENOID_2("Climb Solenoid 2", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH, 4, 5, WsDoubleSolenoidState.FORWARD)),
     
     // ********************************
