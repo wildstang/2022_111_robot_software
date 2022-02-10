@@ -12,7 +12,7 @@ public class AutoFlywheelSpeed extends AutoStep {
     private Launcher launcher;
     
     public AutoFlywheelSpeed() {
-        this(org.wildstang.year2022.subsystems.launcher.Launcher.maxOutputVelocity);
+        this(Launcher.outputVelocityThresholdPercent*Launcher.maxOutputVelocity);
     }
 
     public AutoFlywheelSpeed(double velocity) {

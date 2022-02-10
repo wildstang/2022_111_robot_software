@@ -29,8 +29,8 @@ public class Launcher implements Subsystem {
     // variables
     private double speed = 0.0;
     private double maxSpeed = 1.0;
-    public static double maxOutputVelocity = 240.0;
-    private double outputVelocityThresholdPercent = 0.7;
+    public static final double maxOutputVelocity = 240.0;
+    public static double outputVelocityThresholdPercent = 0.7;
     
     // initializes the subsystem
     public void init() {
@@ -53,12 +53,12 @@ public class Launcher implements Subsystem {
 
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
-        kickerMotor.setValue(speed*maxSpeed);
+        kickerMotor.setSpeed(speed*maxSpeed);
         if(flywheelMotor.getVelocity()< outputVelocityThresholdPercent*maxOutputVelocity) {
-            flywheelMotor.setValue(maxSpeed);
+            flywheelMotor.setSpeed(maxSpeed);
         }
         else {
-            flywheelMotor.setValue(outputVelocityThresholdPercent*maxSpeed);
+            flywheelMotor.setSpeed(outputVelocityThresholdPercent*maxSpeed);
         }
     }
 
@@ -90,6 +90,7 @@ public class Launcher implements Subsystem {
         speed = i;
     }
 
+    // sets the desired velocity for the flywheel
     public void setVelocity(double velocity) {
         outputVelocityThresholdPercent = (velocity/maxOutputVelocity);
     }
