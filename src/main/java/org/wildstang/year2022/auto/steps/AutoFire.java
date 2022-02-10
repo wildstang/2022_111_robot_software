@@ -31,6 +31,6 @@ public class AutoFire extends AutoStep {
     }
     
     public String toString() {
-        return "AutoFire";
+        return "Fire";
     }
 }

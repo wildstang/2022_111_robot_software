@@ -27,6 +27,6 @@ public class AutoFlywheelSpeed extends AutoStep {
     }
     
     public String toString() {
-        return "AutoFlywheelSpeed";
+        return "Flywheel Speed";
     }
 }
