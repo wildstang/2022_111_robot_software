@@ -150,6 +150,9 @@ public class BallpathSubsystem_V2 implements Subsystem{
     public void intakeDeploy(){
         intakeSolenoidValue = true;
     }
+    public void intakeRetract(){
+        intakeSolenoidValue = false;
+    }
     public void turnOnIntake(){
         intakeMotorSpeed = FULL_SPEED;
     }
