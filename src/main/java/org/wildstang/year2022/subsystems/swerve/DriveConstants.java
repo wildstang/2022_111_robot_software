@@ -15,13 +15,13 @@ public final class DriveConstants {
     /**diameter of drive wheel, in inches */
     public static final double WHEEL_DIAMETER = 4.0;
     /**offset of module 1, the front left module, in degrees */
-    public static final double FRONT_LEFT_OFFSET = -280.98;
+    public static final double FRONT_LEFT_OFFSET = -44.64;//-280.98;
     /**offset of module 2, the front right module, in degrees */
-    public static final double FRONT_RIGHT_OFFSET = -313.59;
+    public static final double FRONT_RIGHT_OFFSET = -139.91;//-313.59;
     /**offset of module 3, the rear left module, in degrees */
-    public static final double REAR_LEFT_OFFSET = -199.95;
+    public static final double REAR_LEFT_OFFSET = -16.61;//-199.95;
     /**offset of module 4, the rear right module, in degrees */
-    public static final double REAR_RIGHT_OFFSET = -52.03;
+    public static final double REAR_RIGHT_OFFSET = -288.19;//-52.03;
     /**deadband of the controller's joysticks */
     public static final double DEADBAND = 0.1;
     /**factor of thrust for the drive trigger */
