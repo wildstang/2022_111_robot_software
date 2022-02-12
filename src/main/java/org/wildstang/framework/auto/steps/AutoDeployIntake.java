@@ -21,17 +21,17 @@ public class AutoDeployIntake extends AutoStep {
         }else{
             intake.resetState();
         }
+        //this if else statement should be in initialize but the build fails any way I do this so it is here instead
     }
 
     @Override
     public void initialize() {
-        // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
+        setFinished(true);
         
     }
 
