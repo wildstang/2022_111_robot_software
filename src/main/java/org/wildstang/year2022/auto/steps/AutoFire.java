@@ -28,6 +28,7 @@ public class AutoFire extends AutoStep {
     }
 
     public void update() {
+        setFinished(true);
     }
     
     public String toString() {
