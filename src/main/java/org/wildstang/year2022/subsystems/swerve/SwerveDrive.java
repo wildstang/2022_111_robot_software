@@ -18,6 +18,7 @@ import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -60,7 +61,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double autoTempX;
     private double autoTempY;
 
-    private final AHRS gyro = new AHRS(I2C.Port.kOnboard);
+    private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
     private SwerveModule[] modules;
     private SwerveSignal swerveSignal;
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
@@ -77,9 +78,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
             driveState = driveType.TELEOP;
         }
         //get x and y speeds
-        xSpeed = -xSpeedLimiter.calculate(leftStickX.getValue());
+        xSpeed = -xSpeedLimiter.calculate(-leftStickX.getValue());
         if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
-        ySpeed = -ySpeedLimiter.calculate(leftStickY.getValue());
+        ySpeed = -ySpeedLimiter.calculate(-leftStickY.getValue());
         if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
         
         if (source == select && select.getValue()) {
@@ -114,7 +115,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
             rotLocked = true;
         }
         //get rotational joystick
-        rotSpeed = -rotSpeedLimiter.calculate(rightStickX.getValue());
+        rotSpeed = rotSpeedLimiter.calculate(rightStickX.getValue());
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         //if the rotational joystick is being used, the robot should not be auto tracking heading
         if (rotSpeed != 0) rotLocked = false;

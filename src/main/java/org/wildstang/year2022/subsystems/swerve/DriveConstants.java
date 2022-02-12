@@ -7,7 +7,7 @@ public final class DriveConstants {
     /** robot width from swerve pod to swerve pod, in inches */
     public static final double ROBOT_WIDTH = 11.5;
     /**speed with which the robot rotates relative to drive speed */
-    public static final double ROTATION_SPEED = 0.4;
+    public static final double ROTATION_SPEED = 1.0;
     /**drive motor gear ratio */
     public static final double DRIVE_RATIO = 6.86;
     /**angle motor gear ratio */

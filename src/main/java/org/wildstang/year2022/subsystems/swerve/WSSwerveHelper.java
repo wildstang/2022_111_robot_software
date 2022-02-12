@@ -47,7 +47,7 @@ public class WSSwerveHelper {
      */
     public SwerveSignal setDrive(double i_tx, double i_ty, double i_rot, double i_gyro){
         //magnitude of rotation vector
-        rotMag = i_rot * DriveConstants.ROTATION_SPEED;
+        rotMag = -i_rot * DriveConstants.ROTATION_SPEED;
         //angle of front left rotation vector
         baseV = Math.atan(DriveConstants.ROBOT_LENGTH / DriveConstants.ROBOT_WIDTH);
 

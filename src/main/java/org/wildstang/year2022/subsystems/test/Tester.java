@@ -36,7 +36,7 @@ public class Tester implements Subsystem{
 
     private double feedSpeed, launcherSpeed, kickerSpeed, hoodSpeed, intakeSpeed, climbSpeed;
     private double modifier;
-    private boolean kickerState, launcherSolenoidState, intakeSolenoidState, tiltState;
+    private boolean launcherSolenoidState, intakeSolenoidState, tiltState;
 
     private final double LAUNCHER_INITIAL = 0.7;
     private final double modifyAmount = 0.02;
@@ -55,17 +55,14 @@ public class Tester implements Subsystem{
             feedSpeed = 0;
         }
 
-        if (source == xButton){
+        if (source == xButton && xButton.getValue()){
             intakeSolenoidState = !intakeSolenoidState;
         }
-        
-
-        if (source == startButton && startButton.getValue()) kickerState = !kickerState;
 
         if (Math.abs(rightTrigger.getValue()) > 0.5){
             launcherSolenoidState = false;
             launcherSpeed = LAUNCHER_INITIAL + modifier;
-            kickerSpeed = kickerState ? LAUNCHER_INITIAL + modifier : 1.0;
+            kickerSpeed = 1.0;
         } else {
             launcherSolenoidState = true;
             launcherSpeed = 0;
@@ -90,7 +87,7 @@ public class Tester implements Subsystem{
             tiltState = !tiltState;
         }  
         if (Math.abs(rightStickY.getValue()) > 0.2){
-            climbSpeed = rightStickY.getValue();
+            climbSpeed = -rightStickY.getValue();
         } else {
             climbSpeed = 0;
         }
@@ -125,12 +122,13 @@ public class Tester implements Subsystem{
         hoodMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
         intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.INTAKE);
         climbMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CLIMB);
-        feedMotor.setCurrentLimit(25, 25, 0);
+        feedMotor.setCurrentLimit(35, 35, 0);
         launcherMotor.setCurrentLimit(50, 50, 0);
-        kickerMotor.setCurrentLimit(25, 25, 0);
+        kickerMotor.setCurrentLimit(30, 30, 0);
         hoodMotor.setCurrentLimit(25, 25, 0);
         intakeMotor.setCurrentLimit(25, 25, 0);
         climbMotor.setCurrentLimit(50, 50, 0);
+        climbMotor.setBrake();
 
         launcherSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
         tiltSolenoid1 = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_1);
@@ -147,15 +145,20 @@ public class Tester implements Subsystem{
     @Override
     public void update() {
         launcherMotor.setSpeed(-launcherSpeed);
-        feedMotor.setSpeed(feedSpeed);
+        feedMotor.setSpeed(-feedSpeed);
         kickerMotor.setSpeed(kickerSpeed);
         hoodMotor.setSpeed(hoodSpeed);
         intakeMotor.setSpeed(intakeSpeed);
-        climbMotor.setSpeed(climbSpeed);
+        if ((climbSpeed > 0 && Math.abs(climbMotor.getPosition()) < 88.5) || (climbSpeed < 0 && Math.abs(climbMotor.getPosition()) >= 0)){
+            climbMotor.setSpeed(climbSpeed);
+        } else {
+            climbMotor.setSpeed(0);
+        }
+        
 
         launcherSolenoid.setValue(launcherSolenoidState);
         intakeSolenoid.setValue(intakeSolenoidState);
-        if (tiltState){
+        if (!tiltState){
             tiltSolenoid1.setValue(WsDoubleSolenoidState.FORWARD.ordinal());
             tiltSolenoid2.setValue(WsDoubleSolenoidState.FORWARD.ordinal());
         } else {
@@ -164,11 +167,16 @@ public class Tester implements Subsystem{
         }
 
         SmartDashboard.putNumber("Flywheel velocity", -launcherMotor.getVelocity());
+        SmartDashboard.putNumber("kicker percent output", kickerSpeed);
+        SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
         SmartDashboard.putNumber("Flywheel percent output", LAUNCHER_INITIAL+modifier);
         SmartDashboard.putNumber("hoodPosition", hoodMotor.getPosition());
         SmartDashboard.putNumber("hood MA3", hoodMotor.getController().getAnalog(Mode.kAbsolute).getVoltage());
-        SmartDashboard.putNumber("Hood MA3 inbuilt position", hoodMotor.getController().getAnalog(Mode.kAbsolute).getPosition());
-        SmartDashboard.putBoolean("is kicker mirroring flywheel", kickerState);
+        SmartDashboard.putNumber("climb encoder value", climbMotor.getPosition());
+        SmartDashboard.putNumber("climb percent output", climbSpeed);
+        SmartDashboard.putBoolean("solenoid launcher", launcherSolenoidState);
+        SmartDashboard.putBoolean("solenoid intake", intakeSolenoidState);
+        SmartDashboard.putBoolean("solenoid tilt", !tiltState);
     }
 
     @Override
@@ -179,7 +187,6 @@ public class Tester implements Subsystem{
         hoodSpeed = 0;
         intakeSpeed = 0;
         climbSpeed = 0;
-        kickerState = true;
         intakeSolenoidState = false;
         launcherSolenoidState = true;
         tiltState = true;
