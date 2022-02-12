@@ -70,7 +70,7 @@ public class Shooter implements Subsystem{
 
         NetworkTableEntry SmartDashboardOverride = OVERRIDE_TURRET.add("Turn On Override?", false).getEntry();
         NetworkTableEntry SmartDashboardShooter = OVERRIDE_TURRET.add ("Shooter (RPM)", 0).getEntry();
-        NetworkTableEntry SmartDashboardKicker = OVERRIDE_TURRET.add ("Kicker (RPM)", 0).getEntry();
+        NetworkTableEntry SmartDashboardKicker = OVERRIDE_TURRET.add ("Kicker (% Volt)", 0).getEntry();
         NetworkTableEntry SmartDashboardSolenoid = OVERRIDE_TURRET.add ("Solenoid (ON)", false).getEntry();
 
     public void inputUpdate(Input source) {
@@ -137,7 +137,9 @@ public class Shooter implements Subsystem{
                 SolenoidOpener.setValue(false);
             }
             else{
-                shooterMotorOne.setSpeed(SmartDashboardShooter.getDouble(0));
+                if (shooterMotorOne.getVelocity()<SmartDashboardShooter.getDouble(0)){
+                    shooterMotorOne.setSpeed(1);
+                }
                 kickerMotor.setSpeed(SmartDashboardKicker.getDouble(0));
                 SolenoidOpener.setValue(SmartDashboardSolenoid.getBoolean(false));
             }
