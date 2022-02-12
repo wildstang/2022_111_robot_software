@@ -46,6 +46,8 @@ public enum WSOutputs implements Outputs {
     FEED("Feed Motor", new WsSparkMaxConfig(CANConstants.FEED, true)),
     KICKER("Kicker Motor", new WsSparkMaxConfig(CANConstants.KICKER, true)),
     HOOD("Hood Motor", new WsSparkMaxConfig(CANConstants.HOOD, true)),
+    CLIMB("Climb Motor", new WsSparkMaxConfig(CANConstants.CLIMBER, true)),
+    CLIMB_FOLLOWER("Climb Follower Motor", new WsSparkMaxFollowerConfig("Climb Motor", CANConstants.CLIMBER_FOLLOWER, true, true)),
     LAUNCHER("Launcher Motor", new WsSparkMaxConfig(CANConstants.SHOOTER, true)),
     LAUNCHER_FOLLOWER("Launcher Follower Motor", new WsSparkMaxFollowerConfig("Launcher Motor",CANConstants.SHOOTER_FOLLOWER, true, true)),
     

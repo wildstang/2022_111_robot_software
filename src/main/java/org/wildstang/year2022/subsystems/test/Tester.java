@@ -26,14 +26,15 @@ public class Tester implements Subsystem{
     //a press runs intake/feed, x toggles intake deploy, y and b increase/decrease flywheel speed
     //RT runs the flywheel and its solenoid, left and right bumper move the hood
     //start switches the kicker from mirroring the flywheel and just 100%, select toggles tilt solenoids
+    //right stick y axis moves the climb up and down, 20% min speed
     private DigitalInput aButton, xButton, yButton, bButton, leftbumper, rightBumper, startButton, selectButton;
-    private AnalogInput rightTrigger;
+    private AnalogInput rightTrigger, rightStickY;
     
-    private WsSparkMax feedMotor, launcherMotor, kickerMotor, hoodMotor, intakeMotor;
+    private WsSparkMax feedMotor, launcherMotor, kickerMotor, hoodMotor, intakeMotor, climbMotor;
     private WsSolenoid launcherSolenoid, intakeSolenoid;
     private WsDoubleSolenoid tiltSolenoid1, tiltSolenoid2;
 
-    private double feedSpeed, launcherSpeed, kickerSpeed, hoodSpeed, intakeSpeed;
+    private double feedSpeed, launcherSpeed, kickerSpeed, hoodSpeed, intakeSpeed, climbSpeed;
     private double modifier;
     private boolean kickerState, launcherSolenoidState, intakeSolenoidState, tiltState;
 
@@ -88,6 +89,11 @@ public class Tester implements Subsystem{
         if (source == selectButton && selectButton.getValue()){
             tiltState = !tiltState;
         }  
+        if (Math.abs(rightStickY.getValue()) > 0.2){
+            climbSpeed = rightStickY.getValue();
+        } else {
+            climbSpeed = 0;
+        }
     }
 
     @Override
@@ -110,17 +116,21 @@ public class Tester implements Subsystem{
         startButton.addInputListener(this);
         selectButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_SELECT);
         selectButton.addInputListener(this);
+        rightStickY = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_JOYSTICK_Y);
+        rightStickY.addInputListener(this);
 
         feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.FEED);   
         launcherMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER);    
         kickerMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.KICKER); 
         hoodMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
         intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.INTAKE);
+        climbMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CLIMB);
         feedMotor.setCurrentLimit(25, 25, 0);
         launcherMotor.setCurrentLimit(50, 50, 0);
         kickerMotor.setCurrentLimit(25, 25, 0);
         hoodMotor.setCurrentLimit(25, 25, 0);
         intakeMotor.setCurrentLimit(25, 25, 0);
+        climbMotor.setCurrentLimit(50, 50, 0);
 
         launcherSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
         tiltSolenoid1 = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_1);
@@ -141,6 +151,7 @@ public class Tester implements Subsystem{
         kickerMotor.setSpeed(kickerSpeed);
         hoodMotor.setSpeed(hoodSpeed);
         intakeMotor.setSpeed(intakeSpeed);
+        climbMotor.setSpeed(climbSpeed);
 
         launcherSolenoid.setValue(launcherSolenoidState);
         intakeSolenoid.setValue(intakeSolenoidState);
@@ -167,6 +178,7 @@ public class Tester implements Subsystem{
         modifier = 0;
         hoodSpeed = 0;
         intakeSpeed = 0;
+        climbSpeed = 0;
         kickerState = true;
         intakeSolenoidState = false;
         launcherSolenoidState = true;

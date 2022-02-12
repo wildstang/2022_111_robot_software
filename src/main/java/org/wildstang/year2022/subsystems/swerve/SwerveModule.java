@@ -1,11 +1,14 @@
 package org.wildstang.year2022.subsystems.swerve;
 
+import org.wildstang.year2022.robot.CANConstants;
 import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
 import com.revrobotics.CANSparkMax;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
+import org.wildstang.sample.subsystems.drive.Drive;
+
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,8 +37,8 @@ public class SwerveModule {
         this.driveMotor.setCoast();
         this.angleMotor.setBrake();
 
-        driveMotor.setCurrentLimit(50, 50, 0);
-        angleMotor.setCurrentLimit(25, 25, 0);
+        driveMotor.setCurrentLimit(DriveConstants.DRIVE_CURRENT_LIMIT, DriveConstants.DRIVE_CURRENT_LIMIT, 0);
+        angleMotor.setCurrentLimit(DriveConstants.ANGLE_CURRENT_LIMIT, DriveConstants.ANGLE_CURRENT_LIMIT, 0);
 
         //set up angle and drive with pid and kpid respectively
         driveMotor.initClosedLoop(DriveConstants.DRIVE_P, DriveConstants.DRIVE_I, DriveConstants.DRIVE_D, DriveConstants.DRIVE_F);

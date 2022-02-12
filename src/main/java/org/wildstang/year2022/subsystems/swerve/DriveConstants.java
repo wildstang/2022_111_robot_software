@@ -47,6 +47,10 @@ public final class DriveConstants {
     public static final double ANGLE_I = 0.0;
     /**PID values for angle D */
     public static final double ANGLE_D = 0.0;
+    /**Drive motor current limit */
+    public static final int DRIVE_CURRENT_LIMIT = 50;
+    /**Angle motor current limit */
+    public static final int ANGLE_CURRENT_LIMIT = 30;
     /**Swerve Module Names */
     public static final String[] POD_NAMES = new String[]{"FL", "FR", "BL", "BR"};
 
