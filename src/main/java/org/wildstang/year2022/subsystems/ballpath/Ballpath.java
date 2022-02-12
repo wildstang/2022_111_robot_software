@@ -1,39 +1,18 @@
-package org.wildstang.year2022.subsystems;
+package org.wildstang.year2022.subsystems.ballpath;
 
 import org.wildstang.framework.subsystems.Subsystem;
 
-import com.ctre.phoenix.motion.MotionProfileStatus;
-import com.kauailabs.navx.frc.AHRS;
-
 import org.wildstang.framework.core.Core;
-import com.revrobotics.CANSparkMax;
 import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.io.inputs.DigitalInput;
-import org.wildstang.framework.logger.Log;
-import org.wildstang.framework.pid.PIDConstants;
-import org.wildstang.framework.subsystems.drive.Path;
-import org.wildstang.framework.subsystems.drive.PathFollowingDrive;
-import org.wildstang.framework.subsystems.drive.TankPath;
-import org.wildstang.hardware.roborio.inputs.WsAnalogInput;
-import org.wildstang.hardware.roborio.inputs.WsDigitalInput;
-import org.wildstang.hardware.roborio.inputs.WsJoystickButton;
-import org.wildstang.hardware.roborio.outputs.WsPhoenix;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 
-import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.I2C;
 
-import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
-
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
-
-public class BallpathSubsystem_V2 implements Subsystem{
+public class Ballpath implements Subsystem{
 
     //Motors
     private WsSparkMax feedMotor, intakeMotor;
@@ -67,39 +46,23 @@ public class BallpathSubsystem_V2 implements Subsystem{
         if (Math.abs(rightTrigger.getValue())>0.15){
             feedMotorSpeed = FULL_SPEED;
         } 
-        
-        //intake reverse 
-        if (source == yButton) {
-            if (yButton.getValue()) {
-                intakeMotorSpeed = REVERSE_SPEED;
-            } else {
-                intakeMotorSpeed = 0;
-            }
-        } 
 
-        //intake full speed - also opens intake
-        if (source == aButton) {
-            if (aButton.getValue()) {
-                intakeSolenoidValue = OPEN;
-                intakeMotorSpeed = FULL_SPEED;
-                feedMotorSpeed = FULL_SPEED;
-            } else {
-                intakeSolenoidValue = CLOSE;
-                intakeMotorSpeed = 0;
-                feedMotorSpeed = 0;
-            }
-
+        /**run intake and feed either forwards or backwards */
+        if (aButton.getValue()){
+            intakeMotorSpeed = FULL_SPEED;
+            feedMotorSpeed = FULL_SPEED;
+        } else if (yButton.getValue()){
+            intakeMotorSpeed = REVERSE_SPEED;
+            feedMotorSpeed = REVERSE_SPEED;
+        } else {
+            intakeMotorSpeed = 0;
+            feedMotorSpeed = 0;
         }
 
-        //feed & intake full speed
-        if (source == xButton) {
-            if (xButton.getValue()) {
-                feedMotorSpeed = FULL_SPEED;
-            } else {
-                feedMotorSpeed = 0;
-            }
-        }
-        
+        /**toggle intake deploy/retract */
+        if (source == xButton && xButton.getValue()){
+            intakeSolenoidValue = !intakeSolenoidValue;
+        }        
     }
 
     @Override
@@ -148,10 +111,10 @@ public class BallpathSubsystem_V2 implements Subsystem{
         return "Ballpath";
     }
     public void intakeDeploy(){
-        intakeSolenoidValue = true;
+        intakeSolenoidValue = OPEN;
     }
     public void intakeRetract(){
-        intakeSolenoidValue = false;
+        intakeSolenoidValue = CLOSE;
     }
     public void turnOnIntake(){
         intakeMotorSpeed = FULL_SPEED;

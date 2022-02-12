@@ -1,7 +1,7 @@
 package org.wildstang.year2022.robot;
 
 import org.wildstang.framework.core.Subsystems;
-import org.wildstang.year2022.subsystems.BallpathSubsystem_V2;
+import org.wildstang.year2022.subsystems.ballpath.Ballpath;
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 
 /**
@@ -12,7 +12,7 @@ public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
     SWERVE_DRIVE("Swerve Drive", SwerveDrive.class),
-    BALLPATH("Ballpath", BallpathSubsystem_V2.class )
+    BALLPATH("Ballpath", Ballpath.class)
     ;
 
     /**
