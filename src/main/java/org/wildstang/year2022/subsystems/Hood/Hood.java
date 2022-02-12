@@ -36,7 +36,6 @@ public class Hood implements Subsystem {
     double range_constant;
     double offset;
 
-    final double zero_position = .5; // to be changed
     final double preset1 = 1;
     final double preset2 = .75;
     final double preset3 = .5;
@@ -44,6 +43,11 @@ public class Hood implements Subsystem {
 
     final double max_angle = 45;
     final double position_change = .02;
+
+    final double absLow = 0.0859;
+    final double absHigh = 1.5117;
+    final double absRange = absHigh - absLow;
+    final double neoRange = 75.7;
     
     AimHelper aim;
     
@@ -68,12 +72,8 @@ public class Hood implements Subsystem {
 
     @Override
     public void update() {
-        hood_motor.setPosition(hood_position * range_constant + offset);
+        hood_motor.setPosition(neoRange * (hood_position * range_constant - offset));
     }
-// zero = .5
-// at 0 = .6
-// offset = -.1
-// 0 + -.1 = .5
 
     @Override
     public void inputUpdate(Input source) {
@@ -102,8 +102,8 @@ public class Hood implements Subsystem {
      
     }
 
-    public double offset_from_initial(WsSparkMax motor,double initial){
-        return initial - motor.getController().getAnalog(Mode.kAbsolute).getVoltage() / 3.3;
+    public double offset_from_initial(WsSparkMax motor){
+        return (motor.getController().getAnalog(Mode.kAbsolute).getVoltage() - absLow) / absRange;
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Hood implements Subsystem {
     public void resetState() {
         hood_position = 0.0;
         hood_motor.resetEncoder();
-        offset = offset_from_initial(hood_motor,zero_position);
+        offset = offset_from_initial(hood_motor);
         range_constant = max_angle / 360.0;
     }
 
