@@ -78,9 +78,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
             driveState = driveType.TELEOP;
         }
         //get x and y speeds
-        xSpeed = -xSpeedLimiter.calculate(-leftStickX.getValue());
+        xSpeed = xSpeedLimiter.calculate(-leftStickX.getValue());
         if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
-        ySpeed = -ySpeedLimiter.calculate(-leftStickY.getValue());
+        ySpeed = ySpeedLimiter.calculate(-leftStickY.getValue());
         if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
         
         if (source == select && select.getValue()) {
@@ -115,7 +115,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
             rotLocked = true;
         }
         //get rotational joystick
-        rotSpeed = rotSpeedLimiter.calculate(rightStickX.getValue());
+        rotSpeed = rotSpeedLimiter.calculate(-rightStickX.getValue());
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         //if the rotational joystick is being used, the robot should not be auto tracking heading
         if (rotSpeed != 0) rotLocked = false;
@@ -188,33 +188,30 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (driveState == driveType.TELEOP){
             if (rotLocked){
                 //if rotation tracking, replace rotational joystick value with controller generated one
-                rotSpeed = swerveHelper.getRotControl(rotTarget, gyro.getAngle());
+                rotSpeed = swerveHelper.getRotControl(rotTarget, getGyroAngle());
             }
-            this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, gyro.getAngle());
+            this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, getGyroAngle());
             SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
             drive();
         }
         if (driveState == driveType.AUTO){
             //get controller generated rotation value
-            rotSpeed = swerveHelper.getRotControl(pathTarget, gyro.getAngle());
+            rotSpeed = swerveHelper.getRotControl(pathTarget, getGyroAngle());
             //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
             if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
             //update where the robot is, to determine error in path
             updateAutoDistance();
-            this.swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, gyro.getAngle());
+            this.swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, getGyroAngle());
             drive();
 
         
         }
-        SmartDashboard.putNumber("Gyro Reading", gyro.getAngle());
-        SmartDashboard.putBoolean("Is field oriented", isFieldOriented);
-        SmartDashboard.putNumber("Thrust value", thrustValue);
+        SmartDashboard.putNumber("Gyro Reading", getGyroAngle());
         SmartDashboard.putNumber("X speed", xSpeed);
         SmartDashboard.putNumber("Y speed", ySpeed);
         SmartDashboard.putNumber("rotSpeed", rotSpeed);
         SmartDashboard.putString("Drive mode", driveState.toString());
         SmartDashboard.putBoolean("rotLocked", rotLocked);
-        SmartDashboard.putNumber("FL from signal", swerveSignal.getSpeed(0));
     }
 
     @Override
@@ -258,7 +255,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     }
     /**stops the robot from moving */
     public void stopMoving(){
-        swerveSignal = swerveHelper.setCrab(0.0, 0.0, gyro.getAngle());
+        swerveSignal = swerveHelper.setCrab(0.0, 0.0, getGyroAngle());
         drive();
     }
     /**drives the robot at the current swerveSignal, and displays information for each swerve module */
@@ -301,6 +298,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public void setGyro(double degrees){
         gyro.reset();
         gyro.setAngleAdjustment(degrees);
+    }
+    public double getGyroAngle(){
+        return 359.999-gyro.getAngle();
     }
     
 }
