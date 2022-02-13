@@ -52,8 +52,8 @@ public class WSSwerveHelper {
         baseV = Math.atan(DriveConstants.ROBOT_LENGTH / DriveConstants.ROBOT_WIDTH);
 
         //find the translational vectors rotated to account for the gyro
-        double xTrans = i_tx * Math.cos(Math.toRadians(i_gyro)) + i_ty * Math.sin(Math.toRadians(i_gyro));
-        double yTrans = i_tx * -Math.sin(Math.toRadians(i_gyro)) + i_ty * Math.cos(Math.toRadians(i_gyro));
+        double xTrans = i_tx * Math.cos(Math.toRadians(i_gyro)) - i_ty * Math.sin(Math.toRadians(i_gyro));
+        double yTrans = i_tx * Math.sin(Math.toRadians(i_gyro)) + i_ty * Math.cos(Math.toRadians(i_gyro));
 
         //cartesian vector addition of translation and rotation vectors
         //note rotation vector angle advances in the cos -> sin -> -cos -> -sin fashion

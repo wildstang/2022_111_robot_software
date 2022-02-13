@@ -91,27 +91,27 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
         //update auto tracking values
         if (source == faceUp && faceUp.getValue()){
-            if (faceLeft.getValue()){ rotTarget = 69.0;
-            } else if (faceRight.getValue()){ rotTarget = 339.0;
+            if (faceLeft.getValue()){ rotTarget = 339.0;
+            } else if (faceRight.getValue()){ rotTarget = 69.0;
             } else  rotTarget = 0.0;
             rotLocked = true;
         }
         if (source == faceLeft && faceLeft.getValue()){
-            if (faceUp.getValue()){ rotTarget = 69.0;
-            } else if (faceDown.getValue()){ rotTarget = 159.0;
-            } else rotTarget = 90.0;
+            if (faceUp.getValue()){ rotTarget = 339.0;
+            } else if (faceDown.getValue()){ rotTarget = 249.0;
+            } else rotTarget = 270.0;
             rotLocked = true;
         }
         if (source == faceDown && faceDown.getValue()){
-            if (faceLeft.getValue()){ rotTarget = 159.0;
-            } else if (faceRight.getValue()){ rotTarget = 249.0;
+            if (faceLeft.getValue()){ rotTarget = 249.0;
+            } else if (faceRight.getValue()){ rotTarget = 159.0;
             } else rotTarget = 180.0;
             rotLocked = true;
         }
         if (source == faceRight && faceRight.getValue()){
-            if (faceUp.getValue()){ rotTarget = 339.0;
-            } else if (faceDown.getValue()){ rotTarget = 249.0;
-            } else rotTarget = 270.0;
+            if (faceUp.getValue()){ rotTarget = 69.0;
+            } else if (faceDown.getValue()){ rotTarget = 159.0;
+            } else rotTarget = 90.0;
             rotLocked = true;
         }
         //get rotational joystick
