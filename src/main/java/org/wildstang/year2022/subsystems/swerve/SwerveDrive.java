@@ -78,9 +78,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
             driveState = driveType.TELEOP;
         }
         //get x and y speeds
-        xSpeed = xSpeedLimiter.calculate(-leftStickX.getValue());
+        xSpeed = -xSpeedLimiter.calculate(-leftStickX.getValue());
         if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
-        ySpeed = ySpeedLimiter.calculate(-leftStickY.getValue());
+        ySpeed = -ySpeedLimiter.calculate(-leftStickY.getValue());
         if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
         
         if (source == select && select.getValue()) {
@@ -300,7 +300,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         gyro.setAngleAdjustment(degrees);
     }
     public double getGyroAngle(){
-        return 359.999-gyro.getAngle();
+        return gyro.getAngle();
     }
     
 }
