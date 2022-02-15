@@ -43,26 +43,22 @@ public class Ballpath implements Subsystem{
     public void inputUpdate(Input source) {
 
         //dynamicly controls hopper speed
-        if (Math.abs(rightTrigger.getValue())>0.15){
+        if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue()){
             feedMotorSpeed = FULL_SPEED;
-        } 
+        } else if (yButton.getValue()){
+            feedMotorSpeed = REVERSE_SPEED;
+        } else {
+            feedMotorSpeed = 0;
+        }
 
         /**run intake and feed either forwards or backwards */
         if (aButton.getValue()){
             intakeMotorSpeed = FULL_SPEED;
-            feedMotorSpeed = FULL_SPEED;
-        } else if (yButton.getValue()){
-            intakeMotorSpeed = REVERSE_SPEED;
-            feedMotorSpeed = REVERSE_SPEED;
-        } else {
+            intakeSolenoidValue = CLOSE;
+        }  else {
             intakeMotorSpeed = 0;
-            feedMotorSpeed = 0;
-        }
-
-        /**toggle intake deploy/retract */
-        if (source == xButton && xButton.getValue()){
-            intakeSolenoidValue = !intakeSolenoidValue;
-        }        
+            intakeSolenoidValue = OPEN;
+        }      
     }
 
     @Override

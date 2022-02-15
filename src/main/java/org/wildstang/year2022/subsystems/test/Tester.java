@@ -116,24 +116,24 @@ public class Tester implements Subsystem{
         rightStickY = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_JOYSTICK_Y);
         rightStickY.addInputListener(this);
 
-        feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.FEED);   
+        //feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.FEED);   
         launcherMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER);    
         kickerMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.KICKER); 
         hoodMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
-        intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.INTAKE);
+        //intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.INTAKE);
         climbMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CLIMB);
-        feedMotor.setCurrentLimit(35, 35, 0);
+        //feedMotor.setCurrentLimit(35, 35, 0);
         launcherMotor.setCurrentLimit(50, 50, 0);
         kickerMotor.setCurrentLimit(30, 30, 0);
         hoodMotor.setCurrentLimit(25, 25, 0);
-        intakeMotor.setCurrentLimit(25, 25, 0);
+        //intakeMotor.setCurrentLimit(25, 25, 0);
         climbMotor.setCurrentLimit(50, 50, 0);
         climbMotor.setBrake();
 
         launcherSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
         tiltSolenoid1 = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_1);
         tiltSolenoid2 = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_2);
-        intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_SOLENOID);
+        //intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_SOLENOID);
 
         resetState();
     }
@@ -145,10 +145,10 @@ public class Tester implements Subsystem{
     @Override
     public void update() {
         launcherMotor.setSpeed(-launcherSpeed);
-        feedMotor.setSpeed(-feedSpeed);
+        //feedMotor.setSpeed(-feedSpeed);
         kickerMotor.setSpeed(kickerSpeed);
         hoodMotor.setSpeed(hoodSpeed);
-        intakeMotor.setSpeed(intakeSpeed);
+        //intakeMotor.setSpeed(intakeSpeed);
         if ((climbSpeed > 0 && Math.abs(climbMotor.getPosition()) < 88.5) || (climbSpeed < 0 && Math.abs(climbMotor.getPosition()) >= 0)){
             climbMotor.setSpeed(climbSpeed);
         } else {
@@ -157,7 +157,7 @@ public class Tester implements Subsystem{
         
 
         launcherSolenoid.setValue(launcherSolenoidState);
-        intakeSolenoid.setValue(intakeSolenoidState);
+        //intakeSolenoid.setValue(intakeSolenoidState);
         if (!tiltState){
             tiltSolenoid1.setValue(WsDoubleSolenoidState.FORWARD.ordinal());
             tiltSolenoid2.setValue(WsDoubleSolenoidState.FORWARD.ordinal());

@@ -14,7 +14,7 @@ public enum WSSubsystems implements Subsystems {
     // enumerate subsystems
     SWERVE_DRIVE("Swerve Drive", SwerveDrive.class),
     TESTER("Tester", Tester.class),
-    //BALLPATH("Ballpath", Ballpath.class)
+    BALLPATH("Ballpath", Ballpath.class)
     ;
 
     /**
