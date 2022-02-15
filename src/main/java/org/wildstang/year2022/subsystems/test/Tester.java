@@ -38,7 +38,7 @@ public class Tester implements Subsystem{
     private double modifier;
     private boolean launcherSolenoidState, intakeSolenoidState, tiltState;
 
-    private final double LAUNCHER_INITIAL = 0.7;
+    private final double LAUNCHER_INITIAL = 0.4;
     private final double modifyAmount = 0.02;
     private final double feedMaxSpeed = 1.0;
     private final double intakeMaxSpeed = 1.0;

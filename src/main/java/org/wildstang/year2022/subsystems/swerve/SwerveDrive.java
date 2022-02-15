@@ -88,6 +88,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
             gyro.setAngleAdjustment(0);
         }
         thrustValue = 1 - DriveConstants.DRIVE_THRUST + DriveConstants.DRIVE_THRUST * Math.abs(rightTrigger.getValue());
+        xSpeed *= thrustValue;
+        ySpeed *= thrustValue;
 
         //update auto tracking values
         if (source == faceUp && faceUp.getValue()){
@@ -115,7 +117,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
             rotLocked = true;
         }
         //get rotational joystick
-        rotSpeed = rotSpeedLimiter.calculate(-rightStickX.getValue());
+        rotSpeed = -rotSpeedLimiter.calculate(-rightStickX.getValue());
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         //if the rotational joystick is being used, the robot should not be auto tracking heading
         if (rotSpeed != 0) rotLocked = false;
