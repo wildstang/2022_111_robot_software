@@ -52,11 +52,6 @@ public enum WSOutputs implements Outputs {
     CLIMB_FOLLOWER("Climb Follower Motor", new WsSparkMaxFollowerConfig("Climb Motor", CANConstants.CLIMBER_FOLLOWER, true, true)),
     LAUNCHER("Launcher Motor", new WsSparkMaxConfig(CANConstants.SHOOTER, true)),
     LAUNCHER_FOLLOWER("Launcher Follower Motor", new WsSparkMaxFollowerConfig("Launcher Motor",CANConstants.SHOOTER_FOLLOWER, true, true)),
-    
-
-    RIGHT_CLIMB("Right Climb Motor", new WsSparkMaxConfig(CANConstants.CLIMBER, true)),
-    LEFT_CLIMB("Climb Motor Follower",new WsSparkMaxFollowerConfig("Right Climb Motor", CANConstants.CLIMBER_FOLLOWER, true, true)),
-  
 
     // ---------------------------------
     // Servos
@@ -77,9 +72,7 @@ public enum WSOutputs implements Outputs {
     INTAKE_SOLENOID("Intake Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 2, true)),
     CLIMB_SOLENOID_1("Climb Solenoid 1", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH, 6, 7, WsDoubleSolenoidState.REVERSE)),
     CLIMB_SOLENOID_2("Climb Solenoid 2", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH, 4, 5, WsDoubleSolenoidState.REVERSE)),
-    
-    CLIMB_RIGHT_SOLENOID("Right Climb Solenoid", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH,1,2,WsDoubleSolenoidState.FORWARD)),
-    CLIMB_LEFT_SOLENOID("Left Climb Solenoid", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH,1,2,WsDoubleSolenoidState.FORWARD)),    
+      
     // ********************************
     // Relays
     // ********************************

@@ -38,18 +38,21 @@ public class ClimbMotion {
     private ClimbConstants constant = new ClimbConstants();
     public boolean IsExtended;
     public boolean IsRotated;
+    public boolean isClimbing;
 
-    
     private boolean AutoClimbing;
     
     private double climberSpeed;
+
+    private enum AutoState {IDLE, DEPLOY, RETRACT, GRAB}
+    private AutoState autoState;
     
     public void ClimbMotion() {
 
-        RightSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_RIGHT_SOLENOID);
-        LeftSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_LEFT_SOLENOID);
+        RightSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_1);
+        LeftSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_2);
 
-        RightClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.RIGHT_CLIMB);
+        RightClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CLIMB);
         
         resetState();
     }
@@ -57,8 +60,17 @@ public class ClimbMotion {
 
     public void update() {
         //handle motor output
-        RightClimber.setSpeed(climberSpeed);
-        
+        if (climberSpeed < 0 && Math.abs(RightClimber.getPosition()) >= constant.RETRACTED_POS){
+            RightClimber.setSpeed(climberSpeed);
+        } else if (climberSpeed > 0 && Math.abs(RightClimber.getPosition()) < constant.EXTENDED_POS){
+            if (autoState == AutoState.DEPLOY && AutoClimbing && RightClimber.getPosition() >= constant.DEPLOY_POS){
+                RightClimber.setSpeed(0);
+            } else {
+                RightClimber.setSpeed(climberSpeed);
+            }
+        } else {
+            RightClimber.setSpeed(0);
+        }
         if(IsRotated){
             RightSol.setValue(WsDoubleSolenoidState.REVERSE.ordinal()); //because initialized to .FORWARD, and i'm assuming starts not rotated.
             LeftSol.setValue(WsDoubleSolenoidState.REVERSE.ordinal());
@@ -68,21 +80,26 @@ public class ClimbMotion {
             LeftSol.setValue(WsDoubleSolenoidState.FORWARD.ordinal());
         }
         
-
-        // update climb state (is it done extending/retracting????)
-        if(IsExtended && (RightClimber.getPosition()<=constant.RETRACTED_POS)){
-            IsExtended = false; 
-            climberSpeed = 0;
-            if (AutoClimbing){ //if auto climbing, tilt and stop autoclimbing. autoclimb must be pressed again to climb another bar.
-                Tilt();
-                AutoClimbing = false;
+        if (autoState == AutoState.IDLE){
+        } else if (autoState == AutoState.DEPLOY){
+            Extend();
+            if (RightClimber.getPosition() >= constant.DEPLOY_POS){
+                autoState = AutoState.IDLE;
             }
-        }
-        else if (!IsExtended && (RightClimber.getPosition())>=constant.EXTENDED_POS){
-            IsExtended = true; 
-            climberSpeed = 0;
-            if(AutoClimbing){ //if auto climbing, it is time to start retracting.
-                Retract();
+        } else if (autoState == AutoState.GRAB){
+            if (RightClimber.getPosition() < constant.DEPLOY_POS){
+                Tilt();
+            } else {
+                UnTilt();
+            }
+            Extend();
+            if (RightClimber.getPosition() >= constant.EXTENDED_POS){
+                autoState = AutoState.IDLE;
+            }
+        } else if (autoState == AutoState.RETRACT){
+            Retract();
+            if (RightClimber.getPosition() < constant.RETRACTED_POS){
+                autoState = AutoState.IDLE;
             }
         }
 
@@ -98,20 +115,31 @@ public class ClimbMotion {
 
     //commands
     public void Extend(){
-        climberSpeed = constant.DEPLOY_PERCENT_SPEED; 
+        if (isClimbing) climberSpeed = constant.DEPLOY_PERCENT_SPEED; 
     }
     public void Retract(){
-        climberSpeed = -constant.RETRACT_PERCENT_SPEED;
+        if (isClimbing) climberSpeed = -constant.RETRACT_PERCENT_SPEED;
     }
     public void Tilt(){
-        IsRotated = true;
+        if (isClimbing) IsRotated = true;
     }
     public void UnTilt(){
-        IsRotated = false;
+        if (isClimbing) IsRotated = false;
     }
 
     public void AutoClimb(){
         AutoClimbing = true;
+        if (!isClimbing){
+            autoState = AutoState.DEPLOY;
+            isClimbing = true;
+        } else if (autoState == AutoState.IDLE){
+            if (RightClimber.getPosition() >= constant.DEPLOY_POS){
+                autoState = AutoState.RETRACT;
+            } else {
+                autoState = AutoState.GRAB;
+            }
+        }
+        
         Extend(); //first step to climb any bar is to extend.
     }
     public void StopAutoClimb(){
@@ -125,6 +153,8 @@ public class ClimbMotion {
     public void resetState() {
         IsExtended = false;
         IsRotated = false;
+        isClimbing = false;
+        autoState = AutoState.IDLE;
         AutoClimbing = false;
         climberSpeed = 0;
 
