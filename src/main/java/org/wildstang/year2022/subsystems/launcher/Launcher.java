@@ -9,6 +9,7 @@ import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.io.inputs.DigitalInput;
+import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.subsystems.Subsystem;
 
 /**
@@ -20,7 +21,8 @@ import org.wildstang.framework.subsystems.Subsystem;
 public class Launcher implements Subsystem {
 
     // inputs
-    private AnalogInput launchButton;
+    private AnalogInput launchButton, speedButton;
+    private DigitalInput leftBumper, rightBumper;
 
     // outputs
     private WsSparkMax kickerMotor;
@@ -28,14 +30,11 @@ public class Launcher implements Subsystem {
     private WsSolenoid latch;
 
     // variables
-    private double speed = 0.0;
+    private LauncherModes launchMode;
+    private boolean isRunning;
     private boolean latchValue;
 
-    private final double maxPower = 1.0;
-    private final double maxOutputVelocity = 240.0;
-    private final double outputVelocityThresholdPercent = 0.9;
-    private final double thresholdVelocity = maxOutputVelocity * outputVelocityThresholdPercent;
-    private final double thresholdPower = 0.7;
+    private final double threshold = 0.7;
     
     // initializes the subsystem
     public void init() {
@@ -45,52 +44,73 @@ public class Launcher implements Subsystem {
     }
 
     public void initInputs() {
-        launchButton = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_TRIGGER.getName());
+        launchButton = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_TRIGGER);
         launchButton.addInputListener(this);
+        speedButton = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_TRIGGER);
+        speedButton.addInputListener(this);
+        leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_SHOULDER);
+        leftBumper.addInputListener(this);
+        rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_SHOULDER);
+        rightBumper.addInputListener(this);
     }
 
     public void initOutputs() {
         kickerMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.KICKER);
-        flywheelMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.FLYWHEEL);
-        latch = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.BALL_LATCH);
+        flywheelMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER);
+        latch = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
 
     }
 
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
         latch.setValue(latchValue);
-        kickerMotor.setValue(speed*maxPower);
-        if(flywheelMotor.getVelocity()< thresholdVelocity) {
-            flywheelMotor.setSpeed(maxPower);
-        } else if (flywheelMotor.getVelocity()>maxOutputVelocity){
-            flywheelMotor.setSpeed(thresholdPower);
+        if (!isRunning){
+            kickerMotor.setSpeed(0);
+            flywheelMotor.setSpeed(0);
         } else {
-            flywheelMotor.setSpeed(maxPower - (maxPower - thresholdPower) * (flywheelMotor.getVelocity()-thresholdVelocity)/(maxOutputVelocity - thresholdVelocity));
+            if (flywheelMotor.getVelocity() < threshold*launchMode.getRPM()){
+                flywheelMotor.setSpeed(-1.0);
+            } else {
+                flywheelMotor.setSpeed(-launchMode.getSpeed());
+            }
         }
     }
 
     // respond to input updates
-    public void inputUpdate(org.wildstang.framework.io.inputs.Input signal) {
-        if (signal == launchButton && Math.abs(launchButton.getValue()) > 0.5){
+    public void inputUpdate(Input source) {
+        if (Math.abs(launchButton.getValue()) > 0.5){
             latchValue = false;
-            speed = 1.0;
+        } else {
+            latchValue = true;
         }
-        else {
-            resetState();
+        if (Math.abs(speedButton.getValue()) > 0.5){
+            isRunning = true;
+        } else {
+            isRunning = false;
+        }
+        if (source == leftBumper && leftBumper.getValue()){
+            if (rightBumper.getValue()){
+                launchMode = LauncherModes.LAUNCH_PAD;
+            } else {
+                launchMode = LauncherModes.FENDER_SHOT;
+            }
+        }
+        if (source == rightBumper && rightBumper.getValue()){
+            if (leftBumper.getValue()){
+                launchMode = LauncherModes.LAUNCH_PAD;
+            } else {
+                launchMode = LauncherModes.TARMAC_EDGE;
+            }
         }
     }
 
     // used for testing
     public void selfTest() {}
 
-    // helper methods for autonomous
-    public void setLauncherSpeed(double i) {
-        speed = i;
-    }
-
     // resets all variables to the default state
     public void resetState() {
-        speed = 0.0;
+        launchMode = LauncherModes.ZERO;
+        isRunning = false;
         latchValue = true;
     }
 
