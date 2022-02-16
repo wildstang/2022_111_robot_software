@@ -12,6 +12,10 @@ import org.wildstang.year2022.robot.WSOutputs;
 
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.subsystems.Hood.AimHelper;
+import org.wildstang.year2022.subsystems.launcher.LauncherModes;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.revrobotics.SparkMaxAnalogSensor.Mode;
 
 /**
@@ -27,78 +31,90 @@ public class Hood implements Subsystem {
 
     WsJoystickAxis left_joystick_y;
     AnalogInput left_trigger;
-    DigitalInput dpad_up;
-    DigitalInput dpad_down;
-    DigitalInput dpad_left;
-    DigitalInput dpad_right;
+    DigitalInput leftBumper, rightBumper;
 
     double hood_position;
-    double range_constant;
     double offset;
+    private LauncherModes launchMode;
+    private enum State {MANUALR, MANUALF, PRESET, AIMING}
+    private State state;
 
-    final double preset1 = 1;
-    final double preset2 = .75;
-    final double preset3 = .5;
-    final double preset4 = .25;
+    private final double CONVERSION = 54.0;//NEO rotations per 1V of MA3
+
 
     final double max_angle = 45;
-    final double position_change = .02;
-
+    final double range_constant = max_angle/360.0;
     final double absLow = 0.0859;
     final double absHigh = 1.5117;
     final double absRange = absHigh - absLow;
     final double neoRange = 75.7;
+    final double hoodSpeed = 0.2;
     
     AimHelper aim;
     
     @Override
     public void init() {
-        hood_motor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD_MOTOR);
+        hood_motor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
         hood_motor.initClosedLoop(1.0, 0.0, 0.0, 0.0);
-        left_joystick_y = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_JOYSTICK_Y);
+        hood_motor.setCurrentLimit(15, 15, 0);
+        hood_motor.setBrake();
+        left_joystick_y = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_JOYSTICK_Y);
+        left_joystick_y.addInputListener(this);
         left_trigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
-        dpad_up = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_UP);
-        dpad_up.addInputListener(this);
-        dpad_down = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_DOWN);
-        dpad_down.addInputListener(this);
-        dpad_left = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_LEFT);
-        dpad_left.addInputListener(this);
-        dpad_right = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_RIGHT);
-        dpad_right.addInputListener(this);
+        left_trigger.addInputListener(this);
         aim = new AimHelper();
+        leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_SHOULDER);
+        leftBumper.addInputListener(this);
+        rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_SHOULDER);
+        rightBumper.addInputListener(this);
         resetState();
         
     }
 
     @Override
     public void update() {
-        hood_motor.setPosition(neoRange * (hood_position * range_constant - offset));
+        if (state == State.AIMING){
+            hood_motor.setPosition(neoRange * (hood_position * range_constant - offset));
+        }
+        if (state == State.MANUALF){
+            hood_motor.setSpeed(hoodSpeed);
+        }
+        if (state == State.MANUALR){
+            hood_motor.setSpeed(-hoodSpeed);
+        }
+        if (state == State.PRESET){
+            hood_motor.setPosition(CONVERSION * (getMA3() - launchMode.getHood()));
+        }
+        
+        SmartDashboard.putNumber("hoodPosition", hood_motor.getPosition());
+        SmartDashboard.putNumber("hood MA3", hood_motor.getController().getAnalog(Mode.kAbsolute).getVoltage());
     }
 
     @Override
-    public void inputUpdate(Input source) {
-    
-    if (source == dpad_up){
-        hood_position = preset1;
-    }
-    if (source == dpad_down){
-        hood_position = preset2;
-    }
-    if (source == dpad_left){
-        hood_position = preset3;
-    }
-    if (source == dpad_right){
-        hood_position = preset4;
-    }     
+    public void inputUpdate(Input source) {     
     if (left_trigger.getValue() > 0.5){
-            hood_position = aim.getAngle() / max_angle;
-         }
-     
-     else if (left_joystick_y.getValue() > .15 && hood_position < 1){
-         hood_position += position_change;
-     }else if (left_joystick_y.getValue() < -.15 && hood_position > 0){
-         hood_position += position_change * -1;
-     }
+        hood_position = aim.getAngle() / max_angle;
+        state = State.AIMING;
+    }
+    if (left_joystick_y.getValue() > .15 && getMA3() < absHigh){
+        state = State.MANUALF;
+    } else if (left_joystick_y.getValue() < -.15 && getMA3() > absLow){
+        state = State.MANUALR;
+    }
+    if (source == leftBumper && leftBumper.getValue()){
+        if (rightBumper.getValue()){
+            launchMode = LauncherModes.LAUNCH_PAD;
+        } else {
+            launchMode = LauncherModes.FENDER_SHOT;
+        }
+    }
+    if (source == rightBumper && rightBumper.getValue()){
+        if (leftBumper.getValue()){
+            launchMode = LauncherModes.LAUNCH_PAD;
+        } else {
+            launchMode = LauncherModes.TARMAC_EDGE;
+        }
+    }
      
     }
 
@@ -114,10 +130,13 @@ public class Hood implements Subsystem {
 
     @Override
     public void resetState() {
-        hood_position = 0.0;
         hood_motor.resetEncoder();
+        state = State.MANUALF;
         offset = offset_from_initial(hood_motor);
-        range_constant = max_angle / 360.0;
+        launchMode = LauncherModes.FENDER_SHOT;
+    }
+    private double getMA3(){
+        return hood_motor.getController().getAnalog(Mode.kAbsolute).getVoltage();
     }
 
     @Override

@@ -3,6 +3,9 @@ package org.wildstang.year2022.subsystems.launcher;
 
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 
@@ -58,6 +61,8 @@ public class Launcher implements Subsystem {
         kickerMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.KICKER);
         flywheelMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER);
         latch = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
+        kickerMotor.setCurrentLimit(25, 25, 0);
+        flywheelMotor.setCurrentLimit(50, 50, 0);
 
     }
 
@@ -74,6 +79,10 @@ public class Launcher implements Subsystem {
                 flywheelMotor.setSpeed(-launchMode.getSpeed());
             }
         }
+
+        
+        SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
+        SmartDashboard.putNumber("Flywheel velocity", -flywheelMotor.getVelocity());
     }
 
     // respond to input updates
