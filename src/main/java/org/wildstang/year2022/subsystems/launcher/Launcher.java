@@ -25,7 +25,7 @@ public class Launcher implements Subsystem {
 
     // inputs
     private AnalogInput launchButton, speedButton;
-    private DigitalInput leftBumper, rightBumper;
+    private DigitalInput leftBumper, rightBumper, yButton;
 
     // outputs
     private WsSparkMax kickerMotor;
@@ -55,6 +55,8 @@ public class Launcher implements Subsystem {
         leftBumper.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
+        yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
+        yButton.addInputListener(this);
     }
 
     public void initOutputs() {
@@ -87,7 +89,7 @@ public class Launcher implements Subsystem {
 
     // respond to input updates
     public void inputUpdate(Input source) {
-        if (Math.abs(launchButton.getValue()) > 0.5){
+        if (Math.abs(launchButton.getValue()) > 0.5 || yButton.getValue()){
             latchValue = false;
         } else {
             latchValue = true;

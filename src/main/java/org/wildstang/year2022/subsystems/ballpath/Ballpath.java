@@ -55,10 +55,10 @@ public class Ballpath implements Subsystem{
         /**run intake and feed either forwards or backwards */
         if (aButton.getValue() || driverRightBumper.getValue()){
             intakeMotorSpeed = FULL_SPEED;
-            intakeSolenoidValue = CLOSE;
+            intakeSolenoidValue = OPEN;
         }  else {
             intakeMotorSpeed = 0;
-            intakeSolenoidValue = OPEN;
+            intakeSolenoidValue = CLOSE;
         }      
     }
 
@@ -85,7 +85,7 @@ public class Ballpath implements Subsystem{
         feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.FEED);
         intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.INTAKE);
         intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_SOLENOID);
-        feedMotor.setCurrentLimit(10, 10, 0);
+        feedMotor.setCurrentLimit(30, 30, 0);
         intakeMotor.setCurrentLimit(25, 25, 0);
     }
 

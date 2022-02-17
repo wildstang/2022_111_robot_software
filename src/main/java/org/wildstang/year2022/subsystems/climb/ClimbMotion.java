@@ -47,12 +47,13 @@ public class ClimbMotion {
     private enum AutoState {IDLE, DEPLOY, RETRACT, GRAB}
     private AutoState autoState;
     
-    public void ClimbMotion() {
+    public ClimbMotion() {
 
         RightSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_1);
         LeftSol = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_2);
 
         RightClimber = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CLIMB);
+        
         
         resetState();
     }
