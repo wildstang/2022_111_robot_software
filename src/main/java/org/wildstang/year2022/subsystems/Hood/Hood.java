@@ -36,7 +36,7 @@ public class Hood implements Subsystem {
     double hood_position;
     double offset;
     private LauncherModes launchMode;
-    private enum State {MANUALR, MANUALF, PRESET, AIMING}
+    private enum State {MANUALR, MANUALF, PRESET, AIMING, IDLE}
     private State state;
 
     private final double CONVERSION = 54.0;//NEO rotations per 1V of MA3
@@ -85,6 +85,9 @@ public class Hood implements Subsystem {
         if (state == State.PRESET){
             hood_motor.setPosition(CONVERSION * (getMA3() - launchMode.getHood()));
         }
+        if (state == State.IDLE){
+            hood_motor.setSpeed(0);
+        }
         
         SmartDashboard.putNumber("hoodPosition", hood_motor.getPosition());
         SmartDashboard.putNumber("hood MA3", hood_motor.getController().getAnalog(Mode.kAbsolute).getVoltage());
@@ -96,25 +99,29 @@ public class Hood implements Subsystem {
         hood_position = aim.getAngle() / max_angle;
         state = State.AIMING;
     }
-    if (left_joystick_y.getValue() > .15 && getMA3() < absHigh){
+    else if (left_joystick_y.getValue() > .15 && getMA3() < absHigh){
         state = State.MANUALF;
     } else if (left_joystick_y.getValue() < -.15 && getMA3() > absLow){
         state = State.MANUALR;
     }
-    if (source == leftBumper && leftBumper.getValue()){
+    else if (source == leftBumper && leftBumper.getValue()){
         if (rightBumper.getValue()){
             launchMode = LauncherModes.LAUNCH_PAD;
+            state = State.PRESET;
         } else {
             launchMode = LauncherModes.FENDER_SHOT;
+            state = State.PRESET;
         }
     }
-    if (source == rightBumper && rightBumper.getValue()){
+     else if (source == rightBumper && rightBumper.getValue()){
         if (leftBumper.getValue()){
             launchMode = LauncherModes.LAUNCH_PAD;
+            state = State.PRESET;
         } else {
             launchMode = LauncherModes.TARMAC_EDGE;
+            state = State.PRESET;
         }
-    }
+    } else state = State.IDLE;
      
     }
 
@@ -131,7 +138,7 @@ public class Hood implements Subsystem {
     @Override
     public void resetState() {
         hood_motor.resetEncoder();
-        state = State.MANUALF;
+        state = State.IDLE;
         offset = offset_from_initial(hood_motor);
         launchMode = LauncherModes.FENDER_SHOT;
     }
