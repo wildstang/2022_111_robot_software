@@ -17,6 +17,7 @@ public class SwervePathFollowerStep extends AutoStep {
     private double[][] pathData;
 
     private int counter;
+    private double lastPos;
 
     /** Sets the robot to track a new path
      * finishes after all values have been read to robot
@@ -32,20 +33,22 @@ public class SwervePathFollowerStep extends AutoStep {
     public void initialize() {
         //start path
         counter = 0;
+        lastPos = 0;
         m_drive.resetDriveEncoders();
     }
 
     @Override
     public void update() {
-        if (counter >= pathData.length){
+        if (counter >= pathData.length || lastPos == pathData[counter][positionP]){
             //end path
             m_drive.stopMoving();
             setFinished(true);
         } else {
             //update values the robot is tracking to
-            m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, pathData[counter][velocityP]*ftToIn, Math.toDegrees(pathData[counter][headingP]));
+            m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, (pathData[counter][positionP] - lastPos)*0.02*ftToIn, Math.toDegrees(pathData[counter][headingP]));
             counter++;
         }
+        lastPos = pathData[counter][positionP];
     }
 
     @Override
