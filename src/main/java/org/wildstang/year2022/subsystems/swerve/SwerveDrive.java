@@ -72,8 +72,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
     @Override
     public void inputUpdate(Input source) {
         //determine if we are in cross or teleop
-        if (driveState != driveType.AUTO && rightBumper.getValue()){
+        if (driveState != driveType.AUTO && rightBumper.getValue() && source == rightBumper){
             driveState = driveType.CROSS;
+            this.swerveSignal = new SwerveSignal(new double[]{modules[0].getRawEncoderValue(), modules[1].getRawEncoderValue(), modules[2].getRawEncoderValue(), 
+                modules[3].getRawEncoderValue()}, swerveHelper.setCross().getSpeeds());
         } else if (driveState != driveType.AUTO){
             driveState = driveType.TELEOP;
         }
@@ -90,6 +92,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         thrustValue = 1 - DriveConstants.DRIVE_THRUST + DriveConstants.DRIVE_THRUST * Math.abs(rightTrigger.getValue());
         xSpeed *= thrustValue;
         ySpeed *= thrustValue;
+        rotSpeed *= thrustValue;
 
         //update auto tracking values
         if (source == faceUp && faceUp.getValue()){
@@ -183,8 +186,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
     @Override
     public void update() {
         if (driveState == driveType.CROSS){
-            //set to cross
-            this.swerveSignal = swerveHelper.setCross();
+            //set to cross - done in inputupdate
+            //this.swerveSignal = swerveHelper.setCross();
             drive();
         }
         if (driveState == driveType.TELEOP){
@@ -267,10 +270,11 @@ public class SwerveDrive extends SwerveDriveTemplate {
                 modules[i].runCross(swerveSignal.getSpeed(i), swerveSignal.getAngle(i));
                 modules[i].displayNumbers(DriveConstants.POD_NAMES[i]);
             }
-        }
-        for (int i = 0; i < modules.length; i++){
-            modules[i].run(swerveSignal.getSpeed(i), swerveSignal.getAngle(i));
-            modules[i].displayNumbers(DriveConstants.POD_NAMES[i]);
+        } else {
+            for (int i = 0; i < modules.length; i++){
+                modules[i].run(swerveSignal.getSpeed(i), swerveSignal.getAngle(i));
+                modules[i].displayNumbers(DriveConstants.POD_NAMES[i]);
+            }
         }
     }
     /**sets autonomous values from the path data file */
