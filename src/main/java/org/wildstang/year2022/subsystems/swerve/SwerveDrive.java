@@ -290,6 +290,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
             autoTempY += modules[i].getPosition() * Math.sin(Math.toRadians(modules[i].getAngle()));
         }
         autoTravelled += Math.hypot(autoTempX/modules.length, autoTempY/modules.length);
+        autoTempX = 0;
+        autoTempY = 0;
     }
 
     /**

@@ -14,6 +14,7 @@ public class WSSwerveHelper {
     private double[] yCoords = new double[]{0.0, 0.0, 0.0, 0.0};
     private double rotDelta;
     private double rotPID;
+    private double prevVel = 0;
 
     /** sets the robot in the immobile "cross" defensive position
      * 
@@ -105,7 +106,8 @@ public class WSSwerveHelper {
      * @return double for magnitude of translational vector
      */
     public double getAutoPower(double pathPos, double pathVel, double distTravelled){
-        double guess = pathVel * DriveConstants.DRIVE_F;
+        double guess = pathVel * DriveConstants.DRIVE_F_V + DriveConstants.DRIVE_F_K + 0.02*(pathVel - prevVel)*DriveConstants.DRIVE_F_I;
+        this.prevVel = pathVel;
         double check = DriveConstants.DRIVE_P * (pathPos - distTravelled);
         return -(guess + check);
     }
