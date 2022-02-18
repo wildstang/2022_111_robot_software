@@ -9,24 +9,25 @@ public class AutoDeployIntake extends AutoStep {
 
     private BallpathSubsystem_V2 intake;
 
-    public AutoDeployIntake(){
+    private boolean deploy;
+
+    public AutoDeployIntake(boolean deploy){
+        this.deploy = deploy;
+        intake = (BallpathSubsystem_V2) Core.getSubsystemManager().getSubsystem(WSSubsystems.BALLPATH_INTAKE.getName());
+    }
+
+    public AutoDeployIntake() {
         this(true);
     }
 
-    public AutoDeployIntake(boolean deploy) {
-        intake = (BallpathSubsystem_V2) Core.getSubsystemManager().getSubsystem(WSSubsystems.BALLPATH_INTAKE.getName());
+    @Override
+    public void initialize() {
         if (deploy){
             intake.intakeDeploy();
             intake.turnOnIntake();
         }else{
             intake.resetState();
         }
-        //this if else statement should be in initialize but the build fails any way I do this so it is here instead
-    }
-
-    @Override
-    public void initialize() {
-
     }
 
     @Override

@@ -11,7 +11,8 @@ import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
-    SWERVE_DRIVE("Swerve Drive", SwerveDrive.class), BALLPATH_INTAKE("Ballpath Intake", BallpathSubsystem_V2.class)
+    SWERVE_DRIVE("Swerve Drive", SwerveDrive.class), 
+    BALLPATH_INTAKE("Ballpath Intake", BallpathSubsystem_V2.class)
     ;
 
     /**
