@@ -39,8 +39,6 @@ public class ClimbMotion {
     public boolean IsExtended;
     public boolean IsRotated;
     public boolean isClimbing;
-
-    private boolean AutoClimbing;
     
     private double climberSpeed;
 
@@ -64,7 +62,7 @@ public class ClimbMotion {
         if (climberSpeed < 0 && Math.abs(RightClimber.getPosition()) >= constant.RETRACTED_POS){
             RightClimber.setSpeed(climberSpeed);
         } else if (climberSpeed > 0 && Math.abs(RightClimber.getPosition()) < constant.EXTENDED_POS){
-            if (autoState == AutoState.DEPLOY && AutoClimbing && RightClimber.getPosition() >= constant.DEPLOY_POS){
+            if (autoState == AutoState.DEPLOY && RightClimber.getPosition() >= constant.DEPLOY_POS){
                 RightClimber.setSpeed(0);
             } else {
                 RightClimber.setSpeed(climberSpeed);
@@ -108,7 +106,7 @@ public class ClimbMotion {
         SmartDashboard.putNumber("Climb Motor Speed", climberSpeed);
         SmartDashboard.putBoolean("Is Rotated", IsRotated);
         SmartDashboard.putBoolean("Is Extended", IsExtended);
-        SmartDashboard.putBoolean("Is AutoClimbing", AutoClimbing);
+        SmartDashboard.putBoolean("Is AutoClimbing", autoState != AutoState.IDLE);
 
         
 
@@ -129,7 +127,6 @@ public class ClimbMotion {
     }
 
     public void AutoClimb(){
-        AutoClimbing = true;
         if (!isClimbing){
             autoState = AutoState.DEPLOY;
             isClimbing = true;
@@ -144,7 +141,7 @@ public class ClimbMotion {
         Extend(); //first step to climb any bar is to extend.
     }
     public void StopAutoClimb(){
-        AutoClimbing = false;
+        autoState = AutoState.IDLE;
     }
 
     
@@ -156,7 +153,6 @@ public class ClimbMotion {
         IsRotated = false;
         isClimbing = false;
         autoState = AutoState.IDLE;
-        AutoClimbing = false;
         climberSpeed = 0;
 
         RightClimber.resetEncoder();
