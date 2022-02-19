@@ -14,7 +14,7 @@ public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
     SWERVE_DRIVE("Swerve Drive", SwerveDrive.class),
-    LAUNCHER("Launcher", Launcher.class)
+    LAUNCHER("Launcher", Launcher.class),
     FIRE("Fire", AutoFire.class),
     FLYWHEEL_SPEED("Flywheel Speed", AutoFlywheelSpeed.class);
     ;
