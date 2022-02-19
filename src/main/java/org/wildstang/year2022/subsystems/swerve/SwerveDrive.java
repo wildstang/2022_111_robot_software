@@ -97,6 +97,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (source == faceUp && faceUp.getValue()){
             if (faceLeft.getValue()){ rotTarget = 291.0;
             } else if (faceRight.getValue()){ rotTarget = 21.0;
+            } else if (leftBumper.getValue()){ rotTarget = 17.7;
             } else  rotTarget = 0.0;
             rotLocked = true;
         }
@@ -109,6 +110,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (source == faceDown && faceDown.getValue()){
             if (faceLeft.getValue()){ rotTarget = 201.0;
             } else if (faceRight.getValue()){ rotTarget = 111.0;
+            } else if (leftBumper.getValue()){ rotTarget = 197.7;
             } else rotTarget = 180.0;
             rotLocked = true;
         }
@@ -118,10 +120,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
             } else rotTarget = 90.0;
             rotLocked = true;
         }
-        if (source == leftBumper && leftBumper.getValue()){
-            rotTarget = 17.7;
-            rotLocked = true;
-        }
+        // if (source == leftBumper && leftBumper.getValue()){
+        //     rotTarget = 17.7;
+        //     rotLocked = true;
+        // }
         //get rotational joystick
         rotSpeed = -rotSpeedLimiter.calculate(-rightStickX.getValue());
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
@@ -308,7 +310,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         gyro.setAngleAdjustment(degrees);
     }
     public double getGyroAngle(){
-        return gyro.getAngle()%360;
+        return (gyro.getAngle()+360)%360;
     }
     
 }

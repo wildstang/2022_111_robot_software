@@ -55,7 +55,7 @@ public class Hood implements Subsystem {
     @Override
     public void init() {
         hood_motor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
-        hood_motor.initClosedLoop(1.0, 0.0, 0.0, 0.0);
+        hood_motor.initClosedLoop(0.05, 0.0, 1.0, 0.0);
         hood_motor.setCurrentLimit(10, 10, 0);
         hood_motor.setBrake();
         //hood_motor.getController().setInverted(true);
@@ -84,7 +84,7 @@ public class Hood implements Subsystem {
             //hood_motor.setSpeed(-HOOD_SPEED);
         }
         if (state == State.PRESET){
-            hood_motor.setPosition(CONVERSION * (launchMode.getHood() - getMA3()));
+            hood_motor.setPosition(hood_motor.getPosition()+ CONVERSION * (launchMode.getHood() - getMA3()));
         }
         if (state == State.IDLE){
             hood_motor.setSpeed(0);
@@ -92,6 +92,8 @@ public class Hood implements Subsystem {
         
         SmartDashboard.putNumber("hoodPosition", hood_motor.getPosition());
         SmartDashboard.putNumber("hood MA3", getMA3());
+        SmartDashboard.putNumber("hood target value", launchMode.getHood());
+        SmartDashboard.putNumber("hood target", hood_motor.getPosition() + CONVERSION * (launchMode.getHood() - getMA3()));
         SmartDashboard.putString("hood mode", state.toString());
     }
 
@@ -108,7 +110,7 @@ public class Hood implements Subsystem {
     }
     else if (source == leftBumper && leftBumper.getValue()){
         if (rightBumper.getValue()){
-            launchMode = LauncherModes.LAUNCH_PAD;
+            launchMode = LauncherModes.TARMAC_EDGE;
             state = State.PRESET;
         } else {
             launchMode = LauncherModes.FENDER_SHOT;
@@ -117,13 +119,13 @@ public class Hood implements Subsystem {
     }
      else if (source == rightBumper && rightBumper.getValue()){
         if (leftBumper.getValue()){
-            launchMode = LauncherModes.LAUNCH_PAD;
-            state = State.PRESET;
-        } else {
             launchMode = LauncherModes.TARMAC_EDGE;
             state = State.PRESET;
+        } else {
+            launchMode = LauncherModes.LAUNCH_PAD;
+            state = State.PRESET;
         }
-    } else state = State.IDLE;
+    } //else state = State.IDLE;
      
     }
 

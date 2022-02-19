@@ -42,7 +42,7 @@ public class Tester implements Subsystem{
     private final double modifyAmount = 0.02;
     private final double feedMaxSpeed = 1.0;
     private final double intakeMaxSpeed = 1.0;
-    private final double hoodMaxSpeed = 0.2;
+    private final double hoodMaxSpeed = 0.1;
 
 
     @Override
@@ -59,29 +59,29 @@ public class Tester implements Subsystem{
         //     intakeSolenoidState = !intakeSolenoidState;
         // }
 
-        // if (Math.abs(rightTrigger.getValue()) > 0.5){
-        //     launcherSolenoidState = false;
-        //     launcherSpeed = LAUNCHER_INITIAL + modifier;
-        //     kickerSpeed = 1.0;
-        // } else {
-        //     launcherSolenoidState = true;
-        //     launcherSpeed = 0;
-        //     kickerSpeed = 0;
-        // }
-        // if (source == yButton && yButton.getValue()){
-        //     modifier += modifyAmount;
-        // }
-        // if (source == bButton && bButton.getValue()){
-        //     modifier -= modifyAmount;
-        // }
+        if (Math.abs(rightTrigger.getValue()) > 0.5){
+            launcherSolenoidState = false;
+            launcherSpeed = LAUNCHER_INITIAL + modifier;
+            kickerSpeed = 1.0;
+        } else {
+            launcherSolenoidState = true;
+            launcherSpeed = 0;
+            kickerSpeed = 0;
+        }
+        if (source == yButton && yButton.getValue()){
+            modifier += modifyAmount;
+        }
+        if (source == bButton && bButton.getValue()){
+            modifier -= modifyAmount;
+        }
 
-        // if (rightBumper.getValue()){
-        //     hoodSpeed = hoodMaxSpeed;
-        // } else if (leftbumper.getValue()){
-        //     hoodSpeed = -hoodMaxSpeed;
-        // } else {
-        //     hoodSpeed = 0;
-        // }
+        if (rightBumper.getValue()){
+            hoodSpeed = hoodMaxSpeed;
+        } else if (leftbumper.getValue()){
+            hoodSpeed = -hoodMaxSpeed;
+        } else {
+            hoodSpeed = 0;
+        }
 
         if (source == selectButton && selectButton.getValue()){
             tiltState = !tiltState;
@@ -101,9 +101,9 @@ public class Tester implements Subsystem{
         aButton.addInputListener(this);
         xButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_LEFT);
         xButton.addInputListener(this);
-        yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
+        yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_UP);
         yButton.addInputListener(this);
-        bButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_RIGHT);
+        bButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_DOWN);
         bButton.addInputListener(this);
         leftbumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_SHOULDER);
         leftbumper.addInputListener(this);
@@ -117,20 +117,20 @@ public class Tester implements Subsystem{
         rightStickY.addInputListener(this);
 
         //feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.FEED);   
-        //launcherMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER);    
-        //kickerMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.KICKER); 
-        //hoodMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
+        // launcherMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER);    
+        // kickerMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.KICKER); 
+        // hoodMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
         //intakeMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.INTAKE);
         climbMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.CLIMB);
         //feedMotor.setCurrentLimit(35, 35, 0);
-        //launcherMotor.setCurrentLimit(50, 50, 0);
-        //kickerMotor.setCurrentLimit(30, 30, 0);
-        //hoodMotor.setCurrentLimit(25, 25, 0);
+        // launcherMotor.setCurrentLimit(50, 50, 0);
+        // kickerMotor.setCurrentLimit(30, 30, 0);
+        // hoodMotor.setCurrentLimit(15, 15, 0);
         //intakeMotor.setCurrentLimit(25, 25, 0);
         climbMotor.setCurrentLimit(50, 50, 0);
         climbMotor.setBrake();
 
-        //launcherSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
+        // launcherSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER_SOLENOID);
         tiltSolenoid1 = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_1);
         tiltSolenoid2 = (WsDoubleSolenoid) Core.getOutputManager().getOutput(WSOutputs.CLIMB_SOLENOID_2);
         //intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_SOLENOID);
@@ -144,10 +144,10 @@ public class Tester implements Subsystem{
 
     @Override
     public void update() {
-        //launcherMotor.setSpeed(-launcherSpeed);
+        // launcherMotor.setSpeed(-launcherSpeed);
         //feedMotor.setSpeed(-feedSpeed);
-        //kickerMotor.setSpeed(kickerSpeed);
-        //hoodMotor.setSpeed(hoodSpeed);
+        // kickerMotor.setSpeed(kickerSpeed);
+        // hoodMotor.setSpeed(hoodSpeed);
         //intakeMotor.setSpeed(intakeSpeed);
         if ((climbSpeed < 0 && Math.abs(climbMotor.getPosition()) < 88.5) || (climbSpeed > 0 && Math.abs(climbMotor.getPosition()) >= 2)){
             climbMotor.setSpeed(climbSpeed);
@@ -158,7 +158,7 @@ public class Tester implements Subsystem{
         //climbMotor.setSpeed(climbSpeed);
         
 
-        //launcherSolenoid.setValue(launcherSolenoidState);
+        // launcherSolenoid.setValue(launcherSolenoidState);
         //intakeSolenoid.setValue(intakeSolenoidState);
         if (!tiltState){
             tiltSolenoid1.setValue(WsDoubleSolenoidState.FORWARD.ordinal());
@@ -168,12 +168,12 @@ public class Tester implements Subsystem{
             tiltSolenoid2.setValue(WsDoubleSolenoidState.REVERSE.ordinal());
         }
 
-        //SmartDashboard.putNumber("Flywheel velocity", -launcherMotor.getVelocity());
-        //SmartDashboard.putNumber("kicker percent output", kickerSpeed);
-        //SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
-        //SmartDashboard.putNumber("Flywheel percent output", LAUNCHER_INITIAL+modifier);
-        //SmartDashboard.putNumber("hoodPosition", hoodMotor.getPosition());
-        //SmartDashboard.putNumber("hood MA3", hoodMotor.getController().getAnalog(Mode.kAbsolute).getVoltage());
+        // SmartDashboard.putNumber("Flywheel velocity", -launcherMotor.getVelocity());
+        // SmartDashboard.putNumber("kicker percent output", kickerSpeed);
+        // SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
+        // SmartDashboard.putNumber("Flywheel percent output", LAUNCHER_INITIAL+modifier);
+        // SmartDashboard.putNumber("hoodPosition", hoodMotor.getPosition());
+        // SmartDashboard.putNumber("hood MA3", hoodMotor.getController().getAnalog(Mode.kAbsolute).getVoltage());
         SmartDashboard.putNumber("climb encoder value", climbMotor.getPosition());
         SmartDashboard.putNumber("climb percent output", climbSpeed);
         //SmartDashboard.putBoolean("solenoid launcher", launcherSolenoidState);

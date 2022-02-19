@@ -25,7 +25,7 @@ public class Launcher implements Subsystem {
 
     // inputs
     private AnalogInput launchButton, speedButton;
-    private DigitalInput leftBumper, rightBumper, yButton;
+    private DigitalInput leftBumper, rightBumper, yButton, bButton;
 
     // outputs
     private WsSparkMax kickerMotor;
@@ -57,6 +57,8 @@ public class Launcher implements Subsystem {
         rightBumper.addInputListener(this);
         yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
         yButton.addInputListener(this);
+        bButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_RIGHT);
+        bButton.addInputListener(this);
     }
 
     public void initOutputs() {
@@ -77,10 +79,10 @@ public class Launcher implements Subsystem {
         } else {
             if (flywheelMotor.getVelocity() < threshold*launchMode.getRPM()){
                 flywheelMotor.setSpeed(-launchMode.getSpeed());
-                kickerMotor.setSpeed(-1.0);
+                kickerMotor.setSpeed(1.0);
             } else {
                 flywheelMotor.setSpeed(-launchMode.getSpeed());
-                kickerMotor.setSpeed(-1.0);
+                kickerMotor.setSpeed(1.0);
             }
         }
 
@@ -102,18 +104,25 @@ public class Launcher implements Subsystem {
         } else {
             isRunning = false;
         }
-        if (source == leftBumper && leftBumper.getValue()){
-            if (rightBumper.getValue()){
+        // if (source == leftBumper && leftBumper.getValue()){
+        //     if (rightBumper.getValue()){
+        //         launchMode = LauncherModes.LAUNCH_PAD;
+        //     } else {
+        //         launchMode = LauncherModes.FENDER_SHOT;
+        //     }
+        // }
+        // if (source == rightBumper && rightBumper.getValue()){
+        //     if (leftBumper.getValue()){
+        //         launchMode = LauncherModes.LAUNCH_PAD;
+        //     } else {
+        //         launchMode = LauncherModes.TARMAC_EDGE;
+        //     }
+        // }
+        if (bButton.getValue() && source == bButton){
+            if (launchMode == LauncherModes.FENDER_SHOT){
                 launchMode = LauncherModes.LAUNCH_PAD;
             } else {
                 launchMode = LauncherModes.FENDER_SHOT;
-            }
-        }
-        if (source == rightBumper && rightBumper.getValue()){
-            if (leftBumper.getValue()){
-                launchMode = LauncherModes.LAUNCH_PAD;
-            } else {
-                launchMode = LauncherModes.TARMAC_EDGE;
             }
         }
     }
