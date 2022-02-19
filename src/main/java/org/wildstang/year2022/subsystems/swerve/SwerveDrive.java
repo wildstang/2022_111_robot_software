@@ -39,7 +39,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private AnalogInput rightTrigger;//thrust
     private AnalogInput leftTrigger;//reserved for limelight aiming
     private DigitalInput rightBumper;//defense mode, aka cross
-    private DigitalInput leftBumper;//reserved for intake
+    private DigitalInput leftBumper;//reserved for intake - nah it's launch pad rot lock
     private DigitalInput select;//gyro reset
     private DigitalInput faceUp;//rotation lock 0 degrees
     private DigitalInput faceRight;//rotation lock 90 degrees
@@ -49,7 +49,6 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double xSpeed;
     private double ySpeed;
     private double rotSpeed;
-    private boolean isFieldOriented;
     private double thrustValue;
     private boolean rotLocked;
     private double rotTarget;
@@ -117,6 +116,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
             if (faceUp.getValue()){ rotTarget = 21.0;
             } else if (faceDown.getValue()){ rotTarget = 111.0;
             } else rotTarget = 90.0;
+            rotLocked = true;
+        }
+        if (source == leftBumper && leftBumper.getValue()){
+            rotTarget = 17.7;
             rotLocked = true;
         }
         //get rotational joystick
@@ -224,7 +227,6 @@ public class SwerveDrive extends SwerveDriveTemplate {
         xSpeed = 0;
         ySpeed = 0;
         rotSpeed = 0;
-        isFieldOriented = true;//should be true
         //gyro.reset();
         setToTeleop();
         rotLocked = false;

@@ -59,9 +59,9 @@
 
 //     public void update() {
 //         //handle motor output
-//         if (climberSpeed < 0 && Math.abs(RightClimber.getPosition()) >= constant.RETRACTED_POS){
+//         if (climberSpeed > 0 && Math.abs(RightClimber.getPosition()) >= constant.RETRACTED_POS){
 //             RightClimber.setSpeed(climberSpeed);
-//         } else if (climberSpeed > 0 && Math.abs(RightClimber.getPosition()) < constant.EXTENDED_POS){
+//         } else if (climberSpeed < 0 && Math.abs(RightClimber.getPosition()) < constant.EXTENDED_POS){
 //             if (autoState == AutoState.DEPLOY && RightClimber.getPosition() >= constant.DEPLOY_POS){
 //                 RightClimber.setSpeed(0);
 //             } else {

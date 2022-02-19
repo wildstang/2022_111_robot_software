@@ -84,7 +84,7 @@ public class Hood implements Subsystem {
             //hood_motor.setSpeed(-HOOD_SPEED);
         }
         if (state == State.PRESET){
-            hood_motor.setPosition(CONVERSION * (getMA3() - launchMode.getHood()));
+            hood_motor.setPosition(CONVERSION * (launchMode.getHood() - getMA3()));
         }
         if (state == State.IDLE){
             hood_motor.setSpeed(0);
