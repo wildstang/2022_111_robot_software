@@ -2,8 +2,6 @@ package org.wildstang.year2022.robot;
 
 import org.wildstang.framework.core.AutoPrograms;
 import org.wildstang.year2022.auto.SampleAutoProgram;
-import org.wildstang.year2022.auto.steps.AutoFire;
-import org.wildstang.year2022.auto.steps.AutoFlywheelSpeed;
 
 /**
  * All active AutoPrograms are enumerated here.
@@ -12,9 +10,7 @@ import org.wildstang.year2022.auto.steps.AutoFlywheelSpeed;
 public enum WSAutoPrograms implements AutoPrograms {
 
     // enumerate programs
-    TEST_PROGRAM("Sample", SampleAutoProgram.class),
-    FIRE("Fire", AutoFire.class),
-    FLYWHEEL_SPEED("Flywheel Speed", AutoFlywheelSpeed.class);
+    TEST_PROGRAM("Sample", SampleAutoProgram.class);
     ;
 
     /**
