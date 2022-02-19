@@ -72,19 +72,22 @@ public class Launcher implements Subsystem {
     public void update() {
         latch.setValue(latchValue);
         if (!isRunning){
-            kickerMotor.setSpeed(0);
             flywheelMotor.setSpeed(0);
+            kickerMotor.setSpeed(0);
         } else {
             if (flywheelMotor.getVelocity() < threshold*launchMode.getRPM()){
-                flywheelMotor.setSpeed(-1.0);
+                flywheelMotor.setSpeed(-launchMode.getSpeed());
+                kickerMotor.setSpeed(-1.0);
             } else {
                 flywheelMotor.setSpeed(-launchMode.getSpeed());
+                kickerMotor.setSpeed(-1.0);
             }
         }
 
         
         SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
         SmartDashboard.putNumber("Flywheel velocity", -flywheelMotor.getVelocity());
+        SmartDashboard.putNumber("Flywheel percent output", -launchMode.getSpeed());
     }
 
     // respond to input updates
@@ -120,7 +123,7 @@ public class Launcher implements Subsystem {
 
     // resets all variables to the default state
     public void resetState() {
-        launchMode = LauncherModes.ZERO;
+        launchMode = LauncherModes.FENDER_SHOT;
         isRunning = false;
         latchValue = true;
     }
@@ -130,11 +133,19 @@ public class Launcher implements Subsystem {
         return "Launcher";
     }
 
-   
-
- 
-
-    
-
+    public void setLauncher(LauncherModes modeToUse){
+        launchMode = modeToUse;
+        isRunning = true;
+    }
+    public void stopLauncher(){
+        isRunning = false;
+        launchMode = LauncherModes.ZERO;
+    }
+    /**
+     * @param firing true to fire, false for not
+     */
+    public void fire(boolean firing){
+        latchValue = !firing;
+    }
 
 }

@@ -56,8 +56,9 @@ public class Hood implements Subsystem {
     public void init() {
         hood_motor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
         hood_motor.initClosedLoop(1.0, 0.0, 0.0, 0.0);
-        hood_motor.setCurrentLimit(15, 15, 0);
+        hood_motor.setCurrentLimit(10, 10, 0);
         hood_motor.setBrake();
+        //hood_motor.getController().setInverted(true);
         left_joystick_y = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_JOYSTICK_Y);
         left_joystick_y.addInputListener(this);
         left_trigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
@@ -77,10 +78,10 @@ public class Hood implements Subsystem {
             hood_motor.setPosition(NEO_RANGE * (hood_position * RANGE_CONSTANT - offset));
         }
         if (state == State.MANUALF){
-            hood_motor.setSpeed(HOOD_SPEED);
+            //hood_motor.setSpeed(HOOD_SPEED);
         }
         if (state == State.MANUALR){
-            hood_motor.setSpeed(-HOOD_SPEED);
+            //hood_motor.setSpeed(-HOOD_SPEED);
         }
         if (state == State.PRESET){
             hood_motor.setPosition(CONVERSION * (getMA3() - launchMode.getHood()));
@@ -91,6 +92,7 @@ public class Hood implements Subsystem {
         
         SmartDashboard.putNumber("hoodPosition", hood_motor.getPosition());
         SmartDashboard.putNumber("hood MA3", getMA3());
+        SmartDashboard.putString("hood mode", state.toString());
     }
 
     @Override
@@ -149,5 +151,10 @@ public class Hood implements Subsystem {
     @Override
     public String getName() {
         return "Hood";
+    }
+
+    public void setHood(LauncherModes modeToUse){
+        state = State.PRESET;
+        launchMode = modeToUse;
     }
 }

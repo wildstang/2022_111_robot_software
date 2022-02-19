@@ -149,11 +149,13 @@ public class Tester implements Subsystem{
         //kickerMotor.setSpeed(kickerSpeed);
         //hoodMotor.setSpeed(hoodSpeed);
         //intakeMotor.setSpeed(intakeSpeed);
-        if ((climbSpeed > 0 && Math.abs(climbMotor.getPosition()) < 88.5) || (climbSpeed < 0 && Math.abs(climbMotor.getPosition()) >= 0)){
+        if ((climbSpeed < 0 && Math.abs(climbMotor.getPosition()) < 88.5) || (climbSpeed > 0 && Math.abs(climbMotor.getPosition()) >= 2)){
             climbMotor.setSpeed(climbSpeed);
         } else {
             climbMotor.setSpeed(0);
         }
+        //negative goes up, positive goes down, -88.5 is max height
+        //climbMotor.setSpeed(climbSpeed);
         
 
         //launcherSolenoid.setValue(launcherSolenoidState);

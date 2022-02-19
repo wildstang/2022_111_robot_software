@@ -7,7 +7,7 @@ import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 import org.wildstang.year2022.subsystems.test.Tester;
 import org.wildstang.year2022.subsystems.launcher.Launcher;
 
-import org.wildstang.year2022.subsystems.climb.ClimbControl;
+//import org.wildstang.year2022.subsystems.climb.ClimbControl;
 /**
  * All subsystems are enumerated here.
  * It is used in Robot.java to initialize all subsystems.
@@ -16,11 +16,11 @@ public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
     SWERVE_DRIVE("Swerve Drive", SwerveDrive.class),
-    //TESTER("Tester", Tester.class),
+    TESTER("Tester", Tester.class),
     BALLPATH("Ballpath", Ballpath.class),
     LAUNCHER("Launcher", Launcher.class),
     HOOD("Hood", Hood.class),
-    CLIMB("Climb", ClimbControl.class)
+    //CLIMB("Climb", ClimbControl.class)
     ;
 
     /**
