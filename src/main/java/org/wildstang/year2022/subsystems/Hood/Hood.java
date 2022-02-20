@@ -125,7 +125,9 @@ public class Hood implements Subsystem {
             launchMode = LauncherModes.LAUNCH_PAD;
             state = State.PRESET;
         }
-    } //else state = State.IDLE;
+    } else if (state != State.PRESET){
+        state = State.IDLE;
+    }
      
     }
 
