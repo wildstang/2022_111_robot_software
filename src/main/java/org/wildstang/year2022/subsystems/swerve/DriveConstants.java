@@ -7,7 +7,7 @@ public final class DriveConstants {
     /** robot width from swerve pod to swerve pod, in inches */
     public static final double ROBOT_WIDTH = 11.5;
     /**speed with which the robot rotates relative to drive speed */
-    public static final double ROTATION_SPEED = 0.4;
+    public static final double ROTATION_SPEED = 1.0;
     /**drive motor gear ratio */
     public static final double DRIVE_RATIO = 6.86;
     /**angle motor gear ratio */
@@ -15,13 +15,13 @@ public final class DriveConstants {
     /**diameter of drive wheel, in inches */
     public static final double WHEEL_DIAMETER = 4.0;
     /**offset of module 1, the front left module, in degrees */
-    public static final double FRONT_LEFT_OFFSET = -280.98;
+    public static final double FRONT_LEFT_OFFSET = -44.64;//-280.98;
     /**offset of module 2, the front right module, in degrees */
-    public static final double FRONT_RIGHT_OFFSET = -313.59;
+    public static final double FRONT_RIGHT_OFFSET = -139.91;//-313.59;
     /**offset of module 3, the rear left module, in degrees */
-    public static final double REAR_LEFT_OFFSET = -199.95;
+    public static final double REAR_LEFT_OFFSET = -16.61;//-199.95;
     /**offset of module 4, the rear right module, in degrees */
-    public static final double REAR_RIGHT_OFFSET = -52.03;
+    public static final double REAR_RIGHT_OFFSET = -288.19;//-52.03;
     /**deadband of the controller's joysticks */
     public static final double DEADBAND = 0.1;
     /**factor of thrust for the drive trigger */
@@ -47,6 +47,10 @@ public final class DriveConstants {
     public static final double ANGLE_I = 0.0;
     /**PID values for angle D */
     public static final double ANGLE_D = 0.0;
+    /**Drive motor current limit */
+    public static final int DRIVE_CURRENT_LIMIT = 50;
+    /**Angle motor current limit */
+    public static final int ANGLE_CURRENT_LIMIT = 30;
     /**Swerve Module Names */
     public static final String[] POD_NAMES = new String[]{"FL", "FR", "BL", "BR"};
 
