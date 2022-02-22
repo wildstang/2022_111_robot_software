@@ -35,7 +35,7 @@ public class Ballpath implements Subsystem{
 
     //Inputs
     private AnalogInput rightTrigger;
-    private DigitalInput driverRightBumper;
+    // private DigitalInput driverLeftBumper;
     private DigitalInput aButton;
     private DigitalInput yButton;
     private DigitalInput xButton;
@@ -53,7 +53,7 @@ public class Ballpath implements Subsystem{
         }
 
         /**run intake and feed either forwards or backwards */
-        if (aButton.getValue() || driverRightBumper.getValue()){
+        if (aButton.getValue()){// || driverLeftBumper.getValue()){
             intakeMotorSpeed = FULL_SPEED;
             intakeSolenoidValue = OPEN;
         }  else {
@@ -71,8 +71,8 @@ public class Ballpath implements Subsystem{
     private void initInputs(){
         rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_TRIGGER);
         rightTrigger.addInputListener(this);
-        driverRightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
-        driverRightBumper.addInputListener(this);
+        // driverLeftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_SHOULDER);
+        // driverLeftBumper.addInputListener(this);
         xButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_LEFT);
         xButton.addInputListener(this);
         yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);

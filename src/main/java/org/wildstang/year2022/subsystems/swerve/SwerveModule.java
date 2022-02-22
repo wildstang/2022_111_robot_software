@@ -98,14 +98,13 @@ public class SwerveModule {
             runAtAngle((angle+180.0)%360);
         }
     }
-    public void runCross(double power, double angle){
-        this.drivePower = power;
+    public void runCross(double position, double angle){
+        this.drivePower = position;
         this.target = angle;
+        driveMotor.setPosition(drivePower);
         if (getDirection(angle)){
-            runAtPower(power);
             runAtAngle(angle);
         } else {
-            runAtPower(-power);
             runAtAngle((angle+180.0)%360);
         }
     }
@@ -137,6 +136,12 @@ public class SwerveModule {
     */
     public double getPosition(){
         return driveMotor.getPosition() * DriveConstants.WHEEL_DIAMETER * Math.PI / DriveConstants.DRIVE_RATIO;
+    }
+    /**returns raw drive encoder value, rotations
+     * @return drive encoder value, rotations
+     */
+    public double getRawEncoderValue(){
+        return driveMotor.getPosition();
     }
     /**determines if it is faster to travel towards angle at positive power (true), or away from angle with negative power (false) 
      * @param angle the angle you are moving towards
