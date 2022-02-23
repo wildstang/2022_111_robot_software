@@ -17,12 +17,13 @@ public class AutoFire extends AutoStep {
         this(true);
     }
 
-    public AutoFire(boolean fire) {
+    public AutoFire(boolean f) {
         launcher = (Launcher) Core.getSubsystemManager().getSubsystem(WSSubsystems.LAUNCHER.getName());
+        fire = f;
         
     }
 
-    @Override
+    
     public void initialize() {
         if (fire){
             launcher.fire();
@@ -31,12 +32,12 @@ public class AutoFire extends AutoStep {
         }
     }
 
-    @Override
+    
     public void update() {
         setFinished(true);
     }
     
-    @Override
+    
     public String toString() {
         return "Fire";
     }

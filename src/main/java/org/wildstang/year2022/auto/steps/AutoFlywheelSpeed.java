@@ -17,21 +17,22 @@ public class AutoFlywheelSpeed extends AutoStep {
         this(Launcher.outputVelocityThresholdPercent*Launcher.maxOutputVelocity);
     }
 
-    public AutoFlywheelSpeed(double velocity) {
+    public AutoFlywheelSpeed(double v) {
         launcher = (Launcher) Core.getSubsystemManager().getSubsystem(WSSubsystems.LAUNCHER.getName());
+        velocity = v;
     }
 
-    @Override
+    
     public void initialize() {
         launcher.setVelocity(velocity);
     }
 
-    @Override
+    
     public void update() {
         setFinished(true);
     }
     
-    @Override
+    
     public String toString() {
         return "Flywheel Speed";
     }
