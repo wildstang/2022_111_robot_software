@@ -7,11 +7,15 @@ import org.wildstang.hardware.roborio.outputs.config.WsServoConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsI2COutputConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsMotorControllers;
+import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoidState;
 import org.wildstang.hardware.roborio.outputs.config.WsDigitalOutputConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsDoubleSolenoidConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsPhoenixFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSparkMaxFollowerConfig;
 import org.wildstang.hardware.roborio.outputs.config.WsSolenoidConfig;
+import org.wildstang.hardware.roborio.outputs.config.WsDoubleSolenoidConfig;
+import org.wildstang.hardware.roborio.outputs.WsDoubleSolenoidState;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -29,7 +33,7 @@ public enum WSOutputs implements Outputs {
     // ---------------------------------
     // Motors
     // ---------------------------------
-    TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, WsMotorControllers.VICTOR_SPX)),
+    //TEST_MOTOR("Test Motor", new WsPhoenixConfig(CANConstants.EXAMPLE_MOTOR_CONTROLLER, WsMotorControllers.VICTOR_SPX)),
 
     DRIVE1("Module 1 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE1, true)),
     ANGLE1("Module 1 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE1, true)),
@@ -39,10 +43,15 @@ public enum WSOutputs implements Outputs {
     ANGLE3("Module 3 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE3, true)),
     DRIVE4("Module 4 Drive Motor", new WsSparkMaxConfig(CANConstants.DRIVE4, true)),
     ANGLE4("Module 4 Angle Motor", new WsSparkMaxConfig(CANConstants.ANGLE4, true)),
-    
-    LAUNCHER1("Shooter Motor One", new WsSparkMaxConfig(CANConstants.SHOOTER,true,false)),
-    LAUNCHER2("Shooter Motor Two", new WsSparkMaxFollowerConfig("Shooter Motor One",CANConstants.SHOOTER_FOLLOWER,true,false)),
-    KICKER("Kicker Motor", new WsSparkMaxConfig(CANConstants.KICKER,true,false)),
+
+    INTAKE("Intake Motor", new WsSparkMaxConfig(CANConstants.INTAKE, true)),
+    FEED("Feed Motor", new WsSparkMaxConfig(CANConstants.FEED, true)),
+    KICKER("Kicker Motor", new WsSparkMaxConfig(CANConstants.KICKER, true)),
+    HOOD("Hood Motor", new WsSparkMaxConfig(CANConstants.HOOD, true)),
+    CLIMB("Climb Motor", new WsSparkMaxConfig(CANConstants.CLIMBER, true)),
+    CLIMB_FOLLOWER("Climb Follower Motor", new WsSparkMaxFollowerConfig("Climb Motor", CANConstants.CLIMBER_FOLLOWER, true, true)),
+    LAUNCHER("Launcher Motor", new WsSparkMaxConfig(CANConstants.SHOOTER, true)),
+    LAUNCHER_FOLLOWER("Launcher Follower Motor", new WsSparkMaxFollowerConfig("Launcher Motor",CANConstants.SHOOTER_FOLLOWER, true, true)),
 
     LAUNCHBAR("Launcher Bar Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 0, false)),
     // ---------------------------------
@@ -59,8 +68,12 @@ public enum WSOutputs implements Outputs {
     // Solenoids
     // ********************************
 
-    TEST_SOLENOID("Test Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 0, false)),
-    
+    //TEST_SOLENOID("Test Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 0, false)),
+    LAUNCHER_SOLENOID("Launcher Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 3, true)),
+    INTAKE_SOLENOID("Intake Solenoid", new WsSolenoidConfig(PneumaticsModuleType.REVPH, 2, true)),
+    CLIMB_SOLENOID_1("Climb Solenoid 1", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH, 6, 7, WsDoubleSolenoidState.REVERSE)),
+    CLIMB_SOLENOID_2("Climb Solenoid 2", new WsDoubleSolenoidConfig(PneumaticsModuleType.REVPH, 4, 5, WsDoubleSolenoidState.REVERSE)),
+      
     // ********************************
     // Relays
     // ********************************
