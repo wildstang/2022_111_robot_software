@@ -11,12 +11,20 @@ import org.wildstang.year2022.subsystems.launcher.Launcher;
 public class AutoFire extends AutoStep {
     private Launcher launcher;
 
+    private boolean fire;
+
     public AutoFire() {
         this(true);
     }
 
-    public AutoFire(boolean fire) {
+    public AutoFire(boolean f) {
         launcher = (Launcher) Core.getSubsystemManager().getSubsystem(WSSubsystems.LAUNCHER.getName());
+        fire = f;
+        
+    }
+
+    
+    public void initialize() {
         if (fire){
             launcher.fire();
         } else {
@@ -24,12 +32,11 @@ public class AutoFire extends AutoStep {
         }
     }
 
-    public void initialize() {
-    }
-
+    
     public void update() {
         setFinished(true);
     }
+    
     
     public String toString() {
         return "Fire";

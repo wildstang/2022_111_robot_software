@@ -10,22 +10,28 @@ import org.wildstang.year2022.subsystems.launcher.Launcher;
  */
 public class AutoFlywheelSpeed extends AutoStep {
     private Launcher launcher;
+
+    private double velocity;
     
     public AutoFlywheelSpeed() {
         this(Launcher.outputVelocityThresholdPercent*Launcher.maxOutputVelocity);
     }
 
-    public AutoFlywheelSpeed(double velocity) {
+    public AutoFlywheelSpeed(double v) {
         launcher = (Launcher) Core.getSubsystemManager().getSubsystem(WSSubsystems.LAUNCHER.getName());
+        velocity = v;
+    }
+
+    
+    public void initialize() {
         launcher.setVelocity(velocity);
     }
 
-    public void initialize() {
-    }
-
+    
     public void update() {
         setFinished(true);
     }
+    
     
     public String toString() {
         return "Flywheel Speed";
