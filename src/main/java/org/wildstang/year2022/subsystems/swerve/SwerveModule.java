@@ -151,4 +151,7 @@ public class SwerveModule {
         if (Math.abs(angle - getAngle()) < 90 || Math.abs(angle - getAngle()) > 270) return true;
         return false;
     }
+    public WsSparkMax getDriveMotor(){
+        return driveMotor;
+    }
 }

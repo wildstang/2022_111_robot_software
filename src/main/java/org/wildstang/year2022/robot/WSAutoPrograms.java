@@ -2,6 +2,9 @@ package org.wildstang.year2022.robot;
 
 import org.wildstang.framework.core.AutoPrograms;
 import org.wildstang.year2022.auto.SampleAutoProgram;
+import org.wildstang.year2022.auto.Programs.FrictionTest;
+import org.wildstang.year2022.auto.Programs.InertiaTest;
+import org.wildstang.year2022.auto.Programs.MomentumTest;
 import org.wildstang.year2022.auto.Programs.Shoot;
 
 /**
@@ -12,7 +15,10 @@ public enum WSAutoPrograms implements AutoPrograms {
 
     // enumerate programs
     TEST_PROGRAM("Sample", SampleAutoProgram.class),
-    SHOOT("Shoot", Shoot.class)
+    SHOOT("Shoot", Shoot.class),
+    FRICTIONTEST("Friction Test", FrictionTest.class),
+    MOMENTUMTEST("Momentum Test", MomentumTest.class),
+    INERTIATEST("Inertia Test", InertiaTest.class)
     ;
 
     /**

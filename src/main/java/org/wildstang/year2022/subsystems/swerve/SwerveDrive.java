@@ -65,8 +65,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private SwerveSignal swerveSignal;
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
 
-    public enum driveType {TELEOP, AUTO, CROSS};
+    public enum driveType {TELEOP, AUTO, CROSS, CHARA};
     public driveType driveState;
+
+    public double charaValue;
 
     @Override
     public void inputUpdate(Input source) {
@@ -215,6 +217,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
         
         }
+        if (driveState == driveType.CHARA){
+            this.swerveSignal = swerveHelper.setDrive(charaValue, 0, 0, 0);
+            drive();
+        }
         SmartDashboard.putNumber("Gyro Reading", getGyroAngle());
         SmartDashboard.putNumber("X speed", xSpeed);
         SmartDashboard.putNumber("Y speed", ySpeed);
@@ -236,6 +242,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         pathVel = 0.0;
         pathHeading = 0.0;
         pathTarget = 0.0;
+
+        charaValue = 0;
     }
 
     @Override
@@ -312,6 +320,18 @@ public class SwerveDrive extends SwerveDriveTemplate {
     }
     public double getGyroAngle(){
         return (gyro.getAngle()+360)%360;
+    }
+
+    public void setCharaDrive(double newCharaValue){
+        this.driveState = driveType.CHARA;
+        this.charaValue = newCharaValue;
+    }
+
+    public double getCharaPos(){
+        return modules[0].getDriveMotor().getPosition();
+    }
+    public double getVelocity(){
+        return modules[0].getDriveMotor().getVelocity();
     }
     
 }
