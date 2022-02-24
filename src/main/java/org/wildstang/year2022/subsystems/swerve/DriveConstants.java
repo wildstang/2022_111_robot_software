@@ -21,7 +21,7 @@ public final class DriveConstants {
     /**offset of module 3, the rear left module, in degrees */
     public static final double REAR_LEFT_OFFSET = -16.61;//-199.95;
     /**offset of module 4, the rear right module, in degrees */
-    public static final double REAR_RIGHT_OFFSET = -288.19;//-52.03;
+    public static final double REAR_RIGHT_OFFSET = -284.19;//-52.03;
     /**deadband of the controller's joysticks */
     public static final double DEADBAND = 0.1;
     /**factor of thrust for the drive trigger */
