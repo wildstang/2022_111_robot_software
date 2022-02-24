@@ -34,10 +34,11 @@ public class Launcher implements Subsystem {
 
     // variables
     private LauncherModes launchMode;
-    private boolean isRunning;
+    public boolean isLauncherRunning;
     private boolean latchValue;
 
     private final double threshold = 0.7;
+
     
     // initializes the subsystem
     public void init() {
@@ -71,7 +72,7 @@ public class Launcher implements Subsystem {
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
         latch.setValue(latchValue);
-        if (!isRunning){
+        if (!isLauncherRunning){
             flywheelMotor.setSpeed(0);
             kickerMotor.setSpeed(0);
         } else {
@@ -98,9 +99,9 @@ public class Launcher implements Subsystem {
             latchValue = true;
         }
         if (Math.abs(speedButton.getValue()) > 0.5){
-            isRunning = true;
+            isLauncherRunning = true;
         } else {
-            isRunning = false;
+            isLauncherRunning = false;
         }
         if (source == leftBumper && leftBumper.getValue()){
             if (rightBumper.getValue()){
@@ -124,7 +125,7 @@ public class Launcher implements Subsystem {
     // resets all variables to the default state
     public void resetState() {
         launchMode = LauncherModes.FENDER_SHOT;
-        isRunning = false;
+        isLauncherRunning = false;
         latchValue = true;
     }
 
@@ -135,10 +136,10 @@ public class Launcher implements Subsystem {
 
     public void setLauncher(LauncherModes modeToUse){
         launchMode = modeToUse;
-        isRunning = true;
+        isLauncherRunning = true;
     }
     public void stopLauncher(){
-        isRunning = false;
+        isLauncherRunning = false;
         launchMode = LauncherModes.ZERO;
     }
     /**

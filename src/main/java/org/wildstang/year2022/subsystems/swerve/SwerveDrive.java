@@ -22,6 +22,9 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.wildstang.year2022.subsystems.launcher.Launcher;
+import org.wildstang.year2022.subsystems.Hood.AimHelper;
+
 /**Class: SwerveDrive
  * inputs: driver left joystick x/y, right joystick x, right trigger, right bumper, select, face buttons all, gyro
  * outputs: four swerveModule objects
@@ -67,6 +70,11 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     public enum driveType {TELEOP, AUTO, CROSS};
     public driveType driveState;
+
+    Launcher Launcher = (Launcher) Core.getSubsystemManager().getSubsystem("Launcher");
+    AimHelper AimHelping = (AimHelper) Core.getSubsystemManager().getSubsystem("AimHelper");
+
+    private double Horizontal_Aim_Parameter = 1;
 
     @Override
     public void inputUpdate(Input source) {
@@ -126,8 +134,16 @@ public class SwerveDrive extends SwerveDriveTemplate {
         //get rotational joystick
         rotSpeed = -rotSpeedLimiter.calculate(-rightStickX.getValue());
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
+        
+        if (Launcher.isLauncherRunning){
+            double AdjustedLimeLight = AimHelping.LimeLight_Analog_X * Horizontal_Aim_Parameter;
+            rotSpeed = -rotSpeedLimiter.calculate(-AdjustedLimeLight);
+            if (Math.abs(AdjustedLimeLight) < DriveConstants.DEADBAND) rotSpeed = 0;
+        }
         //if the rotational joystick is being used, the robot should not be auto tracking heading
         if (rotSpeed != 0) rotLocked = false;
+
+        
     }
  
     @Override
@@ -189,6 +205,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     @Override
     public void update() {
+
         if (driveState == driveType.CROSS){
             //set to cross - done in inputupdate
             //this.swerveSignal = swerveHelper.setCross();

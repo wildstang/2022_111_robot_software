@@ -41,8 +41,8 @@ public class AimHelper{
     private NetworkTableEntry tx; //x angle
     private NetworkTableEntry tv;
     
-    public double x;
-    public double y;
+    public double LimeLight_Analog_X;
+    public double LimeLight_Analog_Y;
 
     public boolean TargetInView;
 
@@ -54,8 +54,8 @@ public class AimHelper{
 
     public AimHelper(){ //initialize. Call before use.
         LC = new LimeConsts();
-        x = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
-        y = 0;
+        LimeLight_Analog_X = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
+        LimeLight_Analog_Y = 0;
         TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
         TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
 
@@ -68,13 +68,13 @@ public class AimHelper{
     }
     public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){
-            x = tx.getDouble(0);
-            y = ty.getDouble(0);
+            LimeLight_Analog_X = tx.getDouble(0);
+            LimeLight_Analog_Y = ty.getDouble(0);
             TargetInView = true;
         }
         else{
-            x = 0; //no target case
-            y = 0;
+            LimeLight_Analog_X = 0; //no target case
+            LimeLight_Analog_Y = 0;
             TargetInView = false;
         }
     }
@@ -84,7 +84,7 @@ public class AimHelper{
         //h = lsin(0), d = lcos(0)
         // l = h/sin(0) = d/cos(0)
         // d = cos(0)*h/sin(0) = h/tan(0)
-        TargetDistance = LC.TARGET_HEIGHT/Math.tan(y+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
+        TargetDistance = LC.TARGET_HEIGHT/Math.tan(LimeLight_Analog_Y+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
         
     }
 
