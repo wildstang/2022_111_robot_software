@@ -36,12 +36,24 @@ public class SwerveSignal {
     public double getSpeed(int i_module){
         return speed[i_module];
     }
+    /**returns speeds from the swerve signal
+     * @return double array of 4 speeds, % output
+     */
+    public double[] getSpeeds(){
+        return speed;
+    }
     /**angle is robot centric, in bearing degrees 
      * @param i_module the module to get the angle from (1 through 4)
      * @return double for the angle to set that module to
     */
     public double getAngle(int i_module){
         return angle[i_module];
+    }
+    /**returns angles from the swerve signal
+     * @return double array of 4 angles, bearing degrees
+     */
+    public double[] getAngles(){
+        return angle;
     }
     
 }
