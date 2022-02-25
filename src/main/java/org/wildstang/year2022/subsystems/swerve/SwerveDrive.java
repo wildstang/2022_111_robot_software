@@ -137,6 +137,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         initInputs();
         initOutputs();
         resetState();
+        gyro.enableLogging(true);
         gyro.reset();
     }
 
