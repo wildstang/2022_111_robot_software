@@ -64,7 +64,11 @@ public class WSSwerveHelper {
         swerveSignal = new SwerveSignal(new double[]{getMagnitude(xCoords[0], yCoords[0]), getMagnitude(xCoords[1], yCoords[1]), getMagnitude(xCoords[2], yCoords[2]), getMagnitude(xCoords[3], yCoords[3])}, 
             new double[]{getDirection(xCoords[0], yCoords[0]), getDirection(xCoords[1], yCoords[1]), getDirection(xCoords[2], yCoords[2]), getDirection(xCoords[3], yCoords[3])});
         swerveSignal.normalize();
-        return swerveSignal;
+        if (swerveSignal.isNotZeroed()){
+            return swerveSignal;
+        } else {
+            return this.setDrive(i_tx, i_ty, i_rot * 0.8, i_gyro);
+        }
     }
 
     /**sets the robot to move in autonomous

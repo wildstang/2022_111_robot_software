@@ -29,6 +29,21 @@ public class SwerveSignal {
             }
         }
     }
+
+    public boolean isNotZeroed(){
+        maxSpeed = 1;
+        for (int i = 0; i < speed.length; i++){
+            if (Math.abs(speed[i]) > maxSpeed){
+                maxSpeed = Math.abs(speed[i]);
+            }
+        }
+        for (int i = 0; i < speed.length; i++){
+            if (Math.abs(speed[i]) < maxSpeed * 0.1){
+                return false;
+            }
+        }
+        return true;
+    }
     /**speed is normalized value [0, 1] 
      * @param i_module the module to get the speed from (1 through 4)
      * @return double for the speed to set that module to
