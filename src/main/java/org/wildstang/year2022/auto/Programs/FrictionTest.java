@@ -7,7 +7,7 @@ public class FrictionTest extends AutoProgram{
 
     @Override
     protected void defineSteps() {
-        addStep(new Friction(0.8, 0.1));
+        addStep(new Friction(0.08, 0.01));
     }
 
     @Override
