@@ -1,4 +1,4 @@
-package org.wildstang.year2022.auto;
+package org.wildstang.year2022.auto.Steps;
 
 import org.wildstang.framework.auto.AutoStep;
 import org.wildstang.framework.core.Core;
@@ -14,6 +14,10 @@ public class IntakeDeployStep extends AutoStep {
     private Ballpath intake;
     private boolean modifier;
 
+    /**Deploy the intake and run the intake and feed
+     * 
+     * @param deploy true to deploy and run wheels, false to retract and stop wheels
+     */
     public IntakeDeployStep(boolean deploy){
         this.modifier = deploy;
     }
