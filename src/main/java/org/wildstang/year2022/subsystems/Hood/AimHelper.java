@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 import org.wildstang.framework.core.Core;
 import com.revrobotics.CANSparkMax;
 import org.wildstang.framework.io.inputs.Input;
+import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.logger.Log;
 import org.wildstang.framework.pid.PIDConstants;
 import org.wildstang.framework.subsystems.drive.Path;
@@ -34,8 +35,10 @@ import org.wildstang.year2022.subsystems.Hood.LimeConsts;
 
 import java.util.Arrays;
 
-public class AimHelper{
+public class AimHelper extends Subsystem{
     
+	AnalogInput rightTrigger;
+	
     private NetworkTable LimeTable;
     private NetworkTableEntry ty; //y angle
     private NetworkTableEntry tx; //x angle
@@ -50,15 +53,18 @@ public class AimHelper{
     private double Angle;
 
     private LimeConsts LC;
+	private onValue;
 
-
-    public AimHelper(){ //initialize. Call before use.
+    public void init(){ //initialize. Call before use.
+	    rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_TRIGGER);
+        rightTrigger.addInputListener(this);
+		
         LC = new LimeConsts();
         x = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
         y = 0;
         TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
         TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
-
+		
 
         LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
 
@@ -66,6 +72,40 @@ public class AimHelper{
         tx = LimeTable.getEntry("tx");
         tv = LimeTable.getEntry("tv");
     }
+	
+	 
+    public void update() {
+		
+		ledModeEntry.setNumber(onValue);
+		limelightModeEntry.setNumber(onValue);
+	}
+	
+	public void inputUpdate(Input source) { 
+		 if (rightTrigger.getValue() > 0.5){
+        onValue = 0;
+		 }
+		 else onValue = 1;
+		
+    }
+
+	}
+	
+	
+	public void selfTest() {
+		
+		
+	}
+	
+	public void resetState() {
+		onValue = 1;
+	}
+	
+	public String getName() {
+		
+		
+		
+	}
+		
     public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){
             x = tx.getDouble(0);

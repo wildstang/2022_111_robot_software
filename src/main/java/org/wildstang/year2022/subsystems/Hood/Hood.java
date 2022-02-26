@@ -63,7 +63,7 @@ public class Hood implements Subsystem {
         left_joystick_y.addInputListener(this);
         left_trigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
         left_trigger.addInputListener(this);
-        aim = new AimHelper();
+        aim = (AimHelper) Core.getSubsystemManager().getSubsystem("Aim_Helper");
         leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_SHOULDER);
         leftBumper.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_SHOULDER);

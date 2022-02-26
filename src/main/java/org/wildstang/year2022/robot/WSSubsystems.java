@@ -21,6 +21,7 @@ public enum WSSubsystems implements Subsystems {
     LAUNCHER("Launcher", Launcher.class),
     HOOD("Hood", Hood.class),
     //CLIMB("Climb", ClimbControl.class)
+	AIM_HELPER("Aim Helper", AimHelper.class)
     ;
 
     /**
