@@ -55,7 +55,7 @@ public class AimHelper extends Subsystem {
 
     private LimeConsts LC;
 	private int onValue;
-	@Override
+	
     public void init(){ //initialize. Call before use.
 	    rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_TRIGGER);
         rightTrigger.addInputListener(this);
@@ -74,13 +74,13 @@ public class AimHelper extends Subsystem {
         tv = LimeTable.getEntry("tv");
     }
 	
-	 @Override
+	
     public void update() {
 		
-		ledModeEntry.setNumber(onValue);
-		limelightModeEntry.setNumber(onValue);
+		LimeTable.ledModeEntry.setNumber(onValue);
+		LimeTable.limelightModeEntry.setNumber(onValue);
 	}
-	@Override
+	
 	public void inputUpdate(Input source) { 
 		 if (rightTrigger.getValue() > 0.5){
         onValue = 0;
@@ -91,16 +91,16 @@ public class AimHelper extends Subsystem {
 
 	
 	
-	@Override
+	
 	public void selfTest() {
 		
 		
 	}
-	@Override
+	
 	public void resetState() {
 		onValue = 1;
 	}
-	@Override
+	
 	public String getName() {
 		return "AimHelper";
 	}
