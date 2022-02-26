@@ -104,6 +104,10 @@ public class WsSparkMax extends WsMotorController {
      */
     public void setBrake() {
         motor.setIdleMode(IdleMode.kBrake);
+        if (follower != null)
+        {
+            follower.setIdleMode(IdleMode.kBrake);
+        }
     }
 
     /**
@@ -111,6 +115,10 @@ public class WsSparkMax extends WsMotorController {
      */
     public void setCoast() {
         motor.setIdleMode(IdleMode.kCoast);
+        if (follower != null)
+        {
+            follower.setIdleMode(IdleMode.kCoast);
+        }
     }
 
     /**
@@ -121,6 +129,7 @@ public class WsSparkMax extends WsMotorController {
      */
     public void setCurrentLimit(int stallLimitAmps, int freeLimitAmps, int limitRPM) {
         motor.setSmartCurrentLimit(stallLimitAmps, freeLimitAmps, limitRPM);
+        enableVoltageCompensation();
         motor.burnFlash();
     }
 
