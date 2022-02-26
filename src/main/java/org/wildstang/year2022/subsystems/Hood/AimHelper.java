@@ -44,6 +44,8 @@ public class AimHelper extends Subsystem {
     private NetworkTableEntry ty; //y angle
     private NetworkTableEntry tx; //x angle
     private NetworkTableEntry tv;
+	private NetworkTableEntry ledModeEntry;
+	private NetworkTableEntry limelightModeEntry;
     
     public double x;
     public double y;
@@ -72,13 +74,16 @@ public class AimHelper extends Subsystem {
         ty = LimeTable.getEntry("ty");
         tx = LimeTable.getEntry("tx");
         tv = LimeTable.getEntry("tv");
+		ledModeEntry = LimeTable.getEntry("ledModeEntry");
+		limelightModeEntry = LimeTable.getEntry("limelightModeEntry");
+		resetState();
     }
 	
 	
     public void update() {
 		
-		LimeTable.ledModeEntry.setNumber(onValue);
-		LimeTable.limelightModeEntry.setNumber(onValue);
+		ledModeEntry.setNumber(onValue);
+		limelightModeEntry.setNumber(onValue);
 	}
 	
 	public void inputUpdate(Input source) { 
