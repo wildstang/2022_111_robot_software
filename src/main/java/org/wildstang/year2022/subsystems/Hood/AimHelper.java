@@ -39,6 +39,7 @@ public class AimHelper extends Subsystem{
     
 	AnalogInput rightTrigger;
 	
+	
     private NetworkTable LimeTable;
     private NetworkTableEntry ty; //y angle
     private NetworkTableEntry tx; //x angle
@@ -54,7 +55,7 @@ public class AimHelper extends Subsystem{
 
     private LimeConsts LC;
 	private onValue;
-
+	@Override
     public void init(){ //initialize. Call before use.
 	    rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_TRIGGER);
         rightTrigger.addInputListener(this);
@@ -73,13 +74,13 @@ public class AimHelper extends Subsystem{
         tv = LimeTable.getEntry("tv");
     }
 	
-	 
+	 @Override
     public void update() {
 		
 		ledModeEntry.setNumber(onValue);
 		limelightModeEntry.setNumber(onValue);
 	}
-	
+	@Override
 	public void inputUpdate(Input source) { 
 		 if (rightTrigger.getValue() > 0.5){
         onValue = 0;
@@ -90,20 +91,18 @@ public class AimHelper extends Subsystem{
 
 	}
 	
-	
+	@Override
 	public void selfTest() {
 		
 		
 	}
-	
+	@Override
 	public void resetState() {
 		onValue = 1;
 	}
-	
+	@Override
 	public String getName() {
-		
-		
-		
+		return "AimHelper"
 	}
 		
     public void calcTargetCoords(){ //update target coords. 
