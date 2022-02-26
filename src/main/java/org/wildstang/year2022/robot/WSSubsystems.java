@@ -12,8 +12,8 @@ import org.wildstang.year2022.subsystems.LimeLight.AimHelper;
 public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
-    SWERVE_DRIVE("Swerve Drive", SwerveDrive.class)
-    HOOD("Hood", Hood.class)
+    SWERVE_DRIVE("Swerve Drive", SwerveDrive.class),
+    HOOD("Hood", Hood.class),
     LIMELIGHT("Limelight", AimHelper.class)
     ;
 
