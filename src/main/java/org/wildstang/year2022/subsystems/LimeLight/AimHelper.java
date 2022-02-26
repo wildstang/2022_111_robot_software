@@ -1,4 +1,4 @@
-package org.wildstang.year2022.subsystems.Hood; 
+package org.wildstang.year2022.subsystems.LimeLight; 
 // ton of imports
 import org.wildstang.framework.subsystems.Subsystem;
 
@@ -30,11 +30,11 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-import org.wildstang.year2022.subsystems.Hood.LimeConsts;
+import org.wildstang.year2022.subsystems.LimeLight.LimeConsts;
 
 import java.util.Arrays;
 
-public class AimHelper{
+public class AimHelper implements Subsystem{
     
     private NetworkTable LimeTable;
     private NetworkTableEntry ty; //y angle
@@ -54,17 +54,52 @@ public class AimHelper{
 
     public AimHelper(){ //initialize. Call before use.
         LC = new LimeConsts();
-        x = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
-        y = 0;
-        TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
-        TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
-
 
         LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
 
         ty = LimeTable.getEntry("ty");
         tx = LimeTable.getEntry("tx");
         tv = LimeTable.getEntry("tv");
+        resetState();
+    }
+    @Override
+    public void init(){ // copy/paste of constructor 
+        LC = new LimeConsts();
+
+        LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
+
+        ty = LimeTable.getEntry("ty");
+        tx = LimeTable.getEntry("tx");
+        tv = LimeTable.getEntry("tv");
+        resetState();
+    }
+
+    @Override
+    public void update(){
+        calcTargetCoords(); //get values from the limelight
+    }
+
+    @Override
+    public void inputUpdate(Input source) {
+        // not sure if this should do anything
+
+    }
+
+    @Override
+    public void selfTest(){
+        
+    }
+    @Override
+    public void resetState() {
+        x = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
+        y = 0;
+        TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
+        TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
+
+    }
+    @Override
+    public String getName() {
+        return "LimeLight";
     }
     public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){

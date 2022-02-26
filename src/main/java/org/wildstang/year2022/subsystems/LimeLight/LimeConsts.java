@@ -1,7 +1,7 @@
-package org.wildstang.year2022.subsystems.Hood; 
+package org.wildstang.year2022.subsystems.LimeLight; 
 
 public class LimeConsts{
-;
+
     
     public double CAMERA_ANGLE_OFFSET = 15; //angular offset between ground and center of camera in degrees
 

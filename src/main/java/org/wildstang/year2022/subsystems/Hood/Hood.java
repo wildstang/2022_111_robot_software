@@ -11,7 +11,7 @@ import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
-import org.wildstang.year2022.subsystems.Hood.AimHelper;
+import org.wildstang.year2022.subsystems.LimeLight.AimHelper;
 import com.revrobotics.SparkMaxAnalogSensor.Mode;
 
 /**
