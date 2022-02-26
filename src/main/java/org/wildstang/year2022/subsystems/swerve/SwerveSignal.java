@@ -31,14 +31,14 @@ public class SwerveSignal {
     }
 
     public boolean isNotZeroed(){
-        maxSpeed = 1;
+        maxSpeed = 0;
         for (int i = 0; i < speed.length; i++){
             if (Math.abs(speed[i]) > maxSpeed){
                 maxSpeed = Math.abs(speed[i]);
             }
         }
         for (int i = 0; i < speed.length; i++){
-            if (Math.abs(speed[i]) < maxSpeed * 0.1){
+            if (Math.abs(speed[i]) + 0.01 <= maxSpeed * 0.1){
                 return false;
             }
         }
