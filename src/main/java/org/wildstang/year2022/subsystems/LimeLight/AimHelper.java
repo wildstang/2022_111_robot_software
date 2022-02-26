@@ -138,7 +138,7 @@ public class AimHelper implements Subsystem{
             double EffectiveDist = TargetDistance*Math.sin(Math.abs(RobotAngle)-Math.abs(x))/Math.sin(Math.PI/Math.abs(RobotAngle));
 
             double Tang = EffectiveDist*Math.sin(Math.abs(RobotAngle)-Math.abs(x))/Math.sin(Math.abs(x));
-            double aproxang = ApproximateAngle(EffectiveDistance);
+            double aproxang = ApproximateAngle(EffectiveDist);
             double vertvel = LC.BALL_VELOCITY*Math.sin(aproxang);
             double Tdist = (vertvel+Math.sqrt(Math.pow(vertvel,2)-(LC.TARGET_HEIGHT*LC.GRAVITY/2)))/LC.GRAVITY;
 
