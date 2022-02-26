@@ -132,6 +132,14 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         //if the rotational joystick is being used, the robot should not be auto tracking heading
         if (rotSpeed != 0) rotLocked = false;
+        if (Math.abs(leftTrigger.getValue()) > 0.5){
+            driveState = driveType.LL;
+        } else {
+            if (driveState == driveType.LL){
+                driveState = driveType.TELEOP;
+                rotLocked = false;
+            }
+        }
     }
  
     @Override
@@ -222,7 +230,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         
         }
         if (driveState == driveType.LL){
-            rotSpeed = limelight.getRotPID();
+            rotSpeed = -limelight.getRotPID();
             this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, getGyroAngle());
             drive();
         }

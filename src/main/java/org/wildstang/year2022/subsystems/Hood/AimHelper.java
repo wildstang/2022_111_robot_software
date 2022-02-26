@@ -24,6 +24,7 @@ import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
@@ -75,13 +76,15 @@ public class AimHelper implements Subsystem{
         //h = lsin(0), d = lcos(0)
         // l = h/sin(0) = d/cos(0)
         // d = cos(0)*h/sin(0) = h/tan(0)
-        TargetDistance = LC.TARGET_HEIGHT/Math.tan(y+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
+        // TargetDistance = LC.TARGET_HEIGHT/Math.tan(ty.getDouble(0)+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
+        //double distance = (75.5 / Math.sin(Math.toRadians(20 + getTYValue()))) / 12.0;
+        TargetDistance = 27 + LC.TARGET_HEIGHT / Math.sin(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
         return TargetDistance;
     }
     
     public double getRotPID(){
         calcTargetCoords();
-        return x * -0.05;
+        return tx.getDouble(0) * -0.015;
     }
 
     public double getAngle(){ //get hood angle for autoaim
@@ -161,7 +164,7 @@ public class AimHelper implements Subsystem{
         TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
 
 
-        LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
+        LimeTable  = NetworkTableInstance.getDefault().getTable("limelight");
 
         ty = LimeTable.getEntry("ty");
         tx = LimeTable.getEntry("tx");
@@ -171,6 +174,7 @@ public class AimHelper implements Subsystem{
 
         leftTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
         leftTrigger.addInputListener(this);
+        resetState();
         
     }
     @Override
@@ -181,8 +185,11 @@ public class AimHelper implements Subsystem{
     @Override
     public void update() {
         calcTargetCoords();
-        
+        SmartDashboard.putNumber("limelight distance", getDistance());    
+        SmartDashboard.putNumber("limelight tx", tx.getDouble(0));
+        SmartDashboard.putNumber("limelight ty", ty.getDouble(0));    
     }
+
     @Override
     public void resetState() {
         turnOnLED(false);

@@ -80,12 +80,12 @@ public class Launcher implements Subsystem {
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
         latch.setValue(latchValue);
-        if (!isRunning){
+        if (isAiming){
+            kickerMotor.setSpeed(1.0);
+            flywheelMotor.setSpeed(-(aimHelper.getDistance() * 0.00087 + 0.297));
+        } else if (!isRunning){
             flywheelMotor.setSpeed(0);
             kickerMotor.setSpeed(0);
-        } else if (isAiming){
-            kickerMotor.setSpeed(1.0);
-            flywheelMotor.setSpeed(aimHelper.getDistance() * 0.00087 + 0.297);
         } else {
             if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getRPM()){
                 flywheelMotor.setSpeed(-1.0);
@@ -100,6 +100,7 @@ public class Launcher implements Subsystem {
         SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
         SmartDashboard.putNumber("Flywheel velocity", -flywheelMotor.getVelocity());
         SmartDashboard.putNumber("Flywheel percent output", -launchMode.getSpeed());
+        SmartDashboard.putBoolean("flywheel is aiming", isAiming);
     }
 
     // respond to input updates
@@ -128,7 +129,11 @@ public class Launcher implements Subsystem {
                 launchMode = LauncherModes.LAUNCH_PAD;
             }
         }
-        isAiming = Math.abs(driverAim.getValue()) > 0.5;
+        if (Math.abs(driverAim.getValue()) > 0.5){
+            isAiming = true;
+        } else {
+            isAiming = false;
+        }
     }
 
     // used for testing
