@@ -2,6 +2,7 @@ package org.wildstang.year2022.subsystems.LimeLight;
 
 public class LimeConsts{
 
+    public double DEADBAND = 0.01; //min speed for the robot to be treated as moving
     
     public double CAMERA_ANGLE_OFFSET = 15; //angular offset between ground and center of camera in degrees
 

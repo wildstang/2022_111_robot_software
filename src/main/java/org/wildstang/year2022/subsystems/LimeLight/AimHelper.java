@@ -51,6 +51,10 @@ public class AimHelper implements Subsystem{
 
     private LimeConsts LC;
 
+    public double AngleError; // an error value for the x. NOT the displacement, but will indicate direction the robot should turn and something like a magnitude.
+
+    private double RobotAngle;
+    private double RobotSpeed;
 
     public AimHelper(){ //initialize. Call before use.
         LC = new LimeConsts();
@@ -95,7 +99,9 @@ public class AimHelper implements Subsystem{
         y = 0;
         TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
         TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
-
+        AngleError = 0;
+        RobotAngle = 0;
+        RobotSpeed = 0;
     }
     @Override
     public String getName() {
@@ -125,7 +131,21 @@ public class AimHelper implements Subsystem{
 
     public double getAngle(){ //get hood angle for autoaim
         getDistance();
-        return ApproximateAngle(TargetDistance);
+        if(RobotSpeed < LC.DEADBAND){
+            return ApproximateAngle(TargetDistance);
+        }
+        else{
+            double EffectiveDist = TargetDistance*Math.sin(Math.abs(RobotAngle)-Math.abs(x))/Math.sin(Math.PI/Math.abs(RobotAngle));
+
+            double Tang = EffectiveDist*Math.sin(Math.abs(RobotAngle)-Math.abs(x))/Math.sin(Math.abs(x));
+            double aproxang = ApproximateAngle(EffectiveDistance);
+            double vertvel = LC.BALL_VELOCITY*Math.sin(aproxang);
+            double Tdist = (vertvel+Math.sqrt(Math.pow(vertvel,2)-(LC.TARGET_HEIGHT*LC.GRAVITY/2)))/LC.GRAVITY;
+
+            AngleError = 1-(Tdist/Tang); //this is a really bad meusure of error. Only will work ok for small errors.
+            return aproxang;
+        }
+        
     }
     public double ApproximateAngle(double dist){ //linear interlopation
         double[] dists = LC.Dists;
