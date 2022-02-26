@@ -54,7 +54,7 @@ public class AimHelper extends Subsystem {
     private double Angle;
 
     private LimeConsts LC;
-	private onValue;
+	private int onValue;
 	@Override
     public void init(){ //initialize. Call before use.
 	    rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_TRIGGER);
@@ -102,7 +102,7 @@ public class AimHelper extends Subsystem {
 	}
 	@Override
 	public String getName() {
-		return "AimHelper"
+		return "AimHelper";
 	}
 		
     public void calcTargetCoords(){ //update target coords. 
