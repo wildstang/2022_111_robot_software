@@ -35,7 +35,7 @@ import org.wildstang.year2022.subsystems.Hood.LimeConsts;
 
 import java.util.Arrays;
 
-public class AimHelper extends Subsystem{
+public class AimHelper extends Subsystem {
     
 	AnalogInput rightTrigger;
 	
@@ -89,7 +89,7 @@ public class AimHelper extends Subsystem{
 		
     }
 
-	}
+	
 	
 	@Override
 	public void selfTest() {
