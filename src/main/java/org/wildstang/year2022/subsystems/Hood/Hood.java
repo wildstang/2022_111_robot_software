@@ -9,7 +9,7 @@ import org.wildstang.framework.subsystems.Subsystem;
 import org.wildstang.hardware.roborio.inputs.WsJoystickAxis;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
-
+import org.wildstang.year2022.robot.WSSubsystems;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.subsystems.Hood.AimHelper;
 import org.wildstang.year2022.subsystems.launcher.LauncherModes;
@@ -63,7 +63,7 @@ public class Hood implements Subsystem {
         left_joystick_y.addInputListener(this);
         left_trigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
         left_trigger.addInputListener(this);
-        aim = new AimHelper();
+        aim = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
         leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_SHOULDER);
         leftBumper.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_SHOULDER);
@@ -75,7 +75,9 @@ public class Hood implements Subsystem {
     @Override
     public void update() {
         if (state == State.AIMING){
-            hood_motor.setPosition(NEO_RANGE * (hood_position * RANGE_CONSTANT - offset));
+            // hood_motor.setPosition(NEO_RANGE * (hood_position * RANGE_CONSTANT - offset));
+            // setPosition(hood_motor.getPosition() + CONVERSION * (aim.getDistance() * 0.0058 + 0.4254));
+            hood_motor.setPosition(hood_motor.getPosition() + CONVERSION * ((0.4254 + 0.0058 * aim.getDistance()) - getMA3()));
         }
         if (state == State.MANUALF){
             //hood_motor.setSpeed(HOOD_SPEED);
@@ -85,6 +87,7 @@ public class Hood implements Subsystem {
         }
         if (state == State.PRESET){
             hood_motor.setPosition(hood_motor.getPosition()+ CONVERSION * (launchMode.getHood() - getMA3()));
+            // setPosition(hood_motor.getPosition() + CONVERSION * (launchMode.getHood() - getMA3()));
         }
         if (state == State.IDLE){
             hood_motor.setSpeed(0);
@@ -98,8 +101,8 @@ public class Hood implements Subsystem {
     }
 
     @Override
-    public void inputUpdate(Input source) {     
-    if (left_trigger.getValue() > 0.5){
+    public void inputUpdate(Input source) {    
+    if (Math.abs(left_trigger.getValue()) > 0.5){
         hood_position = aim.getAngle() / MAX_ANGLE;
         state = State.AIMING;
     }
@@ -160,5 +163,15 @@ public class Hood implements Subsystem {
     public void setHood(LauncherModes modeToUse){
         state = State.PRESET;
         launchMode = modeToUse;
+    }
+
+    public void setPosition(double target){
+        double pidSpeed = 0;
+        if (target*.99 > getMA3() || target*1.01<getMA3()){
+            pidSpeed = 0.8 * (target - getMA3()) * Math.abs(target - getMA3());
+            pidSpeed += Math.signum(pidSpeed) * 0.024;
+        }
+        if ((pidSpeed > 0 && getMA3()>1.51) || (pidSpeed < 0 && getMA3() < 0.08)) hood_motor.setSpeed(0);
+        else hood_motor.setSpeed(pidSpeed);
     }
 }

@@ -1,6 +1,7 @@
 package org.wildstang.year2022.robot;
 
 import org.wildstang.framework.core.Subsystems;
+import org.wildstang.year2022.subsystems.Hood.AimHelper;
 import org.wildstang.year2022.subsystems.Hood.Hood;
 import org.wildstang.year2022.subsystems.ballpath.Ballpath;
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
@@ -20,6 +21,7 @@ public enum WSSubsystems implements Subsystems {
     BALLPATH("Ballpath", Ballpath.class),
     LAUNCHER("Launcher", Launcher.class),
     HOOD("Hood", Hood.class),
+    LIMELIGHT("Limelight", AimHelper.class)
     //CLIMB("Climb", ClimbControl.class)
     ;
 

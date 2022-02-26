@@ -7,6 +7,8 @@ import com.kauailabs.navx.frc.AHRS;
 
 import org.wildstang.framework.core.Core;
 import com.revrobotics.CANSparkMax;
+
+import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.logger.Log;
 import org.wildstang.framework.pid.PIDConstants;
@@ -34,12 +36,14 @@ import org.wildstang.year2022.subsystems.Hood.LimeConsts;
 
 import java.util.Arrays;
 
-public class AimHelper{
+public class AimHelper implements Subsystem{
     
     private NetworkTable LimeTable;
     private NetworkTableEntry ty; //y angle
     private NetworkTableEntry tx; //x angle
     private NetworkTableEntry tv;
+    private NetworkTableEntry ledModeEntry;
+    private NetworkTableEntry llModeEntry;
     
     public double x;
     public double y;
@@ -49,23 +53,10 @@ public class AimHelper{
     private double TargetDistance;
     private double Angle;
 
+    private AnalogInput leftTrigger;
+
     private LimeConsts LC;
 
-
-    public AimHelper(){ //initialize. Call before use.
-        LC = new LimeConsts();
-        x = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
-        y = 0;
-        TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
-        TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
-
-
-        LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
-
-        ty = LimeTable.getEntry("ty");
-        tx = LimeTable.getEntry("tx");
-        tv = LimeTable.getEntry("tv");
-    }
     public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){
             x = tx.getDouble(0);
@@ -79,13 +70,18 @@ public class AimHelper{
         }
     }
 
-    private void getDistance(){ //update target dist. for internal use. Distance is in feet.
+    public double getDistance(){ //update target dist. for internal use. Distance is in feet.
         calcTargetCoords();
         //h = lsin(0), d = lcos(0)
         // l = h/sin(0) = d/cos(0)
         // d = cos(0)*h/sin(0) = h/tan(0)
         TargetDistance = LC.TARGET_HEIGHT/Math.tan(y+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
-        
+        return TargetDistance;
+    }
+    
+    public double getRotPID(){
+        calcTargetCoords();
+        return x * -0.05;
     }
 
     public double getAngle(){ //get hood angle for autoaim
@@ -141,6 +137,60 @@ public class AimHelper{
         }
         return out;
     
+    }
+    public void turnOnLED(boolean onState){
+        if (onState) {
+            ledModeEntry.setNumber(0);//turn led on
+            llModeEntry.setNumber(0);//turn camera to vision tracking
+        } else {
+            ledModeEntry.setNumber(1);//turn led off
+            llModeEntry.setNumber(1);//turn camera to normal color mode
+        }
+    }
+    @Override
+    public void inputUpdate(Input source) {
+        turnOnLED(Math.abs(leftTrigger.getValue()) > 0.5);
+        
+    }
+    @Override
+    public void init() {
+        LC = new LimeConsts();
+        x = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
+        y = 0;
+        TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
+        TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
+
+
+        LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
+
+        ty = LimeTable.getEntry("ty");
+        tx = LimeTable.getEntry("tx");
+        tv = LimeTable.getEntry("tv");
+        ledModeEntry = LimeTable.getEntry("ledMode");
+        llModeEntry = LimeTable.getEntry("camMode");
+
+        leftTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
+        leftTrigger.addInputListener(this);
+        
+    }
+    @Override
+    public void selfTest() {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public void update() {
+        calcTargetCoords();
+        
+    }
+    @Override
+    public void resetState() {
+        turnOnLED(false);
+        
+    }
+    @Override
+    public String getName() {
+        return "Limelight";
     }
 
     
