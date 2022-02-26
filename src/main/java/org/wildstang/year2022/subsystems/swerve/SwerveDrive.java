@@ -44,8 +44,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private DigitalInput faceLeft;//rotation lock 270 degrees
     private DigitalInput faceDown;//rotation lock 180 degrees
 
-    private double xSpeed;
-    private double ySpeed;
+    public double xSpeed;
+    public double ySpeed;
+    public double gyroValue;
+
     private double rotSpeed;
     private boolean isFieldOriented;
     private double thrustValue;
@@ -191,6 +193,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
         
         }
+        gyroValue = gyro.getAngle();
         SmartDashboard.putNumber("Gyro Reading", gyro.getAngle());
         SmartDashboard.putBoolean("Is field oriented", isFieldOriented);
         SmartDashboard.putNumber("Thrust value", thrustValue);

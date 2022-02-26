@@ -34,6 +34,8 @@ import org.wildstang.year2022.subsystems.LimeLight.LimeConsts;
 
 import java.util.Arrays;
 
+import org.wildstang.year2022.robot.WSSubsystems;
+
 public class AimHelper implements Subsystem{
     
     private NetworkTable LimeTable;
@@ -56,6 +58,7 @@ public class AimHelper implements Subsystem{
     private double RobotAngle;
     private double RobotSpeed;
 
+    private SwerveDrive swerve;
     public AimHelper(){ //initialize. Call before use.
         LC = new LimeConsts();
 
@@ -76,6 +79,7 @@ public class AimHelper implements Subsystem{
         tx = LimeTable.getEntry("tx");
         tv = LimeTable.getEntry("tv");
         resetState();
+        swerve = WSSubsystems("Swerve Drive",SwerveDrive);
     }
 
     @Override
@@ -118,6 +122,9 @@ public class AimHelper implements Subsystem{
             y = 0;
             TargetInView = false;
         }
+        RobotSpeed = Math.sqrt(Math.pow(swerve.xSpeed,2)+Math.pow(swerve.ySpeed,2));
+        RobotAngle = Math.tan(swerve.ySpeed/swerve.xSpeed)-swerve.gyroValue;
+
     }
 
     private void getDistance(){ //update target dist. for internal use. Distance is in feet.
