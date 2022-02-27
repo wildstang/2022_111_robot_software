@@ -6,6 +6,7 @@ import org.wildstang.year2022.auto.Programs.FrictionTest;
 import org.wildstang.year2022.auto.Programs.InertiaTest;
 import org.wildstang.year2022.auto.Programs.MomentumTest;
 import org.wildstang.year2022.auto.Programs.Shoot;
+import org.wildstang.year2022.auto.Steps.IntakeDeployStep;
 
 /**
  * All active AutoPrograms are enumerated here.
