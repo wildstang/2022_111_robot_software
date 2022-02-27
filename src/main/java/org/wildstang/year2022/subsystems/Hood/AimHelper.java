@@ -78,7 +78,7 @@ public class AimHelper implements Subsystem{
         // d = cos(0)*h/sin(0) = h/tan(0)
         // TargetDistance = LC.TARGET_HEIGHT/Math.tan(ty.getDouble(0)+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
         //double distance = (75.5 / Math.sin(Math.toRadians(20 + getTYValue()))) / 12.0;
-        TargetDistance = 27 + LC.TARGET_HEIGHT / Math.sin(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
+        TargetDistance = 27 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
         return TargetDistance;
     }
     

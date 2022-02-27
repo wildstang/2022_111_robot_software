@@ -47,6 +47,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private DigitalInput faceRight;//rotation lock 90 degrees
     private DigitalInput faceLeft;//rotation lock 270 degrees
     private DigitalInput faceDown;//rotation lock 180 degrees
+    private DigitalInput dpadLeft;
 
     private double xSpeed;
     private double ySpeed;
@@ -74,7 +75,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     @Override
     public void inputUpdate(Input source) {
         //determine if we are in cross or teleop
-        if (driveState != driveType.AUTO && rightBumper.getValue() && source == rightBumper){
+        if (driveState != driveType.AUTO && dpadLeft.getValue() && source == dpadLeft){
             driveState = driveType.CROSS;
             this.swerveSignal = new SwerveSignal(new double[]{modules[0].getRawEncoderValue(), modules[1].getRawEncoderValue(), modules[2].getRawEncoderValue(), 
                 modules[3].getRawEncoderValue()}, swerveHelper.setCross().getSpeeds());
@@ -100,28 +101,28 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (source == faceUp && faceUp.getValue()){
             if (faceLeft.getValue()){ rotTarget = 291.0;
             } else if (faceRight.getValue()){ rotTarget = 21.0;
-            } else if (leftBumper.getValue()){ rotTarget = 17.7;
+            } else if (rightBumper.getValue()){ rotTarget = 17.7;
             } else  rotTarget = 0.0;
             rotLocked = true;
         }
         if (source == faceLeft && faceLeft.getValue()){
             if (faceUp.getValue()){ rotTarget = 291.0;
             } else if (faceDown.getValue()){ rotTarget = 201.0;
-            } else if (leftBumper.getValue()){ rotTarget = 246;
+            } else if (rightBumper.getValue()){ rotTarget = 246;
             } else rotTarget = 270.0;
             rotLocked = true;
         }
         if (source == faceDown && faceDown.getValue()){
             if (faceLeft.getValue()){ rotTarget = 201.0;
             } else if (faceRight.getValue()){ rotTarget = 111.0;
-            } else if (leftBumper.getValue()){ rotTarget = 197.7;
+            } else if (rightBumper.getValue()){ rotTarget = 197.7;
             } else rotTarget = 180.0;
             rotLocked = true;
         }
         if (source == faceRight && faceRight.getValue()){
             if (faceUp.getValue()){ rotTarget = 21.0;
             } else if (faceDown.getValue()){ rotTarget = 111.0;
-            } else if (leftBumper.getValue()){ rotTarget = 66;
+            } else if (rightBumper.getValue()){ rotTarget = 66;
             } else rotTarget = 90.0;
             rotLocked = true;
         }
@@ -177,6 +178,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         faceRight.addInputListener(this);
         faceDown = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_FACE_DOWN);
         faceDown.addInputListener(this);
+        dpadLeft = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_LEFT);
+        dpadLeft.addInputListener(this);
     }
 
     public void initOutputs(){
