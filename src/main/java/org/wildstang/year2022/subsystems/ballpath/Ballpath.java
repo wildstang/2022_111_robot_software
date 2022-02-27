@@ -35,16 +35,17 @@ public class Ballpath implements Subsystem{
 
     //Inputs
     private AnalogInput rightTrigger;
-    // private DigitalInput driverLeftBumper;
+    private DigitalInput driverLeftBumper;
     private DigitalInput aButton;
     private DigitalInput yButton;
     private DigitalInput xButton;
+    private DigitalInput bButton;
 
     @Override
     public void inputUpdate(Input source) {
 
         //dynamicly controls hopper speed
-        if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue()){
+        if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue() || aButton.getValue() || driverLeftBumper.getValue()){
             feedMotorSpeed = FULL_SPEED;
         } else if (yButton.getValue()){
             feedMotorSpeed = REVERSE_SPEED;
@@ -53,10 +54,13 @@ public class Ballpath implements Subsystem{
         }
 
         /**run intake and feed either forwards or backwards */
-        if (aButton.getValue()){// || driverLeftBumper.getValue()){
+        if (aButton.getValue() || driverLeftBumper.getValue()){// || driverLeftBumper.getValue()){
             intakeMotorSpeed = FULL_SPEED;
             intakeSolenoidValue = OPEN;
-        }  else {
+        }  else if (bButton.getValue()){
+            intakeMotorSpeed = REVERSE_SPEED;
+            intakeSolenoidValue = OPEN;
+        }  else  {
             intakeMotorSpeed = 0;
             intakeSolenoidValue = CLOSE;
         }      
@@ -71,14 +75,16 @@ public class Ballpath implements Subsystem{
     private void initInputs(){
         rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_TRIGGER);
         rightTrigger.addInputListener(this);
-        // driverLeftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_SHOULDER);
-        // driverLeftBumper.addInputListener(this);
+        driverLeftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_SHOULDER);
+        driverLeftBumper.addInputListener(this);
         xButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_LEFT);
         xButton.addInputListener(this);
         yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
         yButton.addInputListener(this);
         aButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_DOWN);
         aButton.addInputListener(this);
+        bButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_RIGHT);
+        bButton.addInputListener(this);
     }
 
     private void initOutputs(){
