@@ -4,24 +4,23 @@ import org.wildstang.framework.auto.AutoStep;
 import org.wildstang.framework.core.Core;
 import org.wildstang.year2022.subsystems.ballpath.Ballpath;
 import org.wildstang.year2022.subsystems.launcher.Launcher;
-import org.wildstang.year2022.subsystems.launcher.LauncherModes;
 
 public class Fire extends AutoStep{
 
     Ballpath ballpath;
     Launcher launcher;
-    LauncherModes modeToUse;
+    Boolean turnOn;
 
-    public Fire(LauncherModes mode){
+    public Fire(boolean turnOn){
         ballpath = (Ballpath) Core.getSubsystemManager().getSubsystem("Ballpath");
         launcher = (Launcher) Core.getSubsystemManager().getSubsystem("Launcher");
-        modeToUse = mode;
+        this.turnOn = turnOn;
     }
 
     @Override
     public void initialize() {
         ballpath.turnOnFeed();
-        launcher.fire(true);
+        launcher.fire(turnOn);
     }
 
     @Override

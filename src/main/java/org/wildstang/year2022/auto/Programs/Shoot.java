@@ -12,7 +12,7 @@ public class Shoot extends AutoProgram{
     protected void defineSteps() {
         addStep(new StartFlywheel(LauncherModes.FENDER_SHOT));
         addStep(new AutoStepDelay(1000));
-        addStep(new Fire(LauncherModes.FENDER_SHOT));
+        addStep(new Fire(true));
     }
 
     @Override
