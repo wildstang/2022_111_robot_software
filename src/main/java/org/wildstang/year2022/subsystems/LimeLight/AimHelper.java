@@ -79,7 +79,7 @@ public class AimHelper implements Subsystem{
         tx = LimeTable.getEntry("tx");
         tv = LimeTable.getEntry("tv");
         resetState();
-        swerve = WSSubsystems("Swerve Drive",SwerveDrive);
+        swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
     }
 
     @Override
