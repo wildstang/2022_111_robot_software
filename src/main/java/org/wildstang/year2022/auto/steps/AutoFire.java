@@ -17,9 +17,9 @@ public class AutoFire extends AutoStep {
         this(true);
     }
 
-    public AutoFire(boolean f) {
+    public AutoFire(boolean fire) {
         launcher = (Launcher) Core.getSubsystemManager().getSubsystem(WSSubsystems.LAUNCHER.getName());
-        fire = f;
+        this.fire = fire;
         
     }
 
