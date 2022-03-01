@@ -9,32 +9,29 @@ import org.wildstang.year2022.auto.steps.IntakeDeployStep;
 
 public class FourBallProgram extends AutoProgram {
 
+        //Important >>> I dont know what LAUNCH_PAD means
 
     @Override
     protected void defineSteps() {
         addStep(new IntakeDeployStep(true));
-        addStep(new StartFlywheel(LauncherModes.FENDER_SHOT));
-        //addStep(new DriveStep(Path));         #Drives -> back to the ball -> then up to finder
+        addStep(new StartFlywheel(LauncherModes.TARMAC_EDGE));
+        //addStep(new DriveStep(Path));         #Drives -> back to the ball 
         addStep(new AutoStepDelay(1000));
-        addStep(new Fire(LauncherModes.FENDER_SHOT));
+        addStep(new Fire(LauncherModes.TARMAC_EDGE));
         addStep(new AutoStepDelay(250));
-        //addStep(new DriveStep(Path));         #Drives -> back (maybe runs into enemy ball)
-        //addStep(new IntakeDeployStep());
-        //addStep(new LauncherSpeedStep());
-        //addStep(new HopperPresetStep(?));
-        // addStep(new PathFollowerStep());
+        addStep(new StartFlywheel(LauncherModes.LAUNCH_PAD));  
+        //addStep(new DriveStep(Path));         #Drives -> drives back to human player
+        //                                      #Gets ball infront & human player ball
+        addStep(new AutoStepDelay(1500));
+        addStep(new Fire(LauncherModes.LAUNCH_PAD));
         
-        //addStep(new ShootStep(?));
-        //addStep(new WaitStep(?));
-        //addStep(new Step(?));
-        //addStep(new Step());
 
     }
 
     @Override
     public String toString() {
         //give it a name
-        return "TwoBallPath";
+        return "FourBallPath";
     }
 
 }
