@@ -29,6 +29,21 @@ public class SwerveSignal {
             }
         }
     }
+
+    public boolean isNotZeroed(){
+        maxSpeed = 0;
+        for (int i = 0; i < speed.length; i++){
+            if (Math.abs(speed[i]) > maxSpeed){
+                maxSpeed = Math.abs(speed[i]);
+            }
+        }
+        for (int i = 0; i < speed.length; i++){
+            if (Math.abs(speed[i]) + 0.01 <= maxSpeed * 0.1){
+                return false;
+            }
+        }
+        return true;
+    }
     /**speed is normalized value [0, 1] 
      * @param i_module the module to get the speed from (1 through 4)
      * @return double for the speed to set that module to
@@ -36,12 +51,24 @@ public class SwerveSignal {
     public double getSpeed(int i_module){
         return speed[i_module];
     }
+    /**returns speeds from the swerve signal
+     * @return double array of 4 speeds, % output
+     */
+    public double[] getSpeeds(){
+        return speed;
+    }
     /**angle is robot centric, in bearing degrees 
      * @param i_module the module to get the angle from (1 through 4)
      * @return double for the angle to set that module to
     */
     public double getAngle(int i_module){
         return angle[i_module];
+    }
+    /**returns angles from the swerve signal
+     * @return double array of 4 angles, bearing degrees
+     */
+    public double[] getAngles(){
+        return angle;
     }
     
 }

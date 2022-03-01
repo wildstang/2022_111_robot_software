@@ -25,7 +25,7 @@ public class Launcher implements Subsystem {
 
     // inputs
     private AnalogInput launchButton, speedButton;
-    private DigitalInput leftBumper, rightBumper;
+    private DigitalInput leftBumper, rightBumper, yButton;
 
     // outputs
     private WsSparkMax kickerMotor;
@@ -55,6 +55,8 @@ public class Launcher implements Subsystem {
         leftBumper.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
+        yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
+        yButton.addInputListener(this);
     }
 
     public void initOutputs() {
@@ -70,24 +72,27 @@ public class Launcher implements Subsystem {
     public void update() {
         latch.setValue(latchValue);
         if (!isRunning){
-            kickerMotor.setSpeed(0);
             flywheelMotor.setSpeed(0);
+            kickerMotor.setSpeed(0);
         } else {
-            if (flywheelMotor.getVelocity() < threshold*launchMode.getRPM()){
+            if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getRPM()){
                 flywheelMotor.setSpeed(-1.0);
+                kickerMotor.setSpeed(1.0);
             } else {
                 flywheelMotor.setSpeed(-launchMode.getSpeed());
+                kickerMotor.setSpeed(1.0);
             }
         }
 
         
         SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
         SmartDashboard.putNumber("Flywheel velocity", -flywheelMotor.getVelocity());
+        SmartDashboard.putNumber("Flywheel percent output", -launchMode.getSpeed());
     }
 
     // respond to input updates
     public void inputUpdate(Input source) {
-        if (Math.abs(launchButton.getValue()) > 0.5){
+        if (Math.abs(launchButton.getValue()) > 0.5 || yButton.getValue()){
             latchValue = false;
         } else {
             latchValue = true;
@@ -99,16 +104,16 @@ public class Launcher implements Subsystem {
         }
         if (source == leftBumper && leftBumper.getValue()){
             if (rightBumper.getValue()){
-                launchMode = LauncherModes.LAUNCH_PAD;
+                launchMode = LauncherModes.TARMAC_EDGE;
             } else {
                 launchMode = LauncherModes.FENDER_SHOT;
             }
         }
         if (source == rightBumper && rightBumper.getValue()){
             if (leftBumper.getValue()){
-                launchMode = LauncherModes.LAUNCH_PAD;
-            } else {
                 launchMode = LauncherModes.TARMAC_EDGE;
+            } else {
+                launchMode = LauncherModes.LAUNCH_PAD;
             }
         }
     }
@@ -118,7 +123,7 @@ public class Launcher implements Subsystem {
 
     // resets all variables to the default state
     public void resetState() {
-        launchMode = LauncherModes.ZERO;
+        launchMode = LauncherModes.FENDER_SHOT;
         isRunning = false;
         latchValue = true;
     }
@@ -128,11 +133,19 @@ public class Launcher implements Subsystem {
         return "Launcher";
     }
 
-   
-
- 
-
-    
-
+    public void setLauncher(LauncherModes modeToUse){
+        launchMode = modeToUse;
+        isRunning = true;
+    }
+    public void stopLauncher(){
+        isRunning = false;
+        launchMode = LauncherModes.ZERO;
+    }
+    /**
+     * @param firing true to fire, false for not
+     */
+    public void fire(boolean firing){
+        latchValue = !firing;
+    }
 
 }
