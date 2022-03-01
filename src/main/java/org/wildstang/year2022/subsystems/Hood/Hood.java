@@ -11,8 +11,9 @@ import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
-import org.wildstang.year2022.subsystems.LimeLight.AimHelper;
 import com.revrobotics.SparkMaxAnalogSensor.Mode;
+import org.wildstang.year2022.subsystems.LimeLight.AimHelper;
+import org.wildstang.year2022.robot.WSSubsystems;
 
 /**
  * Hood system
@@ -65,7 +66,8 @@ public class Hood implements Subsystem {
         dpad_left.addInputListener(this);
         dpad_right = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_RIGHT);
         dpad_right.addInputListener(this);
-        aim = new AimHelper();
+
+        aim = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
         resetState();
         
     }
