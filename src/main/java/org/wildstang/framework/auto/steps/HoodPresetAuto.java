@@ -16,7 +16,7 @@ public class HoodPresetAuto extends AutoStep{
 
     public HoodPresetAuto(boolean preset){
         this.preset = preset;
-        hood = (Hood) Core.getSubsystemManager().getSubsystem(WSSubsystems.HOOD_PRESET.getName());
+        hood = (Hood) Core.getSubsystemManager().getSubsystem(WSSubsystems.HOOD.getName());
     }
 
     public HoodPresetAuto(){
@@ -27,9 +27,7 @@ public class HoodPresetAuto extends AutoStep{
     @Override
     public void initialize() {
         if (preset){
-            hood.inputUpdate(dpad_left);
-            //dpad_left is a placeholder for the preset we want. I am basing this code to work with preset3, therefore dpad_left is the corresponding input.
-            //If we base the auto code off of a different preset, we will change the input
+            hood.autoPreset();
         }else {
             hood.resetState();
         }

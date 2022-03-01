@@ -41,6 +41,8 @@ public class Hood implements Subsystem {
     final double preset2 = .75;
     final double preset3 = .5;
     final double preset4 = .25;
+    final double presetAuto = .63;
+        //this will be set to an actual postion later
 
     final double max_angle = 45;
     final double position_change = .02;
@@ -78,16 +80,16 @@ public class Hood implements Subsystem {
     @Override
     public void inputUpdate(Input source) {
     
-    if (source == dpad_up && dpad_up.getValue() == true){
+    if (source == dpad_up){
         hood_position = preset1;
     }
-    if (source == dpad_down && dpad_down.getValue() == true){
+    if (source == dpad_down){
         hood_position = preset2;
     }
-    if (source == dpad_left && dpad_left.getValue() == true){
+    if (source == dpad_left){
         hood_position = preset3;
     }
-    if (source == dpad_right && dpad_right.getValue() == true){
+    if (source == dpad_right){
         hood_position = preset4;
     }     
     if (left_trigger.getValue() > 0.5){
@@ -99,6 +101,11 @@ public class Hood implements Subsystem {
          hood_position += position_change * -1;
      }
      
+    }
+
+
+    public void autoPreset(){
+        hood_position = presetAuto;
     }
 
     public double offset_from_initial(WsSparkMax motor,double initial){
