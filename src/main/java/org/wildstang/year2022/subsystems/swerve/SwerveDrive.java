@@ -40,14 +40,14 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private AnalogInput rightStickX;//rot joystick
     private AnalogInput rightTrigger;//thrust
     private AnalogInput leftTrigger;//reserved for limelight aiming
-    private DigitalInput rightBumper;//defense mode, aka cross
-    private DigitalInput leftBumper;//reserved for intake - nah it's launch pad rot lock
+    private DigitalInput rightBumper;//shoot and launch pad locs
+    private DigitalInput leftBumper;//reserved for intake
     private DigitalInput select;//gyro reset
     private DigitalInput faceUp;//rotation lock 0 degrees
     private DigitalInput faceRight;//rotation lock 90 degrees
     private DigitalInput faceLeft;//rotation lock 270 degrees
     private DigitalInput faceDown;//rotation lock 180 degrees
-    private DigitalInput dpadLeft;
+    private DigitalInput dpadLeft;//defense mode
 
     private double xSpeed;
     private double ySpeed;
