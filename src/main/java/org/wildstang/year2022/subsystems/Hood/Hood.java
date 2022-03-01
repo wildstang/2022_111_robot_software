@@ -78,22 +78,21 @@ public class Hood implements Subsystem {
     @Override
     public void inputUpdate(Input source) {
     
-    if (source == dpad_up){
+    if (source == dpad_up && dpad_up.getValue() == true){
         hood_position = preset1;
     }
-    if (source == dpad_down){
+    if (source == dpad_down && dpad_down.getValue() == true){
         hood_position = preset2;
     }
-    if (source == dpad_left){
+    if (source == dpad_left && dpad_left.getValue() == true){
         hood_position = preset3;
     }
-    if (source == dpad_right){
+    if (source == dpad_right && dpad_right.getValue() == true){
         hood_position = preset4;
     }     
     if (left_trigger.getValue() > 0.5){
             hood_position = aim.getAngle() / max_angle;
-         }
-     
+    }
      else if (left_joystick_y.getValue() > .15 && hood_position < 1){
          hood_position += position_change;
      }else if (left_joystick_y.getValue() < -.15 && hood_position > 0){
