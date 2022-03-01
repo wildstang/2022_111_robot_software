@@ -17,11 +17,11 @@ public enum WSSubsystems implements Subsystems {
 
     // enumerate subsystems
     SWERVE_DRIVE("Swerve Drive", SwerveDrive.class),
-    LIMELIGHT("Limelight", AimHelper.class)
+    LIMELIGHT("Limelight", AimHelper.class),
     TESTER("Tester", Tester.class),
     BALLPATH("Ballpath", Ballpath.class),
     LAUNCHER("Launcher", Launcher.class),
-    HOOD("Hood", Hood.class),
+    HOOD("Hood", Hood.class)
     //CLIMB("Climb", ClimbControl.class)
     ;
 
