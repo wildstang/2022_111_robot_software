@@ -1,11 +1,14 @@
 package org.wildstang.year2022.subsystems.swerve;
 
+import org.wildstang.year2022.robot.CANConstants;
 import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
 import com.revrobotics.CANSparkMax;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
+import org.wildstang.sample.subsystems.drive.Drive;
+
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SwerveModule {
 
     private double target;
+    private double encoderTarget;
     private double drivePower;
 
     private WsSparkMax driveMotor;
@@ -33,6 +37,9 @@ public class SwerveModule {
         this.driveMotor.setCoast();
         this.angleMotor.setBrake();
 
+        driveMotor.setCurrentLimit(DriveConstants.DRIVE_CURRENT_LIMIT, DriveConstants.DRIVE_CURRENT_LIMIT, 0);
+        angleMotor.setCurrentLimit(DriveConstants.ANGLE_CURRENT_LIMIT, DriveConstants.ANGLE_CURRENT_LIMIT, 0);
+
         //set up angle and drive with pid and kpid respectively
         driveMotor.initClosedLoop(DriveConstants.DRIVE_P, DriveConstants.DRIVE_I, DriveConstants.DRIVE_D, DriveConstants.DRIVE_F);
         angleMotor.initClosedLoop(DriveConstants.ANGLE_P, DriveConstants.ANGLE_I, DriveConstants.ANGLE_D, 0);
@@ -47,16 +54,18 @@ public class SwerveModule {
      * @return double for cancoder value (degrees)
     */
     public double getAngle(){
-        return canCoder.getAbsolutePosition();
+        return 359.999-canCoder.getAbsolutePosition();
     }
     /** displays module information, needs the module name from super 
      * @param name the name of this module
     */
     public void displayNumbers(String name){
-        SmartDashboard.putNumber(name + " CANCoder", canCoder.getAbsolutePosition());
+        SmartDashboard.putNumber(name + " CANCoder", 359.999-canCoder.getAbsolutePosition());
         SmartDashboard.putNumber(name + " NEO angle encoder", angleMotor.getPosition());
         SmartDashboard.putNumber(name + " NEO angle target", target);
+        SmartDashboard.putNumber(name + " NEO angle encoder target", encoderTarget);
         SmartDashboard.putNumber(name + " NEO drive power", drivePower);
+        SmartDashboard.putNumber(name + " NEO drive position", driveMotor.getPosition());
     }
     /** resets drive encoder */
     public void resetDriveEncoders(){
@@ -89,14 +98,13 @@ public class SwerveModule {
             runAtAngle((angle+180.0)%360);
         }
     }
-    public void runCross(double power, double angle){
-        this.drivePower = power;
+    public void runCross(double position, double angle){
+        this.drivePower = position;
         this.target = angle;
+        driveMotor.setPosition(drivePower);
         if (getDirection(angle)){
-            runAtPower(power);
             runAtAngle(angle);
         } else {
-            runAtPower(-power);
             runAtAngle((angle+180.0)%360);
         }
     }
@@ -112,10 +120,10 @@ public class SwerveModule {
             currentRotation+=360.0;
         }
         
-        double deltaRotation = -currentRotation + angle;
+        double deltaRotation = currentRotation - angle;
         double deltaTicks = deltaRotation/360 * DriveConstants.TICKS_PER_REV * DriveConstants.ANGLE_RATIO;
         double currentTicks = angleMotor.getPosition();
-        angleMotor.setPosition(currentTicks + deltaTicks);
+        angleMotor.setPosition(currentTicks + deltaTicks); encoderTarget = currentTicks + deltaTicks;
     }
     /**runs module drive at specified power [-1, 1] 
      * @param power the power to run the module at, [-1, 1]
@@ -128,6 +136,12 @@ public class SwerveModule {
     */
     public double getPosition(){
         return driveMotor.getPosition() * DriveConstants.WHEEL_DIAMETER * Math.PI / DriveConstants.DRIVE_RATIO;
+    }
+    /**returns raw drive encoder value, rotations
+     * @return drive encoder value, rotations
+     */
+    public double getRawEncoderValue(){
+        return driveMotor.getPosition();
     }
     /**determines if it is faster to travel towards angle at positive power (true), or away from angle with negative power (false) 
      * @param angle the angle you are moving towards

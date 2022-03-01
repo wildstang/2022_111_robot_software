@@ -20,7 +20,7 @@ public class WSSwerveHelper {
      * @return driveSignal for cross, with 0 magnitude and crossed directions
      */
     public SwerveSignal setCross(){
-        return new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{45.0, 135.0, 135.0, 45.0});
+        return new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{135.0, 45.0, 45.0, 135.0});
     }
 
     /** sets the robot in the mobile defensive "crab" mode, where all modules are aligned
@@ -31,7 +31,7 @@ public class WSSwerveHelper {
      */
     public SwerveSignal setCrab(double i_tx, double i_ty, double i_gyro){
         magnitude = getMagnitude(i_tx, i_ty);
-        direction = getDirection(i_tx, i_ty, i_gyro);
+        direction = getDirection(i_tx, i_ty);
         swerveSignal = new SwerveSignal(new double[]{magnitude, magnitude, magnitude, magnitude}, new double[]{direction, direction, direction, direction});
         swerveSignal.normalize();
         return swerveSignal;
@@ -51,14 +51,18 @@ public class WSSwerveHelper {
         //angle of front left rotation vector
         baseV = Math.atan(DriveConstants.ROBOT_LENGTH / DriveConstants.ROBOT_WIDTH);
 
+        //find the translational vectors rotated to account for the gyro
+        double xTrans = i_tx * Math.cos(Math.toRadians(i_gyro)) - i_ty * Math.sin(Math.toRadians(i_gyro));
+        double yTrans = i_tx * Math.sin(Math.toRadians(i_gyro)) + i_ty * Math.cos(Math.toRadians(i_gyro));
+
         //cartesian vector addition of translation and rotation vectors
         //note rotation vector angle advances in the cos -> sin -> -cos -> -sin fashion
-        xCoords = new double[]{i_tx + rotMag*Math.cos(baseV), i_tx + rotMag*Math.sin(baseV), i_tx - rotMag*Math.sin(baseV), i_tx - rotMag*Math.cos(baseV)}; 
-        yCoords = new double[]{i_ty + rotMag*Math.sin(baseV), i_ty - rotMag*Math.cos(baseV), i_ty + rotMag*Math.cos(baseV), i_ty - rotMag*Math.sin(baseV)};
+        xCoords = new double[]{xTrans + rotMag*Math.cos(baseV), xTrans + rotMag*Math.sin(baseV), xTrans - rotMag*Math.sin(baseV), xTrans - rotMag*Math.cos(baseV)}; 
+        yCoords = new double[]{yTrans + rotMag*Math.sin(baseV), yTrans - rotMag*Math.cos(baseV), yTrans + rotMag*Math.cos(baseV), yTrans - rotMag*Math.sin(baseV)};
 
         //create drivesignal, with magnitudes and directions of x and y
         swerveSignal = new SwerveSignal(new double[]{getMagnitude(xCoords[0], yCoords[0]), getMagnitude(xCoords[1], yCoords[1]), getMagnitude(xCoords[2], yCoords[2]), getMagnitude(xCoords[3], yCoords[3])}, 
-            new double[]{getDirection(xCoords[0], yCoords[0], i_gyro), getDirection(xCoords[1], yCoords[1], i_gyro), getDirection(xCoords[2], yCoords[2], i_gyro), getDirection(xCoords[3], yCoords[3], i_gyro)});
+            new double[]{getDirection(xCoords[0], yCoords[0]), getDirection(xCoords[1], yCoords[1]), getDirection(xCoords[2], yCoords[2]), getDirection(xCoords[3], yCoords[3])});
         swerveSignal.normalize();
         return swerveSignal;
     }
@@ -111,11 +115,10 @@ public class WSSwerveHelper {
         return Math.hypot(x, y);
     }
     /**x,y inputs are cartesian, angle values are in bearing, returns 0 - 360 */
-    private double getDirection(double x, double y, double angle){
-        double measurement =  360-Math.toDegrees(Math.atan2(x,y));//returns angle in bearing form
+    private double getDirection(double x, double y){
+        double measurement =  Math.toDegrees(Math.atan2(x,y));//returns angle in bearing form
         if (measurement<0) measurement = 360+measurement;
-        measurement = measurement - angle;
-        if (measurement<0) measurement = 360+measurement;
+        if (measurement>=360) measurement = measurement-360;
         return measurement;
     }
     
