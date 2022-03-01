@@ -1,4 +1,4 @@
-package org.wildstang.year2022.auto.Steps;
+package org.wildstang.year2022.auto.steps;
 
 import org.wildstang.framework.auto.AutoStep;
 import org.wildstang.framework.core.Core;
