@@ -8,7 +8,7 @@ import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 
 import frc.paths.*;
 
-public class TestPath extends AutoProgram{
+public class TestCircle extends AutoProgram{
 
     @Override
     protected void defineSteps() {
@@ -23,7 +23,7 @@ public class TestPath extends AutoProgram{
     @Override
     public String toString() {
         // TODO Auto-generated method stub
-        return "Test Path";
+        return "Test Circle";
     }
     
 }

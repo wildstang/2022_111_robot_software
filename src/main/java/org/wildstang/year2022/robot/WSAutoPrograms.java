@@ -7,6 +7,10 @@ import org.wildstang.year2022.auto.Programs.InertiaTest;
 import org.wildstang.year2022.auto.Programs.MomentumTest;
 import org.wildstang.year2022.auto.Programs.Offset5Ball;
 import org.wildstang.year2022.auto.Programs.Shoot;
+import org.wildstang.year2022.auto.Programs.TestCircle;
+import org.wildstang.year2022.auto.Programs.TestHeading;
+import org.wildstang.year2022.auto.Programs.TestStraight10;
+import org.wildstang.year2022.auto.Programs.TestStraight5;
 
 /**
  * All active AutoPrograms are enumerated here.
@@ -20,7 +24,11 @@ public enum WSAutoPrograms implements AutoPrograms {
     FRICTIONTEST("Friction Test", FrictionTest.class),
     MOMENTUMTEST("Momentum Test", MomentumTest.class),
     INERTIATEST("Inertia Test", InertiaTest.class),
-    OFFSET5BALL("Offset 5 Ball", Offset5Ball.class)
+    OFFSET5BALL("Offset 5 Ball", Offset5Ball.class),
+    CIRCLE("Test Circle", TestCircle.class),
+    STRAIGHT5("Test Straight5", TestStraight5.class),
+    STRAIGHT10("Test Straight10", TestStraight10.class),
+    HEADING("Test Heading", TestHeading.class)
     ;
 
     /**

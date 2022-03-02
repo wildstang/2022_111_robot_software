@@ -253,6 +253,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         SmartDashboard.putNumber("rotSpeed", rotSpeed);
         SmartDashboard.putString("Drive mode", driveState.toString());
         SmartDashboard.putBoolean("rotLocked", rotLocked);
+        SmartDashboard.putNumber("Chara drive speed", modules[0].getDriveMotor().getVelocity());
     }
 
     @Override
