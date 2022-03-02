@@ -35,17 +35,19 @@ public class Ballpath implements Subsystem{
 
     //Inputs
     private AnalogInput rightTrigger;
-    private DigitalInput driverLeftBumper;
+    private DigitalInput driverAim;
     private DigitalInput aButton;
     private DigitalInput yButton;
     private DigitalInput xButton;
     private DigitalInput bButton;
+    private DigitalInput driverIntake;
+    private AnalogInput driverShoot;
 
     @Override
     public void inputUpdate(Input source) {
 
         //dynamicly controls hopper speed
-        if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue() || aButton.getValue() || driverLeftBumper.getValue()){
+        if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue() || aButton.getValue() || driverIntake.getValue() || Math.abs(driverShoot.getValue()) > 0.5){
             feedMotorSpeed = FULL_SPEED;
         } else if (yButton.getValue()){
             feedMotorSpeed = REVERSE_SPEED;
@@ -54,7 +56,7 @@ public class Ballpath implements Subsystem{
         }
 
         /**run intake and feed either forwards or backwards */
-        if (aButton.getValue() || driverLeftBumper.getValue()){// || driverLeftBumper.getValue()){
+        if (aButton.getValue() || driverIntake.getValue() || (Math.abs(driverShoot.getValue())>0.5 && !driverAim.getValue())){// || driverLeftBumper.getValue()){
             intakeMotorSpeed = FULL_SPEED;
             intakeSolenoidValue = OPEN;
         }  else if (bButton.getValue()){
@@ -75,8 +77,6 @@ public class Ballpath implements Subsystem{
     private void initInputs(){
         rightTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_TRIGGER);
         rightTrigger.addInputListener(this);
-        driverLeftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_SHOULDER);
-        driverLeftBumper.addInputListener(this);
         xButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_LEFT);
         xButton.addInputListener(this);
         yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
@@ -85,6 +85,12 @@ public class Ballpath implements Subsystem{
         aButton.addInputListener(this);
         bButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_RIGHT);
         bButton.addInputListener(this);
+        driverShoot = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
+        driverShoot.addInputListener(this);
+        driverAim = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        driverAim.addInputListener(this);
+        driverIntake = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_SHOULDER);
+        driverIntake.addInputListener(this);
     }
 
     private void initOutputs(){
