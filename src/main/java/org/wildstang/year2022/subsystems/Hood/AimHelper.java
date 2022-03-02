@@ -34,7 +34,7 @@ import org.wildstang.year2022.subsystems.Hood.LimeConsts;
 
 import java.util.Arrays;
 
-public class AimHelper{
+public class AimHelper implements Subsystem{
     
     private NetworkTable LimeTable;
     private NetworkTableEntry ty; //y angle
@@ -52,7 +52,7 @@ public class AimHelper{
     private LimeConsts LC;
 
 
-    public AimHelper(){ //initialize. Call before use.
+    public void init(){ //initialize. Call before use.
         LC = new LimeConsts();
         LimeLight_Analog_X = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
         LimeLight_Analog_Y = 0;
@@ -62,11 +62,13 @@ public class AimHelper{
 
         LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
 
+        calcTargetCoords();
+    }
+    public void calcTargetCoords(){ //update target coords. 
         ty = LimeTable.getEntry("ty");
         tx = LimeTable.getEntry("tx");
         tv = LimeTable.getEntry("tv");
-    }
-    public void calcTargetCoords(){ //update target coords. 
+
         if(tv.getDouble(0) == 1){
             LimeLight_Analog_X = tx.getDouble(0);
             LimeLight_Analog_Y = ty.getDouble(0);
@@ -78,6 +80,27 @@ public class AimHelper{
             TargetInView = false;
         }
     }
+
+    public void update(){
+        calcTargetCoords();
+    }
+
+    public void selfTest(){
+
+    }
+
+    public void inputUpdate(Input theinput){
+        
+    }
+
+    public void resetState(){
+        LimeTable  = NetworkTableInstance.getDefault().getTable("limelight-stang");
+        calcTargetCoords();
+    }
+
+    public String getName(){
+        return "AimHelper";
+    }   
 
     private void getDistance(){ //update target dist. for internal use. Distance is in feet.
         calcTargetCoords();
