@@ -26,8 +26,8 @@ import org.wildstang.framework.subsystems.Subsystem;
 public class Launcher implements Subsystem {
 
     // inputs
-    private AnalogInput launchButton, speedButton, driverAim;
-    private DigitalInput leftBumper, rightBumper, yButton, driverShoot;
+    private AnalogInput launchButton, speedButton, driverShoot;
+    private DigitalInput leftBumper, rightBumper, yButton, driverAim;
 
     // outputs
     private WsSparkMax kickerMotor;
@@ -62,10 +62,10 @@ public class Launcher implements Subsystem {
         rightBumper.addInputListener(this);
         yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
         yButton.addInputListener(this);
-        driverAim = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
-        driverAim.addInputListener(this);
-        driverShoot = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        driverShoot = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
         driverShoot.addInputListener(this);
+        driverAim = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        driverAim.addInputListener(this);
     }
 
     public void initOutputs() {
@@ -107,7 +107,7 @@ public class Launcher implements Subsystem {
 
     // respond to input updates
     public void inputUpdate(Input source) {
-        if (Math.abs(launchButton.getValue()) > 0.5 || yButton.getValue() || (driverShoot.getValue() && Math.abs(driverAim.getValue()) > 0.5)){
+        if (Math.abs(launchButton.getValue()) > 0.5 || yButton.getValue() || (driverAim.getValue() && Math.abs(driverShoot.getValue()) > 0.5)){
             latchValue = false;
         } else {
             latchValue = true;
@@ -131,7 +131,7 @@ public class Launcher implements Subsystem {
                 launchMode = LauncherModes.LAUNCH_PAD;
             }
         }
-        if (Math.abs(driverAim.getValue()) > 0.5){
+        if (driverAim.getValue()){
             isAiming = true;
         } else {
             isAiming = false;

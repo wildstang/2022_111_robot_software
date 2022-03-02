@@ -33,16 +33,17 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     private final SlewRateLimiter xSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
     private final SlewRateLimiter ySpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
-    private final SlewRateLimiter rotSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
+    //private final SlewRateLimiter rotSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
 
     private AnalogInput leftStickX;//translation joystick x
     private AnalogInput leftStickY;//translation joystick y
     private AnalogInput rightStickX;//rot joystick
     private AnalogInput rightTrigger;//thrust
-    private AnalogInput leftTrigger;//reserved for limelight aiming
-    private DigitalInput rightBumper;//shoot and launch pad locs
-    private DigitalInput leftBumper;//reserved for intake
+    private AnalogInput leftTrigger;//intake, shoot while aiming
+    private DigitalInput rightBumper;//aim
+    private DigitalInput leftBumper;//robot centric intake
     private DigitalInput select;//gyro reset
+    private DigitalInput start;
     private DigitalInput faceUp;//rotation lock 0 degrees
     private DigitalInput faceRight;//rotation lock 90 degrees
     private DigitalInput faceLeft;//rotation lock 270 degrees
@@ -54,6 +55,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double rotSpeed;
     private double thrustValue;
     private boolean rotLocked;
+    private boolean isFieldCentric;
     private double rotTarget;
     private double pathPos;
     private double pathVel;
@@ -101,29 +103,29 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (source == faceUp && faceUp.getValue()){
             if (faceLeft.getValue()){ rotTarget = 291.0;
             } else if (faceRight.getValue()){ rotTarget = 21.0;
-            } else if (rightBumper.getValue()){ rotTarget = 17.7;
             } else  rotTarget = 0.0;
             rotLocked = true;
         }
         if (source == faceLeft && faceLeft.getValue()){
             if (faceUp.getValue()){ rotTarget = 291.0;
             } else if (faceDown.getValue()){ rotTarget = 201.0;
-            } else if (rightBumper.getValue()){ rotTarget = 246;
             } else rotTarget = 270.0;
             rotLocked = true;
         }
         if (source == faceDown && faceDown.getValue()){
             if (faceLeft.getValue()){ rotTarget = 201.0;
             } else if (faceRight.getValue()){ rotTarget = 111.0;
-            } else if (rightBumper.getValue()){ rotTarget = 197.7;
             } else rotTarget = 180.0;
             rotLocked = true;
         }
         if (source == faceRight && faceRight.getValue()){
             if (faceUp.getValue()){ rotTarget = 21.0;
             } else if (faceDown.getValue()){ rotTarget = 111.0;
-            } else if (rightBumper.getValue()){ rotTarget = 66;
             } else rotTarget = 90.0;
+            rotLocked = true;
+        }
+        if (start.getValue()){
+            rotTarget = 197.7;
             rotLocked = true;
         }
 
@@ -133,7 +135,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         //if the rotational joystick is being used, the robot should not be auto tracking heading
         if (rotSpeed != 0) rotLocked = false;
-        if (Math.abs(leftTrigger.getValue()) > 0.5){
+        if (rightBumper.getValue()){
             driveState = driveType.LL;
         } else {
             if (driveState == driveType.LL){
@@ -141,6 +143,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
                 rotLocked = false;
             }
         }
+        isFieldCentric = !leftBumper.getValue();
     }
  
     @Override
@@ -170,6 +173,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         leftBumper.addInputListener(this);
         select = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_SELECT);
         select.addInputListener(this);
+        start = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_START);
+        start.addInputListener(this);
         faceUp = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_FACE_UP);
         faceUp.addInputListener(this);
         faceLeft = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_FACE_LEFT);
@@ -258,6 +263,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         pathVel = 0.0;
         pathHeading = 0.0;
         pathTarget = 0.0;
+        isFieldCentric = true;
     }
 
     @Override
@@ -331,6 +337,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         gyro.setAngleAdjustment(degrees);
     }
     public double getGyroAngle(){
+        if (!isFieldCentric) return 0;
         return (gyro.getAngle()+360)%360;
     }
     
