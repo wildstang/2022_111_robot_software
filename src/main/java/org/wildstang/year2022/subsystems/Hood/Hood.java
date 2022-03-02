@@ -172,6 +172,6 @@ public class Hood implements Subsystem {
             pidSpeed += Math.signum(pidSpeed) * 0.024;
         }
         if ((pidSpeed > 0 && getMA3()>1.51) || (pidSpeed < 0 && getMA3() < 0.08)) hood_motor.setSpeed(0);
-        else hood_motor.setSpeed(pidSpeed);
+        else hood_motor.setSpeed(-pidSpeed);
     }
 }
