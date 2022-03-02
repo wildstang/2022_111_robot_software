@@ -39,12 +39,13 @@ public class Ballpath implements Subsystem{
     private DigitalInput aButton;
     private DigitalInput yButton;
     private DigitalInput xButton;
+    private DigitalInput bButton;
 
     @Override
     public void inputUpdate(Input source) {
 
         //dynamicly controls hopper speed
-        if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue()){
+        if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue() || aButton.getValue()){
             feedMotorSpeed = FULL_SPEED;
         } else if (yButton.getValue()){
             feedMotorSpeed = REVERSE_SPEED;
@@ -56,7 +57,10 @@ public class Ballpath implements Subsystem{
         if (aButton.getValue()){// || driverLeftBumper.getValue()){
             intakeMotorSpeed = FULL_SPEED;
             intakeSolenoidValue = OPEN;
-        }  else {
+        }  else if (bButton.getValue()){
+            intakeMotorSpeed = REVERSE_SPEED;
+            intakeSolenoidValue = OPEN;
+        }  else  {
             intakeMotorSpeed = 0;
             intakeSolenoidValue = CLOSE;
         }      
@@ -79,6 +83,8 @@ public class Ballpath implements Subsystem{
         yButton.addInputListener(this);
         aButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_DOWN);
         aButton.addInputListener(this);
+        bButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_RIGHT);
+        bButton.addInputListener(this);
     }
 
     private void initOutputs(){

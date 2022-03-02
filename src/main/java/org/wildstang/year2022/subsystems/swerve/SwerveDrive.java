@@ -132,7 +132,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         }
 
         //get rotational joystick
-        rotSpeed = -rotSpeedLimiter.calculate(-rightStickX.getValue());
+        rotSpeed = rightStickX.getValue()*Math.abs(rightStickX.getValue());
+        //rotSpeed = -rotSpeedLimiter.calculate(-rightStickX.getValue());
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         
         if (Launcher.isLauncherRunning){
@@ -152,6 +153,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         initInputs();
         initOutputs();
         resetState();
+        gyro.enableLogging(true);
         gyro.reset();
     }
 
