@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Momentum extends AutoStep{
 
     private double percentOutput;
+    private double lastPos;
     private SwerveDrive swerve;
 
     public Momentum(double percent){
@@ -20,12 +21,14 @@ public class Momentum extends AutoStep{
     @Override
     public void initialize() {
         swerve.setCharaDrive(percentOutput);
+        lastPos = 0;
     }
 
     @Override
     public void update() {
-        SmartDashboard.putNumber("Momentum percent", percentOutput);
-        SmartDashboard.putNumber("Momentum Velocity", swerve.getVelocity());
+        SmartDashboard.putNumber("Momentum velocity",(swerve.getCharaPos()-lastPos) / 0.02 );
+        lastPos = swerve.getCharaPos();
+        
     }
 
     @Override

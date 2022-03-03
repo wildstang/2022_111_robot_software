@@ -66,7 +66,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double autoTempY;
 
     private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
-    private SwerveModule[] modules;
+    public SwerveModule[] modules;
     private SwerveSignal swerveSignal;
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
     private AimHelper limelight;
@@ -240,7 +240,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         
         }
         if (driveState == driveType.CHARA){
-            this.swerveSignal = swerveHelper.setDrive(charaValue, 0, 0, 0);
+            this.swerveSignal = swerveHelper.setDrive(0, charaValue, 0, getGyroAngle());
+            drive();
         }
         if (driveState == driveType.LL){
             rotSpeed = -limelight.getRotPID();
@@ -254,7 +255,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
         SmartDashboard.putString("Drive mode", driveState.toString());
         SmartDashboard.putBoolean("rotLocked", rotLocked);
         SmartDashboard.putNumber("Chara drive speed", modules[0].getDriveMotor().getVelocity());
+        SmartDashboard.putNumber("Chara value", charaValue);
+        SmartDashboard.putNumber("Chara foundspeed", this.swerveSignal.getSpeed(0));
     }
+    
 
     @Override
     public void resetState() {
@@ -288,10 +292,18 @@ public class SwerveDrive extends SwerveDriveTemplate {
     }
     /** sets the drive to teleop/cross, and sets drive motors to coast */
     public void setToTeleop(){
-        driveState = driveType.TELEOP;
+        driveState = driveType.CHARA;
+        this.charaValue = 0;
         for (int i = 0; i < modules.length; i++){
             modules[i].setDriveBrake(false);
         }
+        rotSpeed = 0;
+        xSpeed = 0;
+        ySpeed = 0;
+        rotLocked = false;
+        //stopMoving();
+        //this.inputUpdate((Input) leftStickX);
+        //update();
     }
     /**sets the drive to autonomous */
     public void setToAuto(){
@@ -299,8 +311,12 @@ public class SwerveDrive extends SwerveDriveTemplate {
     }
     /**stops the robot from moving */
     public void stopMoving(){
-        swerveSignal = swerveHelper.setCrab(0.0, 0.0, getGyroAngle());
+        //swerveSignal = swerveHelper.setCrab(0.0, 0.0, getGyroAngle());
+        this.swerveSignal = swerveHelper.setDrive(0.0, 0.0, 0.0, getGyroAngle());
         drive();
+        for (int i = 0; i < 4; i++){
+            modules[i].runAtPower(0);
+        }
     }
     /**drives the robot at the current swerveSignal, and displays information for each swerve module */
     private void drive(){

@@ -8,7 +8,7 @@ public class InertiaTest extends AutoProgram{
     @Override
     protected void defineSteps() {
         // TODO Auto-generated method stub
-        addStep(new Inertia(0.3));
+        addStep(new Inertia(0.5));
     }
 
     @Override

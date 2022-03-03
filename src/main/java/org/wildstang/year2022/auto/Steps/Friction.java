@@ -36,7 +36,7 @@ public class Friction extends AutoStep{
         SmartDashboard.putNumber("Friction drive value", Math.abs(swerve.getCharaPos()));
         SmartDashboard.putNumber("Friction last pos", lastPos);
         if (timer.get()>2.0){
-            if (Math.abs(swerve.getCharaPos()) < lastPos+0.1){
+            if (Math.abs(swerve.getCharaPos()) < lastPos+0.01){
                 SmartDashboard.putNumber("current Value", initial);
                 swerve.setCharaDrive(0);
                 setFinished();

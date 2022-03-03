@@ -30,8 +30,8 @@ public class Hood implements Subsystem {
     WsSparkMax hood_motor;
 
     WsJoystickAxis left_joystick_y;
-    AnalogInput right_bumper;
-    DigitalInput leftBumper, rightBumper;
+    DigitalInput right_bumper;//driver right bumper
+    DigitalInput leftBumper, rightBumper;//manipulator right bumper
 
     double hood_position;
     double offset;
@@ -61,7 +61,7 @@ public class Hood implements Subsystem {
         //hood_motor.getController().setInverted(true);
         left_joystick_y = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_JOYSTICK_Y);
         left_joystick_y.addInputListener(this);
-        right_bumper = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        right_bumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
         right_bumper.addInputListener(this);
         aim = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
         leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_SHOULDER);
@@ -102,7 +102,7 @@ public class Hood implements Subsystem {
 
     @Override
     public void inputUpdate(Input source) {    
-    if (Math.abs(right_bumper.getValue()) > 0.5){
+    if (right_bumper.getValue()){
         hood_position = aim.getAngle() / MAX_ANGLE;
         state = State.AIMING;
     }

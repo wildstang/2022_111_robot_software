@@ -14,4 +14,8 @@ public abstract class SwerveDriveTemplate implements Subsystem{
 
     public abstract void setGyro(double degrees);
 
+    public abstract void setToAuto();
+
+    public abstract void setToTeleop();
+
 }
