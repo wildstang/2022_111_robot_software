@@ -79,10 +79,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
     @Override
     public void inputUpdate(Input source) {
         //determine if we are in cross or teleop
-        if (driveState != driveType.AUTO && dpadLeft.getValue() && source == dpadLeft){
+        if (driveState != driveType.AUTO && dpadLeft.getValue()){
             driveState = driveType.CROSS;
             this.swerveSignal = new SwerveSignal(new double[]{modules[0].getRawEncoderValue(), modules[1].getRawEncoderValue(), modules[2].getRawEncoderValue(), 
-                modules[3].getRawEncoderValue()}, swerveHelper.setCross().getSpeeds());
+                modules[3].getRawEncoderValue()}, swerveHelper.setCross().getAngles());
         } else if (driveState != driveType.AUTO){
             driveState = driveType.TELEOP;
         }
@@ -229,7 +229,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         }
         if (driveState == driveType.AUTO){
             //get controller generated rotation value
-            rotSpeed = swerveHelper.getRotControl(pathTarget, getGyroAngle());
+            rotSpeed = -swerveHelper.getRotControl(pathTarget, getGyroAngle());
             //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
             if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
             //update where the robot is, to determine error in path
@@ -301,22 +301,11 @@ public class SwerveDrive extends SwerveDriveTemplate {
         xSpeed = 0;
         ySpeed = 0;
         rotLocked = false;
-        //stopMoving();
-        //this.inputUpdate((Input) leftStickX);
-        //update();
     }
     /**sets the drive to autonomous */
     public void setToAuto(){
         driveState = driveType.AUTO;
-    }
-    /**stops the robot from moving */
-    public void stopMoving(){
-        //swerveSignal = swerveHelper.setCrab(0.0, 0.0, getGyroAngle());
-        this.swerveSignal = swerveHelper.setDrive(0.0, 0.0, 0.0, getGyroAngle());
-        drive();
-        for (int i = 0; i < 4; i++){
-            modules[i].runAtPower(0);
-        }
+        resetDriveEncoders();
     }
     /**drives the robot at the current swerveSignal, and displays information for each swerve module */
     private void drive(){

@@ -63,8 +63,12 @@ public class Ballpath implements Subsystem{
             intakeMotorSpeed = REVERSE_SPEED;
             intakeSolenoidValue = OPEN;
         }  else  {
-            intakeMotorSpeed = 0;
             intakeSolenoidValue = CLOSE;
+            if (Math.abs(rightTrigger.getValue()) > 0.15 || Math.abs(driverShoot.getValue())>0.15){
+                intakeMotorSpeed = FULL_SPEED;
+            } else {
+                intakeMotorSpeed = 0;
+            }
         }      
     }
 
