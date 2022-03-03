@@ -229,7 +229,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         }
         if (driveState == driveType.AUTO){
             //get controller generated rotation value
-            rotSpeed = swerveHelper.getRotControl(pathTarget, getGyroAngle());
+            rotSpeed = -swerveHelper.getRotControl(pathTarget, getGyroAngle());
             //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
             if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
             //update where the robot is, to determine error in path
