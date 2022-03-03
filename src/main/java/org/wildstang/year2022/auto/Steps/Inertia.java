@@ -16,9 +16,13 @@ public class Inertia extends AutoStep{
     private double totalT;
     private double totalAdjustedPower;
     private double finalV;
+    private double ii;
+    private double iff;
 
     private final double timeStep = 0.02;
-    private final double targetVelocity = 2000;
+    private final double targetVelocity = 2800;
+    private final double timeInitial = 1.0;
+    private final double timeFinal = 2.0;
 
     public Inertia(double percent){
         
@@ -32,19 +36,32 @@ public class Inertia extends AutoStep{
         totalV = 0;
         totalT = 0;
         finalV = 0;
+        ii = 0;
+        iff = 0;
     }
 
     @Override
     public void update() {
         totalT += timeStep;
-        totalV += swerve.getVelocity() * 0.02;
+            if (totalT >= 1.0 && totalT <= 2.0){
+            totalV += swerve.getVelocity() * 0.02;
+        }
+        if (totalT == 1.0){
+            ii = swerve.getVelocity();
+        }
+        if (totalT == 2.0){
+            iff = swerve.getVelocity();
+        }
         SmartDashboard.putNumber("Inertia time", totalT);
-        SmartDashboard.putNumber("Inertia total V", totalV);
-        SmartDashboard.putNumber("Inertia measured V", Math.abs(swerve.getVelocity()));
-        SmartDashboard.putNumber("Inertia goal V", targetVelocity);
+        SmartDashboard.putNumber("Inertia total Vel", totalV);
+        SmartDashboard.putNumber("Inertia measured Vel", Math.abs(swerve.getVelocity()));
+        SmartDashboard.putNumber("Inertia intial vel", ii);
+        SmartDashboard.putNumber("Inertia goal Vel", targetVelocity);
+        SmartDashboard.putNumber("Inertia final value", iff);
         if (targetVelocity < Math.abs(swerve.getVelocity())){
             finalV = Math.abs(swerve.getVelocity());
             SmartDashboard.putNumber("Inertia final velocity", finalV);
+            swerve.setCharaDrive(0);
             setFinished();
         }
     }

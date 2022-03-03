@@ -8,7 +8,7 @@ public class MomentumTest extends AutoProgram{
     @Override
     protected void defineSteps() {
         // TODO Auto-generated method stub
-        addStep(new Momentum(0.3));
+        addStep(new Momentum(0.5));
     }
 
     @Override

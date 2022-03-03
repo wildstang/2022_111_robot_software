@@ -128,7 +128,7 @@ public class SwerveModule {
     /**runs module drive at specified power [-1, 1] 
      * @param power the power to run the module at, [-1, 1]
     */
-    private void runAtPower(double power){
+    public void runAtPower(double power){
         driveMotor.setSpeed(power);
     }
     /** returns drive encoder distance in inches 

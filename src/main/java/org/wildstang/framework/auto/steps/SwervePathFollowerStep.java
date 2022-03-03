@@ -4,6 +4,8 @@ import org.wildstang.framework.auto.AutoStep;
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.subsystems.swerve.SwerveDriveTemplate;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class SwervePathFollowerStep extends AutoStep {
 
     private static final double ftToIn = 12;
@@ -35,20 +37,23 @@ public class SwervePathFollowerStep extends AutoStep {
         counter = 0;
         lastPos = 0;
         m_drive.resetDriveEncoders();
+        m_drive.setToAuto();
     }
 
     @Override
     public void update() {
+        SmartDashboard.putNumber("Auto Time", counter*0.02);
+        SmartDashboard.putNumber("Auto Attempted position", pathData[counter][positionP]);
         if (counter >= pathData.length || lastPos == pathData[counter][positionP]){
             //end path
-            m_drive.stopMoving();
+            
             setFinished(true);
         } else {
             //update values the robot is tracking to
-            m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, (pathData[counter][positionP] - lastPos)*0.02*ftToIn, -Math.toDegrees(pathData[counter][headingP]));
+            m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, (pathData[counter][positionP] - lastPos)/0.02*ftToIn, -Math.toDegrees(pathData[counter][headingP]));
+            lastPos = pathData[counter][positionP];
             counter++;
         }
-        lastPos = pathData[counter][positionP];
     }
 
     @Override

@@ -81,7 +81,7 @@ public class WSSwerveHelper {
      * @return SwerveSignal that is the command for the robot to move
      */
     public SwerveSignal setAuto(double i_power, double i_heading, double i_rot, double i_gyro){
-        return setDrive(i_power * Math.cos(Math.toRadians(i_heading)), i_power * Math.sin(Math.toRadians(i_heading)), i_rot, i_gyro);
+        return setDrive(i_power * -Math.sin(Math.toRadians(i_heading)), i_power * -Math.cos(Math.toRadians(i_heading)), i_rot, i_gyro);
     }
 
     /**automatically creates a rotational joystick value to rotate the robot towards a specific target
@@ -110,7 +110,7 @@ public class WSSwerveHelper {
      * @return double for magnitude of translational vector
      */
     public double getAutoPower(double pathPos, double pathVel, double distTravelled){
-        double guess = pathVel * DriveConstants.DRIVE_F_V + DriveConstants.DRIVE_F_K + 0.02*(pathVel - prevVel)*DriveConstants.DRIVE_F_I;
+        double guess = pathVel * DriveConstants.DRIVE_F_V + DriveConstants.DRIVE_F_K;// + 0.02*(pathVel - prevVel)*DriveConstants.DRIVE_F_I;
         this.prevVel = pathVel;
         double check = DriveConstants.DRIVE_P * (pathPos - distTravelled);
         return -(guess + check);
