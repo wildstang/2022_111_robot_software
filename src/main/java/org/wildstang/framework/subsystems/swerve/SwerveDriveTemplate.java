@@ -8,8 +8,6 @@ public abstract class SwerveDriveTemplate implements Subsystem{
 
     public abstract void resetDriveEncoders();
 
-    public abstract void stopMoving();
-
     public abstract void setAutoHeading(double headingTarget);
 
     public abstract void setGyro(double degrees);

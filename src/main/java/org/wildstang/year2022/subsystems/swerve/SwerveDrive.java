@@ -292,8 +292,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     }
     /** sets the drive to teleop/cross, and sets drive motors to coast */
     public void setToTeleop(){
-        driveState = driveType.CHARA;
-        this.charaValue = 0;
+        driveState = driveType.TELEOP;
         for (int i = 0; i < modules.length; i++){
             modules[i].setDriveBrake(false);
         }
@@ -301,22 +300,11 @@ public class SwerveDrive extends SwerveDriveTemplate {
         xSpeed = 0;
         ySpeed = 0;
         rotLocked = false;
-        //stopMoving();
-        //this.inputUpdate((Input) leftStickX);
-        //update();
     }
     /**sets the drive to autonomous */
     public void setToAuto(){
         driveState = driveType.AUTO;
-    }
-    /**stops the robot from moving */
-    public void stopMoving(){
-        //swerveSignal = swerveHelper.setCrab(0.0, 0.0, getGyroAngle());
-        this.swerveSignal = swerveHelper.setDrive(0.0, 0.0, 0.0, getGyroAngle());
-        drive();
-        for (int i = 0; i < 4; i++){
-            modules[i].runAtPower(0);
-        }
+        resetDriveEncoders();
     }
     /**drives the robot at the current swerveSignal, and displays information for each swerve module */
     private void drive(){

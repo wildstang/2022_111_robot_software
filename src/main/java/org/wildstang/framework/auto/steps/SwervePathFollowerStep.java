@@ -46,7 +46,7 @@ public class SwervePathFollowerStep extends AutoStep {
         SmartDashboard.putNumber("Auto Attempted position", pathData[counter][positionP]);
         if (counter >= pathData.length || lastPos == pathData[counter][positionP]){
             //end path
-            
+            m_drive.setAutoValues(pathData[counter-1][positionP]*ftToIn, 0, -Math.toDegrees(pathData[counter-1][headingP]));
             setFinished(true);
         } else {
             //update values the robot is tracking to
