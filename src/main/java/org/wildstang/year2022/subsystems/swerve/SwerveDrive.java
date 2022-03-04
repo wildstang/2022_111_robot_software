@@ -46,6 +46,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private DigitalInput faceLeft;//rotation lock 270 degrees
     private DigitalInput faceDown;//rotation lock 180 degrees
 
+    private DigitalInput dpadDown; // Click to toggle robot-centric driving mode (vs. default feild centric)
     private double xSpeed;
     private double ySpeed;
     private double rotSpeed;
@@ -65,7 +66,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private SwerveSignal swerveSignal;
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
 
-    public enum driveType {TELEOP, AUTO, CROSS};
+    public enum driveType {TELEOP, AUTO, CROSS, CAMERA};
     public driveType driveState;
 
     @Override
@@ -123,6 +124,15 @@ public class SwerveDrive extends SwerveDriveTemplate {
             rotLocked = true;
         }
 
+        if(source == dpadDown && dpadDown.getValue()){
+            if(driveState == driveType.TELEOP){
+                driveState = driveType.CAMERA;
+            }
+            else if (driveState == driveType.CAMERA){
+                driveState = driveType.TELEOP;
+            }
+        }
+
         //get rotational joystick
         rotSpeed = -rotSpeedLimiter.calculate(-rightStickX.getValue());
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
@@ -164,6 +174,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         faceRight.addInputListener(this);
         faceDown = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_FACE_DOWN);
         faceDown.addInputListener(this);
+        dpadDown = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_DPAD_DOWN);
+        dpadDown.addInputListener(this);
     }
 
     public void initOutputs(){
@@ -200,6 +212,15 @@ public class SwerveDrive extends SwerveDriveTemplate {
                 rotSpeed = swerveHelper.getRotControl(rotTarget, getGyroAngle());
             }
             this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, getGyroAngle());
+            SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
+            drive();
+        }
+        if (driveState == driveType.CAMERA){//getGyroAngle() replaced with 0 (assume robot is always facing forward)
+            if (rotLocked){
+                //if rotation tracking, replace rotational joystick value with controller generated one
+                rotSpeed = swerveHelper.getRotControl(rotTarget, 0);
+            }
+            this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, 0); 
             SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
             drive();
         }
