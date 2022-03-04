@@ -40,10 +40,12 @@ public class Launcher implements Subsystem {
     private boolean isAiming;
     private boolean latchValue;
     private boolean isLow;
+    private double aimDistance;
 
     private AimHelper aimHelper;
 
-    private final double threshold = 0.7;
+    private final double threshold = 0.8;
+    private final double CONVERSION = 5500;
     
     // initializes the subsystem
     public void init() {
@@ -84,14 +86,19 @@ public class Launcher implements Subsystem {
     public void update() {
         latch.setValue(latchValue);
         if (isAiming){
+            aimDistance = aimHelper.getDistance() * 0.00087 + 0.297;
             kickerMotor.setSpeed(1.0);
-            flywheelMotor.setSpeed(-(aimHelper.getDistance() * 0.00087 + 0.297));
+            if (Math.abs(flywheelMotor.getVelocity()) < threshold*aimDistance*CONVERSION){
+                flywheelMotor.setSpeed(-1.0);
+            } else {
+                flywheelMotor.setSpeed(-aimDistance - 0.001*(aimDistance*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
+            }
         } else if (isRunning) {
-            if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getRPM()){
+            if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getSpeed()*CONVERSION){
                 flywheelMotor.setSpeed(-1.0);
                 kickerMotor.setSpeed(1.0);
             } else {
-                flywheelMotor.setSpeed(-launchMode.getSpeed());
+                flywheelMotor.setSpeed(-launchMode.getSpeed() - 0.001*(launchMode.getSpeed()*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
                 kickerMotor.setSpeed(1.0);
             }
         } else if (isLow){
@@ -155,6 +162,7 @@ public class Launcher implements Subsystem {
         isRunning = false;
         isAiming = false;
         latchValue = true;
+        aimDistance = 0;
     }
 
     // returns the unique name of the subsystem

@@ -75,9 +75,8 @@ public class Hood implements Subsystem {
     @Override
     public void update() {
         if (state == State.AIMING){
-            // hood_motor.setPosition(NEO_RANGE * (hood_position * RANGE_CONSTANT - offset));
-            // setPosition(hood_motor.getPosition() + CONVERSION * (aim.getDistance() * 0.0058 + 0.4254));
-            hood_motor.setPosition(hood_motor.getPosition() + CONVERSION * ((0.4254 + 0.0058 * aim.getDistance()) - getMA3()));
+            setPosition(aim.getDistance() * 0.0058 + 0.4254);
+            //hood_motor.setPosition(hood_motor.getPosition() + CONVERSION * ((0.4254 + 0.0058 * aim.getDistance()) - getMA3()));
         }
         if (state == State.MANUALF){
             //hood_motor.setSpeed(HOOD_SPEED);
@@ -86,8 +85,8 @@ public class Hood implements Subsystem {
             //hood_motor.setSpeed(-HOOD_SPEED);
         }
         if (state == State.PRESET){
-            hood_motor.setPosition(hood_motor.getPosition()+ CONVERSION * (launchMode.getHood() - getMA3()));
-            // setPosition(hood_motor.getPosition() + CONVERSION * (launchMode.getHood() - getMA3()));
+            //hood_motor.setPosition(hood_motor.getPosition()+ CONVERSION * (launchMode.getHood() - getMA3()));
+            setPosition(launchMode.getHood());
         }
         if (state == State.IDLE){
             hood_motor.setSpeed(0);
@@ -168,10 +167,10 @@ public class Hood implements Subsystem {
     public void setPosition(double target){
         double pidSpeed = 0;
         if (target*.99 > getMA3() || target*1.01<getMA3()){
-            pidSpeed = 0.8 * (target - getMA3()) * Math.abs(target - getMA3());
+            pidSpeed = -0.8 * (target - getMA3()) * Math.abs(target - getMA3());
             pidSpeed += Math.signum(pidSpeed) * 0.024;
         }
-        if ((pidSpeed > 0 && getMA3()>1.51) || (pidSpeed < 0 && getMA3() < 0.08)) hood_motor.setSpeed(0);
+        if ((pidSpeed < 0 && getMA3()>1.51) || (pidSpeed > 0 && getMA3() < 0.08)) hood_motor.setSpeed(0);
         else hood_motor.setSpeed(pidSpeed);
     }
 }
