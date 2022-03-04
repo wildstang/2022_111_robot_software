@@ -64,6 +64,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double autoTravelled;
     private double autoTempX;
     private double autoTempY;
+    private double[] crossPositions;
 
     private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
     public SwerveModule[] modules;
@@ -79,17 +80,21 @@ public class SwerveDrive extends SwerveDriveTemplate {
     @Override
     public void inputUpdate(Input source) {
         //determine if we are in cross or teleop
+        if (source == dpadLeft && dpadLeft.getValue()){
+            crossPositions = new double[]{modules[0].getPosition(), modules[1].getPosition(), modules[2].getPosition(), modules[3].getPosition()};
+        }
         if (driveState != driveType.AUTO && dpadLeft.getValue()){
             driveState = driveType.CROSS;
-            this.swerveSignal = new SwerveSignal(new double[]{modules[0].getRawEncoderValue(), modules[1].getRawEncoderValue(), modules[2].getRawEncoderValue(), 
-                modules[3].getRawEncoderValue()}, swerveHelper.setCross().getAngles());
+            this.swerveSignal = new SwerveSignal(new double[]{modules[0].getPosition()-crossPositions[0], modules[1].getPosition()-crossPositions[1], modules[2].getPosition()-crossPositions[2], modules[3].getPosition()-crossPositions[3], }, swerveHelper.setCross().getAngles());
         } else if (driveState != driveType.AUTO){
             driveState = driveType.TELEOP;
         }
         //get x and y speeds
-        xSpeed = -xSpeedLimiter.calculate(-leftStickX.getValue());
+        //xSpeed = -xSpeedLimiter.calculate(-leftStickX.getValue());
+        xSpeed = leftStickX.getValue();
+        ySpeed = leftStickY.getValue();
         if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
-        ySpeed = -ySpeedLimiter.calculate(-leftStickY.getValue());
+        //ySpeed = -ySpeedLimiter.calculate(-leftStickY.getValue());
         if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
         
         if (source == select && select.getValue()) {
@@ -148,7 +153,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         isFieldCentric = !(Math.abs(leftTrigger.getValue())>0.15);
         if (!isFieldCentric) {
             rotTarget = 0;
-            rotSpeed *= 0.5;
+            rotSpeed *= 0.25;
         }
     }
  
@@ -277,6 +282,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         pathVel = 0.0;
         pathHeading = 0.0;
         pathTarget = 0.0;
+        crossPositions = new double[]{0.0, 0.0, 0.0, 0.0};
 
         charaValue = 0;
         isFieldCentric = true;
