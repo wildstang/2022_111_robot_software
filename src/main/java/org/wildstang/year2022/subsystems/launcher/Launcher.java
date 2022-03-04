@@ -39,6 +39,7 @@ public class Launcher implements Subsystem {
     private boolean isRunning;
     private boolean isAiming;
     private boolean latchValue;
+    private boolean isLow;
 
     private AimHelper aimHelper;
 
@@ -85,10 +86,7 @@ public class Launcher implements Subsystem {
         if (isAiming){
             kickerMotor.setSpeed(1.0);
             flywheelMotor.setSpeed(-(aimHelper.getDistance() * 0.00087 + 0.297));
-        } else if (!isRunning){
-            flywheelMotor.setSpeed(0);
-            kickerMotor.setSpeed(0);
-        } else {
+        } else if (isRunning) {
             if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getRPM()){
                 flywheelMotor.setSpeed(-1.0);
                 kickerMotor.setSpeed(1.0);
@@ -96,8 +94,13 @@ public class Launcher implements Subsystem {
                 flywheelMotor.setSpeed(-launchMode.getSpeed());
                 kickerMotor.setSpeed(1.0);
             }
+        } else if (isLow){
+            flywheelMotor.setSpeed(-0.23);
+            kickerMotor.setSpeed(1.0);
+        } else if (!isRunning){
+            flywheelMotor.setSpeed(0);
+            kickerMotor.setSpeed(0);
         }
-
         
         SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
         SmartDashboard.putNumber("Flywheel velocity", -flywheelMotor.getVelocity());
@@ -107,7 +110,7 @@ public class Launcher implements Subsystem {
 
     // respond to input updates
     public void inputUpdate(Input source) {
-        if (Math.abs(launchButton.getValue()) > 0.5 || yButton.getValue() || (driverAim.getValue() && Math.abs(driverShoot.getValue()) > 0.5)){
+        if (Math.abs(launchButton.getValue()) > 0.5 || yButton.getValue()){
             latchValue = false;
         } else {
             latchValue = true;
@@ -116,6 +119,11 @@ public class Launcher implements Subsystem {
             isRunning = true;
         } else {
             isRunning = false;
+        }
+        if (Math.abs(launchButton.getValue())>0.15){
+            isLow = true;
+        } else {
+            isLow = false;
         }
         if (source == leftBumper && leftBumper.getValue()){
             if (rightBumper.getValue()){

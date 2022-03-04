@@ -145,7 +145,11 @@ public class SwerveDrive extends SwerveDriveTemplate {
                 rotLocked = false;
             }
         }
-        isFieldCentric = !leftBumper.getValue();
+        isFieldCentric = !(Math.abs(leftTrigger.getValue())>0.15);
+        if (!isFieldCentric) {
+            rotTarget = 0;
+            rotSpeed *= 0.5;
+        }
     }
  
     @Override

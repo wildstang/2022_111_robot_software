@@ -9,6 +9,7 @@ import org.wildstang.framework.core.Core;
 import com.revrobotics.CANSparkMax;
 
 import org.wildstang.framework.io.inputs.AnalogInput;
+import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.logger.Log;
 import org.wildstang.framework.pid.PIDConstants;
@@ -54,7 +55,7 @@ public class AimHelper implements Subsystem{
     private double TargetDistance;
     private double Angle;
 
-    private AnalogInput leftTrigger;
+    private DigitalInput rightBumper;
 
     private LimeConsts LC;
 
@@ -152,7 +153,7 @@ public class AimHelper implements Subsystem{
     }
     @Override
     public void inputUpdate(Input source) {
-        turnOnLED(Math.abs(leftTrigger.getValue()) > 0.5);
+        turnOnLED(rightBumper.getValue());
         
     }
     @Override
@@ -172,8 +173,8 @@ public class AimHelper implements Subsystem{
         ledModeEntry = LimeTable.getEntry("ledMode");
         llModeEntry = LimeTable.getEntry("camMode");
 
-        leftTrigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
-        leftTrigger.addInputListener(this);
+        rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        rightBumper.addInputListener(this);
         resetState();
         
     }
