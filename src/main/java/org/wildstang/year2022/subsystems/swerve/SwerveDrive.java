@@ -72,10 +72,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
     private AimHelper limelight;
 
-    public enum driveType {TELEOP, AUTO, CROSS, CHARA, LL};
+    public enum driveType {TELEOP, AUTO, CROSS, LL};
     public driveType driveState;
 
-    public double charaValue;
 
     @Override
     public void inputUpdate(Input source) {
@@ -238,7 +237,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         }
         if (driveState == driveType.AUTO){
             //get controller generated rotation value
-            rotSpeed = -swerveHelper.getRotControl(pathTarget, getGyroAngle());
+            rotSpeed = swerveHelper.getRotControl(pathTarget, getGyroAngle());
             //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
             if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
             //update where the robot is, to determine error in path
@@ -247,10 +246,6 @@ public class SwerveDrive extends SwerveDriveTemplate {
             drive();
 
         
-        }
-        if (driveState == driveType.CHARA){
-            this.swerveSignal = swerveHelper.setDrive(0, charaValue, 0, getGyroAngle());
-            drive();
         }
         if (driveState == driveType.LL){
             rotSpeed = -limelight.getRotPID();
@@ -263,9 +258,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
         SmartDashboard.putNumber("rotSpeed", rotSpeed);
         SmartDashboard.putString("Drive mode", driveState.toString());
         SmartDashboard.putBoolean("rotLocked", rotLocked);
-        SmartDashboard.putNumber("Chara drive speed", modules[0].getDriveMotor().getVelocity());
-        SmartDashboard.putNumber("Chara value", charaValue);
-        SmartDashboard.putNumber("Chara foundspeed", this.swerveSignal.getSpeed(0));
+        SmartDashboard.putNumber("Auto position", pathPos);
+        SmartDashboard.putNumber("Auto velocity", pathVel);
+        SmartDashboard.putNumber("Auto translate direction", pathHeading);
+        SmartDashboard.putNumber("Auto rotation target", pathTarget);
     }
     
 
@@ -284,7 +280,6 @@ public class SwerveDrive extends SwerveDriveTemplate {
         pathTarget = 0.0;
         crossPositions = new double[]{0.0, 0.0, 0.0, 0.0};
 
-        charaValue = 0;
         isFieldCentric = true;
     }
 
@@ -302,8 +297,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     }
     /** sets the drive to teleop/cross, and sets drive motors to coast */
     public void setToTeleop(){
-        driveState = driveType.CHARA;
-        this.charaValue = 0;
+        driveState = driveType.TELEOP;
         for (int i = 0; i < modules.length; i++){
             modules[i].setDriveBrake(false);
         }
@@ -364,18 +358,5 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public double getGyroAngle(){
         if (!isFieldCentric) return 0;
         return (gyro.getAngle()+360)%360;
-    }
-
-    public void setCharaDrive(double newCharaValue){
-        this.driveState = driveType.CHARA;
-        this.charaValue = newCharaValue;
-    }
-
-    public double getCharaPos(){
-        return modules[0].getDriveMotor().getPosition();
-    }
-    public double getVelocity(){
-        return modules[0].getDriveMotor().getVelocity();
-    }
-    
+    }    
 }

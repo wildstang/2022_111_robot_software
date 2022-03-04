@@ -42,17 +42,21 @@ public class SwervePathFollowerStep extends AutoStep {
 
     @Override
     public void update() {
-        SmartDashboard.putNumber("Auto Time", counter*0.02);
-        SmartDashboard.putNumber("Auto Attempted position", pathData[counter][positionP]);
-        if (counter >= pathData.length || lastPos == pathData[counter][positionP]){
-            //end path
-            m_drive.setAutoValues(pathData[counter-1][positionP]*ftToIn, 0, -Math.toDegrees(pathData[counter-1][headingP]));
-            setFinished(true);
+        if (counter >= pathData.length) {
+            setFinished();
         } else {
-            //update values the robot is tracking to
-            m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, (pathData[counter][positionP] - lastPos)/0.02*ftToIn, -Math.toDegrees(pathData[counter][headingP]));
-            lastPos = pathData[counter][positionP];
-            counter++;
+            SmartDashboard.putNumber("Auto Time", counter*0.02);
+            SmartDashboard.putNumber("Auto Attempted position", pathData[counter][positionP]);
+            if (lastPos == pathData[counter][positionP]){
+                //end path
+                m_drive.setAutoValues(pathData[counter-1][positionP]*ftToIn, 0, -Math.toDegrees(pathData[counter-1][headingP]));
+                counter = pathData.length;
+            } else {
+                //update values the robot is tracking to
+                m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, (pathData[counter][positionP] - lastPos)/0.02*ftToIn, -Math.toDegrees(pathData[counter][headingP]));
+                lastPos = pathData[counter][positionP];
+                counter++;
+            }
         }
     }
 

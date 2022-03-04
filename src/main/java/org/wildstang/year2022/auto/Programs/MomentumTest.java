@@ -1,20 +1,20 @@
-package org.wildstang.year2022.auto.Programs;
+// package org.wildstang.year2022.auto.Programs;
 
-import org.wildstang.framework.auto.AutoProgram;
-import org.wildstang.year2022.auto.Steps.Momentum;
+// import org.wildstang.framework.auto.AutoProgram;
+// import org.wildstang.year2022.auto.Steps.Momentum;
 
-public class MomentumTest extends AutoProgram{
+// public class MomentumTest extends AutoProgram{
 
-    @Override
-    protected void defineSteps() {
-        // TODO Auto-generated method stub
-        addStep(new Momentum(0.5));
-    }
+//     @Override
+//     protected void defineSteps() {
+//         // TODO Auto-generated method stub
+//         addStep(new Momentum(0.5));
+//     }
 
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return "Momentum Test";
-    }
+//     @Override
+//     public String toString() {
+//         // TODO Auto-generated method stub
+//         return "Momentum Test";
+//     }
     
-}
+// }
