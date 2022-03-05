@@ -75,7 +75,7 @@ public class Hood implements Subsystem {
     @Override
     public void update() {
         if (state == State.AIMING){
-            setPosition(aim.getDistance() * 0.0058 + 0.4254);
+            setPosition(aim.getDistance() * 0.00685 + 0.435);
             //hood_motor.setPosition(hood_motor.getPosition() + CONVERSION * ((0.4254 + 0.0058 * aim.getDistance()) - getMA3()));
         }
         if (state == State.MANUALF){

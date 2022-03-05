@@ -131,7 +131,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
             rotLocked = true;
         }
         if (start.getValue()){
-            rotTarget = 197.7;
+            rotTarget = 191;
             rotLocked = true;
         }
 

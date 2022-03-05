@@ -86,7 +86,7 @@ public class Launcher implements Subsystem {
     public void update() {
         latch.setValue(latchValue);
         if (isAiming){
-            aimDistance = aimHelper.getDistance() * 0.00087 + 0.297;
+            aimDistance = aimHelper.getDistance() * 0.00103 + 0.298;
             kickerMotor.setSpeed(1.0);
             if (Math.abs(flywheelMotor.getVelocity()) < threshold*aimDistance*CONVERSION){
                 flywheelMotor.setSpeed(-1.0);
