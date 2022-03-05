@@ -36,7 +36,7 @@ public class Tester implements Subsystem{
 
     private double feedSpeed, launcherSpeed, kickerSpeed, hoodSpeed, intakeSpeed, climbSpeed;
     private double modifier;
-    private boolean launcherSolenoidState, intakeSolenoidState, tiltState;
+    private boolean launcherSolenoidState, intakeSolenoidState, tiltState, climbHardStops;
 
     private final double LAUNCHER_INITIAL = 0.4;
     private final double modifyAmount = 0.02;
@@ -90,6 +90,12 @@ public class Tester implements Subsystem{
             climbSpeed = -rightStickY.getValue();
         } else {
             climbSpeed = 0;
+        }
+        if (source == startButton && startButton.getValue()){
+            if (!climbHardStops){
+                climbMotor.resetEncoder();
+            }
+            climbHardStops = !climbHardStops;
         }
     }
 
@@ -149,7 +155,9 @@ public class Tester implements Subsystem{
         // kickerMotor.setSpeed(kickerSpeed);
         // hoodMotor.setSpeed(hoodSpeed);
         //intakeMotor.setSpeed(intakeSpeed);
-        if ((climbSpeed < 0 && Math.abs(climbMotor.getPosition()) < 88.5) || (climbSpeed > 0 && Math.abs(climbMotor.getPosition()) >= 2)){
+        if (!climbHardStops){
+            climbMotor.setSpeed(climbSpeed);
+        } else if ((climbSpeed < 0 && Math.abs(climbMotor.getPosition()) < 88.5) || (climbSpeed > 0 && Math.abs(climbMotor.getPosition()) >= 2)){
             climbMotor.setSpeed(climbSpeed);
         } else {
             climbMotor.setSpeed(0);
@@ -179,6 +187,7 @@ public class Tester implements Subsystem{
         //SmartDashboard.putBoolean("solenoid launcher", launcherSolenoidState);
         //SmartDashboard.putBoolean("solenoid intake", intakeSolenoidState);
         SmartDashboard.putBoolean("solenoid tilt", !tiltState);
+        SmartDashboard.putBoolean(("climb hard stops enabled"), climbHardStops);
     }
 
     @Override
@@ -192,6 +201,7 @@ public class Tester implements Subsystem{
         intakeSolenoidState = false;
         launcherSolenoidState = true;
         tiltState = true;
+        climbHardStops = true;
     }
 
     @Override
