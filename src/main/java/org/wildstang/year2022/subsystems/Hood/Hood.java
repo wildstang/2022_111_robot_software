@@ -167,7 +167,7 @@ public class Hood implements Subsystem {
     public void setPosition(double target){
         double pidSpeed = 0;
         if (target*.99 > getMA3() || target*1.01<getMA3()){
-            pidSpeed = -0.8 * (target - getMA3()) * Math.abs(target - getMA3());
+            pidSpeed = -2.8 * (target - getMA3());
             pidSpeed += Math.signum(pidSpeed) * 0.024;
         }
         if ((pidSpeed < 0 && getMA3()>1.51) || (pidSpeed > 0 && getMA3() < 0.08)) hood_motor.setSpeed(0);

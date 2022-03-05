@@ -44,7 +44,7 @@ public class Launcher implements Subsystem {
 
     private AimHelper aimHelper;
 
-    private final double threshold = 0.8;
+    private final double threshold = 0.01;
     private final double CONVERSION = 5500;
     
     // initializes the subsystem
@@ -91,14 +91,14 @@ public class Launcher implements Subsystem {
             if (Math.abs(flywheelMotor.getVelocity()) < threshold*aimDistance*CONVERSION){
                 flywheelMotor.setSpeed(-1.0);
             } else {
-                flywheelMotor.setSpeed(-aimDistance - 0.001*(aimDistance*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
+                flywheelMotor.setSpeed(-aimDistance - 0.00001*(aimDistance*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
             }
         } else if (isRunning) {
             if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getSpeed()*CONVERSION){
                 flywheelMotor.setSpeed(-1.0);
                 kickerMotor.setSpeed(1.0);
             } else {
-                flywheelMotor.setSpeed(-launchMode.getSpeed() - 0.001*(launchMode.getSpeed()*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
+                flywheelMotor.setSpeed(-launchMode.getSpeed() - 0.0001*(launchMode.getSpeed()*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
                 kickerMotor.setSpeed(1.0);
             }
         } else if (isLow){
@@ -112,6 +112,7 @@ public class Launcher implements Subsystem {
         SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
         SmartDashboard.putNumber("Flywheel velocity", -flywheelMotor.getVelocity());
         SmartDashboard.putNumber("Flywheel percent output", -launchMode.getSpeed());
+        SmartDashboard.putNumber("Flywheel limelight power", aimDistance);
         SmartDashboard.putBoolean("flywheel is aiming", isAiming);
     }
 
