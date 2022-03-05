@@ -50,7 +50,7 @@ public class Ballpath implements Subsystem{
         if (yButton.getValue()){
             feedMotorSpeed = REVERSE_SPEED;
         } else if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue() || aButton.getValue()){
-            feedMotorSpeed = FULL_SPEED;
+            feedMotorSpeed = 0.75*FULL_SPEED;
         } else {
             feedMotorSpeed = 0;
         }
