@@ -37,12 +37,10 @@ public class Hood implements Subsystem {
     double offset;
 
     final double zero_position = .5; // to be changed
-    final double preset1 = 1;
-    final double preset2 = .75;
-    final double preset3 = .5;
-    final double preset4 = .25;
-    final double presetAuto = .63;
-        //this will be set to an actual postion later
+    public static double preset1 = 1;
+    public static double preset2 = .75;
+    public static double preset3 = .5;
+    public static double preset4 = .25;
 
     final double max_angle = 45;
     final double position_change = .02;
@@ -104,8 +102,18 @@ public class Hood implements Subsystem {
     }
 
 
-    public void autoPreset(){
-        hood_position = presetAuto;
+    public void autoPreset(double aPre){
+        if (aPre <= 0.25){
+            hood_position = preset4;
+        }else if(aPre > 0.25 && aPre <= 0.5){
+            hood_position = preset3;
+        }else if(aPre > 0.5 && aPre <= 0.75){
+            hood_position = preset2;
+        }else if (aPre > 0.75){
+            hood_position = preset1;
+        }else{
+            resetState();
+        }
     }
 
     public double offset_from_initial(WsSparkMax motor,double initial){

@@ -2,7 +2,6 @@ package org.wildstang.framework.auto.steps;
 
 import org.wildstang.framework.auto.AutoStep;
 import org.wildstang.framework.core.Core;
-import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.year2022.robot.WSSubsystems;
 import org.wildstang.year2022.subsystems.Hood.Hood;
 
@@ -10,27 +9,21 @@ public class HoodPresetAuto extends AutoStep{
 
     private Hood hood;
 
-    private boolean preset;
-
-    DigitalInput dpad_left;
-
-    public HoodPresetAuto(boolean preset){
+    private double preset;
+    
+    public HoodPresetAuto(double preset){
         this.preset = preset;
         hood = (Hood) Core.getSubsystemManager().getSubsystem(WSSubsystems.HOOD.getName());
     }
 
     public HoodPresetAuto(){
-        this(true);
+        this(Hood.preset1);
     }
 
     
     @Override
     public void initialize() {
-        if (preset){
-            hood.autoPreset();
-        }else {
-            hood.resetState();
-        }
+        hood.autoPreset(preset);
     }
 
     @Override
