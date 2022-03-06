@@ -164,6 +164,14 @@ public class Hood implements Subsystem {
         launchMode = modeToUse;
     }
 
+    public void setAiming(boolean toAim){
+        if (toAim){
+            state = State.AIMING;
+        } else {
+            state = State.PRESET;
+        }
+    }
+
     public void setPosition(double target){
         double pidSpeed = 0;
         if (target*.99 > getMA3() || target*1.01<getMA3()){

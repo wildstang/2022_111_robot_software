@@ -175,6 +175,9 @@ public class Launcher implements Subsystem {
         launchMode = modeToUse;
         isRunning = true;
     }
+    public void setAiming(boolean toAim){
+        isAiming = toAim;
+    }
     public void stopLauncher(){
         isRunning = false;
         launchMode = LauncherModes.ZERO;

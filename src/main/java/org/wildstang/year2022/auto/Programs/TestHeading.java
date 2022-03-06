@@ -2,6 +2,7 @@ package org.wildstang.year2022.auto.Programs;
 import org.wildstang.framework.auto.AutoProgram;
 import org.wildstang.framework.auto.steps.PathHeadingStep;
 import org.wildstang.framework.auto.steps.SwervePathFollowerStep;
+import org.wildstang.framework.auto.steps.control.AutoStepDelay;
 import org.wildstang.framework.core.Core;
 import org.wildstang.year2022.robot.WSSubsystems;
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
@@ -16,6 +17,7 @@ public class TestHeading extends AutoProgram{
         //addStep(new SwervePathFollowerStep(new Circle().getPath(), swerve));
         addStep(new PathHeadingStep(270, swerve));
          addStep(new SwervePathFollowerStep(new Straight5ft().getPath(), swerve));
+         addStep(new AutoStepDelay(2000));
         // addStep(new SwervePathFollowerStep(new Straight10ft().getPath(), swerve));
         addStep(new PathHeadingStep(00, swerve));
         addStep(new SwervePathFollowerStep(new Straight5ft().getPath(), swerve));

@@ -18,6 +18,7 @@ import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 import org.wildstang.year2022.subsystems.swerve.SwerveSignal;
 import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
+import org.wildstang.sample.subsystems.drive.Drive.DriveState;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -237,9 +238,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
         }
         if (driveState == driveType.AUTO){
             //get controller generated rotation value
-            rotSpeed = swerveHelper.getRotControl(pathTarget, getGyroAngle());
+            rotSpeed = Math.max(-0.2, Math.min(0.2, swerveHelper.getRotControl(pathTarget, getGyroAngle())));
             //ensure rotation is never more than 0.2 to prevent normalization of translation from occuring
-            if (Math.abs(rotSpeed) > 0.2) rotSpeed /= (Math.abs(rotSpeed * 5));
+            
             //update where the robot is, to determine error in path
             updateAutoDistance();
             this.swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, getGyroAngle());
@@ -334,6 +335,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
     /**sets the autonomous heading controller to a new target */
     public void setAutoHeading(double headingTarget){
         pathTarget = headingTarget;
+    }
+    public void setAiming(){
+        driveState = driveType.LL;
     }
     /**updates distance travelled in autonomous, to determine error in path following */
     private void updateAutoDistance(){
