@@ -4,6 +4,7 @@ import org.wildstang.framework.subsystems.Subsystem;
 
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.io.inputs.Input;
+import org.wildstang.framework.io.outputs.DigitalOutput;
 import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
@@ -27,6 +28,8 @@ public class Ballpath implements Subsystem{
     //Solenoid Value
     private boolean intakeSolenoidValue;
 
+    private boolean shooting;
+
     //Constants
     private final double FULL_SPEED = 1.0;
     private final double REVERSE_SPEED = -1.0;
@@ -42,6 +45,8 @@ public class Ballpath implements Subsystem{
     private DigitalInput bButton;
     private DigitalInput driverIntake;
     private AnalogInput driverShoot;
+    private DigitalOutput cargoLow;
+    private DigitalOutput cargoHigh;
 
     @Override
     public void inputUpdate(Input source) {
@@ -49,10 +54,16 @@ public class Ballpath implements Subsystem{
         //dynamicly controls hopper speed
         if (yButton.getValue()){
             feedMotorSpeed = REVERSE_SPEED;
-        } else if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue() || aButton.getValue()){
-            feedMotorSpeed = 0.75*FULL_SPEED;
+            shooting = true;
+        } else if (Math.abs(rightTrigger.getValue())>0.15 || xButton.getValue()){
+            feedMotorSpeed = FULL_SPEED;
+            shooting = true;
+        } else if (aButton.getValue()){
+            feedMotorSpeed = FULL_SPEED;
+            shooting = false;
         } else {
             feedMotorSpeed = 0;
+            shooting = false;
         }
 
         /**run intake and feed either forwards or backwards */
@@ -103,6 +114,8 @@ public class Ballpath implements Subsystem{
         intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_SOLENOID);
         feedMotor.setCurrentLimit(30, 30, 0);
         intakeMotor.setCurrentLimit(25, 25, 0);
+        cargoLow = (DigitalOutput) Core.getOutputManager().getOutput(WSOutputs.CARGO_LOW);
+        cargoHigh = (DigitalOutput) Core.getOutputManager().getOutput(WSOutputs.CARGO_HIGH);
     }
 
     @Override
@@ -111,8 +124,12 @@ public class Ballpath implements Subsystem{
 
     @Override
     public void update() {
+        if (cargoLow.getValue() && cargoHigh.getValue() && !shooting){
+            feedMotor.setSpeed(0);
+        } else {
+            feedMotor.setSpeed(-feedMotorSpeed);
+        }
         intakeSolenoid.setValue(intakeSolenoidValue);
-        feedMotor.setSpeed(-feedMotorSpeed);
         intakeMotor.setSpeed(intakeMotorSpeed);
     }
 
@@ -121,6 +138,7 @@ public class Ballpath implements Subsystem{
         feedMotorSpeed = 0.0;
         intakeMotorSpeed = 0.0;
         intakeSolenoidValue = CLOSE;
+        shooting = false;
     }
 
     @Override

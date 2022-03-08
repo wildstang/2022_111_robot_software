@@ -188,7 +188,8 @@ public class AimHelper implements Subsystem{
         calcTargetCoords();
         SmartDashboard.putNumber("limelight distance", getDistance());    
         SmartDashboard.putNumber("limelight tx", tx.getDouble(0));
-        SmartDashboard.putNumber("limelight ty", ty.getDouble(0));    
+        SmartDashboard.putNumber("limelight ty", ty.getDouble(0));  
+        SmartDashboard.putBoolean("limelight target in view", tv.getDouble(0)==1);  
     }
 
     @Override

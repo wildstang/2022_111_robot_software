@@ -61,7 +61,9 @@ public enum WSOutputs implements Outputs {
     // ********************************
     // DIO Outputs
     // ********************************
-    DIO_O_0("Test Digital Output 0", new WsDigitalOutputConfig(0, true)), // Channel 0, Initially Low
+    //DIO_O_0("Test Digital Output 0", new WsDigitalOutputConfig(0, true)), // Channel 0, Initially Low
+    CARGO_LOW("Cargo low beam break", new WsDigitalOutputConfig(0, false)),
+    CARGO_HIGH("Cargo high beam break", new WsDigitalOutputConfig(1, false)),
 
     // ********************************
     // Solenoids
