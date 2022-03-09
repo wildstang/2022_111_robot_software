@@ -5,6 +5,7 @@ import org.wildstang.framework.logger.Log;
 import org.wildstang.framework.logger.Log.LogLevel;
 import org.wildstang.hardware.roborio.RoboRIOInputFactory;
 import org.wildstang.hardware.roborio.RoboRIOOutputFactory;
+import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -23,6 +24,7 @@ public class Robot extends TimedRobot {
     Core core;
     private boolean AutoFirstRun = true;
     private SendableChooser<LogLevel> logChooser;
+    private SwerveDrive swerve;
 
     /**
      * Runs on initialization, creates and configure framework Core.
@@ -36,6 +38,8 @@ public class Robot extends TimedRobot {
         core.createOutputs(WSOutputs.values());
         core.createSubsystems(WSSubsystems.values());
         core.createAutoPrograms(WSAutoPrograms.values());
+
+        swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
         
         // create smart dashboard option for LogLevel
         logChooser = new SendableChooser<>();
@@ -73,6 +77,7 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         Log.danger("Engaging teleoperated mode.");
         Core.getSubsystemManager().resetState();
+        swerve.setToTeleop();
     }
 
     /**

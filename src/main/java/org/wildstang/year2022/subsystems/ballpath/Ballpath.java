@@ -4,13 +4,15 @@ import org.wildstang.framework.subsystems.Subsystem;
 
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.io.inputs.Input;
-import org.wildstang.framework.io.outputs.DigitalOutput;
+import org.wildstang.hardware.roborio.outputs.WsDigitalOutput;
 import org.wildstang.framework.io.inputs.AnalogInput;
 import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.hardware.roborio.outputs.WsSolenoid;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Ballpath implements Subsystem{
@@ -45,8 +47,8 @@ public class Ballpath implements Subsystem{
     private DigitalInput bButton;
     private DigitalInput driverIntake;
     private AnalogInput driverShoot;
-    private DigitalOutput cargoLow;
-    private DigitalOutput cargoHigh;
+    private WsDigitalOutput cargoLow;
+    private WsDigitalOutput cargoHigh;
 
     @Override
     public void inputUpdate(Input source) {
@@ -114,8 +116,8 @@ public class Ballpath implements Subsystem{
         intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_SOLENOID);
         feedMotor.setCurrentLimit(30, 30, 0);
         intakeMotor.setCurrentLimit(25, 25, 0);
-        cargoLow = (DigitalOutput) Core.getOutputManager().getOutput(WSOutputs.CARGO_LOW);
-        cargoHigh = (DigitalOutput) Core.getOutputManager().getOutput(WSOutputs.CARGO_HIGH);
+        cargoLow = (WsDigitalOutput) Core.getOutputManager().getOutput(WSOutputs.CARGO_LOW);
+        cargoHigh = (WsDigitalOutput) Core.getOutputManager().getOutput(WSOutputs.CARGO_HIGH);
     }
 
     @Override
@@ -131,6 +133,9 @@ public class Ballpath implements Subsystem{
         }
         intakeSolenoid.setValue(intakeSolenoidValue);
         intakeMotor.setSpeed(intakeMotorSpeed);
+
+        SmartDashboard.putBoolean("cargo low", cargoLow.getValue());
+        SmartDashboard.putBoolean("cargo high", cargoHigh.getValue());
     }
 
     @Override

@@ -34,7 +34,7 @@ public final class DriveConstants {
     /**encoder ticks per revolution, 1.0 for neos */
     public static final double TICKS_PER_REV = 1.0;
     /**PID values for drive P */
-    public static final double DRIVE_P = 0.02;//0.02
+    public static final double DRIVE_P = 0;//-0.02;//0.02
     /**PID values for drive I */
     public static final double DRIVE_I = 0.01;
     /**PID values for drive D */
@@ -44,7 +44,7 @@ public final class DriveConstants {
     /**PID values for drive F coefficient of kinetic friction */
     public static final double DRIVE_F_K = 0.016;
     /**PID values for drive F coefficient of inertia */
-    public static final double DRIVE_F_I = 0.003;
+    public static final double DRIVE_F_I = 0;//0.003;
     /**PID values for angle P */
     public static final double ANGLE_P = 0.5;
     /**PID values for angle I */
