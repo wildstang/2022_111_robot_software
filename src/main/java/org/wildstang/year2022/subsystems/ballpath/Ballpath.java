@@ -47,8 +47,8 @@ public class Ballpath implements Subsystem{
     private DigitalInput bButton;
     private DigitalInput driverIntake;
     private AnalogInput driverShoot;
-    private WsDigitalOutput cargoLow;
-    private WsDigitalOutput cargoHigh;
+    private notADIO cargoLow;
+    private notADIO cargoHigh;
 
     @Override
     public void inputUpdate(Input source) {
@@ -116,8 +116,8 @@ public class Ballpath implements Subsystem{
         intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_SOLENOID);
         feedMotor.setCurrentLimit(30, 30, 0);
         intakeMotor.setCurrentLimit(25, 25, 0);
-        cargoLow = (WsDigitalOutput) Core.getOutputManager().getOutput(WSOutputs.CARGO_LOW);
-        cargoHigh = (WsDigitalOutput) Core.getOutputManager().getOutput(WSOutputs.CARGO_HIGH);
+        cargoLow = new notADIO(0);
+        cargoHigh = new notADIO(1);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class Ballpath implements Subsystem{
 
     @Override
     public void update() {
-        if (cargoLow.getValue() && cargoHigh.getValue() && !shooting){
+        if (cargoLow.get() && cargoHigh.get() && !shooting){
             feedMotor.setSpeed(0);
         } else {
             feedMotor.setSpeed(-feedMotorSpeed);
@@ -134,8 +134,8 @@ public class Ballpath implements Subsystem{
         intakeSolenoid.setValue(intakeSolenoidValue);
         intakeMotor.setSpeed(intakeMotorSpeed);
 
-        SmartDashboard.putBoolean("cargo low", cargoLow.getValue());
-        SmartDashboard.putBoolean("cargo high", cargoHigh.getValue());
+        SmartDashboard.putBoolean("cargo low", cargoLow.get());
+        SmartDashboard.putBoolean("cargo high", cargoHigh.get());
     }
 
     @Override
