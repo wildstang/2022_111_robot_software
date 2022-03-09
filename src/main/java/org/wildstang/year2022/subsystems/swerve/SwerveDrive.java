@@ -245,6 +245,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
             updateAutoDistance();
             this.swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, getGyroAngle());
             drive();
+            if (Math.abs(swerveSignal.getSpeed(0))>0){
+                System.out.println("Current power: " + swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled));
+            }
 
         
         }

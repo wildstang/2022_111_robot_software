@@ -4,6 +4,7 @@ import org.wildstang.framework.auto.AutoStep;
 import org.wildstang.framework.core.Core;
 import org.wildstang.framework.subsystems.swerve.SwerveDriveTemplate;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SwervePathFollowerStep extends AutoStep {
@@ -21,6 +22,8 @@ public class SwervePathFollowerStep extends AutoStep {
     private int counter;
     private double lastPos;
 
+    private Timer timer;
+
     /** Sets the robot to track a new path
      * finishes after all values have been read to robot
      * @param pathData double[][] that contains path, should be from \frc\paths
@@ -29,6 +32,7 @@ public class SwervePathFollowerStep extends AutoStep {
     public SwervePathFollowerStep(double[][] pathData, SwerveDriveTemplate drive) {
         this.pathData = pathData;
         m_drive = drive;
+        timer = new Timer();
     }
 
     @Override
@@ -38,6 +42,7 @@ public class SwervePathFollowerStep extends AutoStep {
         lastPos = 0;
         m_drive.resetDriveEncoders();
         m_drive.setToAuto();
+        timer.start();
     }
 
     @Override
@@ -53,11 +58,12 @@ public class SwervePathFollowerStep extends AutoStep {
                 counter = pathData.length;
             } else {
                 //update values the robot is tracking to
-                m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, (pathData[counter][positionP] - lastPos)/0.02*ftToIn, -Math.toDegrees(pathData[counter][headingP]));
+                m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, ((pathData[counter][positionP] - lastPos)/0.02)*ftToIn, -Math.toDegrees(pathData[counter][headingP]));
                 lastPos = pathData[counter][positionP];
                 counter++;
             }
         }
+        System.out.println("Time: " + timer.get() + ", counter " + (counter-1) + ", velocity" + ((pathData[counter-1][positionP]-lastPos)/0.02));
     }
 
     @Override
