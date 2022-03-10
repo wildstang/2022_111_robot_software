@@ -65,7 +65,6 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double autoTravelled;
     private double autoTempX;
     private double autoTempY;
-    private double[] crossPositions;
 
     private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
     public SwerveModule[] modules;
@@ -81,11 +80,11 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public void inputUpdate(Input source) {
         //determine if we are in cross or teleop
         if (source == leftBumper && leftBumper.getValue()){
-            crossPositions = new double[]{modules[0].getPosition(), modules[1].getPosition(), modules[2].getPosition(), modules[3].getPosition()};
+            resetDriveEncoders();
         }
         if (driveState != driveType.AUTO && leftBumper.getValue()){
             driveState = driveType.CROSS;
-            this.swerveSignal = new SwerveSignal(new double[]{-modules[0].getPosition()+crossPositions[0], -modules[1].getPosition()+crossPositions[1], -modules[2].getPosition()+crossPositions[2], -modules[3].getPosition()+crossPositions[3], }, swerveHelper.setCross().getAngles());
+            this.swerveSignal = new SwerveSignal(new double[]{-modules[0].getPosition()*0.01, -modules[1].getPosition()*0.01, -modules[2].getPosition()*0.01, -modules[3].getPosition()*0.01, }, swerveHelper.setCross().getAngles());
         } else if (driveState != driveType.AUTO){
             driveState = driveType.TELEOP;
         }
@@ -277,7 +276,6 @@ public class SwerveDrive extends SwerveDriveTemplate {
         pathVel = 0.0;
         pathHeading = 0.0;
         pathTarget = 0.0;
-        crossPositions = new double[]{0.0, 0.0, 0.0, 0.0};
 
         isFieldCentric = true;
     }
