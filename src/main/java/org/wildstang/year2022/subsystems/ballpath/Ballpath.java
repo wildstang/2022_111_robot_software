@@ -126,7 +126,7 @@ public class Ballpath implements Subsystem{
 
     @Override
     public void update() {
-        if (cargoLow.get() && cargoHigh.get() && !shooting){
+        if (!cargoLow.get() && !cargoHigh.get() && !shooting){
             feedMotor.setSpeed(0);
         } else {
             feedMotor.setSpeed(-feedMotorSpeed);

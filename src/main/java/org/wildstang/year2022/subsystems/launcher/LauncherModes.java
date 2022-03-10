@@ -4,7 +4,7 @@ public enum LauncherModes{
     FENDER_SHOT (0.38, 2000.0, 0.516),
     TARMAC_EDGE (0.4, 2200.0, 1.113),
     LAUNCH_PAD(0.46, 2500.0, 1.51),//0.46, 2778, 1.51
-    AUTO(0.412, 2200, 1.191),
+    AUTO(0.25, 2200, 1.191),//0.412
     ZERO(0, 0, 0.070);
 
     private final double SPEED;//motor % output

@@ -15,13 +15,13 @@ public final class DriveConstants {
     /**diameter of drive wheel, in inches */
     public static final double WHEEL_DIAMETER = 4.0;
     /**offset of module 1, the front left module, in degrees */
-    public static final double FRONT_LEFT_OFFSET = -44.64;//-280.98;
+    public static final double FRONT_LEFT_OFFSET = -44.64+1.4;//-280.98;
     /**offset of module 2, the front right module, in degrees */
-    public static final double FRONT_RIGHT_OFFSET = -139.91;//-313.59;
+    public static final double FRONT_RIGHT_OFFSET = -139.91+0.6;//-313.59;
     /**offset of module 3, the rear left module, in degrees */
-    public static final double REAR_LEFT_OFFSET = -16.61;//-199.95;
+    public static final double REAR_LEFT_OFFSET = -16.61-2.4;//-199.95;
     /**offset of module 4, the rear right module, in degrees */
-    public static final double REAR_RIGHT_OFFSET = -284.19;//-52.03;
+    public static final double REAR_RIGHT_OFFSET = -284.19-0.1;//-52.03;
     /**deadband of the controller's joysticks */
     public static final double DEADBAND = 0.15;
     /**factor of thrust for the drive trigger */
@@ -40,7 +40,7 @@ public final class DriveConstants {
     /**PID values for drive D */
     public static final double DRIVE_D = 0.1;
     /**PID values for driveF coefficient of momentum */
-    public static final double DRIVE_F_V = 0.00558;//0.00581 on old treads
+    public static final double DRIVE_F_V = 0.00558*60/48*60/63*0.92;//0.00581 on old treads
     /**PID values for drive F coefficient of kinetic friction */
     public static final double DRIVE_F_K = 0.016;
     /**PID values for drive F coefficient of inertia */

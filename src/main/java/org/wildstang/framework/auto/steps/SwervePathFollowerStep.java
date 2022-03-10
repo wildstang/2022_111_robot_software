@@ -56,14 +56,16 @@ public class SwervePathFollowerStep extends AutoStep {
                 //end path
                 m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, 0, -Math.toDegrees(pathData[counter][headingP]));
                 counter = pathData.length;
-            } else {
+            } else if (timer.get()>=0.02){
                 //update values the robot is tracking to
+                System.out.println("Target position: " + pathData[counter][positionP]*ftToIn);
                 m_drive.setAutoValues(pathData[counter][positionP]*ftToIn, ((pathData[counter][positionP] - lastPos)/0.02)*ftToIn, -Math.toDegrees(pathData[counter][headingP]));
                 lastPos = pathData[counter][positionP];
                 counter++;
+                timer.advanceIfElapsed(0.02);
             }
         }
-        System.out.println("Time: " + timer.get() + ", counter " + (counter-1) + ", velocity" + ((pathData[counter-1][positionP]-lastPos)/0.02));
+        //System.out.println("Time: " + timer.get() + ", counter " + (counter-1));
     }
 
     @Override

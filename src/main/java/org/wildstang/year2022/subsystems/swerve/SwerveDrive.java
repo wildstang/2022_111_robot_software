@@ -85,7 +85,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         }
         if (driveState != driveType.AUTO && leftBumper.getValue()){
             driveState = driveType.CROSS;
-            this.swerveSignal = new SwerveSignal(new double[]{modules[0].getPosition()-crossPositions[0], modules[1].getPosition()-crossPositions[1], modules[2].getPosition()-crossPositions[2], modules[3].getPosition()-crossPositions[3], }, swerveHelper.setCross().getAngles());
+            this.swerveSignal = new SwerveSignal(new double[]{-modules[0].getPosition()+crossPositions[0], -modules[1].getPosition()+crossPositions[1], -modules[2].getPosition()+crossPositions[2], -modules[3].getPosition()+crossPositions[3], }, swerveHelper.setCross().getAngles());
         } else if (driveState != driveType.AUTO){
             driveState = driveType.TELEOP;
         }
@@ -244,12 +244,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
             //update where the robot is, to determine error in path
             updateAutoDistance();
             this.swerveSignal = swerveHelper.setAuto(swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled), pathHeading, rotSpeed, getGyroAngle());
-            drive();
-            if (Math.abs(swerveSignal.getSpeed(0))>0){
-                System.out.println("Current power: " + swerveHelper.getAutoPower(pathPos, pathVel, autoTravelled));
-            }
-
-        
+            drive();        
         }
         if (driveState == driveType.LL){
             rotSpeed = -limelight.getRotPID();
@@ -297,7 +292,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         for (int i = 0; i < modules.length; i++){
             modules[i].resetDriveEncoders();
         }
-        autoTravelled = 0.0;
+        //autoTravelled = 0.0;
     }
     /** sets the drive to teleop/cross, and sets drive motors to coast */
     public void setToTeleop(){
@@ -347,10 +342,13 @@ public class SwerveDrive extends SwerveDriveTemplate {
         for (int i = 0; i < modules.length; i++){
             autoTempX += modules[i].getPosition() * Math.cos(Math.toRadians(modules[i].getAngle()));
             autoTempY += modules[i].getPosition() * Math.sin(Math.toRadians(modules[i].getAngle()));
+            //System.out.println("Auto temp X and Y" + autoTempX + "And Y " + autoTempY);
         }
-        autoTravelled += Math.hypot(autoTempX/modules.length, autoTempY/modules.length);
+        autoTravelled += Math.abs(Math.hypot(autoTempX/modules.length, autoTempY/modules.length))/10000;
         autoTempX = 0;
         autoTempY = 0;
+        resetDriveEncoders();
+        //System.out.println("AutoTravelled: " + autoTravelled);
     }
 
     /**
