@@ -20,6 +20,7 @@ public class Fire extends AutoStep{
     @Override
     public void initialize() {
         ballpath.turnOnFeed();
+        ballpath.setShooting(turnOn);
         launcher.fire(turnOn);
     }
 

@@ -40,7 +40,7 @@ public final class DriveConstants {
     /**PID values for drive D */
     public static final double DRIVE_D = 0.1;
     /**PID values for driveF coefficient of momentum */
-    public static final double DRIVE_F_V = 0.00558*60/48*60/63*0.92;//0.00581 on old treads
+    public static final double DRIVE_F_V = 0.00558*60/48*60/63*0.88;//0.00581 on old treads
     /**PID values for drive F coefficient of kinetic friction */
     public static final double DRIVE_F_K = 0.016;
     /**PID values for drive F coefficient of inertia */

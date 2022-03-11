@@ -168,4 +168,7 @@ public class Ballpath implements Subsystem{
     public void turnOffFeed(){
         feedMotorSpeed = 0.0;
     }
+    public void setShooting(boolean isShooting){
+        this.shooting = isShooting;
+    }
 }

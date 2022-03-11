@@ -49,6 +49,10 @@ public class Hood implements Subsystem {
     private final double ABS_RANGE = ABS_HIGH - ABS_LOW;
     private final double NEO_RANGE = 75.7;
     private final double HOOD_SPEED = 0.2;
+
+    private final double REG_A = 0;
+    private final double REG_B = 0.00685;
+    private final double REG_C = 0.435;
     
     AimHelper aim;
     
@@ -75,7 +79,8 @@ public class Hood implements Subsystem {
     @Override
     public void update() {
         if (state == State.AIMING){
-            setPosition(aim.getDistance() * 0.00685 + 0.435);
+            double distance = aim.getDistance();
+            setPosition(REG_A*distance*distance + distance * REG_B + REG_C);
             //hood_motor.setPosition(hood_motor.getPosition() + CONVERSION * ((0.4254 + 0.0058 * aim.getDistance()) - getMA3()));
         }
         if (state == State.MANUALF){

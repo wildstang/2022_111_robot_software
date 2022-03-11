@@ -84,7 +84,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         }
         if (driveState != driveType.AUTO && leftBumper.getValue()){
             driveState = driveType.CROSS;
-            this.swerveSignal = new SwerveSignal(new double[]{-modules[0].getPosition()*0.01, -modules[1].getPosition()*0.01, -modules[2].getPosition()*0.01, -modules[3].getPosition()*0.01, }, swerveHelper.setCross().getAngles());
+            this.swerveSignal = new SwerveSignal(new double[]{-modules[0].getPosition()*0.0025, -modules[1].getPosition()*0.01, -modules[2].getPosition()*0.01, -modules[3].getPosition()*0.01, }, swerveHelper.setCross().getAngles());
         } else if (driveState != driveType.AUTO){
             driveState = driveType.TELEOP;
         }

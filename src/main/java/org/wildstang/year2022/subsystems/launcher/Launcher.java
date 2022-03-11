@@ -46,6 +46,9 @@ public class Launcher implements Subsystem {
 
     private final double threshold = 0.01;
     private final double CONVERSION = 5500;
+    private final double REG_A = 0;
+    private final double REG_B = 0.00103;
+    private final double REG_C = 0.298;
     
     // initializes the subsystem
     public void init() {
@@ -86,7 +89,8 @@ public class Launcher implements Subsystem {
     public void update() {
         latch.setValue(latchValue);
         if (isAiming){
-            aimDistance = aimHelper.getDistance() * 0.00103 + 0.298;
+            double distance = aimHelper.getDistance();
+            aimDistance = REG_A * distance*distance + REG_B * distance + REG_C;
             kickerMotor.setSpeed(1.0);
             if (Math.abs(flywheelMotor.getVelocity()) < threshold*aimDistance*CONVERSION){
                 flywheelMotor.setSpeed(-1.0);

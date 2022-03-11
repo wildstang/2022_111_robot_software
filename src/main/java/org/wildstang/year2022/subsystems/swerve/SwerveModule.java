@@ -69,7 +69,7 @@ public class SwerveModule {
     }
     /** resets drive encoder */
     public void resetDriveEncoders(){
-        driveMotor.setPosition(0.0);
+        driveMotor.resetEncoder();
     }
     /**sets drive to brake mode if true, coast if false 
      * @param isBrake true for brake, false for coast
