@@ -10,10 +10,11 @@ import org.wildstang.year2022.auto.steps.IntakeDeployStep;
 //import org.wildstang.year2022.auto.steps.OpenIntake;
 import org.wildstang.year2022.subsystems.ballpath.Ballpath;
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
-import frc.TwoBallPath.TwoBallPath;
+
+import frc.TwoBallPaths.TwoBallPath_Upper;
 
 
-public class TwoBallProgram extends AutoProgram {
+public class TwoBallProgram_Upper extends AutoProgram {
 
     SwerveDrive swerveDrive;
 
@@ -21,7 +22,7 @@ public class TwoBallProgram extends AutoProgram {
     protected void defineSteps() {
         addStep(new IntakeDeployStep(true));
         addStep(new StartFlywheel(LauncherModes.TARMAC_EDGE));
-        addStep(new SwervePathFollowerStep(new TwoBallPath().getPath(), swerveDrive));  // back to the ball 
+        addStep(new SwervePathFollowerStep(new TwoBallPath_Upper().getPath(), swerveDrive));  // back to the ball 
         addStep(new AutoStepDelay(1000));
         addStep(new Fire(LauncherModes.TARMAC_EDGE));
         

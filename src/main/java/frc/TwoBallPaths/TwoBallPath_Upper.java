@@ -1,8 +1,8 @@
-package frc.TwoBallPath;
+package frc.TwoBallPaths;
 
 import com.team319.trajectory.Path;
 
-public class TwoBallPath extends Path {
+public class TwoBallPath_Upper extends Path {
    // dt,x,y,left.pos,left.vel,left.acc,left.jerk,center.pos,center.vel,center.acc,center.jerk,right.pos,right.vel,right.acc,right.jerk,heading
 	private static final double[][] points = {
 				{0.0200,18.2500,7.6740,0.0040,0.2000,10.0000,0.0000,0.0040,0.2000,10.0000,0.0000,0.0040,0.2000,10.0000,0.0000,1.5708},
