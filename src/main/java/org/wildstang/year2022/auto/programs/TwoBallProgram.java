@@ -20,10 +20,10 @@ public class TwoBallProgram extends AutoProgram {
     @Override
     protected void defineSteps() {
         addStep(new IntakeDeployStep(true));
-        addStep(new StartFlywheel(LauncherModes.FENDER_SHOT));
+        addStep(new StartFlywheel(LauncherModes.TARMAC_EDGE));
         addStep(new SwervePathFollowerStep(new TwoBallPath().getPath(), swerveDrive));  // back to the ball 
         addStep(new AutoStepDelay(1000));
-        addStep(new Fire(LauncherModes.FENDER_SHOT));
+        addStep(new Fire(LauncherModes.TARMAC_EDGE));
         
         
         
