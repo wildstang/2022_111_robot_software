@@ -156,9 +156,9 @@ public class Tester implements Subsystem{
         // hoodMotor.setSpeed(hoodSpeed);
         //intakeMotor.setSpeed(intakeSpeed);
         if (!climbHardStops){
-            climbMotor.setSpeed(climbSpeed);
+            climbMotor.setSpeed(climbSpeed*0.8);
         } else if ((climbSpeed < 0 && Math.abs(climbMotor.getPosition()) < 88.5) || (climbSpeed > 0 && Math.abs(climbMotor.getPosition()) >= 2)){
-            climbMotor.setSpeed(climbSpeed);
+            climbMotor.setSpeed(climbSpeed*0.8);
         } else {
             climbMotor.setSpeed(0);
         }
