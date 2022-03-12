@@ -72,7 +72,7 @@ dependencies {
     nativeRelease wpi.java.vendor.jniRelease(wpi.platforms.desktop)
     simulationRelease wpi.sim.enableRelease()
 
-    implementation 'com.github.Team319:BobTrajectory:v2.1.0'
+    implementation 'com.google.guava:guava:31.1-jre'
 
     testImplementation 'junit:junit:4.12'
 }
