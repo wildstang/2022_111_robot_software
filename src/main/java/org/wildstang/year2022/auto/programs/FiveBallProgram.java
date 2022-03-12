@@ -7,7 +7,7 @@ import org.wildstang.year2022.subsystems.launcher.LauncherModes;
 import org.wildstang.year2022.auto.steps.StartFlywheel;
 import org.wildstang.year2022.auto.steps.IntakeDeployStep;
 
-public class FourBallProgram extends AutoProgram {
+public class FiveBallProgram extends AutoProgram {
 
         //Important >>> I dont know what LAUNCH_PAD means
 
@@ -31,7 +31,7 @@ public class FourBallProgram extends AutoProgram {
     @Override
     public String toString() {
         //give it a name
-        return "FourBallPath";
+        return "FiveBallPath";
     }
 
 }
