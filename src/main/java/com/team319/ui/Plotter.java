@@ -52,7 +52,7 @@ public class Plotter extends JPanel {
     }
 
     private void drawSplines(Graphics g) {
-        g.setColor(Color.WHITE);
+        g.setColor(Color.YELLOW);
         for (ClickableSpline spline :  waypointListener.getSplines()) {
             removeMouseListener(spline);
         }
