@@ -8,6 +8,8 @@ import org.wildstang.year2022.auto.Programs.TestCircle;
 import org.wildstang.year2022.auto.Programs.TestHeading;
 import org.wildstang.year2022.auto.Programs.TestStraight10;
 import org.wildstang.year2022.auto.Programs.TestStraight5;
+import org.wildstang.year2022.auto.Programs.TwoBallAndSteal;
+import org.wildstang.year2022.auto.Programs.Two_Ball;
 
 /**
  * All active AutoPrograms are enumerated here.
@@ -22,7 +24,9 @@ public enum WSAutoPrograms implements AutoPrograms {
     CIRCLE("Test Circle", TestCircle.class),
     STRAIGHT5("Test Straight5", TestStraight5.class),
     STRAIGHT10("Test Straight10", TestStraight10.class),
-    HEADING("Test Heading", TestHeading.class)
+    HEADING("Test Heading", TestHeading.class),
+    TWOBALL("Two Ball", Two_Ball.class),
+    STEALTWOBALL("Steal and Two Ball", TwoBallAndSteal.class)
     ;
 
     /**
