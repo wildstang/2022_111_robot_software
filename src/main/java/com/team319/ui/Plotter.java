@@ -25,7 +25,7 @@ public class Plotter extends JPanel {
     private WaypointListener waypointListener;
     private String pathName;
 
-    private static final double FIELD_HEIGHT = 15.0;
+    private static final double FIELD_HEIGHT = 162.00*2;
 
     public Plotter(String pathName) {
         waypointListener = new WaypointListener(this);
