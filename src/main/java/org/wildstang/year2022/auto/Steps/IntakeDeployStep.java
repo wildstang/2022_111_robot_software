@@ -28,7 +28,7 @@ public class IntakeDeployStep extends AutoStep {
             intake.turnOnFeed();
             intake.turnOnIntake();
         }else{
-            intake.intakeRetract();
+            //intake.intakeRetract();
             intake.turnOffIntake();
             intake.turnOffFeed();
         }

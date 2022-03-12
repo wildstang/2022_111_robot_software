@@ -38,28 +38,33 @@ public class Offset5Ball extends AutoProgram{
         group1.addStep(new SwervePathFollowerStep(new Fiver().getPath(), swerve));
         addStep(group1);
 
+        
+        addStep(new LimelightStep(true));
+        addStep(new AutoStepDelay(500));
+
         AutoParallelStepGroup group2 = new AutoParallelStepGroup();
         group2.addStep(new Fire(true));
-        //group2.addStep(new LimelightStep(true));
         group2.addStep(new AutoStepDelay(1500));
         addStep(group2);
 
         AutoParallelStepGroup group3 = new AutoParallelStepGroup();
         group3.addStep(new Fire(false));
-        //group3.addStep(new LimelightStep(false));
+        group3.addStep(new LimelightStep(false));
         group3.addStep(new SwervePathFollowerStep(new FiverA().getPath(), swerve));
         group3.addStep(new PathHeadingStep(144.8, swerve));
         addStep(group3);
 
+        addStep(new LimelightStep(true));
+        addStep(new AutoStepDelay(250));
+
         AutoParallelStepGroup group4 = new AutoParallelStepGroup();
         group4.addStep(new Fire(true));
-        //group4.addStep(new LimelightStep(true));
         group4.addStep(new AutoStepDelay(1750));
         addStep(group4);
 
         AutoParallelStepGroup group5 = new AutoParallelStepGroup();
         group5.addStep(new Fire(false));
-        //group5.addStep(new LimelightStep(false));
+        group5.addStep(new LimelightStep(false));
         group5.addStep(new SwervePathFollowerStep(new FiverB().getPath(), swerve));
         addStep(group5);
 
@@ -73,7 +78,7 @@ public class Offset5Ball extends AutoProgram{
         AutoParallelStepGroup group7 = new AutoParallelStepGroup();
         group7.addStep(new IntakeDeployStep(true));
         group7.addStep(new Fire(true));
-        //group7.addStep(new LimelightStep(true));
+        group7.addStep(new LimelightStep(true));
         addStep(group7);
         
     }

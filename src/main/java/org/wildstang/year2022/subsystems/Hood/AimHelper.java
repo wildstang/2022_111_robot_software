@@ -147,8 +147,8 @@ public class AimHelper implements Subsystem{
             ledModeEntry.setNumber(0);//turn led on
             llModeEntry.setNumber(0);//turn camera to vision tracking
         } else {
-            ledModeEntry.setNumber(1);//turn led off
-            llModeEntry.setNumber(1);//turn camera to normal color mode
+            ledModeEntry.setNumber(0);//turn led off
+            llModeEntry.setNumber(0);//turn camera to normal color mode
         }
     }
     @Override

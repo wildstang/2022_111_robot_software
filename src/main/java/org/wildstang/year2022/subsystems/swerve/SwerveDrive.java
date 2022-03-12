@@ -301,6 +301,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rotSpeed = 0;
         xSpeed = 0;
         ySpeed = 0;
+        pathHeading = 0;
+        pathPos = 0;
+        pathVel = 0;
         rotLocked = false;
     }
     /**sets the drive to autonomous */

@@ -34,20 +34,22 @@ public class TwoBallAndSteal extends AutoProgram{
         group1.addStep(new StartFlywheel(LauncherModes.AUTO));
         group1.addStep(new SetGyroStep(201.7, swerve));
         group1.addStep(new PathHeadingStep(212.5, swerve));
-        group1.addStep(new AutoStepDelay(2000));
+        group1.addStep(new AutoStepDelay(1000));
         addStep(group1);
 
         addStep(new SwervePathFollowerStep(new TwoBall().getPath(), swerve));
 
+        addStep(new LimelightStep(true));
+        addStep(new AutoStepDelay(500));
+
         AutoParallelStepGroup group2 = new AutoParallelStepGroup();
         group2.addStep(new Fire(true));
-        //group2.addStep(new LimelightStep(true));
         group2.addStep(new AutoStepDelay(2500));
         addStep(group2);
 
         AutoParallelStepGroup group3 = new AutoParallelStepGroup();
         group3.addStep(new Fire(false));
-        //group3.addStep(new LimelightStep(false));
+        group3.addStep(new LimelightStep(false));
         group3.addStep(new PathHeadingStep(90, swerve));
         group3.addStep(new SwervePathFollowerStep(new Steal1().getPath(), swerve));
         addStep(group3);

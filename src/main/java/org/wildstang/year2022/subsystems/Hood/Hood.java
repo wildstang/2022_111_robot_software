@@ -33,6 +33,8 @@ public class Hood implements Subsystem {
     DigitalInput right_bumper;//driver right bumper
     DigitalInput leftBumper, rightBumper;//manipulator right bumper
 
+    private DigitalInput leftPad, rightPad;
+
     double hood_position;
     double offset;
     private LauncherModes launchMode;
@@ -40,6 +42,8 @@ public class Hood implements Subsystem {
     private State state;
 
     private final double CONVERSION = -54.0;//NEO rotations per 1V of MA3
+
+    private double modifier;
 
 
     private final double MAX_ANGLE = 45;
@@ -50,9 +54,9 @@ public class Hood implements Subsystem {
     private final double NEO_RANGE = 75.7;
     private final double HOOD_SPEED = 0.2;
 
-    private final double REG_A = 0.00013116;
-    private final double REG_B = -0.03091;//.00685
-    private final double REG_C = 2.9316;//.435
+    private final double REG_A = -0.000034595;//0.00013116;
+    private final double REG_B = 0.0153707;//-0.03091;//.00685
+    private final double REG_C = -0.19354;//2.9316;//.435
     
     AimHelper aim;
     
@@ -72,6 +76,10 @@ public class Hood implements Subsystem {
         leftBumper.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
+        leftPad = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_LEFT);
+        leftPad.addInputListener(this);
+        rightPad = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_RIGHT);
+        rightPad.addInputListener(this);
         resetState();
         
     }
@@ -91,7 +99,7 @@ public class Hood implements Subsystem {
         }
         if (state == State.PRESET){
             //hood_motor.setPosition(hood_motor.getPosition()+ CONVERSION * (launchMode.getHood() - getMA3()));
-            setPosition(launchMode.getHood());
+            setPosition(launchMode.getHood() + modifier);
         }
         if (state == State.IDLE){
             hood_motor.setSpeed(0);
@@ -102,10 +110,18 @@ public class Hood implements Subsystem {
         SmartDashboard.putNumber("hood target value", launchMode.getHood());
         SmartDashboard.putNumber("hood target", hood_motor.getPosition() + CONVERSION * (launchMode.getHood() - getMA3()));
         SmartDashboard.putString("hood mode", state.toString());
+        SmartDashboard.putNumber("testing hood", modifier);
     }
 
     @Override
     public void inputUpdate(Input source) {    
+
+        if (source == leftPad && leftPad.getValue()){
+            modifier -= 0.05;
+        } 
+        if (source == rightPad && rightPad.getValue()){
+            modifier += 0.05;
+        }
     if (right_bumper.getValue()){
         hood_position = aim.getAngle() / MAX_ANGLE;
         state = State.AIMING;
@@ -154,6 +170,7 @@ public class Hood implements Subsystem {
         state = State.IDLE;
         offset = offset_from_initial();
         launchMode = LauncherModes.FENDER_SHOT;
+        modifier = 0;
     }
     private double getMA3(){
         return hood_motor.getController().getAnalog(Mode.kAbsolute).getVoltage();

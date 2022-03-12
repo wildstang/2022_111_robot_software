@@ -29,6 +29,8 @@ public class Launcher implements Subsystem {
     private AnalogInput launchButton, speedButton, driverShoot;
     private DigitalInput leftBumper, rightBumper, yButton, driverAim;
 
+    private DigitalInput updpad, downdpad;
+
     // outputs
     private WsSparkMax kickerMotor;
     private WsSparkMax flywheelMotor;
@@ -44,11 +46,13 @@ public class Launcher implements Subsystem {
 
     private AimHelper aimHelper;
 
+    private double modifier;
+
     private final double threshold = 0.01;
     private final double CONVERSION = 5500;
-    private final double REG_A = 0.000015406;
-    private final double REG_B = -0.002584;//.00103
-    private final double REG_C = 0.48595;//.298
+    private final double REG_A = 0.0000001497;//0.000015406
+    private final double REG_B = 0.002085;//-0.002584
+    private final double REG_C = 0.1497;//.48595
     
     // initializes the subsystem
     public void init() {
@@ -72,6 +76,10 @@ public class Launcher implements Subsystem {
         driverShoot.addInputListener(this);
         driverAim = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
         driverAim.addInputListener(this);
+        updpad = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_UP);
+        updpad.addInputListener(this);
+        downdpad = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_DOWN);
+        downdpad.addInputListener(this);
     }
 
     public void initOutputs() {
@@ -102,7 +110,7 @@ public class Launcher implements Subsystem {
                 flywheelMotor.setSpeed(-1.0);
                 kickerMotor.setSpeed(1.0);
             } else {
-                flywheelMotor.setSpeed(-launchMode.getSpeed() - 0.0001*(launchMode.getSpeed()*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
+                flywheelMotor.setSpeed(-modifier -launchMode.getSpeed() - 0.0001*(launchMode.getSpeed()*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
                 kickerMotor.setSpeed(1.0);
             }
         } else if (isLow){
@@ -118,10 +126,17 @@ public class Launcher implements Subsystem {
         SmartDashboard.putNumber("Flywheel percent output", -launchMode.getSpeed());
         SmartDashboard.putNumber("Flywheel limelight power", aimDistance);
         SmartDashboard.putBoolean("flywheel is aiming", isAiming);
+        SmartDashboard.putNumber("testing launcher", modifier);
     }
 
     // respond to input updates
     public void inputUpdate(Input source) {
+        if (source == downdpad && downdpad.getValue()){
+            modifier-=0.005;
+        }
+        if (source == updpad && updpad.getValue()){
+            modifier+=0.005;
+        }
         if (Math.abs(launchButton.getValue()) > 0.5 || yButton.getValue()){
             latchValue = false;
         } else {
@@ -168,6 +183,7 @@ public class Launcher implements Subsystem {
         isAiming = false;
         latchValue = true;
         aimDistance = 0;
+        modifier = 0;
     }
 
     // returns the unique name of the subsystem
