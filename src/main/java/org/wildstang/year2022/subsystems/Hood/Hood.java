@@ -50,9 +50,9 @@ public class Hood implements Subsystem {
     private final double NEO_RANGE = 75.7;
     private final double HOOD_SPEED = 0.2;
 
-    private final double REG_A = 0;
-    private final double REG_B = 0.00685;
-    private final double REG_C = 0.435;
+    private final double REG_A = 0.00013116;
+    private final double REG_B = -0.03091;//.00685
+    private final double REG_C = 2.9316;//.435
     
     AimHelper aim;
     

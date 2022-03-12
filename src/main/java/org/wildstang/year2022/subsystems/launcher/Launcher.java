@@ -46,9 +46,9 @@ public class Launcher implements Subsystem {
 
     private final double threshold = 0.01;
     private final double CONVERSION = 5500;
-    private final double REG_A = 0;
-    private final double REG_B = 0.00103;
-    private final double REG_C = 0.298;
+    private final double REG_A = 0.000015406;
+    private final double REG_B = -0.002584;//.00103
+    private final double REG_C = 0.48595;//.298
     
     // initializes the subsystem
     public void init() {

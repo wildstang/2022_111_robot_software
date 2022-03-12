@@ -58,7 +58,7 @@ public class TwoBallAndSteal extends AutoProgram{
         addStep(group4);
 
         AutoParallelStepGroup group5 = new AutoParallelStepGroup();
-        group5.addStep(new PathHeadingStep(180, swerve));
+        group5.addStep(new PathHeadingStep(0, swerve));
         group5.addStep(new AutoStepDelay(1500));
         addStep(group5);
 
