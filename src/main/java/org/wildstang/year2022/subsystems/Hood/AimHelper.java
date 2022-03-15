@@ -50,12 +50,14 @@ public class AimHelper implements Subsystem{
     public double x;
     public double y;
 
+    private double modifier;
+
     public boolean TargetInView;
 
     private double TargetDistance;
     private double Angle;
 
-    private DigitalInput rightBumper;
+    private DigitalInput rightBumper, dup, ddown;
 
     private LimeConsts LC;
 
@@ -79,7 +81,7 @@ public class AimHelper implements Subsystem{
         // d = cos(0)*h/sin(0) = h/tan(0)
         // TargetDistance = LC.TARGET_HEIGHT/Math.tan(ty.getDouble(0)+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
         //double distance = (75.5 / Math.sin(Math.toRadians(20 + getTYValue()))) / 12.0;
-        TargetDistance = 47 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
+        TargetDistance = (modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
         return TargetDistance;
     }
     
@@ -154,6 +156,12 @@ public class AimHelper implements Subsystem{
     @Override
     public void inputUpdate(Input source) {
         turnOnLED(rightBumper.getValue());
+        if (source == dup && dup.getValue()){
+            modifier++;
+        }
+        if (source == ddown && ddown.getValue()){
+            modifier--;
+        }
         
     }
     @Override
@@ -175,6 +183,10 @@ public class AimHelper implements Subsystem{
 
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
+        dup = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_UP);
+        dup.addInputListener(this);
+        ddown = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_DOWN);
+        ddown.addInputListener(this);
         resetState();
         
     }
@@ -190,11 +202,13 @@ public class AimHelper implements Subsystem{
         SmartDashboard.putNumber("limelight tx", tx.getDouble(0));
         SmartDashboard.putNumber("limelight ty", ty.getDouble(0));  
         SmartDashboard.putBoolean("limelight target in view", tv.getDouble(0)==1);  
+        SmartDashboard.putNumber("Distance Modifier", modifier);
     }
 
     @Override
     public void resetState() {
         turnOnLED(false);
+        modifier = 0;
         
     }
     @Override
