@@ -14,6 +14,7 @@ public class WSSwerveHelper {
     private double[] yCoords = new double[]{0.0, 0.0, 0.0, 0.0};
     private double rotDelta;
     private double rotPID;
+    private double prevVel = 0;
 
     /** sets the robot in the immobile "cross" defensive position
      * 
@@ -64,7 +65,11 @@ public class WSSwerveHelper {
         swerveSignal = new SwerveSignal(new double[]{getMagnitude(xCoords[0], yCoords[0]), getMagnitude(xCoords[1], yCoords[1]), getMagnitude(xCoords[2], yCoords[2]), getMagnitude(xCoords[3], yCoords[3])}, 
             new double[]{getDirection(xCoords[0], yCoords[0]), getDirection(xCoords[1], yCoords[1]), getDirection(xCoords[2], yCoords[2]), getDirection(xCoords[3], yCoords[3])});
         swerveSignal.normalize();
-        return swerveSignal;
+        if (swerveSignal.isNotZeroed()){
+            return swerveSignal;
+        } else {
+            return this.setDrive(i_tx, i_ty, i_rot * 0.8, i_gyro);
+        }
     }
 
     /**sets the robot to move in autonomous
@@ -76,7 +81,7 @@ public class WSSwerveHelper {
      * @return SwerveSignal that is the command for the robot to move
      */
     public SwerveSignal setAuto(double i_power, double i_heading, double i_rot, double i_gyro){
-        return setDrive(i_power * Math.cos(Math.toRadians(i_heading)), i_power * Math.sin(Math.toRadians(i_heading)), i_rot, i_gyro);
+        return setDrive(i_power * -Math.sin(Math.toRadians(i_heading)), i_power * -Math.cos(Math.toRadians(i_heading)), i_rot, i_gyro);
     }
 
     /**automatically creates a rotational joystick value to rotate the robot towards a specific target
@@ -105,7 +110,9 @@ public class WSSwerveHelper {
      * @return double for magnitude of translational vector
      */
     public double getAutoPower(double pathPos, double pathVel, double distTravelled){
-        double guess = pathVel * DriveConstants.DRIVE_F;
+        if (pathVel == 0) return 0;
+        double guess = pathVel * DriveConstants.DRIVE_F_V + DriveConstants.DRIVE_F_K + 0.02*(pathVel - prevVel)*DriveConstants.DRIVE_F_I;
+        this.prevVel = pathVel;
         double check = DriveConstants.DRIVE_P * (pathPos - distTravelled);
         return -(guess + check);
     }

@@ -2,7 +2,14 @@ package org.wildstang.year2022.robot;
 
 import org.wildstang.framework.core.AutoPrograms;
 import org.wildstang.year2022.auto.SampleAutoProgram;
+import org.wildstang.year2022.auto.Programs.Offset5Ball;
 import org.wildstang.year2022.auto.Programs.Shoot;
+import org.wildstang.year2022.auto.Programs.TestCircle;
+import org.wildstang.year2022.auto.Programs.TestHeading;
+import org.wildstang.year2022.auto.Programs.TestStraight10;
+import org.wildstang.year2022.auto.Programs.TestStraight5;
+import org.wildstang.year2022.auto.Programs.TwoBallAndSteal;
+import org.wildstang.year2022.auto.Programs.Two_Ball;
 
 /**
  * All active AutoPrograms are enumerated here.
@@ -11,8 +18,15 @@ import org.wildstang.year2022.auto.Programs.Shoot;
 public enum WSAutoPrograms implements AutoPrograms {
 
     // enumerate programs
-    TEST_PROGRAM("Sample", SampleAutoProgram.class),
-    SHOOT("Shoot", Shoot.class)
+    //TEST_PROGRAM("Sample", SampleAutoProgram.class),
+    //SHOOT("Shoot", Shoot.class),
+    OFFSET5BALL("Offset 5 Ball", Offset5Ball.class),
+    //CIRCLE("Test Circle", TestCircle.class),
+    //STRAIGHT5("Test Straight5", TestStraight5.class),
+    //STRAIGHT10("Test Straight10", TestStraight10.class),
+    //HEADING("Test Heading", TestHeading.class),
+    TWOBALL("Two Ball", Two_Ball.class),
+    STEALTWOBALL("Steal and Two Ball", TwoBallAndSteal.class)
     ;
 
     /**

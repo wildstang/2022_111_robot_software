@@ -41,7 +41,7 @@ public class SwerveModule {
         angleMotor.setCurrentLimit(DriveConstants.ANGLE_CURRENT_LIMIT, DriveConstants.ANGLE_CURRENT_LIMIT, 0);
 
         //set up angle and drive with pid and kpid respectively
-        driveMotor.initClosedLoop(DriveConstants.DRIVE_P, DriveConstants.DRIVE_I, DriveConstants.DRIVE_D, DriveConstants.DRIVE_F);
+        driveMotor.initClosedLoop(DriveConstants.DRIVE_P, DriveConstants.DRIVE_I, DriveConstants.DRIVE_D, 0);
         angleMotor.initClosedLoop(DriveConstants.ANGLE_P, DriveConstants.ANGLE_I, DriveConstants.ANGLE_D, 0);
         
 
@@ -69,7 +69,7 @@ public class SwerveModule {
     }
     /** resets drive encoder */
     public void resetDriveEncoders(){
-        driveMotor.setPosition(0.0);
+        driveMotor.resetEncoder();
     }
     /**sets drive to brake mode if true, coast if false 
      * @param isBrake true for brake, false for coast
@@ -128,7 +128,7 @@ public class SwerveModule {
     /**runs module drive at specified power [-1, 1] 
      * @param power the power to run the module at, [-1, 1]
     */
-    private void runAtPower(double power){
+    public void runAtPower(double power){
         driveMotor.setSpeed(power);
     }
     /** returns drive encoder distance in inches 
@@ -150,5 +150,8 @@ public class SwerveModule {
     public boolean getDirection(double angle){
         if (Math.abs(angle - getAngle()) < 90 || Math.abs(angle - getAngle()) > 270) return true;
         return false;
+    }
+    public WsSparkMax getDriveMotor(){
+        return driveMotor;
     }
 }

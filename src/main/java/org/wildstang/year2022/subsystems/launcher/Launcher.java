@@ -3,6 +3,8 @@ package org.wildstang.year2022.subsystems.launcher;
 
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
+import org.wildstang.year2022.robot.WSSubsystems;
+import org.wildstang.year2022.subsystems.Hood.AimHelper;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,8 +26,9 @@ import org.wildstang.framework.subsystems.Subsystem;
 public class Launcher implements Subsystem {
 
     // inputs
-    private AnalogInput launchButton, speedButton;
-    private DigitalInput leftBumper, rightBumper, yButton;
+    private AnalogInput launchButton, speedButton, driverShoot;
+    private DigitalInput leftBumper, rightBumper, yButton, driverAim;
+
 
     // outputs
     private WsSparkMax kickerMotor;
@@ -35,9 +38,19 @@ public class Launcher implements Subsystem {
     // variables
     private LauncherModes launchMode;
     private boolean isRunning;
+    private boolean isAiming;
     private boolean latchValue;
+    private boolean isLow;
+    private double aimDistance;
 
-    private final double threshold = 0.7;
+    private AimHelper aimHelper;
+
+
+    private final double threshold = 0.01;
+    private final double CONVERSION = 5500;
+    private final double REG_A = -0.000001488;//0.000015406;//-0.0000040441;//0.0000001497
+    private final double REG_B = 0.002265;//-0.002584;//0.003158;//0.002085;
+    private final double REG_C = 0.149;//.48595;//0.08335;//0.1497;
     
     // initializes the subsystem
     public void init() {
@@ -57,6 +70,10 @@ public class Launcher implements Subsystem {
         rightBumper.addInputListener(this);
         yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
         yButton.addInputListener(this);
+        driverShoot = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
+        driverShoot.addInputListener(this);
+        driverAim = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        driverAim.addInputListener(this);
     }
 
     public void initOutputs() {
@@ -66,32 +83,48 @@ public class Launcher implements Subsystem {
         kickerMotor.setCurrentLimit(25, 25, 0);
         flywheelMotor.setCurrentLimit(50, 50, 0);
 
+        aimHelper = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
+
     }
 
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
         latch.setValue(latchValue);
-        if (!isRunning){
-            flywheelMotor.setSpeed(0);
-            kickerMotor.setSpeed(0);
-        } else {
-            if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getRPM()){
+        if (isAiming){
+            double distance = aimHelper.getDistance();
+            aimDistance = REG_A * distance*distance + REG_B * distance + REG_C;
+            kickerMotor.setSpeed(1.0);
+            if (Math.abs(flywheelMotor.getVelocity()) < threshold*aimDistance*CONVERSION){
+                flywheelMotor.setSpeed(-1.0);
+            } else {
+                flywheelMotor.setSpeed(-aimDistance - 0.00001*(aimDistance*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
+            }
+        } else if (isRunning) {
+            if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getSpeed()*CONVERSION){
                 flywheelMotor.setSpeed(-1.0);
                 kickerMotor.setSpeed(1.0);
             } else {
-                flywheelMotor.setSpeed(-launchMode.getSpeed());
+                flywheelMotor.setSpeed( -launchMode.getSpeed() - 0.0001*(launchMode.getSpeed()*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
                 kickerMotor.setSpeed(1.0);
             }
+        } else if (isLow){
+            flywheelMotor.setSpeed(-0.23);
+            kickerMotor.setSpeed(1.0);
+        } else if (!isRunning){
+            flywheelMotor.setSpeed(0);
+            kickerMotor.setSpeed(0);
         }
-
         
         SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
         SmartDashboard.putNumber("Flywheel velocity", -flywheelMotor.getVelocity());
         SmartDashboard.putNumber("Flywheel percent output", -launchMode.getSpeed());
+        SmartDashboard.putNumber("Flywheel limelight power", aimDistance);
+        SmartDashboard.putBoolean("flywheel is aiming", isAiming);
     }
 
     // respond to input updates
     public void inputUpdate(Input source) {
+        
         if (Math.abs(launchButton.getValue()) > 0.5 || yButton.getValue()){
             latchValue = false;
         } else {
@@ -101,6 +134,11 @@ public class Launcher implements Subsystem {
             isRunning = true;
         } else {
             isRunning = false;
+        }
+        if (Math.abs(launchButton.getValue())>0.15){
+            isLow = true;
+        } else {
+            isLow = false;
         }
         if (source == leftBumper && leftBumper.getValue()){
             if (rightBumper.getValue()){
@@ -116,6 +154,11 @@ public class Launcher implements Subsystem {
                 launchMode = LauncherModes.LAUNCH_PAD;
             }
         }
+        if (driverAim.getValue()){
+            isAiming = true;
+        } else {
+            isAiming = false;
+        }
     }
 
     // used for testing
@@ -125,7 +168,9 @@ public class Launcher implements Subsystem {
     public void resetState() {
         launchMode = LauncherModes.FENDER_SHOT;
         isRunning = false;
+        isAiming = false;
         latchValue = true;
+        aimDistance = 0;
     }
 
     // returns the unique name of the subsystem
@@ -136,6 +181,9 @@ public class Launcher implements Subsystem {
     public void setLauncher(LauncherModes modeToUse){
         launchMode = modeToUse;
         isRunning = true;
+    }
+    public void setAiming(boolean toAim){
+        isAiming = toAim;
     }
     public void stopLauncher(){
         isRunning = false;
