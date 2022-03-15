@@ -1,9 +1,9 @@
-package org.wildstang.year2022.auto.programs;
+package org.wildstang.year2022.auto.Programs;
 
 import org.wildstang.framework.auto.AutoProgram;
 import org.wildstang.framework.auto.steps.control.AutoStepDelay;
-import org.wildstang.year2022.auto.steps.Fire;
-import org.wildstang.year2022.auto.steps.StartFlywheel;
+import org.wildstang.year2022.auto.Steps.Fire;
+import org.wildstang.year2022.auto.Steps.StartFlywheel;
 import org.wildstang.year2022.subsystems.launcher.LauncherModes;
 
 public class Shoot extends AutoProgram{
