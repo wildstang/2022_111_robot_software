@@ -41,8 +41,8 @@ public class AimHelper{
     private NetworkTableEntry tx; //x angle
     private NetworkTableEntry tv;
     
-    public double x;
-    public double y;
+    public double Limelight_Offset_X;
+    public double Limelight_Offset_Y;
 
     public boolean TargetInView;
 
@@ -68,13 +68,13 @@ public class AimHelper{
     }
     public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){
-            x = tx.getDouble(0);
-            y = ty.getDouble(0);
+            Limelight_Offset_X = tx.getDouble(0);
+            Limelight_Offset_Y = ty.getDouble(0);
             TargetInView = true;
         }
         else{
-            x = 0; //no target case
-            y = 0;
+            Limelight_Offset_X = 0; //no target case
+            Limelight_Offset_Y = 0;
             TargetInView = false;
         }
     }
@@ -142,6 +142,80 @@ public class AimHelper{
         return out;
     
     }
+<<<<<<< Updated upstream
+=======
+    public void turnOnLED(boolean onState){
+        if (onState) {
+            ledModeEntry.setNumber(0);//turn led on
+            llModeEntry.setNumber(0);//turn camera to vision tracking
+        } else {
+            ledModeEntry.setNumber(0);//turn led off
+            llModeEntry.setNumber(0);//turn camera to normal color mode
+        }
+    }
+    @Override
+    public void inputUpdate(Input source) {
+        turnOnLED(rightBumper.getValue());
+        if (source == dup && dup.getValue()){
+            modifier++;
+        }
+        if (source == ddown && ddown.getValue()){
+            modifier--;
+        }
+        
+    }
+    @Override
+    public void init() {
+        LC = new LimeConsts();
+        Limelight_Offset_X = 0;  //x and y angular offsets from limelight. Only updated when calcTargetCoords is called.
+        Limelight_Offset_Y = 0;
+        TargetInView = false; //is the target in view? only updated when calcTargetCoords is called.
+        TargetDistance = 0; //distance to target in feet. Only updated when calcTargetCoords is called.
+
+
+        LimeTable  = NetworkTableInstance.getDefault().getTable("limelight");
+
+        ty = LimeTable.getEntry("ty");
+        tx = LimeTable.getEntry("tx");
+        tv = LimeTable.getEntry("tv");
+        ledModeEntry = LimeTable.getEntry("ledMode");
+        llModeEntry = LimeTable.getEntry("camMode");
+
+        rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        rightBumper.addInputListener(this);
+        dup = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_UP);
+        dup.addInputListener(this);
+        ddown = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_DOWN);
+        ddown.addInputListener(this);
+        resetState();
+        
+    }
+    @Override
+    public void selfTest() {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public void update() {
+        calcTargetCoords();
+        SmartDashboard.putNumber("limelight distance", getDistance());    
+        SmartDashboard.putNumber("limelight tx", tx.getDouble(0));
+        SmartDashboard.putNumber("limelight ty", ty.getDouble(0));  
+        SmartDashboard.putBoolean("limelight target in view", tv.getDouble(0)==1);  
+        SmartDashboard.putNumber("Distance Modifier", modifier);
+    }
+
+    @Override
+    public void resetState() {
+        turnOnLED(false);
+        modifier = 0;
+        
+    }
+    @Override
+    public String getName() {
+        return "Limelight";
+    }
+>>>>>>> Stashed changes
 
     
 

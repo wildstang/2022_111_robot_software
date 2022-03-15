@@ -12,6 +12,12 @@ import org.wildstang.framework.subsystems.swerve.SwerveDriveTemplate;
 import org.wildstang.year2022.robot.CANConstants;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
+<<<<<<< Updated upstream
+=======
+import org.wildstang.year2022.robot.WSSubsystems;
+import org.wildstang.year2022.subsystems.Hood.AimHelper;
+import org.wildstang.year2022.subsystems.launcher.Launcher;
+>>>>>>> Stashed changes
 import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 import org.wildstang.year2022.subsystems.swerve.SwerveSignal;
 import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
@@ -64,10 +70,29 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private SwerveModule[] modules;
     private SwerveSignal swerveSignal;
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
 
     public enum driveType {TELEOP, AUTO, CROSS};
     public driveType driveState;
 
+<<<<<<< Updated upstream
+=======
+    private AimHelper limelight;
+    private Launcher Launcher;
+    private double AimOffsetParam = 10;
+    
+    private double findAimOffset_THETA(){
+        double CurrentOffset = limelight.getRotPID()
+        double WheelOffset_ABS = modules[4].getAngle + CurrentOffset;
+        double TAN_Speed = modules[4].getSpeed * Math.sin(Math.toRadians(WheelOffset_ABS+90)); //Lower left wheel
+        double AimOffset = (AimHelping.Distance()/AimOffsetParam) * TAN_Speed;
+        return Math.sin(AimOffset/AimHelping.Distance())
+        
+    }
+>>>>>>> Stashed changes
     @Override
     public void inputUpdate(Input source) {
         //determine if we are in cross or teleop
@@ -127,6 +152,13 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rotSpeed = -rotSpeedLimiter.calculate(-rightStickX.getValue());
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         //if the rotational joystick is being used, the robot should not be auto tracking heading
+        if (Launcher.isLauncherRunning){
+            double AimOffset = findAimOffset()
+            //Figure out how to turn AimOffset (Theta to turn robot) into a offset for Limelight
+            double AdjustedLimeLight = AimHelping.LimeLight_Analog_X * AimOffset;
+            rotSpeed = -rotSpeedLimiter.calculate(-AdjustedLimeLight);
+            if (Math.abs(AdjustedLimeLight) < DriveConstants.DEADBAND) rotSpeed = 0;
+        }
         if (rotSpeed != 0) rotLocked = false;
     }
  
@@ -180,6 +212,11 @@ public class SwerveDrive extends SwerveDriveTemplate {
         };
         //create default swerveSignal
         swerveSignal = new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{0.0, 0.0, 0.0, 0.0});
+<<<<<<< Updated upstream
+=======
+        limelight = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
+        Launcher= (Launcher) Core.getSubsystemManager().getSubsystem("Launcher");
+>>>>>>> Stashed changes
     }
     
     @Override

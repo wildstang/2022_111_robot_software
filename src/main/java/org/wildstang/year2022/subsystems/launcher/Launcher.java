@@ -34,7 +34,12 @@ public class Launcher implements Subsystem {
 
     // variables
     private LauncherModes launchMode;
+<<<<<<< Updated upstream
     private boolean isRunning;
+=======
+    public boolean LAUNCHER_RUNNING;
+    private boolean isAiming;
+>>>>>>> Stashed changes
     private boolean latchValue;
 
     private final double threshold = 0.7;
@@ -71,17 +76,40 @@ public class Launcher implements Subsystem {
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
         latch.setValue(latchValue);
+<<<<<<< Updated upstream
         if (!isRunning){
             flywheelMotor.setSpeed(0);
             kickerMotor.setSpeed(0);
         } else {
             if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getRPM()){
+=======
+        if (isAiming){
+            double distance = aimHelper.getDistance();
+            aimDistance = REG_A * distance*distance + REG_B * distance + REG_C;
+            kickerMotor.setSpeed(1.0);
+            if (Math.abs(flywheelMotor.getVelocity()) < threshold*aimDistance*CONVERSION){
+                flywheelMotor.setSpeed(-1.0);
+            } else {
+                flywheelMotor.setSpeed(-aimDistance - 0.00001*(aimDistance*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
+            }
+        } else if (LAUNCHER_RUNNING) {
+            if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getSpeed()*CONVERSION){
+>>>>>>> Stashed changes
                 flywheelMotor.setSpeed(-1.0);
                 kickerMotor.setSpeed(1.0);
             } else {
                 flywheelMotor.setSpeed(-launchMode.getSpeed());
                 kickerMotor.setSpeed(1.0);
             }
+<<<<<<< Updated upstream
+=======
+        } else if (isLow){
+            flywheelMotor.setSpeed(-0.23);
+            kickerMotor.setSpeed(1.0);
+        } else if (!LAUNCHER_RUNNING){
+            flywheelMotor.setSpeed(0);
+            kickerMotor.setSpeed(0);
+>>>>>>> Stashed changes
         }
 
         
@@ -98,9 +126,9 @@ public class Launcher implements Subsystem {
             latchValue = true;
         }
         if (Math.abs(speedButton.getValue()) > 0.5){
-            isRunning = true;
+            LAUNCHER_RUNNING = true;
         } else {
-            isRunning = false;
+            LAUNCHER_RUNNING = false;
         }
         if (source == leftBumper && leftBumper.getValue()){
             if (rightBumper.getValue()){
@@ -124,7 +152,12 @@ public class Launcher implements Subsystem {
     // resets all variables to the default state
     public void resetState() {
         launchMode = LauncherModes.FENDER_SHOT;
+<<<<<<< Updated upstream
         isRunning = false;
+=======
+        LAUNCHER_RUNNING = false;
+        isAiming = false;
+>>>>>>> Stashed changes
         latchValue = true;
     }
 
@@ -135,10 +168,10 @@ public class Launcher implements Subsystem {
 
     public void setLauncher(LauncherModes modeToUse){
         launchMode = modeToUse;
-        isRunning = true;
+        LAUNCHER_RUNNING = true;
     }
     public void stopLauncher(){
-        isRunning = false;
+        LAUNCHER_RUNNING = false;
         launchMode = LauncherModes.ZERO;
     }
     /**
