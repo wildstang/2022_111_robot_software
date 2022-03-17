@@ -201,7 +201,7 @@ public class Tester implements Subsystem{
         intakeSolenoidState = false;
         launcherSolenoidState = true;
         tiltState = true;
-        climbHardStops = true;
+        climbHardStops = false;
     }
 
     @Override
