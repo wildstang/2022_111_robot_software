@@ -16,6 +16,7 @@ import org.wildstang.year2022.subsystems.ballpath.Ballpath;
 import org.wildstang.year2022.subsystems.launcher.LauncherModes;
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 
+import frc.paths.FiveInt;
 import frc.paths.Fiver;
 import frc.paths.FiverA;
 import frc.paths.FiverB;
@@ -68,7 +69,9 @@ public class Offset5Ball extends AutoProgram{
         group5.addStep(new SwervePathFollowerStep(new FiverB().getPath(), swerve));
         addStep(group5);
 
-        addStep(new AutoStepDelay(1500));
+        addStep(new SwervePathFollowerStep(new FiveInt().getPath(), swerve));
+
+        addStep(new AutoStepDelay(1000));
 
         AutoParallelStepGroup group6 = new AutoParallelStepGroup();
         group6.addStep(new IntakeDeployStep(false));
