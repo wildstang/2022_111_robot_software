@@ -85,7 +85,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         double WheelOffset_ABS = swerveSignal.getAngle(4) + CurrentOffset;
         double TAN_Speed = Motor4.getVelocity() * MotorVelocityParam * Math.sin(Math.toRadians(WheelOffset_ABS+90)); //Lower left wheel
         double AimOffset = (limelight.getDistance()*AimOffsetParam) * TAN_Speed;
-        double AimOffset_THETA = Math.tan(AimOffset/limelight.getDistance());
+        double AimOffset_THETA = Math.atan(AimOffset/limelight.getDistance());
         return CurrentOffset+AimOffset_THETA;
     }
 
