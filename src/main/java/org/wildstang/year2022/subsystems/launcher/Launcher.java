@@ -57,7 +57,6 @@ public class Launcher implements Subsystem {
     private AimHelper aimHelper;
         private double RobotVelocityParam = 3;
     private WsSparkMax Motor4;
-        private double MotorVelocityParam = 3600; //Radians per second to Feet/S
 
     private double findDistanceWithVelocity(double fedDistance){
         double CurrentOffset = aimHelper.getRotPID();
