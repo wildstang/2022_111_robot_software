@@ -68,13 +68,26 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
     public SwerveModule[] modules;
-    private SwerveSignal swerveSignal;
+    public SwerveSignal swerveSignal;
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
-    private AimHelper limelight;
+    
 
     public enum driveType {TELEOP, AUTO, CROSS, LL};
     public driveType driveState;
 
+    private AimHelper limelight;
+    public double AimOffsetParam = 3;
+    private WsSparkMax Motor4;
+        public double MotorVelocityParam = 3600; //Radians per second to Feet/S
+
+    private double findAimOffset(){
+        double CurrentOffset = limelight.getRotPID();
+        double WheelOffset_ABS = swerveSignal.getAngle(4) + CurrentOffset;
+        double TAN_Speed = Motor4.getVelocity() * MotorVelocityParam * Math.sin(Math.toRadians(WheelOffset_ABS+90)); //Lower left wheel
+        double AimOffset = (limelight.getDistance()*AimOffsetParam) * TAN_Speed;
+        double AimOffset_THETA = Math.tan(AimOffset/limelight.getDistance());
+        return CurrentOffset+AimOffset_THETA;
+    }
 
     @Override
     public void inputUpdate(Input source) {
@@ -212,6 +225,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
         //create default swerveSignal
         swerveSignal = new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{0.0, 0.0, 0.0, 0.0});
         limelight = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
+
+        //ONLY FOR TRACKING
+        Motor4 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.DRIVE4);
     }
     
     @Override
@@ -246,7 +262,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
             drive();        
         }
         if (driveState == driveType.LL){
-            rotSpeed = -limelight.getRotPID();
+            rotSpeed = -findAimOffset();
+
+            
             this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, getGyroAngle());
             drive();
         }
