@@ -118,11 +118,11 @@ public class WSSwerveHelper {
     }
 
     /**returns magnitude of vector components */
-    private double getMagnitude(double x, double y){
+    public double getMagnitude(double x, double y){
         return Math.hypot(x, y);
     }
     /**x,y inputs are cartesian, angle values are in bearing, returns 0 - 360 */
-    private double getDirection(double x, double y){
+    public double getDirection(double x, double y){
         double measurement =  Math.toDegrees(Math.atan2(x,y));//returns angle in bearing form
         if (measurement<0) measurement = 360+measurement;
         if (measurement>=360) measurement = measurement-360;

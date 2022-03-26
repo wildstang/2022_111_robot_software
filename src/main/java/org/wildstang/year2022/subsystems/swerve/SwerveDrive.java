@@ -79,12 +79,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
     @Override
     public void inputUpdate(Input source) {
         //determine if we are in cross or teleop
-        if (source == leftBumper && leftBumper.getValue()){
-            resetDriveEncoders();
-        }
-        if (driveState != driveType.AUTO && leftBumper.getValue()){
+        if (driveState != driveType.AUTO && dpadLeft.getValue()){
             driveState = driveType.CROSS;
-            this.swerveSignal = new SwerveSignal(new double[]{-modules[0].getPosition()*0.0025, -modules[1].getPosition()*0.01, -modules[2].getPosition()*0.01, -modules[3].getPosition()*0.01, }, swerveHelper.setCross().getAngles());
+            this.swerveSignal = new SwerveSignal(new double[]{0, 0, 0, 0 }, swerveHelper.setCross().getAngles());
         } else if (driveState != driveType.AUTO){
             driveState = driveType.TELEOP;
         }
@@ -106,6 +103,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rotSpeed *= thrustValue;
 
         //update auto tracking values
+        if (leftBumper.getValue()){
+            rotLocked = true;
+            rotTarget = swerveHelper.getDirection(xSpeed, ySpeed);
+        }
         if (source == faceUp && faceUp.getValue()){
             if (faceLeft.getValue()){ rotTarget = 291.0;
             } else if (faceRight.getValue()){ rotTarget = 21.0;
