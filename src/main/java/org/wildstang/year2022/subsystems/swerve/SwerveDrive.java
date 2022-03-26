@@ -103,7 +103,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rotSpeed *= thrustValue;
 
         //update auto tracking values
-        if (leftBumper.getValue()){
+        if (leftBumper.getValue() && (Math.abs(xSpeed)>0.1 || Math.abs(ySpeed)>0.1)){
             rotLocked = true;
             rotTarget = swerveHelper.getDirection(xSpeed, ySpeed);
         }
