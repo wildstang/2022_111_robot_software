@@ -56,6 +56,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double rotSpeed;
     private double thrustValue;
     private boolean rotLocked;
+    private boolean isSnake;
     private boolean isFieldCentric;
     private double rotTarget;
     private double pathPos;
@@ -105,7 +106,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
         //update auto tracking values
         if (leftBumper.getValue() && (Math.abs(xSpeed)>0.1 || Math.abs(ySpeed)>0.1)){
             rotLocked = true;
+            isSnake = true;
             rotTarget = swerveHelper.getDirection(xSpeed, ySpeed);
+        } else {
+            isSnake = false;
         }
         if (source == faceUp && faceUp.getValue()){
             if (faceLeft.getValue()){ rotTarget = 291.0;
@@ -231,6 +235,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
             if (rotLocked){
                 //if rotation tracking, replace rotational joystick value with controller generated one
                 rotSpeed = swerveHelper.getRotControl(rotTarget, getGyroAngle());
+                if (isSnake) {
+                    rotSpeed *= 4;
+                    if (Math.abs(rotSpeed) > 1) rotSpeed = 1.0 * Math.signum(rotSpeed);
+                } 
             }
             this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, getGyroAngle());
             SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
@@ -279,6 +287,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         pathTarget = 0.0;
 
         isFieldCentric = true;
+        isSnake = false;
     }
 
     @Override
