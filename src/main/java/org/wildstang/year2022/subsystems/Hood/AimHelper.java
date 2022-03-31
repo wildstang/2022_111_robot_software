@@ -23,12 +23,15 @@ import org.wildstang.hardware.roborio.outputs.WsPhoenix;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
+import org.wildstang.year2022.robot.WSSubsystems;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 
+import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
+import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -46,6 +49,9 @@ public class AimHelper implements Subsystem{
     private NetworkTableEntry tv;
     private NetworkTableEntry ledModeEntry;
     private NetworkTableEntry llModeEntry;
+
+    private SwerveDrive swerve;
+    private WSSwerveHelper helper;
     
     public double x;
     public double y;
@@ -56,10 +62,17 @@ public class AimHelper implements Subsystem{
 
     private double TargetDistance;
     private double Angle;
+    private double xSpeed, ySpeed;
+
+    private double perpFactor, parFactor;
 
     private DigitalInput rightBumper, dup, ddown;
+    private AnalogInput leftStickX, leftStickY;
 
     private LimeConsts LC;
+
+    private final double DISTANCE_FACTOR = 60;
+    private final double ANGLE_FACTOR = 20;
 
     public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){
@@ -74,76 +87,27 @@ public class AimHelper implements Subsystem{
         }
     }
 
-    public double getDistance(){ //update target dist. for internal use. Distance is in feet.
+    public void getMovingCoords(){
+        double robotAngle = (swerve.getGyroAngle() - tx.getDouble(0))%360;
+        double movementAngle = helper.getDirection(xSpeed, ySpeed);
+        double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
+        perpFactor = movementMagnitude * Math.cos(-robotAngle + movementAngle);
+        parFactor = movementMagnitude * Math.sin(-robotAngle + movementAngle);
+    }
+
+    public double getDistance(){
         calcTargetCoords();
-        //h = lsin(0), d = lcos(0)
-        // l = h/sin(0) = d/cos(0)
-        // d = cos(0)*h/sin(0) = h/tan(0)
-        // TargetDistance = LC.TARGET_HEIGHT/Math.tan(ty.getDouble(0)+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
-        //double distance = (75.5 / Math.sin(Math.toRadians(20 + getTYValue()))) / 12.0;
         TargetDistance = (modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
-        return TargetDistance;
+        //return TargetDistance;
+        return TargetDistance - perpFactor;
     }
     
     public double getRotPID(){
         calcTargetCoords();
-        return tx.getDouble(0) * -0.015;
+        //return tx.getDouble(0) * -0.015;
+        return (tx.getDouble(0) - parFactor) * -0.015;
     }
 
-    public double getAngle(){ //get hood angle for autoaim
-        getDistance();
-        return ApproximateAngle(TargetDistance);
-    }
-    public double ApproximateAngle(double dist){ //linear interlopation
-        double[] dists = LC.Dists;
-        int max = dists.length-1;
-        int min = 0;
-        int c = 0;
-        boolean done = false;
-        boolean exact = false;
-        while(done == false){
-            if(max-min <= 1){
-                done = true;
-                c = max;
-            }
-            else{
-                c = (int) ((max-min)/2)+min;
-                
-                if(dists[c]>dist){
-                    max = c;
-                }
-                else if(dists[c] < dist){
-                    min = c;
-                }
-                else{
-                    exact = true;
-                    done = true;
-                }
-                
-            }
-
-            
-        }
-        double out = 0;
-        // now c is index of nearest value (rounded up)
-        if(exact){
-            out = LC.Angles[c];
-        }
-        else{
-            if(c-1 >= min){
-                double interval = dists[c]-dists[c-1];
-                double range = LC.Angles[c]-LC.Angles[c-1];
-                out = (((dist-dists[c-1])/interval)*range)+dists[c-1];
-            }
-            else{ //outside of domain
-                out = LC.Angles[c];
-            }
-
-
-        }
-        return out;
-    
-    }
     public void turnOnLED(boolean onState){
         if (onState) {
             ledModeEntry.setNumber(0);//turn led on
@@ -162,6 +126,10 @@ public class AimHelper implements Subsystem{
         if (source == ddown && ddown.getValue()){
             modifier--;
         }
+        xSpeed = leftStickX.getValue();
+        ySpeed = leftStickY.getValue();
+        if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
+        if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
         
     }
     @Override
@@ -181,12 +149,19 @@ public class AimHelper implements Subsystem{
         ledModeEntry = LimeTable.getEntry("ledMode");
         llModeEntry = LimeTable.getEntry("camMode");
 
+        helper = new WSSwerveHelper();
+
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
+        leftStickX = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_JOYSTICK_X);
+        leftStickX.addInputListener(this);
+        leftStickY = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_JOYSTICK_Y);
+        leftStickY.addInputListener(this);
         dup = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_UP);
         dup.addInputListener(this);
         ddown = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_DOWN);
         ddown.addInputListener(this);
+        swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
         resetState();
         
     }
@@ -209,6 +184,10 @@ public class AimHelper implements Subsystem{
     public void resetState() {
         turnOnLED(false);
         modifier = 0;
+        xSpeed = 0;
+        ySpeed = 0;
+        perpFactor = 0;
+        parFactor = 0;
         
     }
     @Override
