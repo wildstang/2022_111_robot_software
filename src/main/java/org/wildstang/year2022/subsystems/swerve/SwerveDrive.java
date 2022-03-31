@@ -51,8 +51,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private DigitalInput faceDown;//rotation lock 180 degrees
     private DigitalInput dpadLeft;//defense mode
 
-    private double xSpeed;
-    private double ySpeed;
+    public double xSpeed;
+    public double ySpeed;
     private double rotSpeed;
     private double thrustValue;
     private boolean rotLocked;
@@ -77,15 +77,21 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     private AimHelper limelight;
     public double AimOffsetParam = 3;
-    private WsSparkMax Motor4;
-        public double MotorVelocityParam = 3600; //Radians per second to Feet/S
+    
+    public double MotorVelocityParam = 168; //max Velocity
 
     private double findAimOffset(){
-        double CurrentOffset = limelight.getRotPID();
-        double WheelOffset_ABS = swerveSignal.getAngle(4) + CurrentOffset;
-        double TAN_Speed = Motor4.getVelocity() * MotorVelocityParam * Math.sin(Math.toRadians(WheelOffset_ABS+90)); //Lower left wheel
+
+        double CurrentOffset = Math.toRadians(limelight.getRotPID()/-.0015);
+        double WheelOffset_ABS = getGyroAngle() - CurrentOffset;
+
+        //Find robot translational speed towards hub and tangent to hub
+        double TAN_Speed = xSpeed/Math.cos(CurrentOffset) * MotorVelocityParam * Math.cos(WheelOffset_ABS);
+
+        //Find current limelight offset and theta of offset (shooting triangle)
         double AimOffset = (limelight.getDistance()*AimOffsetParam) * TAN_Speed;
         double AimOffset_THETA = Math.atan(AimOffset/limelight.getDistance());
+
         return CurrentOffset+AimOffset_THETA;
     }
 
@@ -225,9 +231,6 @@ public class SwerveDrive extends SwerveDriveTemplate {
         //create default swerveSignal
         swerveSignal = new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{0.0, 0.0, 0.0, 0.0});
         limelight = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
-
-        //ONLY FOR TRACKING
-        Motor4 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.DRIVE4);
     }
     
     @Override

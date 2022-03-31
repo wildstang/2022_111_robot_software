@@ -56,15 +56,14 @@ public class Launcher implements Subsystem {
 
     private AimHelper aimHelper;
         private double RobotVelocityParam = 3;
-    private WsSparkMax Motor4;
 
     private double findDistanceWithVelocity(double fedDistance){
-        double CurrentOffset = aimHelper.getRotPID();
-        double WheelOffset_ABS = swerveDrive.swerveSignal.getAngle(4) + CurrentOffset;
+        double CurrentOffset = Math.toRadians(aimHelper.getRotPID()/-.0015);
+        double WheelOffset_ABS = swerveDrive.getGyroAngle() - CurrentOffset;
 
         //Find robot translational speed towards hub and tangent to hub
-        double TAN_Speed = Motor4.getVelocity() * swerveDrive.MotorVelocityParam * Math.sin(Math.toRadians(WheelOffset_ABS+90));
-        double Direct_Speed = Motor4.getVelocity() * swerveDrive.MotorVelocityParam * Math.sin(Math.toRadians(WheelOffset_ABS)); //Lower left wheel
+        double TAN_Speed = swerveDrive.xSpeed/Math.cos(CurrentOffset) * swerveDrive.MotorVelocityParam * Math.cos(WheelOffset_ABS);
+        double Direct_Speed = swerveDrive.xSpeed/Math.cos(CurrentOffset) * swerveDrive.MotorVelocityParam * Math.sin(WheelOffset_ABS); //Lower left wheel
 
         //Find current limelight offset and theta of offset (shooting triangle)
         double AimOffset = (aimHelper.getDistance()*swerveDrive.AimOffsetParam) * TAN_Speed;
@@ -110,9 +109,6 @@ public class Launcher implements Subsystem {
 
         aimHelper = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
         swerveDrive = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
-
-        //ONLY FOR TRACKING
-        Motor4 = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.DRIVE4);
     }
 
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
