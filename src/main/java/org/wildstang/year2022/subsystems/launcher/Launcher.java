@@ -55,7 +55,6 @@ public class Launcher implements Subsystem {
     private SwerveDrive swerveDrive;
 
     private AimHelper aimHelper;
-        private double RobotVelocityParam = 3;
 
     private double findDistanceWithVelocity(double fedDistance){
         double CurrentOffset = Math.toRadians(aimHelper.getRotPID()/-.0015);
@@ -67,10 +66,10 @@ public class Launcher implements Subsystem {
 
         //Find current limelight offset and theta of offset (shooting triangle)
         double AimOffset = (aimHelper.getDistance()*swerveDrive.AimOffsetParam) * TAN_Speed;
-        double AimOffset_THETA = Math.atan(AimOffset/aimHelper.getDistance());
+        double AimOffset_THETA = Math.atan(AimOffset/(aimHelper.getDistance()+Direct_Speed*swerveDrive.RobotVelocityParam));
 
         //Takes distance + d(position)/dt *  VelocityParameter then multiplies by Inv_Sin of Shooting Triangle
-        double newDistance = -(fedDistance + Direct_Speed * RobotVelocityParam)/Math.sin(AimOffset_THETA);
+        double newDistance = -(fedDistance + Direct_Speed * swerveDrive.RobotVelocityParam)/Math.sin(AimOffset_THETA);
 
         return newDistance;
     }

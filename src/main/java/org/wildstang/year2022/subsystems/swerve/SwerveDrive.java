@@ -79,6 +79,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public double AimOffsetParam = 3;
     
     public double MotorVelocityParam = 168; //max Velocity
+    public double RobotVelocityParam = 3;
 
     private double findAimOffset(){
 
@@ -87,12 +88,13 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
         //Find robot translational speed towards hub and tangent to hub
         double TAN_Speed = xSpeed/Math.cos(CurrentOffset) * MotorVelocityParam * Math.cos(WheelOffset_ABS);
+        double Direct_Speed = xSpeed/Math.cos(CurrentOffset) * MotorVelocityParam * Math.sin(WheelOffset_ABS); //Lower left wheel
 
         //Find current limelight offset and theta of offset (shooting triangle)
         double AimOffset = (limelight.getDistance()*AimOffsetParam) * TAN_Speed;
-        double AimOffset_THETA = Math.atan(AimOffset/limelight.getDistance());
+        double AimOffset_THETA = Math.atan(AimOffset/(limelight.getDistance()+Direct_Speed*RobotVelocityParam));
 
-        return CurrentOffset+AimOffset_THETA;
+        return CurrentOffset-AimOffset_THETA;
     }
 
     @Override
