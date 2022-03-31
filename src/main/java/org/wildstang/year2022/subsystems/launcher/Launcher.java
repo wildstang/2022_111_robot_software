@@ -69,7 +69,7 @@ public class Launcher implements Subsystem {
         double AimOffset_THETA = Math.atan(AimOffset/(aimHelper.getDistance()+Direct_Speed*swerveDrive.RobotVelocityParam));
 
         //Takes distance + d(position)/dt *  VelocityParameter then multiplies by Inv_Sin of Shooting Triangle
-        double newDistance = -(fedDistance + Direct_Speed * swerveDrive.RobotVelocityParam)/Math.sin(AimOffset_THETA);
+        double newDistance = (fedDistance + Direct_Speed * swerveDrive.RobotVelocityParam)/Math.sin(AimOffset_THETA);
 
         return newDistance;
     }
