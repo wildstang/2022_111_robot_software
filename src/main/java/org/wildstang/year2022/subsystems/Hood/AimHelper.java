@@ -81,7 +81,7 @@ public class AimHelper implements Subsystem{
 
     ShuffleboardTab tab = Shuffleboard.getTab("Tab");
     SimpleWidget distance = tab.add("SWM distance", 60);
-    SimpleWidget angle = tab.add("SWM angle", 20);
+    SimpleWidget angle = tab.add("SWM angle", 15);
 
 
     public void calcTargetCoords(){ //update target coords. 
@@ -99,9 +99,10 @@ public class AimHelper implements Subsystem{
     }
 
     public void getMovingCoords(){
-        double robotAngle = (getGyroAngle() - tx.getDouble(0))%360;
+        double robotAngle = (getGyroAngle() + tx.getDouble(0))%360;
         double movementAngle = helper.getDirection(xSpeed, ySpeed);
-        double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
+        //double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
+        double movementMagnitude = 1;
         perpFactor = distanceFactor * movementMagnitude * Math.cos(-robotAngle + movementAngle);
         parFactor = angleFactor * movementMagnitude * Math.sin(-robotAngle + movementAngle);
         //double tofFactor = 0.8 + 0.2*(((modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)))-115)/60;
@@ -118,14 +119,14 @@ public class AimHelper implements Subsystem{
     public double getDistance(){
         calcTargetCoords();
         TargetDistance = (modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
-        return TargetDistance;
-        //return TargetDistance - perpFactor;
+        //return TargetDistance;
+        return TargetDistance - perpFactor;
     }
     
     public double getRotPID(){
         calcTargetCoords();
-        return tx.getDouble(0) * -0.015;
-        //return (tx.getDouble(0) - parFactor) * -0.015;
+        //return tx.getDouble(0) * -0.015;
+        return (tx.getDouble(0) - parFactor) * -0.015;
     }
 
     public void turnOnLED(boolean onState){
