@@ -26,6 +26,9 @@ import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.year2022.robot.WSSubsystems;
 
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 
@@ -71,8 +74,13 @@ public class AimHelper implements Subsystem{
 
     private LimeConsts LC;
 
-    private final double DISTANCE_FACTOR = 60;
-    private final double ANGLE_FACTOR = 20;
+    private double distanceFactor = 60;
+    private double angleFactor = 20;
+
+    ShuffleboardTab tab = Shuffleboard.getTab("Tab");
+    SimpleWidget distance = tab.add("SWM distance", 60);
+    SimpleWidget angle = tab.add("SWM angle", 20);
+
 
     public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){
@@ -85,14 +93,18 @@ public class AimHelper implements Subsystem{
             y = 0;
             TargetInView = false;
         }
+        getMovingCoords();
     }
 
     public void getMovingCoords(){
         double robotAngle = (swerve.getGyroAngle() - tx.getDouble(0))%360;
         double movementAngle = helper.getDirection(xSpeed, ySpeed);
         double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
-        perpFactor = movementMagnitude * Math.cos(-robotAngle + movementAngle);
-        parFactor = movementMagnitude * Math.sin(-robotAngle + movementAngle);
+        perpFactor = angleFactor * movementMagnitude * Math.cos(-robotAngle + movementAngle);
+        parFactor = distanceFactor * movementMagnitude * Math.sin(-robotAngle + movementAngle);
+        //double tofFactor = 0.8 + 0.2*(((modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)))-115)/60;
+        //perpFactor *= tofFactor;
+        //parFactor *= tofFactor;
     }
 
     public double getDistance(){
@@ -173,6 +185,8 @@ public class AimHelper implements Subsystem{
     @Override
     public void update() {
         calcTargetCoords();
+        distanceFactor = distance.getEntry().getDouble(0);
+        angleFactor = angle.getEntry().getDouble(0);
         SmartDashboard.putNumber("limelight distance", getDistance());    
         SmartDashboard.putNumber("limelight tx", tx.getDouble(0));
         SmartDashboard.putNumber("limelight ty", ty.getDouble(0));  
