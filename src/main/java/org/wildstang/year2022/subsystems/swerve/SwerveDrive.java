@@ -148,6 +148,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (rotSpeed != 0) rotLocked = false;
         if (rightBumper.getValue()){
             driveState = driveType.LL;
+            xSpeed*=0.5;
+            ySpeed*=0.5;
         } else {
             if (driveState == driveType.LL){
                 driveState = driveType.TELEOP;
@@ -375,6 +377,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     }
     public double getGyroAngle(){
         if (!isFieldCentric) return 0;
+        limelight.setGyroValue((gyro.getAngle() + 360)%360);
         return (gyro.getAngle()+360)%360;
     }    
 }

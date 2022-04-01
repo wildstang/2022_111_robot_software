@@ -53,7 +53,7 @@ public class AimHelper implements Subsystem{
     private NetworkTableEntry ledModeEntry;
     private NetworkTableEntry llModeEntry;
 
-    private SwerveDrive swerve;
+    //private SwerveDrive swerve;
     private WSSwerveHelper helper;
     
     public double x;
@@ -73,6 +73,8 @@ public class AimHelper implements Subsystem{
     private AnalogInput leftStickX, leftStickY;
 
     private LimeConsts LC;
+
+    private double gyroValue;
 
     private double distanceFactor = 60;
     private double angleFactor = 20;
@@ -97,27 +99,33 @@ public class AimHelper implements Subsystem{
     }
 
     public void getMovingCoords(){
-        double robotAngle = (swerve.getGyroAngle() - tx.getDouble(0))%360;
+        double robotAngle = (getGyroAngle() - tx.getDouble(0))%360;
         double movementAngle = helper.getDirection(xSpeed, ySpeed);
         double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
-        perpFactor = angleFactor * movementMagnitude * Math.cos(-robotAngle + movementAngle);
-        parFactor = distanceFactor * movementMagnitude * Math.sin(-robotAngle + movementAngle);
+        perpFactor = distanceFactor * movementMagnitude * Math.cos(-robotAngle + movementAngle);
+        parFactor = angleFactor * movementMagnitude * Math.sin(-robotAngle + movementAngle);
         //double tofFactor = 0.8 + 0.2*(((modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)))-115)/60;
         //perpFactor *= tofFactor;
         //parFactor *= tofFactor;
+    }
+    private double getGyroAngle(){
+        return gyroValue;
+    }
+    public void setGyroValue(double toSet){
+        gyroValue = toSet;
     }
 
     public double getDistance(){
         calcTargetCoords();
         TargetDistance = (modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
-        //return TargetDistance;
-        return TargetDistance - perpFactor;
+        return TargetDistance;
+        //return TargetDistance - perpFactor;
     }
     
     public double getRotPID(){
         calcTargetCoords();
-        //return tx.getDouble(0) * -0.015;
-        return (tx.getDouble(0) - parFactor) * -0.015;
+        return tx.getDouble(0) * -0.015;
+        //return (tx.getDouble(0) - parFactor) * -0.015;
     }
 
     public void turnOnLED(boolean onState){
@@ -173,7 +181,7 @@ public class AimHelper implements Subsystem{
         dup.addInputListener(this);
         ddown = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_DOWN);
         ddown.addInputListener(this);
-        swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
+        //swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
         resetState();
         
     }
@@ -202,6 +210,7 @@ public class AimHelper implements Subsystem{
         ySpeed = 0;
         perpFactor = 0;
         parFactor = 0;
+        gyroValue = 0;
         
     }
     @Override
