@@ -201,6 +201,8 @@ public class AimHelper implements Subsystem{
         SmartDashboard.putNumber("limelight ty", ty.getDouble(0));  
         SmartDashboard.putBoolean("limelight target in view", tv.getDouble(0)==1);  
         SmartDashboard.putNumber("Distance Modifier", modifier);
+        SmartDashboard.putNumber("SWM parFactor", parFactor);
+        SmartDashboard.putNumber("SWM perpFactor", perpFactor);
     }
 
     @Override

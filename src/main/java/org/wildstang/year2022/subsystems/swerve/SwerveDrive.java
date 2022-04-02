@@ -82,9 +82,15 @@ public class SwerveDrive extends SwerveDriveTemplate {
         //determine if we are in cross or teleop
         if (driveState != driveType.AUTO && dpadLeft.getValue()){
             driveState = driveType.CROSS;
+            for (int i = 0; i < modules.length; i++){
+                modules[i].setDriveBrake(true);
+            }
             this.swerveSignal = new SwerveSignal(new double[]{0, 0, 0, 0 }, swerveHelper.setCross().getAngles());
         } else if (driveState != driveType.AUTO){
             driveState = driveType.TELEOP;
+            for (int i = 0; i < modules.length; i++){
+                modules[i].setDriveBrake(false);
+            }
         }
         //get x and y speeds
         //xSpeed = -xSpeedLimiter.calculate(-leftStickX.getValue());
