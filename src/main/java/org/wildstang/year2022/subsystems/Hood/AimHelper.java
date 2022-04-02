@@ -99,13 +99,27 @@ public class AimHelper implements Subsystem{
     }
 
     public void getMovingCoords(){
-        double robotAngle = (getGyroAngle() + tx.getDouble(0))%360;
+        double robotAngle = (getGyroAngle()+180)%360;
         double movementAngle = helper.getDirection(xSpeed, ySpeed);
         //double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
-        double movementMagnitude = 1;
-        perpFactor = distanceFactor * movementMagnitude * Math.cos(-robotAngle + movementAngle);
-        parFactor = angleFactor * movementMagnitude * Math.sin(-robotAngle + movementAngle);
+        //double movementMagnitude = 1;
+        if (Math.abs(xSpeed) < 0.1 && Math.abs(ySpeed) < 0.1){
+            parFactor = 0;
+            perpFactor = 0;
+        } else {
+            if (Math.sin(Math.toRadians(-robotAngle + movementAngle)) > 0){
+                parFactor = 15;
+            } else {
+                parFactor = -15;
+            }
+            perpFactor = distanceFactor * Math.cos(Math.toRadians(-robotAngle + movementAngle));
+            //parFactor = angleFactor * Math.sin(Math.toRadians(-robotAngle + movementAngle));
+        }
+        
         //double tofFactor = 0.8 + 0.2*(((modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)))-115)/60;
+        if (!TargetInView){
+            parFactor *= -0.2;
+        }
         //perpFactor *= tofFactor;
         //parFactor *= tofFactor;
     }
