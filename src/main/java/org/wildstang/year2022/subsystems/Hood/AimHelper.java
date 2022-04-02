@@ -76,7 +76,7 @@ public class AimHelper implements Subsystem{
 
     private double gyroValue;
 
-    private double distanceFactor = 60;
+    private double distanceFactor = 10;
     private double angleFactor = 20;
 
     ShuffleboardTab tab = Shuffleboard.getTab("Tab");
@@ -107,13 +107,13 @@ public class AimHelper implements Subsystem{
             parFactor = 0;
             perpFactor = 0;
         } else {
-            if (Math.sin(Math.toRadians(-robotAngle + movementAngle)) > 0){
-                parFactor = 15;
-            } else {
-                parFactor = -15;
-            }
+            // if (Math.sin(Math.toRadians(-robotAngle + movementAngle)) > 0){
+            //     parFactor = 15;
+            // } else {
+            //     parFactor = -15;
+            // }
             perpFactor = distanceFactor * Math.cos(Math.toRadians(-robotAngle + movementAngle));
-            //parFactor = angleFactor * Math.sin(Math.toRadians(-robotAngle + movementAngle));
+            parFactor = angleFactor * Math.sin(Math.toRadians(-robotAngle + movementAngle));
         }
         
         //double tofFactor = 0.8 + 0.2*(((modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)))-115)/60;
