@@ -80,8 +80,8 @@ public class AimHelper implements Subsystem{
     private double angleFactor = 20;
 
     ShuffleboardTab tab = Shuffleboard.getTab("Tab");
-    SimpleWidget distance = tab.add("SWM distance", 60);
-    SimpleWidget angle = tab.add("SWM angle", 15);
+    //SimpleWidget distance = tab.add("SWM distance", 60);
+    //SimpleWidget angle = tab.add("SWM angle", 15);
 
 
     public void calcTargetCoords(){ //update target coords. 
@@ -132,9 +132,9 @@ public class AimHelper implements Subsystem{
 
     public double getDistance(){
         calcTargetCoords();
-        TargetDistance = (modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
-        //return TargetDistance;
-        return TargetDistance - perpFactor;
+        TargetDistance = (modifier*12) + 36 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
+        return TargetDistance;
+        //return TargetDistance - perpFactor;
     }
     
     public double getRotPID(){
@@ -208,8 +208,8 @@ public class AimHelper implements Subsystem{
     @Override
     public void update() {
         calcTargetCoords();
-        distanceFactor = distance.getEntry().getDouble(0);
-        angleFactor = angle.getEntry().getDouble(0);
+        //distanceFactor = distance.getEntry().getDouble(0);
+        //angleFactor = angle.getEntry().getDouble(0);
         SmartDashboard.putNumber("limelight distance", getDistance());    
         SmartDashboard.putNumber("limelight tx", tx.getDouble(0));
         SmartDashboard.putNumber("limelight ty", ty.getDouble(0));  
