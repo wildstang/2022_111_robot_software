@@ -60,15 +60,15 @@ public class EasyAuto {
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
     public void update() {
         if(timer.get() >= AutonomousTime){
-            timer.stop()
-            writer.close()
+            timer.stop();
+            writer.close();
         }
     }
 
     // respond to input updates
     public void inputUpdate(Input source) {
         
-        writer.write((String) timer.get() +"-!_!_!:" source.getName()+"-!_!_!:"+ (String) source.getValue());
+        writer.write(String(timer.get()) +"-!_!_!:" + source.getName()+"-!_!_!:"+ String(source.getValue()));
 
     }
     
