@@ -75,6 +75,7 @@ public class AimHelper implements Subsystem{
     private LimeConsts LC;
 
     private double gyroValue;
+    private double disableValue;
 
     private double distanceFactor = 10;
     private double angleFactor = 20;
@@ -148,8 +149,8 @@ public class AimHelper implements Subsystem{
             ledModeEntry.setNumber(0);//turn led on
             llModeEntry.setNumber(0);//turn camera to vision tracking
         } else {
-            ledModeEntry.setNumber(1);//turn led off
-            llModeEntry.setNumber(1);//turn camera to normal color mode
+            ledModeEntry.setNumber(disableValue);//turn led off
+            llModeEntry.setNumber(disableValue);//turn camera to normal color mode
         }
     }
     @Override
@@ -228,11 +229,16 @@ public class AimHelper implements Subsystem{
         perpFactor = 0;
         parFactor = 0;
         gyroValue = 0;
+        disableValue = 0;
         
     }
     @Override
     public String getName() {
         return "Limelight";
+    }
+    public void setLimelightLight(boolean lighting){
+        if (lighting) disableValue = 0;
+        else disableValue = 1;
     }
 
     

@@ -37,6 +37,9 @@ public class Two_Ball extends AutoProgram{
 
         addStep(new SwervePathFollowerStep(new TwoBall().getPath(), swerve));
 
+        addStep(new LimelightStep(true));
+        addStep(new AutoStepDelay(500));
+
         AutoParallelStepGroup group2 = new AutoParallelStepGroup();
         group2.addStep(new Fire(true));
         //group2.addStep(new LimelightStep(true));
