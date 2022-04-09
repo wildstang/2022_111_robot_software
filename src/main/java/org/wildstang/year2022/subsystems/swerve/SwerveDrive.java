@@ -152,7 +152,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         //if the rotational joystick is being used, the robot should not be auto tracking heading
         if (rotSpeed != 0) rotLocked = false;
-        if (rightBumper.getValue()){
+        if (rightBumper.getValue() && driveState != driveType.CROSS){
             driveState = driveType.LL;
             xSpeed*=0.5;
             ySpeed*=0.5;
@@ -236,7 +236,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public void update() {
         if (driveState == driveType.CROSS){
             //set to cross - done in inputupdate
-            //this.swerveSignal = swerveHelper.setCross();
+            this.swerveSignal = swerveHelper.setCross();
             drive();
         }
         if (driveState == driveType.TELEOP){

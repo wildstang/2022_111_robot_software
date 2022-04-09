@@ -5,7 +5,7 @@ import org.wildstang.framework.logger.Log;
 import org.wildstang.framework.logger.Log.LogLevel;
 import org.wildstang.hardware.roborio.RoboRIOInputFactory;
 import org.wildstang.hardware.roborio.RoboRIOOutputFactory;
-import org.wildstang.year2022.subsystems.Hood.AimHelper;
+//import org.wildstang.year2022.subsystems.Hood.AimHelper;
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
     private boolean AutoFirstRun = true;
     private SendableChooser<LogLevel> logChooser;
     private SwerveDrive swerve;
-    private AimHelper helper;
+    //private AimHelper helper;
 
     /**
      * Runs on initialization, creates and configure framework Core.
@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
         core.createAutoPrograms(WSAutoPrograms.values());
 
         swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
-        helper = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
+        //helper = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
         
         // create smart dashboard option for LogLevel
         logChooser = new SendableChooser<>();
@@ -105,7 +105,6 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         resetRobotState();
-        helper.setLimelightLight(false);
     }
     
     /**
@@ -133,7 +132,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         update();
-        helper.setLimelightLight(true);
     }
 
     /**

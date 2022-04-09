@@ -101,7 +101,7 @@ public class SwerveModule {
     public void runCross(double position, double angle){
         this.drivePower = position;
         this.target = angle;
-        driveMotor.setPosition(drivePower);
+        driveMotor.setSpeed(drivePower);
         if (getDirection(angle)){
             runAtAngle(angle);
         } else {

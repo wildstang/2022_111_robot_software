@@ -77,7 +77,7 @@ public class AimHelper implements Subsystem{
     private double gyroValue;
     private double disableValue;
 
-    private double distanceFactor = 10;
+    private double distanceFactor = 40;
     private double angleFactor = 20;
 
     ShuffleboardTab tab = Shuffleboard.getTab("Tab");
@@ -149,8 +149,8 @@ public class AimHelper implements Subsystem{
             ledModeEntry.setNumber(0);//turn led on
             llModeEntry.setNumber(0);//turn camera to vision tracking
         } else {
-            ledModeEntry.setNumber(disableValue);//turn led off
-            llModeEntry.setNumber(disableValue);//turn camera to normal color mode
+            ledModeEntry.setNumber(0);//turn led off
+            llModeEntry.setNumber(0);//turn camera to normal color mode
         }
     }
     @Override
@@ -236,10 +236,10 @@ public class AimHelper implements Subsystem{
     public String getName() {
         return "Limelight";
     }
-    public void setLimelightLight(boolean lighting){
-        if (lighting) disableValue = 0;
-        else disableValue = 1;
-    }
+    // public void setLimelightLight(boolean lighting){
+    //     if (lighting) disableValue = 0;
+    //     else disableValue = 1;
+    // }
 
     
 
