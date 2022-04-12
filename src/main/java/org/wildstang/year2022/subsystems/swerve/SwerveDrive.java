@@ -34,6 +34,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     private final SlewRateLimiter xSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
     private final SlewRateLimiter ySpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
+    private final boolean autoStabilize = true; //auto stabilization
+    private final double TiltTolarance = 1.0; //deadband for stabilization
+    private final double CounterFactor = 0.01;
     //private final SlewRateLimiter rotSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
 
     private AnalogInput leftStickX;//translation joystick x
@@ -67,6 +70,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double autoTempX;
     private double autoTempY;
 
+    private double yStabilize;
+    private double xStabilize;
     private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
     public SwerveModule[] modules;
     private SwerveSignal swerveSignal;
@@ -248,7 +253,20 @@ public class SwerveDrive extends SwerveDriveTemplate {
                     if (Math.abs(rotSpeed) > 1) rotSpeed = 1.0 * Math.signum(rotSpeed);
                 } 
             }
-            this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, getGyroAngle());
+            
+            if(Math.abs(getGyroPitch())>= TiltTolarance && autoStabilize){
+                xStabilize = -CounterFactor*getGyroPitch();
+            }
+            else{
+                xStabilize = 0;
+            }
+            if(Math.abs(getGyroRoll())>= TiltTolarance && autoStabilize){
+                yStabilize = -CounterFactor*getGyroRoll();
+            }
+            else{
+                yStabilize = 0;
+            }
+            this.swerveSignal = swerveHelper.setDrive(xSpeed+xStabilize, ySpeed+yStabilize, rotSpeed, getGyroAngle());
             SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
             drive();
         }
@@ -277,6 +295,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
         SmartDashboard.putNumber("Auto velocity", pathVel);
         SmartDashboard.putNumber("Auto translate direction", pathHeading);
         SmartDashboard.putNumber("Auto rotation target", pathTarget);
+        SmartDashboard.putNumber("Gyro Reading Roll", getGyroRoll());
+        SmartDashboard.putNumber("Gyro Reading Pitch", getGyroPitch());
     }
     
 
@@ -296,6 +316,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
         isFieldCentric = true;
         isSnake = false;
+
+        yStabilize = 0;
+        xStabilize = 0;
     }
 
     @Override
@@ -386,4 +409,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
         limelight.setGyroValue((gyro.getAngle() + 360)%360);
         return (gyro.getAngle()+360)%360;
     }    
+    public double getGyroRoll(){
+        return (gyro.getRoll()); 
+    }   
+    public double getGyroPitch(){
+        return (gyro.getPitch()); 
+    }   
 }
