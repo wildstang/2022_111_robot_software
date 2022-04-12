@@ -72,6 +72,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     private double yStabilize;
     private double xStabilize;
+    private double rollStabilize;
+    private double pitchStabilize;
     private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
     public SwerveModule[] modules;
     private SwerveSignal swerveSignal;
@@ -255,17 +257,20 @@ public class SwerveDrive extends SwerveDriveTemplate {
             }
             
             if(Math.abs(getGyroPitch())>= TiltTolarance && autoStabilize){
-                xStabilize = -CounterFactor*getGyroPitch();
+                pitchStabilize = -CounterFactor*getGyroPitch();
             }
             else{
-                xStabilize = 0;
+                pitchStabilize = 0;
             }
             if(Math.abs(getGyroRoll())>= TiltTolarance && autoStabilize){
-                yStabilize = -CounterFactor*getGyroRoll();
+                rollStabilize = -CounterFactor*getGyroRoll();
             }
             else{
-                yStabilize = 0;
+                rollStabilize = 0;
             }
+
+            xStabilize = rollStabilize*Math.sin(getGyroAngle())+pitchStabilize*(Math.cos(getGyroAngle()));
+            yStabilize = pitchStabilize*Math.sin(getGyroAngle())+rollStabilize*(Math.cos(getGyroAngle()));
             this.swerveSignal = swerveHelper.setDrive(xSpeed+xStabilize, ySpeed+yStabilize, rotSpeed, getGyroAngle());
             SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
             drive();
