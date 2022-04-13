@@ -110,13 +110,13 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rotSpeed *= thrustValue;
 
         //update auto tracking values
-        if (leftBumper.getValue() && (Math.abs(xSpeed)>0.1 || Math.abs(ySpeed)>0.1)){
-            rotLocked = true;
-            isSnake = true;
-            rotTarget = swerveHelper.getDirection(xSpeed, ySpeed);
-        } else {
-            isSnake = false;
-        }
+        // if (leftBumper.getValue() && (Math.abs(xSpeed)>0.1 || Math.abs(ySpeed)>0.1)){
+        //     rotLocked = true;
+        //     isSnake = true;
+        //     rotTarget = swerveHelper.getDirection(xSpeed, ySpeed);
+        // } else {
+        //     isSnake = false;
+        // }
         if (source == faceUp && faceUp.getValue()){
             if (faceLeft.getValue()){ rotTarget = 291.0;
             } else if (faceRight.getValue()){ rotTarget = 21.0;

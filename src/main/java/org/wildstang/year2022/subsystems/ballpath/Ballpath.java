@@ -60,7 +60,7 @@ public class Ballpath implements Subsystem{
         } else if (Math.abs(rightTrigger.getValue())>0.15){
             feedMotorSpeed = FULL_SPEED;
             shooting = true;
-        } else if (aButton.getValue() || xButton.getValue()){
+        } else if (aButton.getValue() || xButton.getValue() || driverIntake.getValue()){
             feedMotorSpeed = FULL_SPEED;
             shooting = false;
         } else {
@@ -69,7 +69,7 @@ public class Ballpath implements Subsystem{
         }
 
         /**run intake and feed either forwards or backwards */
-        if (aButton.getValue()){// || driverLeftBumper.getValue()){
+        if (aButton.getValue() || driverIntake.getValue()){// || driverLeftBumper.getValue()){
             intakeMotorSpeed = FULL_SPEED;
             intakeSolenoidValue = OPEN;
         }  else if (bButton.getValue()){

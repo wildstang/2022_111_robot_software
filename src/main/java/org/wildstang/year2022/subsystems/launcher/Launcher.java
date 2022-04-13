@@ -108,7 +108,7 @@ public class Launcher implements Subsystem {
                 kickerMotor.setSpeed(1.0);
             }
         } else if (isLow){
-            flywheelMotor.setSpeed(-0.23);
+            flywheelMotor.setSpeed(-0.18);
             kickerMotor.setSpeed(1.0);
         } else if (!isRunning){
             flywheelMotor.setSpeed(0);
@@ -156,7 +156,7 @@ public class Launcher implements Subsystem {
         }
         if (driverAim.getValue()){
             isAiming = true;
-        } else {
+        } else  if (Math.abs(launchButton.getValue()) < 0.15){
             isAiming = false;
         }
     }

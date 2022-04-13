@@ -116,17 +116,17 @@ public class AimHelper implements Subsystem{
             perpFactor = distanceFactor * Math.cos(Math.toRadians(-robotAngle + movementAngle));
             parFactor = angleFactor * Math.sin(Math.toRadians(-robotAngle + movementAngle));
         }
-        double parameterA = 1;
-        double parameterB = 5;
-        double parameterC = 5;
-        double GivenDistance = (modifier*12) + (LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)));
+        double parameterA = 0.000091667;
+        double parameterB = -0.0199;
+        double parameterC = 1.878;
+        double GivenDistance = (modifier*12) + 36 + (LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)));
         double tofFactor = parameterA * Math.pow(GivenDistance,2) + parameterB * GivenDistance + parameterC;
         //find time of flight vs. given distance on calculator then calculate quadratic regression ax^2 + bx + c.
         if (!TargetInView){
             parFactor *= -0.2;
         }
-        //perpFactor *= tofFactor;
-        parFactor *= tofFactor;
+        perpFactor *= tofFactor;
+        //parFactor *= tofFactor;
     }
     private double getGyroAngle(){
         return gyroValue;
@@ -138,8 +138,8 @@ public class AimHelper implements Subsystem{
     public double getDistance(){
         calcTargetCoords();
         TargetDistance = (modifier*12) + 36 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
-        return TargetDistance;
-        //return TargetDistance - perpFactor;
+        //return TargetDistance;
+        return TargetDistance - perpFactor;
     }
     
     public double getRotPID(){
