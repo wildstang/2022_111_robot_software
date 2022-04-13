@@ -116,13 +116,17 @@ public class AimHelper implements Subsystem{
             perpFactor = distanceFactor * Math.cos(Math.toRadians(-robotAngle + movementAngle));
             parFactor = angleFactor * Math.sin(Math.toRadians(-robotAngle + movementAngle));
         }
-        
-        //double tofFactor = 0.8 + 0.2*(((modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)))-115)/60;
+        double parameterA = 1;
+        double parameterB = 5;
+        double parameterC = 5;
+        double GivenDistance = (modifier*12) + (LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)));
+        double tofFactor = parameterA * Math.pow(GivenDistance,2) + parameterB * GivenDistance + parameterC;
+        //find time of flight vs. given distance on calculator then calculate quadratic regression ax^2 + bx + c.
         if (!TargetInView){
             parFactor *= -0.2;
         }
         //perpFactor *= tofFactor;
-        //parFactor *= tofFactor;
+        parFactor *= tofFactor;
     }
     private double getGyroAngle(){
         return gyroValue;
