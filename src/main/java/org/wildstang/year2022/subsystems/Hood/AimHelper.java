@@ -77,12 +77,12 @@ public class AimHelper implements Subsystem{
     private double gyroValue;
     private double disableValue;
 
-    private double distanceFactor = 40;
-    private double angleFactor = 20;
+    private double distanceFactor = 30;
+    private double angleFactor = 15;
 
     ShuffleboardTab tab = Shuffleboard.getTab("Tab");
-    //SimpleWidget distance = tab.add("SWM distance", 60);
-    //SimpleWidget angle = tab.add("SWM angle", 15);
+    //SimpleWidget distance = tab.add("SWM distance", 30);
+    //SimpleWidget angle = tab.add("SWM angle", 20);
 
 
     public void calcTargetCoords(){ //update target coords. 
@@ -100,9 +100,9 @@ public class AimHelper implements Subsystem{
     }
 
     public void getMovingCoords(){
-        double robotAngle = (getGyroAngle()+180)%360;
+        double robotAngle = (getGyroAngle()+180 + tx.getDouble(0))%360;
         double movementAngle = helper.getDirection(xSpeed, ySpeed);
-        //double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
+        double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
         //double movementMagnitude = 1;
         if (Math.abs(xSpeed) < 0.1 && Math.abs(ySpeed) < 0.1){
             parFactor = 0;
@@ -113,19 +113,19 @@ public class AimHelper implements Subsystem{
             // } else {
             //     parFactor = -15;
             // }
-            perpFactor = distanceFactor * Math.cos(Math.toRadians(-robotAngle + movementAngle));
-            parFactor = angleFactor * Math.sin(Math.toRadians(-robotAngle + movementAngle));
+            perpFactor = distanceFactor * movementMagnitude * Math.cos(Math.toRadians(-robotAngle + movementAngle));
+            parFactor = angleFactor * movementMagnitude * Math.sin(Math.toRadians(-robotAngle + movementAngle));
         }
-        double parameterA = 0.000091667;
-        double parameterB = -0.0199;
-        double parameterC = 1.878;
-        double GivenDistance = (modifier*12) + 36 + (LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)));
-        double tofFactor = parameterA * Math.pow(GivenDistance,2) + parameterB * GivenDistance + parameterC;
+        // double parameterA = 0.000091667;
+        // double parameterB = -0.0199;
+        // double parameterC = 1.878;
+        // double GivenDistance = (modifier*12) + 36 + (LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)));
+        // double tofFactor = parameterA * Math.pow(GivenDistance,2) + parameterB * GivenDistance + parameterC;
         //find time of flight vs. given distance on calculator then calculate quadratic regression ax^2 + bx + c.
         if (!TargetInView){
             parFactor *= -0.2;
         }
-        perpFactor *= tofFactor;
+        //perpFactor *= tofFactor;
         //parFactor *= tofFactor;
     }
     private double getGyroAngle(){
@@ -139,7 +139,7 @@ public class AimHelper implements Subsystem{
         calcTargetCoords();
         TargetDistance = (modifier*12) + 36 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
         //return TargetDistance;
-        return TargetDistance - perpFactor;
+        return TargetDistance - perpFactor + 0.5*Math.abs(parFactor);
     }
     
     public double getRotPID(){
