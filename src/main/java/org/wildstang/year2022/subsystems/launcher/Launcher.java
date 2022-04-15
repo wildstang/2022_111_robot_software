@@ -17,8 +17,6 @@ import org.wildstang.framework.io.inputs.DigitalInput;
 import org.wildstang.framework.io.inputs.Input;
 import org.wildstang.framework.subsystems.Subsystem;
 
-import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
-
 /**
  * Class:       Launcher.java
  * Inputs:      1 DigitalInput (Right Trigger)
@@ -45,35 +43,14 @@ public class Launcher implements Subsystem {
     private boolean isLow;
     private double aimDistance;
 
+    private AimHelper aimHelper;
+
+
     private final double threshold = 0.01;
     private final double CONVERSION = 5500;
     private final double REG_A = -0.000001488;//0.000015406;//-0.0000040441;//0.0000001497
     private final double REG_B = 0.002265;//-0.002584;//0.003158;//0.002085;
-    private final double REG_C = 0.149;//.48595;//0.08335;//0.1497;
-
-
-    private SwerveDrive swerveDrive;
-
-    private AimHelper aimHelper;
-
-    private double findDistanceWithVelocity(double fedDistance){
-        double CurrentOffset = Math.toRadians(aimHelper.getRotPID()/-.0015);
-        double WheelOffset_ABS = swerveDrive.getGyroAngle() - CurrentOffset;
-
-        //Find robot translational speed towards hub and tangent to hub
-        double TAN_Speed = swerveDrive.xSpeed/Math.cos(CurrentOffset) * swerveDrive.MotorVelocityParam * Math.cos(WheelOffset_ABS);
-        double Direct_Speed = swerveDrive.xSpeed/Math.cos(CurrentOffset) * swerveDrive.MotorVelocityParam * Math.sin(WheelOffset_ABS); //Lower left wheel
-
-        //Find current limelight offset and theta of offset (shooting triangle)
-        double AimOffset = (aimHelper.getDistance()*swerveDrive.AimOffsetParam) * TAN_Speed;
-        double AimOffset_THETA = Math.atan(AimOffset/(aimHelper.getDistance()+Direct_Speed*swerveDrive.RobotVelocityParam));
-
-        //Takes distance + d(position)/dt *  VelocityParameter then multiplies by Inv_Sin of Shooting Triangle
-        double newDistance = (fedDistance + Direct_Speed * swerveDrive.RobotVelocityParam)/Math.sin(AimOffset_THETA);
-
-        return newDistance;
-    }
-
+    private final double REG_C = 0.149-0.01;//.48595;//0.08335;//0.1497;
     
     // initializes the subsystem
     public void init() {
@@ -107,7 +84,7 @@ public class Launcher implements Subsystem {
         flywheelMotor.setCurrentLimit(50, 50, 0);
 
         aimHelper = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
-        swerveDrive = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
+
     }
 
     // update the subsystem everytime the framework updates (every ~0.02 seconds)
@@ -115,7 +92,6 @@ public class Launcher implements Subsystem {
         latch.setValue(latchValue);
         if (isAiming){
             double distance = aimHelper.getDistance();
-            distance = findDistanceWithVelocity(distance);
             aimDistance = REG_A * distance*distance + REG_B * distance + REG_C;
             kickerMotor.setSpeed(1.0);
             if (Math.abs(flywheelMotor.getVelocity()) < threshold*aimDistance*CONVERSION){
@@ -132,7 +108,7 @@ public class Launcher implements Subsystem {
                 kickerMotor.setSpeed(1.0);
             }
         } else if (isLow){
-            flywheelMotor.setSpeed(-0.23);
+            flywheelMotor.setSpeed(-0.18);
             kickerMotor.setSpeed(1.0);
         } else if (!isRunning){
             flywheelMotor.setSpeed(0);
@@ -180,7 +156,7 @@ public class Launcher implements Subsystem {
         }
         if (driverAim.getValue()){
             isAiming = true;
-        } else {
+        } else  if (Math.abs(launchButton.getValue()) < 0.15){
             isAiming = false;
         }
     }

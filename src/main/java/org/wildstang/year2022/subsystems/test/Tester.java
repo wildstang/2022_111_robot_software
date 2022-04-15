@@ -28,7 +28,7 @@ public class Tester implements Subsystem{
     //start switches the kicker from mirroring the flywheel and just 100%, select toggles tilt solenoids
     //right stick y axis moves the climb up and down, 20% min speed
     private DigitalInput aButton, xButton, yButton, bButton, leftbumper, rightBumper, startButton, selectButton;
-    private AnalogInput rightTrigger, rightStickY;
+    private AnalogInput rightTrigger, rightStickY, leftStickY;
     
     private WsSparkMax feedMotor, launcherMotor, kickerMotor, hoodMotor, intakeMotor, climbMotor;
     private WsSolenoid launcherSolenoid, intakeSolenoid;
@@ -59,35 +59,37 @@ public class Tester implements Subsystem{
         //     intakeSolenoidState = !intakeSolenoidState;
         // }
 
-        if (Math.abs(rightTrigger.getValue()) > 0.5){
-            launcherSolenoidState = false;
-            launcherSpeed = LAUNCHER_INITIAL + modifier;
-            kickerSpeed = 1.0;
-        } else {
-            launcherSolenoidState = true;
-            launcherSpeed = 0;
-            kickerSpeed = 0;
-        }
-        if (source == yButton && yButton.getValue()){
-            modifier += modifyAmount;
-        }
-        if (source == bButton && bButton.getValue()){
-            modifier -= modifyAmount;
-        }
+        // if (Math.abs(rightTrigger.getValue()) > 0.5){
+        //     launcherSolenoidState = false;
+        //     launcherSpeed = LAUNCHER_INITIAL + modifier;
+        //     kickerSpeed = 1.0;
+        // } else {
+        //     launcherSolenoidState = true;
+        //     launcherSpeed = 0;
+        //     kickerSpeed = 0;
+        // }
+        // if (source == yButton && yButton.getValue()){
+        //     modifier += modifyAmount;
+        // }
+        // if (source == bButton && bButton.getValue()){
+        //     modifier -= modifyAmount;
+        // }
 
-        if (rightBumper.getValue()){
-            hoodSpeed = hoodMaxSpeed;
-        } else if (leftbumper.getValue()){
-            hoodSpeed = -hoodMaxSpeed;
-        } else {
-            hoodSpeed = 0;
-        }
+        // if (rightBumper.getValue()){
+        //     hoodSpeed = hoodMaxSpeed;
+        // } else if (leftbumper.getValue()){
+        //     hoodSpeed = -hoodMaxSpeed;
+        // } else {
+        //     hoodSpeed = 0;
+        // }
 
         if (source == selectButton && selectButton.getValue()){
             tiltState = !tiltState;
         }  
         if (Math.abs(rightStickY.getValue()) > 0.2){
-            climbSpeed = -rightStickY.getValue();
+            climbSpeed = -rightStickY.getValue()*0.8;
+        } else if (Math.abs(leftStickY.getValue()) > 0.2){
+            climbSpeed = 0.25 * Math.signum(leftStickY.getValue());
         } else {
             climbSpeed = 0;
         }
@@ -121,6 +123,8 @@ public class Tester implements Subsystem{
         selectButton.addInputListener(this);
         rightStickY = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_JOYSTICK_Y);
         rightStickY.addInputListener(this);
+        leftStickY = (AnalogInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_JOYSTICK_Y);
+        leftStickY.addInputListener(this);
 
         //feedMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.FEED);   
         // launcherMotor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.LAUNCHER);    
@@ -156,9 +160,9 @@ public class Tester implements Subsystem{
         // hoodMotor.setSpeed(hoodSpeed);
         //intakeMotor.setSpeed(intakeSpeed);
         if (!climbHardStops){
-            climbMotor.setSpeed(climbSpeed*0.8);
+            climbMotor.setSpeed(climbSpeed);
         } else if ((climbSpeed < 0 && Math.abs(climbMotor.getPosition()) < 88.5) || (climbSpeed > 0 && Math.abs(climbMotor.getPosition()) >= 2)){
-            climbMotor.setSpeed(climbSpeed*0.8);
+            climbMotor.setSpeed(climbSpeed);
         } else {
             climbMotor.setSpeed(0);
         }
@@ -201,7 +205,7 @@ public class Tester implements Subsystem{
         intakeSolenoidState = false;
         launcherSolenoidState = true;
         tiltState = true;
-        climbHardStops = true;
+        climbHardStops = false;
     }
 
     @Override

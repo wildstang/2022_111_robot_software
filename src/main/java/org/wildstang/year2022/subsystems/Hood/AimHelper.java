@@ -23,12 +23,18 @@ import org.wildstang.hardware.roborio.outputs.WsPhoenix;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
+import org.wildstang.year2022.robot.WSSubsystems;
 
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 
+import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
+import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -46,6 +52,9 @@ public class AimHelper implements Subsystem{
     private NetworkTableEntry tv;
     private NetworkTableEntry ledModeEntry;
     private NetworkTableEntry llModeEntry;
+
+    //private SwerveDrive swerve;
+    private WSSwerveHelper helper;
     
     public double x;
     public double y;
@@ -56,10 +65,25 @@ public class AimHelper implements Subsystem{
 
     private double TargetDistance;
     private double Angle;
+    private double xSpeed, ySpeed;
+
+    private double perpFactor, parFactor;
 
     private DigitalInput rightBumper, dup, ddown;
+    private AnalogInput leftStickX, leftStickY;
 
     private LimeConsts LC;
+
+    private double gyroValue;
+    private double disableValue;
+
+    private double distanceFactor = 30;
+    private double angleFactor = 15;
+
+    ShuffleboardTab tab = Shuffleboard.getTab("Tab");
+    //SimpleWidget distance = tab.add("SWM distance", 30);
+    //SimpleWidget angle = tab.add("SWM angle", 20);
+
 
     public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){
@@ -72,78 +96,58 @@ public class AimHelper implements Subsystem{
             y = 0;
             TargetInView = false;
         }
+        getMovingCoords();
     }
 
-    public double getDistance(){ //update target dist. for internal use. Distance is in feet.
+    public void getMovingCoords(){
+        double robotAngle = (getGyroAngle()+180 + tx.getDouble(0))%360;
+        double movementAngle = helper.getDirection(xSpeed, ySpeed);
+        double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
+        //double movementMagnitude = 1;
+        if (Math.abs(xSpeed) < 0.1 && Math.abs(ySpeed) < 0.1){
+            parFactor = 0;
+            perpFactor = 0;
+        } else {
+            // if (Math.sin(Math.toRadians(-robotAngle + movementAngle)) > 0){
+            //     parFactor = 15;
+            // } else {
+            //     parFactor = -15;
+            // }
+            perpFactor = distanceFactor * movementMagnitude * Math.cos(Math.toRadians(-robotAngle + movementAngle));
+            parFactor = angleFactor * movementMagnitude * Math.sin(Math.toRadians(-robotAngle + movementAngle));
+        }
+        // double parameterA = 0.000091667;
+        // double parameterB = -0.0199;
+        // double parameterC = 1.878;
+        // double GivenDistance = (modifier*12) + 36 + (LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)));
+        // double tofFactor = parameterA * Math.pow(GivenDistance,2) + parameterB * GivenDistance + parameterC;
+        //find time of flight vs. given distance on calculator then calculate quadratic regression ax^2 + bx + c.
+        if (!TargetInView){
+            parFactor *= -0.2;
+        }
+        //perpFactor *= tofFactor;
+        //parFactor *= tofFactor;
+    }
+    private double getGyroAngle(){
+        return gyroValue;
+    }
+    public void setGyroValue(double toSet){
+        gyroValue = toSet;
+    }
+
+    public double getDistance(){
         calcTargetCoords();
-        //h = lsin(0), d = lcos(0)
-        // l = h/sin(0) = d/cos(0)
-        // d = cos(0)*h/sin(0) = h/tan(0)
-        // TargetDistance = LC.TARGET_HEIGHT/Math.tan(ty.getDouble(0)+(Math.PI*LC.CAMERA_ANGLE_OFFSET/180));
-        //double distance = (75.5 / Math.sin(Math.toRadians(20 + getTYValue()))) / 12.0;
-        TargetDistance = (modifier*12) + 48 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
-        return TargetDistance;
+        TargetDistance = (modifier*12) + 36 + LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET));
+        //return TargetDistance;
+        return TargetDistance - perpFactor + 0.5*Math.abs(parFactor);
     }
     
     public double getRotPID(){
         calcTargetCoords();
-        return tx.getDouble(0) * -0.015;
+        //return tx.getDouble(0) * -0.015;
+        return (tx.getDouble(0) - parFactor) * -0.015;
     }
 
-    public double getAngle(){ //get hood angle for autoaim
-        getDistance();
-        return ApproximateAngle(TargetDistance);
-    }
-    public double ApproximateAngle(double dist){ //linear interlopation
-        double[] dists = LC.Dists;
-        int max = dists.length-1;
-        int min = 0;
-        int c = 0;
-        boolean done = false;
-        boolean exact = false;
-        while(done == false){
-            if(max-min <= 1){
-                done = true;
-                c = max;
-            }
-            else{
-                c = (int) ((max-min)/2)+min;
-                
-                if(dists[c]>dist){
-                    max = c;
-                }
-                else if(dists[c] < dist){
-                    min = c;
-                }
-                else{
-                    exact = true;
-                    done = true;
-                }
-                
-            }
-
-            
-        }
-        double out = 0;
-        // now c is index of nearest value (rounded up)
-        if(exact){
-            out = LC.Angles[c];
-        }
-        else{
-            if(c-1 >= min){
-                double interval = dists[c]-dists[c-1];
-                double range = LC.Angles[c]-LC.Angles[c-1];
-                out = (((dist-dists[c-1])/interval)*range)+dists[c-1];
-            }
-            else{ //outside of domain
-                out = LC.Angles[c];
-            }
-
-
-        }
-        return out;
-    
-    }
     public void turnOnLED(boolean onState){
         if (onState) {
             ledModeEntry.setNumber(0);//turn led on
@@ -162,6 +166,10 @@ public class AimHelper implements Subsystem{
         if (source == ddown && ddown.getValue()){
             modifier--;
         }
+        xSpeed = leftStickX.getValue();
+        ySpeed = leftStickY.getValue();
+        if (Math.abs(leftStickX.getValue()) < DriveConstants.DEADBAND) xSpeed = 0;
+        if (Math.abs(leftStickY.getValue()) < DriveConstants.DEADBAND) ySpeed = 0;
         
     }
     @Override
@@ -181,12 +189,19 @@ public class AimHelper implements Subsystem{
         ledModeEntry = LimeTable.getEntry("ledMode");
         llModeEntry = LimeTable.getEntry("camMode");
 
+        helper = new WSSwerveHelper();
+
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
         rightBumper.addInputListener(this);
+        leftStickX = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_JOYSTICK_X);
+        leftStickX.addInputListener(this);
+        leftStickY = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_JOYSTICK_Y);
+        leftStickY.addInputListener(this);
         dup = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_UP);
         dup.addInputListener(this);
         ddown = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_DOWN);
         ddown.addInputListener(this);
+        //swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
         resetState();
         
     }
@@ -198,23 +213,37 @@ public class AimHelper implements Subsystem{
     @Override
     public void update() {
         calcTargetCoords();
+        //distanceFactor = distance.getEntry().getDouble(0);
+        //angleFactor = angle.getEntry().getDouble(0);
         SmartDashboard.putNumber("limelight distance", getDistance());    
         SmartDashboard.putNumber("limelight tx", tx.getDouble(0));
         SmartDashboard.putNumber("limelight ty", ty.getDouble(0));  
         SmartDashboard.putBoolean("limelight target in view", tv.getDouble(0)==1);  
         SmartDashboard.putNumber("Distance Modifier", modifier);
+        SmartDashboard.putNumber("SWM parFactor", parFactor);
+        SmartDashboard.putNumber("SWM perpFactor", perpFactor);
     }
 
     @Override
     public void resetState() {
         turnOnLED(false);
         modifier = 0;
+        xSpeed = 0;
+        ySpeed = 0;
+        perpFactor = 0;
+        parFactor = 0;
+        gyroValue = 0;
+        disableValue = 0;
         
     }
     @Override
     public String getName() {
         return "Limelight";
     }
+    // public void setLimelightLight(boolean lighting){
+    //     if (lighting) disableValue = 0;
+    //     else disableValue = 1;
+    // }
 
     
 

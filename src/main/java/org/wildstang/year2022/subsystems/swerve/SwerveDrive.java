@@ -56,6 +56,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double rotSpeed;
     private double thrustValue;
     private boolean rotLocked;
+    private boolean isSnake;
     private boolean isFieldCentric;
     private double rotTarget;
     private double pathPos;
@@ -100,14 +101,17 @@ public class SwerveDrive extends SwerveDriveTemplate {
     @Override
     public void inputUpdate(Input source) {
         //determine if we are in cross or teleop
-        if (source == leftBumper && leftBumper.getValue()){
-            resetDriveEncoders();
-        }
-        if (driveState != driveType.AUTO && leftBumper.getValue()){
+        if (driveState != driveType.AUTO && dpadLeft.getValue()){
             driveState = driveType.CROSS;
-            this.swerveSignal = new SwerveSignal(new double[]{-modules[0].getPosition()*0.0025, -modules[1].getPosition()*0.01, -modules[2].getPosition()*0.01, -modules[3].getPosition()*0.01, }, swerveHelper.setCross().getAngles());
+            for (int i = 0; i < modules.length; i++){
+                modules[i].setDriveBrake(true);
+            }
+            this.swerveSignal = new SwerveSignal(new double[]{0, 0, 0, 0 }, swerveHelper.setCross().getAngles());
         } else if (driveState != driveType.AUTO){
             driveState = driveType.TELEOP;
+            for (int i = 0; i < modules.length; i++){
+                modules[i].setDriveBrake(false);
+            }
         }
         //get x and y speeds
         //xSpeed = -xSpeedLimiter.calculate(-leftStickX.getValue());
@@ -127,6 +131,13 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rotSpeed *= thrustValue;
 
         //update auto tracking values
+        // if (leftBumper.getValue() && (Math.abs(xSpeed)>0.1 || Math.abs(ySpeed)>0.1)){
+        //     rotLocked = true;
+        //     isSnake = true;
+        //     rotTarget = swerveHelper.getDirection(xSpeed, ySpeed);
+        // } else {
+        //     isSnake = false;
+        // }
         if (source == faceUp && faceUp.getValue()){
             if (faceLeft.getValue()){ rotTarget = 291.0;
             } else if (faceRight.getValue()){ rotTarget = 21.0;
@@ -162,8 +173,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         //if the rotational joystick is being used, the robot should not be auto tracking heading
         if (rotSpeed != 0) rotLocked = false;
-        if (rightBumper.getValue()){
+        if (rightBumper.getValue() && driveState != driveType.CROSS){
             driveState = driveType.LL;
+            xSpeed*=0.5;
+            ySpeed*=0.5;
         } else {
             if (driveState == driveType.LL){
                 driveState = driveType.TELEOP;
@@ -244,13 +257,17 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public void update() {
         if (driveState == driveType.CROSS){
             //set to cross - done in inputupdate
-            //this.swerveSignal = swerveHelper.setCross();
+            this.swerveSignal = swerveHelper.setCross();
             drive();
         }
         if (driveState == driveType.TELEOP){
             if (rotLocked){
                 //if rotation tracking, replace rotational joystick value with controller generated one
                 rotSpeed = swerveHelper.getRotControl(rotTarget, getGyroAngle());
+                if (isSnake) {
+                    rotSpeed *= 4;
+                    if (Math.abs(rotSpeed) > 1) rotSpeed = 1.0 * Math.signum(rotSpeed);
+                } 
             }
             this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, getGyroAngle());
             SmartDashboard.putNumber("FR signal", swerveSignal.getSpeed(0));
@@ -301,6 +318,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         pathTarget = 0.0;
 
         isFieldCentric = true;
+        isSnake = false;
     }
 
     @Override
@@ -382,10 +400,13 @@ public class SwerveDrive extends SwerveDriveTemplate {
      */
     public void setGyro(double degrees){
         gyro.reset();
+        resetState();
+        setToAuto();
         gyro.setAngleAdjustment(degrees);
     }
     public double getGyroAngle(){
         if (!isFieldCentric) return 0;
+        limelight.setGyroValue((gyro.getAngle() + 360)%360);
         return (gyro.getAngle()+360)%360;
     }    
 }

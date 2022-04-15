@@ -116,7 +116,7 @@ public class Hood implements Subsystem {
 
         
     if (right_bumper.getValue()){
-        hood_position = aim.getAngle() / MAX_ANGLE;
+        //hood_position = aim.getAngle() / MAX_ANGLE;
         state = State.AIMING;
     }
     else if (left_joystick_y.getValue() > .15 && getMA3() < ABS_HIGH){
