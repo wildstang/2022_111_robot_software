@@ -79,11 +79,11 @@ public class AimHelper implements Subsystem{
 
     private double distanceFactor = 30;
     private double angleFactor = 15;
-    public static double FenderDistance = 25;
 
     ShuffleboardTab tab = Shuffleboard.getTab("Tab");
     //SimpleWidget distance = tab.add("SWM distance", 30);
     //SimpleWidget angle = tab.add("SWM angle", 20);
+
 
     public void calcTargetCoords(){ //update target coords. 
         if(tv.getDouble(0) == 1){
