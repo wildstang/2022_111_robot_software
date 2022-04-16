@@ -79,6 +79,7 @@ public class AimHelper implements Subsystem{
 
     private double distanceFactor = 30;
     private double angleFactor = 15;
+    public static double FenderDistance = 60;
 
     ShuffleboardTab tab = Shuffleboard.getTab("Tab");
     //SimpleWidget distance = tab.add("SWM distance", 30);

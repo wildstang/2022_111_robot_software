@@ -57,6 +57,10 @@ public class Hood implements Subsystem {
     private final double REG_C = 0.2338;//2.9316;//-0.19354;
     
     AimHelper aim;
+
+    private double DistanceRegression(double input){
+        return REG_A * (input*input) + REG_B * input + REG_C;
+    }
     
     @Override
     public void init() {
@@ -82,10 +86,12 @@ public class Hood implements Subsystem {
     public void update() {
         if (state == State.AIMING){
             double distance = aim.getDistance();
-            if (REG_A*distance*distance + distance * REG_B + REG_C > 1.52){
-                setPosition(1.52);
-            } else {
-                setPosition(REG_A*distance*distance + distance * REG_B + REG_C);
+
+            if (distance < AimHelper.FenderDistance){
+                setPosition(Math.max(ABS_LOW, DistanceRegression(distance))); //Linear EQ & Hood Position Floor
+            }
+            else {
+                setPosition(Math.min(ABS_HIGH, DistanceRegression(distance))); //Hood Position Ceiling
             }
 
             //hood_motor.setPosition(hood_motor.getPosition() + CONVERSION * ((0.4254 + 0.0058 * aim.getDistance()) - getMA3()));
