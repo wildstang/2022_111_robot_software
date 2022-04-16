@@ -76,11 +76,7 @@ public class Ballpath implements Subsystem{
             intakeMotorSpeed = REVERSE_SPEED;
             intakeSolenoidValue = OPEN;
         }  else  {
-            if (Math.abs(driverShoot.getValue())>0.15){
-                intakeSolenoidValue = OPEN;
-            } else {
-                intakeSolenoidValue = CLOSE;
-            }
+            intakeSolenoidValue = CLOSE;
             intakeMotorSpeed = 0;
         }      
     }
@@ -162,9 +158,10 @@ public class Ballpath implements Subsystem{
     public void turnOffIntake(){
         intakeMotorSpeed = 0;
     }
-    public void reverse(){
-        intakeMotorSpeed = -FULL_SPEED;
+    public void reverse(double speed){
+        intakeMotorSpeed = -speed;
         feedMotorSpeed = -FULL_SPEED;
+        shooting = true;
     }
     public void turnOnFeed(){
         feedMotorSpeed = FULL_SPEED;

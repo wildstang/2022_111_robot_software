@@ -12,16 +12,18 @@ import org.wildstang.year2022.subsystems.ballpath.Ballpath;
 public class ReverseIntakeStep extends AutoStep {
 
     private Ballpath intake;
+    private double reverseSpeed;
 
     /**Reverse the Intake
      * 
      */
-    public ReverseIntakeStep(){
+    public ReverseIntakeStep(double speed){
+        this.reverseSpeed = speed;
     }
 
     public void update(){
-        intake.intakeRetract();
-        intake.reverse();
+        intake.intakeDeploy();
+        intake.reverse(reverseSpeed);
         this.setFinished(true);
     }
     

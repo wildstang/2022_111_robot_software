@@ -62,11 +62,12 @@ public class TwoBallAndHide extends AutoProgram{
         addStep(group4);
 
         AutoParallelStepGroup group5 = new AutoParallelStepGroup();
-        group5.addStep(new PathHeadingStep(41.475, swerve));
+        group5.addStep(new PathHeadingStep(41.475-15, swerve));
         group5.addStep(new SwervePathFollowerStep(new StealHide().getPath(), swerve));
         addStep(group5);
 
-        addStep(new ReverseIntakeStep());
+        addStep(new ReverseIntakeStep(0.25));
+        addStep(new AutoStepDelay(2000));
     }
 
     public String toString(){

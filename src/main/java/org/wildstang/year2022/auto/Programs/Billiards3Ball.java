@@ -21,6 +21,7 @@ import frc.paths.Steal1;
 import frc.paths.StealNew;
 import frc.paths.StealNew2;
 import frc.paths.StealNew3;
+import frc.paths.StealNew4;
 import frc.paths.TwoBall;
 
 public class Billiards3Ball extends AutoProgram{
@@ -58,12 +59,12 @@ public class Billiards3Ball extends AutoProgram{
         addStep(group3);
 
         AutoParallelStepGroup group4 = new AutoParallelStepGroup();
-        group4.addStep(new PathHeadingStep(297.4, swerve));
+        group4.addStep(new PathHeadingStep(297.4-14.4, swerve));
         group4.addStep(new SwervePathFollowerStep(new StealNew2().getPath(), swerve));
         addStep(group4);
         
-        addStep(new ReverseIntakeStep());
-        addStep(new AutoStepDelay(1000));
+        addStep(new ReverseIntakeStep(1.0));
+        addStep(new AutoStepDelay(1500));
 
         AutoParallelStepGroup group5 = new AutoParallelStepGroup();
         group5.addStep(new PathHeadingStep(270, swerve));
@@ -72,8 +73,8 @@ public class Billiards3Ball extends AutoProgram{
         addStep(group5);
 
         AutoParallelStepGroup group6 = new AutoParallelStepGroup();
-        group6.addStep(new PathHeadingStep(212.5, swerve));
-        group6.addStep(new SwervePathFollowerStep(new Steal1().getPath(), swerve));
+        group6.addStep(new PathHeadingStep(212.5-12.5, swerve));
+        group6.addStep(new SwervePathFollowerStep(new StealNew4().getPath(), swerve));
         addStep(group6);
 
         addStep(new LimelightStep(true));
