@@ -10,6 +10,7 @@ import org.wildstang.framework.core.Core;
 import org.wildstang.year2022.auto.Steps.Fire;
 import org.wildstang.year2022.auto.Steps.IntakeDeployStep;
 import org.wildstang.year2022.auto.Steps.LimelightStep;
+import org.wildstang.year2022.auto.Steps.ReverseIntakeStep;
 import org.wildstang.year2022.auto.Steps.StartFlywheel;
 import org.wildstang.year2022.robot.WSSubsystems;
 import org.wildstang.year2022.subsystems.launcher.LauncherModes;
@@ -18,9 +19,10 @@ import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 import frc.paths.Scoot;
 import frc.paths.Steal1;
 import frc.paths.Steal2;
+import frc.paths.StealHide;
 import frc.paths.TwoBall;
 
-public class TwoBallAndSteal extends AutoProgram{
+public class TwoBallAndHide extends AutoProgram{
 
     private SwerveDrive swerve;
 
@@ -60,14 +62,14 @@ public class TwoBallAndSteal extends AutoProgram{
         addStep(group4);
 
         AutoParallelStepGroup group5 = new AutoParallelStepGroup();
-        group5.addStep(new PathHeadingStep(0, swerve));
-        group5.addStep(new AutoStepDelay(1500));
+        group5.addStep(new PathHeadingStep(41.475, swerve));
+        group5.addStep(new SwervePathFollowerStep(new StealHide().getPath(), swerve));
         addStep(group5);
 
-        addStep(new Fire(true));
+        addStep(new ReverseIntakeStep());
     }
 
     public String toString(){
-        return "Two Ball then Hangar";
+        return "Two Ball then hide";
     }
 }

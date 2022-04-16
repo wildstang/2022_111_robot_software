@@ -10,6 +10,7 @@ import org.wildstang.framework.core.Core;
 import org.wildstang.year2022.auto.Steps.Fire;
 import org.wildstang.year2022.auto.Steps.IntakeDeployStep;
 import org.wildstang.year2022.auto.Steps.LimelightStep;
+import org.wildstang.year2022.auto.Steps.ReverseIntakeStep;
 import org.wildstang.year2022.auto.Steps.StartFlywheel;
 import org.wildstang.year2022.robot.WSSubsystems;
 import org.wildstang.year2022.subsystems.launcher.LauncherModes;
@@ -17,10 +18,12 @@ import org.wildstang.year2022.subsystems.swerve.SwerveDrive;
 
 import frc.paths.Scoot;
 import frc.paths.Steal1;
-import frc.paths.Steal2;
+import frc.paths.StealNew;
+import frc.paths.StealNew2;
+import frc.paths.StealNew3;
 import frc.paths.TwoBall;
 
-public class TwoBallAndSteal extends AutoProgram{
+public class Billiards3Ball extends AutoProgram{
 
     private SwerveDrive swerve;
 
@@ -50,24 +53,40 @@ public class TwoBallAndSteal extends AutoProgram{
         AutoParallelStepGroup group3 = new AutoParallelStepGroup();
         group3.addStep(new Fire(false));
         group3.addStep(new LimelightStep(false));
-        group3.addStep(new PathHeadingStep(90, swerve));
-        group3.addStep(new SwervePathFollowerStep(new Steal1().getPath(), swerve));
+        group3.addStep(new SwervePathFollowerStep(new StealNew().getPath(), swerve));
+        group3.addStep(new PathHeadingStep(270, swerve));
         addStep(group3);
 
         AutoParallelStepGroup group4 = new AutoParallelStepGroup();
-        group4.addStep(new PathHeadingStep(270, swerve));
-        group4.addStep(new SwervePathFollowerStep(new Steal2().getPath(), swerve));
+        group4.addStep(new PathHeadingStep(297.4, swerve));
+        group4.addStep(new SwervePathFollowerStep(new StealNew2().getPath(), swerve));
         addStep(group4);
+        
+        addStep(new ReverseIntakeStep());
+        addStep(new AutoStepDelay(1000));
 
         AutoParallelStepGroup group5 = new AutoParallelStepGroup();
-        group5.addStep(new PathHeadingStep(0, swerve));
-        group5.addStep(new AutoStepDelay(1500));
+        group5.addStep(new PathHeadingStep(270, swerve));
+        group5.addStep(new SwervePathFollowerStep(new StealNew3().getPath(), swerve));
+        group5.addStep(new IntakeDeployStep(true));
         addStep(group5);
 
+        AutoParallelStepGroup group6 = new AutoParallelStepGroup();
+        group6.addStep(new PathHeadingStep(212.5, swerve));
+        group6.addStep(new SwervePathFollowerStep(new Steal1().getPath(), swerve));
+        addStep(group6);
+
+        addStep(new LimelightStep(true));
+        addStep(new AutoStepDelay(500));
         addStep(new Fire(true));
+
+
+
+
+
     }
 
     public String toString(){
-        return "Two Ball then Hangar";
+        return "Two Ball and another";
     }
 }

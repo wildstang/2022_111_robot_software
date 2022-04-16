@@ -162,6 +162,10 @@ public class Ballpath implements Subsystem{
     public void turnOffIntake(){
         intakeMotorSpeed = 0;
     }
+    public void reverse(){
+        intakeMotorSpeed = -FULL_SPEED;
+        feedMotorSpeed = -FULL_SPEED;
+    }
     public void turnOnFeed(){
         feedMotorSpeed = FULL_SPEED;
     }

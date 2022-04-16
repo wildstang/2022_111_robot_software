@@ -20,7 +20,7 @@ import frc.paths.Steal1;
 import frc.paths.Steal2;
 import frc.paths.TwoBall;
 
-public class TwoBallAndSteal extends AutoProgram{
+public class SlamJam extends AutoProgram{
 
     private SwerveDrive swerve;
 
@@ -57,6 +57,7 @@ public class TwoBallAndSteal extends AutoProgram{
         AutoParallelStepGroup group4 = new AutoParallelStepGroup();
         group4.addStep(new PathHeadingStep(270, swerve));
         group4.addStep(new SwervePathFollowerStep(new Steal2().getPath(), swerve));
+        group4.addStep(new StartFlywheel(LauncherModes.SLAM));
         addStep(group4);
 
         AutoParallelStepGroup group5 = new AutoParallelStepGroup();
@@ -65,9 +66,12 @@ public class TwoBallAndSteal extends AutoProgram{
         addStep(group5);
 
         addStep(new Fire(true));
+        addStep(new AutoStepDelay(1500));
+        addStep(new SwervePathFollowerStep(new Steal1().getPath(), swerve));
+
     }
 
     public String toString(){
-        return "Two Ball then Hangar";
+        return "Two Ball then SlamJam";
     }
 }

@@ -5,6 +5,7 @@ public enum LauncherModes{
     TARMAC_EDGE (0.40, 2200.0, 1.113),//99 dist, now 122, between 157 with .46-1.312
     LAUNCH_PAD(0.50, 2500.0, 1.51),//157 dist, now 173
     AUTO(0.412, 2200, 1.191),
+    SLAM(1.0, 2000, 0.1),
     ZERO(0, 0, 0.070);
 
     private final double SPEED;//motor % output
