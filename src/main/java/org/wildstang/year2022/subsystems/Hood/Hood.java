@@ -86,18 +86,13 @@ public class Hood implements Subsystem {
     public void update() {
         if (state == State.AIMING){
             double distance = aim.getDistance();
-            double PositionToSet;
 
             if (distance < AimHelper.FenderDistance){
-                double YInt = 0;
-                double XMax = AimHelper.FenderDistance;
-                double slope = DistanceRegression(AimHelper.FenderDistance)/XMax;
-                PositionToSet = Math.max(ABS_LOW, slope*(distance) + YInt); //Linear EQ & Hood Position Floor
+                setPosition(Math.max(ABS_LOW, DistanceRegression(distance))); //Linear EQ & Hood Position Floor
             }
             else {
-                PositionToSet = Math.min(ABS_HIGH, DistanceRegression(distance)); //Hood Position Ceiling
+                setPosition(Math.min(ABS_HIGH, DistanceRegression(distance))); //Hood Position Ceiling
             }
-            setPosition(PositionToSet);
 
             //hood_motor.setPosition(hood_motor.getPosition() + CONVERSION * ((0.4254 + 0.0058 * aim.getDistance()) - getMA3()));
         }
