@@ -25,6 +25,10 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+
 /**Class: SwerveDrive
  * inputs: driver left joystick x/y, right joystick x, right trigger, right bumper, select, face buttons all, gyro
  * outputs: four swerveModule objects
@@ -76,6 +80,23 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public enum driveType {TELEOP, AUTO, CROSS, LL};
     public driveType driveState;
 
+    class HapticFeedback{
+        //just for testing, would likely fit better in roborio inputs
+        private final XboxController m_hid = new XboxController(0);
+
+        private void HapticRotationSpeed(){
+            if (rotSpeed > 0){
+                m_hid.setRumble(RumbleType.kRightRumble, rotSpeed);
+                m_hid.setRumble(RumbleType.kLeftRumble, 0);
+            } else if (rotSpeed == 0){
+                m_hid.setRumble(RumbleType.kRightRumble, 0);
+                m_hid.setRumble(RumbleType.kLeftRumble, 0);
+            } else if (rotSpeed < 0){
+                m_hid.setRumble(RumbleType.kRightRumble, 0);
+                m_hid.setRumble(RumbleType.kLeftRumble, rotSpeed);
+            }
+        }
+    }
 
     @Override
     public void inputUpdate(Input source) {
@@ -167,6 +188,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
             rotTarget = 0;
             rotSpeed *= 0.25;
         }
+
+        new HapticFeedback().HapticRotationSpeed();
     }
  
     @Override
