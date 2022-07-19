@@ -11,4 +11,11 @@ public class LimeConsts{
 
     public double[] Angles = {0}; //correspnding hood angles
 
+    public const double OVERSHOOT = 0; //in feet? b/c you want the ball in the center of the target, not the nearest edge.
+
+    public const double SHOT_HEIGHT = 0; //in feet? max height of shot
+
+    public const double FIRE_TIME = 1; //in seconds. Delay before firing.
+    
+    public const double GRAVITY = 32.17;
 }

@@ -366,5 +366,12 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public double getGyroAngle(){
         if (!isFieldCentric) return 0;
         return (gyro.getAngle()+360)%360;
-    }    
+    } 
+    public double[] getVelocity(){
+        double[] out = {xSpeed,ySpeed};
+        return out;
+    }   
+    public AHRS getGyro(){
+        return gyro;
+    }
 }

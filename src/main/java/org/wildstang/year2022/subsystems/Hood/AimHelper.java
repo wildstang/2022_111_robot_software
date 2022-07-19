@@ -49,7 +49,6 @@ public class AimHelper implements Subsystem{
     
     public double x;
     public double y;
-
     private double modifier;
 
     public boolean TargetInView;
@@ -214,6 +213,14 @@ public class AimHelper implements Subsystem{
     @Override
     public String getName() {
         return "Limelight";
+    }
+    public boolean TargetInView(){
+        if(tv.getDouble(0) == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     
