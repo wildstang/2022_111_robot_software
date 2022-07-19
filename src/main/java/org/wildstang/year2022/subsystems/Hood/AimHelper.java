@@ -26,6 +26,7 @@ import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.year2022.robot.WSSubsystems;
 
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
@@ -41,6 +42,10 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 import org.wildstang.year2022.subsystems.Hood.LimeConsts;
+
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 
 import java.util.Arrays;
 
@@ -80,6 +85,21 @@ public class AimHelper implements Subsystem{
     private double distanceFactor = 30;
     private double angleFactor = 15;
     public static double FenderDistance = 60;
+
+    private class HapticFeedback{
+        //just for testing, would likely fit better in roborio inputs
+        private final XboxController m_hid = new XboxController(1 /* Manipulator */);
+
+        private void WhenAutoAimFinished(){
+            if (-.05 < ((tx.getDouble(0) - parFactor) * -0.015) && ((tx.getDouble(0) - parFactor) < .05)){
+                m_hid.setRumble(RumbleType.kRightRumble, .5);
+                m_hid.setRumble(RumbleType.kLeftRumble, .5);
+            } else {
+                m_hid.setRumble(RumbleType.kRightRumble, 0);
+                m_hid.setRumble(RumbleType.kLeftRumble, 0);
+            }
+        }
+    }
 
     ShuffleboardTab tab = Shuffleboard.getTab("Tab");
     //SimpleWidget distance = tab.add("SWM distance", 30);
@@ -146,6 +166,7 @@ public class AimHelper implements Subsystem{
     public double getRotPID(){
         calcTargetCoords();
         //return tx.getDouble(0) * -0.015;
+        new HapticFeedback().WhenAutoAimFinished();
         return (tx.getDouble(0) - parFactor) * -0.015;
     }
 

@@ -80,9 +80,9 @@ public class SwerveDrive extends SwerveDriveTemplate {
     public enum driveType {TELEOP, AUTO, CROSS, LL};
     public driveType driveState;
 
-    class HapticFeedback{
+    private class HapticFeedback{
         //just for testing, would likely fit better in roborio inputs
-        private final XboxController m_hid = new XboxController(0);
+        private final XboxController m_hid = new XboxController(0 /* Driver */);
 
         private void HapticRotationSpeed(){
             if (rotSpeed > 0){
