@@ -38,7 +38,7 @@ public class PositionTracking implements Subsystem{
     private LimeConsts LC;
 
     private double flightTime;
-    private double vLaunchVel; //vertical launch velocity squared
+    private double vLaunchVel; //vertical launch velocity
 
     public double launchVel; //target launch velocity
     public double targetOffsetGoal; //goal for target offset 
@@ -48,6 +48,7 @@ public class PositionTracking implements Subsystem{
     public void init() {
         swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
         aim = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
+        LC = new LimeConsts();
         gyro = swerve.getGyro();
         resetState();
         timer = new Timer();
@@ -59,7 +60,7 @@ public class PositionTracking implements Subsystem{
         flightTime = Math.sqrt(2*LC.SHOT_HEIGHT/LC.GRAVITY)+Math.sqrt(2*(LC.SHOT_HEIGHT-LC.TARGET_HEIGHT)/LC.GRAVITY);
         vLaunchVel = Math.pow(LC.SHOT_HEIGHT/Math.sqrt(2*LC.SHOT_HEIGHT/LC.GRAVITY),2);
         x = 0;
-        y = 0;
+        y = 1;
         rot = 0;
         lastAngle = 0;
         launchVel = 0;
@@ -125,11 +126,13 @@ public class PositionTracking implements Subsystem{
         double hLaunchVel = EffectiveDist/flightTime;
         launchVel = Math.sqrt(Math.pow(hLaunchVel,2)+Math.pow(vLaunchVel,2));
         launchAngle = Math.atan(vLaunchVel/hLaunchVel);
-
+ 
         targetOffsetGoal = Math.toDegrees(targetOffsetGoal); //switch to degrees
         launchAngle = Math.toDegrees(targetOffsetGoal);
     }
-
+    public double getRotPID(){
+        return (targetOffsetGoal-rot)*0.015;
+    }
     public void setAiming(boolean aim){
         IsAiming = aim;
     }

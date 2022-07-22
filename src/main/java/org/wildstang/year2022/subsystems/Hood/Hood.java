@@ -12,6 +12,7 @@ import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.year2022.robot.WSSubsystems;
 import org.wildstang.hardware.roborio.outputs.WsSparkMax;
 import org.wildstang.year2022.subsystems.Hood.AimHelper;
+import org.wildstang.year2022.subsystems.Hood.PositionTracking;
 import org.wildstang.year2022.subsystems.launcher.LauncherModes;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -57,7 +58,7 @@ public class Hood implements Subsystem {
     private final double REG_C = 0.2338;//2.9316;//-0.19354;
     
     AimHelper aim;
-    
+    PositionTracking posTrack;
     @Override
     public void init() {
         hood_motor = (WsSparkMax) Core.getOutputManager().getOutput(WSOutputs.HOOD);
@@ -70,6 +71,7 @@ public class Hood implements Subsystem {
         right_bumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
         right_bumper.addInputListener(this);
         aim = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
+        posTrack = (PositionTracking) Core.getSubsystemManager().getSubsystem(WSSubsystems.POSTRACKER);
         leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_SHOULDER);
         leftBumper.addInputListener(this);
         rightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_RIGHT_SHOULDER);
@@ -85,7 +87,7 @@ public class Hood implements Subsystem {
             if (REG_A*distance*distance + distance * REG_B + REG_C > 1.52){
                 setPosition(1.52);
             } else {
-                setPosition(REG_A*distance*distance + distance * REG_B + REG_C);
+                setPosition(posTrack.launchAngle)// setPosition(REG_A*distance*distance + distance * REG_B + REG_C);
             }
 
             //hood_motor.setPosition(hood_motor.getPosition() + CONVERSION * ((0.4254 + 0.0058 * aim.getDistance()) - getMA3()));
@@ -118,13 +120,17 @@ public class Hood implements Subsystem {
     if (right_bumper.getValue()){
         hood_position = aim.getAngle() / MAX_ANGLE;
         state = State.AIMING;
+        posTrack.setAiming(true);
     }
     else if (left_joystick_y.getValue() > .15 && getMA3() < ABS_HIGH){
         state = State.MANUALF;
+        posTrack.setAiming(false);
     } else if (left_joystick_y.getValue() < -.15 && getMA3() > ABS_LOW){
         state = State.MANUALR;
+        posTrack.setAiming(false);
     }
     else if (source == leftBumper && leftBumper.getValue()){
+        posTrack.setAiming(false);
         if (rightBumper.getValue()){
             launchMode = LauncherModes.TARMAC_EDGE;
             state = State.PRESET;
@@ -134,6 +140,7 @@ public class Hood implements Subsystem {
         }
     }
      else if (source == rightBumper && rightBumper.getValue()){
+        posTrack.setAiming(false);
         if (leftBumper.getValue()){
             launchMode = LauncherModes.TARMAC_EDGE;
             state = State.PRESET;
@@ -142,8 +149,10 @@ public class Hood implements Subsystem {
             state = State.PRESET;
         }
     } else if (state != State.PRESET){
+        posTrack.setAiming(false);
         state = State.IDLE;
-    }
+    } 
+
      
     }
 

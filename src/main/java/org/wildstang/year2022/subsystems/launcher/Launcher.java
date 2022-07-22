@@ -5,6 +5,7 @@ import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.year2022.robot.WSSubsystems;
 import org.wildstang.year2022.subsystems.Hood.AimHelper;
+import org.wildstang.year2022.subsystems.Hood.PosTrack;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -41,9 +42,10 @@ public class Launcher implements Subsystem {
     private boolean isAiming;
     private boolean latchValue;
     private boolean isLow;
-    private double aimDistance;
+    private double aimVelocity;
 
     private AimHelper aimHelper;
+    private PositionTracking posTrack;
 
 
     private final double threshold = 0.01;
@@ -51,7 +53,7 @@ public class Launcher implements Subsystem {
     private final double REG_A = -0.000001488;//0.000015406;//-0.0000040441;//0.0000001497
     private final double REG_B = 0.002265;//-0.002584;//0.003158;//0.002085;
     private final double REG_C = 0.149-0.01;//.48595;//0.08335;//0.1497;
-    
+    private final double wheelRadius = 1; //Dummy value, in feet.
     // initializes the subsystem
     public void init() {
         initInputs();
@@ -84,6 +86,7 @@ public class Launcher implements Subsystem {
         flywheelMotor.setCurrentLimit(50, 50, 0);
 
         aimHelper = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
+        posTrack = (PositionTracking) Core.getSubsystemManager().getSubsystem(WSSubsystems.POSTRACKER);
 
     }
 
@@ -91,13 +94,13 @@ public class Launcher implements Subsystem {
     public void update() {
         latch.setValue(latchValue);
         if (isAiming){
-            double distance = aimHelper.getDistance();
-            aimDistance = REG_A * distance*distance + REG_B * distance + REG_C;
+            double velocity = posTrack.launchVel;
+            aimVelocity = velocity/wheelRadius;//REG_A * distance*distance + REG_B * distance + REG_C;
             kickerMotor.setSpeed(1.0);
-            if (Math.abs(flywheelMotor.getVelocity()) < threshold*aimDistance*CONVERSION){
+            if (Math.abs(flywheelMotor.getVelocity()) < threshold*aimVelocity*CONVERSION){
                 flywheelMotor.setSpeed(-1.0);
             } else {
-                flywheelMotor.setSpeed(-aimDistance - 0.00001*(aimDistance*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
+                flywheelMotor.setSpeed(-aimVelocity - 0.00001*(aimVelocity*CONVERSION-Math.abs(flywheelMotor.getVelocity())));
             }
         } else if (isRunning) {
             if (Math.abs(flywheelMotor.getVelocity()) < threshold*launchMode.getSpeed()*CONVERSION){
@@ -118,7 +121,7 @@ public class Launcher implements Subsystem {
         SmartDashboard.putNumber("kicker output current", kickerMotor.getController().getOutputCurrent());
         SmartDashboard.putNumber("Flywheel velocity", -flywheelMotor.getVelocity());
         SmartDashboard.putNumber("Flywheel percent output", -launchMode.getSpeed());
-        SmartDashboard.putNumber("Flywheel limelight power", aimDistance);
+        SmartDashboard.putNumber("Flywheel limelight power", aimVelocity);
         SmartDashboard.putBoolean("flywheel is aiming", isAiming);
     }
 
@@ -170,7 +173,7 @@ public class Launcher implements Subsystem {
         isRunning = false;
         isAiming = false;
         latchValue = true;
-        aimDistance = 0;
+        aimVelocity = 0;
     }
 
     // returns the unique name of the subsystem

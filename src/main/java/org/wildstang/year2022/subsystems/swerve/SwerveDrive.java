@@ -14,6 +14,7 @@ import org.wildstang.year2022.robot.WSInputs;
 import org.wildstang.year2022.robot.WSOutputs;
 import org.wildstang.year2022.robot.WSSubsystems;
 import org.wildstang.year2022.subsystems.Hood.AimHelper;
+import org.wildstang.year2022.subsystems.Hood.PositionTracking;
 import org.wildstang.year2022.subsystems.swerve.DriveConstants;
 import org.wildstang.year2022.subsystems.swerve.SwerveSignal;
 import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
@@ -71,6 +72,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private SwerveSignal swerveSignal;
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
     private AimHelper limelight;
+    private PositionTracking posTrack;
 
     public enum driveType {TELEOP, AUTO, CROSS, LL};
     public driveType driveState;
@@ -212,6 +214,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         //create default swerveSignal
         swerveSignal = new SwerveSignal(new double[]{0.0, 0.0, 0.0, 0.0}, new double[]{0.0, 0.0, 0.0, 0.0});
         limelight = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
+        posTrack = (PositionTracking) Core.getSubsystemManager().getSubsystem(WSSubsystems.POSTRACKER);
     }
     
     @Override
@@ -246,7 +249,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
             drive();        
         }
         if (driveState == driveType.LL){
-            rotSpeed = -limelight.getRotPID();
+            rotSpeed = -posTrack.getRotPID();
             this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, getGyroAngle());
             drive();
         }
