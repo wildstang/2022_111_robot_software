@@ -3,11 +3,11 @@ package org.wildstang.year2022.subsystems.ballpath;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 
-public class notADIO {
+public class RoborioDIO {
 
     private DigitalInput dio;
 
-    public notADIO(int channel){
+    public RoborioDIO(int channel){
         this.dio = new DigitalInput(channel);
     }
 

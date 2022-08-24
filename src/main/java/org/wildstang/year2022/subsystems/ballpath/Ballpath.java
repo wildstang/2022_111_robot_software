@@ -40,15 +40,16 @@ public class Ballpath implements Subsystem{
 
     //Inputs
     private AnalogInput rightTrigger;
-    private DigitalInput driverAim;
+    private AnalogInput driverAim;
     private DigitalInput aButton;
     private DigitalInput yButton;
     private DigitalInput xButton;
     private DigitalInput bButton;
     private DigitalInput driverIntake;
+    private DigitalInput driverRightBumper;
     private AnalogInput driverShoot;
-    private notADIO cargoLow;
-    private notADIO cargoHigh;
+    private RoborioDIO cargoLow;
+    private RoborioDIO cargoHigh;
 
     @Override
     public void inputUpdate(Input source) {
@@ -57,7 +58,7 @@ public class Ballpath implements Subsystem{
         if (yButton.getValue()){
             feedMotorSpeed = REVERSE_SPEED;
             shooting = true;
-        } else if (Math.abs(rightTrigger.getValue())>0.15){
+        } else if (Math.abs(rightTrigger.getValue())>0.15 || (Math.abs(driverAim.getValue()) > 0.15 && driverRightBumper.getValue())){
             feedMotorSpeed = FULL_SPEED;
             shooting = true;
         } else if (aButton.getValue() || xButton.getValue() || driverIntake.getValue()){
@@ -100,10 +101,12 @@ public class Ballpath implements Subsystem{
         bButton.addInputListener(this);
         driverShoot = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
         driverShoot.addInputListener(this);
-        driverAim = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        driverAim = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
         driverAim.addInputListener(this);
         driverIntake = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_SHOULDER);
         driverIntake.addInputListener(this);
+        driverRightBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        driverRightBumper.addInputListener(this);
     }
 
     private void initOutputs(){
@@ -112,8 +115,8 @@ public class Ballpath implements Subsystem{
         intakeSolenoid = (WsSolenoid) Core.getOutputManager().getOutput(WSOutputs.INTAKE_SOLENOID);
         feedMotor.setCurrentLimit(30, 30, 0);
         intakeMotor.setCurrentLimit(25, 25, 0);
-        cargoLow = new notADIO(0);
-        cargoHigh = new notADIO(1);
+        cargoLow = new RoborioDIO(0);
+        cargoHigh = new RoborioDIO(1);
     }
 
     @Override

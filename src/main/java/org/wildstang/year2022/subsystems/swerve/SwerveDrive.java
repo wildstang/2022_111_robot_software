@@ -34,17 +34,16 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
     private final SlewRateLimiter xSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
     private final SlewRateLimiter ySpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
-    //private final SlewRateLimiter rotSpeedLimiter = new SlewRateLimiter(DriveConstants.SLEW_RATE_LIMIT);
 
     private AnalogInput leftStickX;//translation joystick x
     private AnalogInput leftStickY;//translation joystick y
     private AnalogInput rightStickX;//rot joystick
     private AnalogInput rightTrigger;//thrust
-    private AnalogInput leftTrigger;//intake, shoot while aiming
-    private DigitalInput rightBumper;//aim
-    private DigitalInput leftBumper;//robot centric intake
+    private AnalogInput leftTrigger;//aiming
+    private DigitalInput rightBumper;//robot centric control
+    private DigitalInput leftBumper;//intake
     private DigitalInput select;//gyro reset
-    private DigitalInput start;
+    private DigitalInput start;//snake mode
     private DigitalInput faceUp;//rotation lock 0 degrees
     private DigitalInput faceRight;//rotation lock 90 degrees
     private DigitalInput faceLeft;//rotation lock 270 degrees
@@ -110,13 +109,13 @@ public class SwerveDrive extends SwerveDriveTemplate {
         rotSpeed *= thrustValue;
 
         //update auto tracking values
-        // if (leftBumper.getValue() && (Math.abs(xSpeed)>0.1 || Math.abs(ySpeed)>0.1)){
-        //     rotLocked = true;
-        //     isSnake = true;
-        //     rotTarget = swerveHelper.getDirection(xSpeed, ySpeed);
-        // } else {
-        //     isSnake = false;
-        // }
+        if (start.getValue() && (Math.abs(xSpeed)>0.1 || Math.abs(ySpeed)>0.1)){
+            rotLocked = true;
+            isSnake = true;
+            rotTarget = swerveHelper.getDirection(xSpeed, ySpeed);
+        } else {
+            isSnake = false;
+        }
         if (source == faceUp && faceUp.getValue()){
             if (faceLeft.getValue()){ rotTarget = 291.0;
             } else if (faceRight.getValue()){ rotTarget = 21.0;
@@ -141,10 +140,6 @@ public class SwerveDrive extends SwerveDriveTemplate {
             } else rotTarget = 90.0;
             rotLocked = true;
         }
-        if (start.getValue()){
-            rotTarget = 191;
-            rotLocked = true;
-        }
 
         //get rotational joystick
         rotSpeed = rightStickX.getValue()*Math.abs(rightStickX.getValue());
@@ -152,7 +147,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
         if (Math.abs(rightStickX.getValue()) < DriveConstants.DEADBAND) rotSpeed = 0;
         //if the rotational joystick is being used, the robot should not be auto tracking heading
         if (rotSpeed != 0) rotLocked = false;
-        if (rightBumper.getValue() && driveState != driveType.CROSS){
+        if (Math.abs(leftTrigger.getValue())>0.15 && driveState != driveType.CROSS){
             driveState = driveType.LL;
             xSpeed*=0.5;
             ySpeed*=0.5;
@@ -162,7 +157,7 @@ public class SwerveDrive extends SwerveDriveTemplate {
                 rotLocked = false;
             }
         }
-        isFieldCentric = !(Math.abs(leftTrigger.getValue())>0.15);
+        isFieldCentric = !(rightBumper.getValue() && Math.abs(leftTrigger.getValue()) < 0.15);
         if (!isFieldCentric) {
             rotTarget = 0;
             rotSpeed *= 0.25;
@@ -244,8 +239,13 @@ public class SwerveDrive extends SwerveDriveTemplate {
                 //if rotation tracking, replace rotational joystick value with controller generated one
                 rotSpeed = swerveHelper.getRotControl(rotTarget, getGyroAngle());
                 if (isSnake) {
-                    rotSpeed *= 4;
-                    if (Math.abs(rotSpeed) > 1) rotSpeed = 1.0 * Math.signum(rotSpeed);
+                    if (Math.abs(rotSpeed) < 0.05){
+                        rotSpeed = 0;
+                    } else {
+                        rotSpeed *= 4;
+                        if (Math.abs(rotSpeed) > 1) rotSpeed = 1.0 * Math.signum(rotSpeed);
+                    }
+                    
                 } 
             }
             this.swerveSignal = swerveHelper.setDrive(xSpeed, ySpeed, rotSpeed, getGyroAngle());

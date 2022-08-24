@@ -82,8 +82,6 @@ public class AimHelper implements Subsystem{
     public static double FenderDistance = 60;
 
     ShuffleboardTab tab = Shuffleboard.getTab("Tab");
-    //SimpleWidget distance = tab.add("SWM distance", 30);
-    //SimpleWidget angle = tab.add("SWM angle", 20);
 
 
     public void calcTargetCoords(){ //update target coords. 
@@ -104,30 +102,16 @@ public class AimHelper implements Subsystem{
         double robotAngle = (getGyroAngle()+180 + tx.getDouble(0))%360;
         double movementAngle = helper.getDirection(xSpeed, ySpeed);
         double movementMagnitude = helper.getMagnitude(xSpeed, ySpeed);
-        //double movementMagnitude = 1;
         if (Math.abs(xSpeed) < 0.1 && Math.abs(ySpeed) < 0.1){
             parFactor = 0;
             perpFactor = 0;
         } else {
-            // if (Math.sin(Math.toRadians(-robotAngle + movementAngle)) > 0){
-            //     parFactor = 15;
-            // } else {
-            //     parFactor = -15;
-            // }
             perpFactor = distanceFactor * movementMagnitude * Math.cos(Math.toRadians(-robotAngle + movementAngle));
             parFactor = angleFactor * movementMagnitude * Math.sin(Math.toRadians(-robotAngle + movementAngle));
         }
-        // double parameterA = 0.000091667;
-        // double parameterB = -0.0199;
-        // double parameterC = 1.878;
-        // double GivenDistance = (modifier*12) + 36 + (LC.TARGET_HEIGHT / Math.tan(Math.toRadians(ty.getDouble(0) + LC.CAMERA_ANGLE_OFFSET)));
-        // double tofFactor = parameterA * Math.pow(GivenDistance,2) + parameterB * GivenDistance + parameterC;
-        //find time of flight vs. given distance on calculator then calculate quadratic regression ax^2 + bx + c.
         if (!TargetInView){
             parFactor *= -0.2;
         }
-        //perpFactor *= tofFactor;
-        //parFactor *= tofFactor;
     }
     private double getGyroAngle(){
         return gyroValue;
@@ -156,6 +140,7 @@ public class AimHelper implements Subsystem{
         } else {
             ledModeEntry.setNumber(0);//turn led off
             llModeEntry.setNumber(0);//turn camera to normal color mode
+            //set above to 0 for debug mode, or for perma limelight mode
         }
     }
     @Override
@@ -202,7 +187,6 @@ public class AimHelper implements Subsystem{
         dup.addInputListener(this);
         ddown = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_DPAD_DOWN);
         ddown.addInputListener(this);
-        //swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
         resetState();
         
     }
@@ -240,12 +224,5 @@ public class AimHelper implements Subsystem{
     @Override
     public String getName() {
         return "Limelight";
-    }
-    // public void setLimelightLight(boolean lighting){
-    //     if (lighting) disableValue = 0;
-    //     else disableValue = 1;
-    // }
-
-    
-
+    }  
 }

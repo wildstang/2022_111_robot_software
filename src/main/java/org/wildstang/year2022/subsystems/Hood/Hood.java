@@ -30,27 +30,23 @@ public class Hood implements Subsystem {
     WsSparkMax hood_motor;
 
     WsJoystickAxis left_joystick_y;
-    DigitalInput right_bumper;//driver right bumper
+    AnalogInput left_trigger;//driver left trigger
     DigitalInput leftBumper, rightBumper;//manipulator right bumper
 
 
     double hood_position;
     double offset;
     private LauncherModes launchMode;
-    private enum State {MANUALR, MANUALF, PRESET, AIMING, IDLE}
+    private enum State {PRESET, AIMING, IDLE}
     private State state;
 
     private final double CONVERSION = -54.0;//NEO rotations per 1V of MA3
 
 
 
-    private final double MAX_ANGLE = 45;
-    private final double RANGE_CONSTANT = MAX_ANGLE/360.0;
     private final double ABS_LOW = 0.0859;
     private final double ABS_HIGH = 1.5117;
     private final double ABS_RANGE = ABS_HIGH - ABS_LOW;
-    private final double NEO_RANGE = 75.7;
-    private final double HOOD_SPEED = 0.2;
 
     private final double REG_A = -0.00000588;//0.00013116;//-0.000034595;
     private final double REG_B = 0.00832;//-0.03091;//0.0153707;
@@ -71,8 +67,8 @@ public class Hood implements Subsystem {
         //hood_motor.getController().setInverted(true);
         left_joystick_y = (WsJoystickAxis) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_JOYSTICK_Y);
         left_joystick_y.addInputListener(this);
-        right_bumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
-        right_bumper.addInputListener(this);
+        left_trigger = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
+        left_trigger.addInputListener(this);
         aim = (AimHelper) Core.getSubsystemManager().getSubsystem(WSSubsystems.LIMELIGHT);
         leftBumper = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_LEFT_SHOULDER);
         leftBumper.addInputListener(this);
@@ -94,16 +90,8 @@ public class Hood implements Subsystem {
                 setPosition(Math.min(ABS_HIGH, DistanceRegression(distance))); //Hood Position Ceiling
             }
 
-            //hood_motor.setPosition(hood_motor.getPosition() + CONVERSION * ((0.4254 + 0.0058 * aim.getDistance()) - getMA3()));
-        }
-        if (state == State.MANUALF){
-            //hood_motor.setSpeed(HOOD_SPEED);
-        }
-        if (state == State.MANUALR){
-            //hood_motor.setSpeed(-HOOD_SPEED);
         }
         if (state == State.PRESET){
-            //hood_motor.setPosition(hood_motor.getPosition()+ CONVERSION * (launchMode.getHood() - getMA3()));
             setPosition(launchMode.getHood());
         }
         if (state == State.IDLE){
@@ -121,14 +109,9 @@ public class Hood implements Subsystem {
     public void inputUpdate(Input source) {    
 
         
-    if (right_bumper.getValue()){
+    if (Math.abs(left_trigger.getValue()) > 0.15){
         //hood_position = aim.getAngle() / MAX_ANGLE;
         state = State.AIMING;
-    }
-    else if (left_joystick_y.getValue() > .15 && getMA3() < ABS_HIGH){
-        state = State.MANUALF;
-    } else if (left_joystick_y.getValue() < -.15 && getMA3() > ABS_LOW){
-        state = State.MANUALR;
     }
     else if (source == leftBumper && leftBumper.getValue()){
         if (rightBumper.getValue()){

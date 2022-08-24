@@ -26,8 +26,8 @@ import org.wildstang.framework.subsystems.Subsystem;
 public class Launcher implements Subsystem {
 
     // inputs
-    private AnalogInput launchButton, speedButton, driverShoot;
-    private DigitalInput leftBumper, rightBumper, yButton, driverAim;
+    private AnalogInput launchButton, speedButton, driverAim;
+    private DigitalInput leftBumper, rightBumper, yButton, driverShoot;
 
 
     // outputs
@@ -70,10 +70,10 @@ public class Launcher implements Subsystem {
         rightBumper.addInputListener(this);
         yButton = (DigitalInput) Core.getInputManager().getInput(WSInputs.MANIPULATOR_FACE_UP);
         yButton.addInputListener(this);
-        driverShoot = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
-        driverShoot.addInputListener(this);
-        driverAim = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        driverAim = (AnalogInput) Core.getInputManager().getInput(WSInputs.DRIVER_LEFT_TRIGGER);
         driverAim.addInputListener(this);
+        driverShoot = (DigitalInput) Core.getInputManager().getInput(WSInputs.DRIVER_RIGHT_SHOULDER);
+        driverShoot.addInputListener(this);
     }
 
     public void initOutputs() {
@@ -154,7 +154,7 @@ public class Launcher implements Subsystem {
                 launchMode = LauncherModes.LAUNCH_PAD;
             }
         }
-        if (driverAim.getValue()){
+        if (Math.abs(driverAim.getValue()) > 0.15){
             isAiming = true;
         } else  if (Math.abs(launchButton.getValue()) < 0.15){
             isAiming = false;

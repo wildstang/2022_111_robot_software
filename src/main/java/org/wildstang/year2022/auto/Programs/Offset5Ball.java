@@ -71,13 +71,14 @@ public class Offset5Ball extends AutoProgram{
 
         addStep(new SwervePathFollowerStep(new FiveInt().getPath(), swerve));
 
-        addStep(new AutoStepDelay(1000));
+        addStep(new AutoStepDelay(750));
 
         AutoParallelStepGroup group6 = new AutoParallelStepGroup();
         group6.addStep(new IntakeDeployStep(false));
         group6.addStep(new SwervePathFollowerStep(new FiverC().getPath(), swerve));
         addStep(group6);
 
+        addStep(new AutoStepDelay(250));
         AutoParallelStepGroup group7 = new AutoParallelStepGroup();
         group7.addStep(new IntakeDeployStep(true));
         group7.addStep(new Fire(true));
