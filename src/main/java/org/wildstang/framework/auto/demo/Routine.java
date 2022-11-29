@@ -1,5 +1,7 @@
 package org.wildstang.framework.auto.demo;
 
+import org.wildstang.framework.auto.AutoManager;
+import org.wildstang.framework.auto.AutoProgram;
 import org.wildstang.framework.auto.demo.Calculations;
 import org.wildstang.framework.core.Core;
 import org.wildstang.sample.subsystems.swerve.SwerveDrive;
@@ -19,26 +21,12 @@ public class Routine {
     private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
     private Calculations calcs = new Calculations();
+    private AutoProgram autoMan; //remove??
     
     public Routine(){
         gyro.reset();
     }
 
-    public void loop(int LC){
-        //Look on to do for order ig
-
-        //LC is the time in frames
-        //50 fps
-
-
-        //step one
-        //convert to seconds
-        if (LC < 100 && LC >=0){ //2 seconds
-
-        }else if (LC >= 100 && LC < 240){ // 2 seconds
-
-        }
-    }
 
     public void update(){
         // things to check every frame
@@ -49,8 +37,7 @@ public class Routine {
         moveDirection = 0;
         facingAngle = gyro.getAngle();
         if (calcs.Calc()){
-            loop(loopCount);
-            loopCount ++;
+            
         }
         else {
             returnToCenter();
