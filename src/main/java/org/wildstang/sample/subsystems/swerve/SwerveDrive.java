@@ -55,8 +55,8 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double pathHeading;
     private double pathTarget;
     private double autoTravelled;
-    private double autoTempX;
-    private double autoTempY;
+    public double autoTempX;
+    public double autoTempY;
 
     private final AHRS gyro = new AHRS(I2C.Port.kOnboard);
     private SwerveModule[] modules;

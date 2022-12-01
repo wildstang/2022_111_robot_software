@@ -5,7 +5,9 @@ import org.wildstang.framework.auto.AutoProgram;
 import org.wildstang.framework.auto.demo.Calculations;
 import org.wildstang.framework.core.Core;
 import org.wildstang.sample.subsystems.swerve.SwerveDrive;
+import org.wildstang.framework.auto.demo.StepLoop;
 
+import org.wildstang.year2022.robot.WSSubsystems;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
 import org.wildstang.year2022.subsystems.swerve.WSSwerveHelper;
@@ -21,10 +23,15 @@ public class Routine {
     private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
     private WSSwerveHelper swerveHelper = new WSSwerveHelper();
     private Calculations calcs = new Calculations();
-    private AutoProgram autoMan; //remove??
+    private AutoManager autoMan; //remove??
+    private boolean Started;
+    private static SwerveDrive swerve;
     
     public Routine(){
         gyro.reset();
+        autoMan.addProgram(new StepLoop());
+        Started = false;
+        swerve = (SwerveDrive) Core.getSubsystemManager().getSubsystem(WSSubsystems.SWERVE_DRIVE);
     }
 
 
@@ -33,15 +40,19 @@ public class Routine {
             //all posable encoders
             //gyro
             //if its outside the boundries
+            
+        //stealing speed from auto dont worry about it
+        speedx = swerve.autoTempX;
+        speedy = swerve.autoTempY;
         
         moveDirection = 0;
         facingAngle = gyro.getAngle();
-        if (calcs.Calc()){
-            
+        if (calcs.Calc() && !Started){
+            autoMan.startCurrentProgram();
+            Started = true;
         }
-        else {
+        else if(!calcs.Calc()){
             returnToCenter();
-            loopCount = 0;
         }
         calcs.update(swerveHelper.getDirection(speedx, speedy),0.4);
 
@@ -49,6 +60,7 @@ public class Routine {
     
     public void returnToCenter(){
         //return robot to center
+        //once activated
     }
 
     
