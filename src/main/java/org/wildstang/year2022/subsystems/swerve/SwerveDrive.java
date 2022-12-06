@@ -63,6 +63,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
     private double pathHeading;
     private double pathTarget;
     private double autoTravelled;
+    private double posX;
+    private double posY;
+    private double[] lastX = {0,0,0,0};
+    private double[] lastY = {0,0,0,0};
     private double autoTempX;
     private double autoTempY;
 
@@ -296,6 +300,10 @@ public class SwerveDrive extends SwerveDriveTemplate {
 
         isFieldCentric = true;
         isSnake = false;
+
+        autoTravelled = 0;
+        posX = 0;
+        posY = 0;
     }
 
     @Override
@@ -359,14 +367,17 @@ public class SwerveDrive extends SwerveDriveTemplate {
     /**updates distance travelled in autonomous, to determine error in path following */
     private void updateAutoDistance(){
         for (int i = 0; i < modules.length; i++){
-            autoTempX += modules[i].getPosition() * Math.cos(Math.toRadians(modules[i].getAngle()));
-            autoTempY += modules[i].getPosition() * Math.sin(Math.toRadians(modules[i].getAngle()));
+            autoTempX += (modules[i].getPosition() - lastX[i]) * Math.cos(Math.toRadians(modules[i].getAngle()));
+            autoTempY += (modules[i].getPosition() - lastY[i]) * Math.sin(Math.toRadians(modules[i].getAngle()));
             //System.out.println("Auto temp X and Y" + autoTempX + "And Y " + autoTempY);
+            lastX[i] = modules[i].getPosition();
+            lastY[i] = modules[i].getPosition();
         }
+        posX += autoTempX/modules.length;
+        posY += autoTempY/modules.length;
         autoTravelled += Math.abs(Math.hypot(autoTempX/modules.length, autoTempY/modules.length))/10000;
         autoTempX = 0;
         autoTempY = 0;
-        resetDriveEncoders();
         //System.out.println("AutoTravelled: " + autoTravelled);
     }
 
